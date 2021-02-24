@@ -11,7 +11,7 @@ import {IFeedback} from './feedback';
 
 export interface IAccount {
   id: number;
-  username: string;
+  userName: string;
   password: string;
   fullName: string;
   dateOfBirth: string;
@@ -19,7 +19,7 @@ export interface IAccount {
   enable: boolean;
   gender: boolean;
   audience: boolean;
-  describe: string;
+  accountDescribe: string;
   avatar: string;
   backgroundImage: string;
   dateRegister: string;

@@ -1,11 +1,11 @@
 import {IAccount} from './account';
-import {IGroup} from './group';
+import {IUserGroup} from './user-group';
 import {IGroupRole} from './group-role';
 
 export interface IAccountGroup {
   id: number;
 
   account: IAccount;
-  group: IGroup;
+  group: IUserGroup;
   groupRole: IGroupRole;
 }

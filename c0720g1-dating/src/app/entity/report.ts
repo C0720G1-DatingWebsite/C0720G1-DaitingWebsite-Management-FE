@@ -1,6 +1,6 @@
 import {IReportContent} from './report-content';
 import {IAccount} from './account';
-import {IGroup} from './group';
+import {IUserGroup} from './user-group';
 
 export interface IReport {
   id: number;
@@ -9,5 +9,5 @@ export interface IReport {
   reportContent: IReportContent;
   accountVictim: IAccount;
   accountTarget: IAccount;
-  group: IGroup;
+  group: IUserGroup;
 }
