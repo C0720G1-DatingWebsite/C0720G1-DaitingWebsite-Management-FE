@@ -42,7 +42,7 @@ app.plugins.createHexagon({
   roundedCorners: true,
   clip: true
 });
-
+//check point 1
 app.plugins.createHexagon({
   container: '.hexagon-120-132',
   width: 120,
@@ -330,3 +330,4 @@ app.plugins.createHexagon({
   lineColor: 'rgba(97, 93, 250, .9)',
   fill: true
 });
+console.log('load hexagons done');

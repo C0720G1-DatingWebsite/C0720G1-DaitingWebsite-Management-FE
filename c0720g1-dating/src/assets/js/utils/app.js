@@ -181,5 +181,5 @@ const app = {
       }
     }
   };
-
+console.log('load app.js done');
 
