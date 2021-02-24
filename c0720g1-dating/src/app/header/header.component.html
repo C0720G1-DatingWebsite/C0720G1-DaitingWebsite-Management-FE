@@ -1307,7 +1307,8 @@
                 <!-- USER AVATAR CONTENT -->
                 <div class="user-avatar-content">
                   <!-- HEXAGON -->
-                  <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
+                  <div class="hexagon-image-30-32" id="main-avatar4"></div>
+<!--                  <img [src]="account.avatar" alt="">-->
                   <!-- /HEXAGON -->
                 </div>
                 <!-- /USER AVATAR CONTENT -->
@@ -1333,7 +1334,7 @@
             <!-- /USER STATUS AVATAR -->
 
             <!-- USER STATUS TITLE -->
-            <p class="user-status-title"><span class="bold">Xin chào <span class="font-weight-bold">Phúc Duy</span></span></p>
+            <p class="user-status-title"><span class="bold">Xin chào <span class="font-weight-bold">{{account.username}}</span></span></p>
             <!-- /USER STATUS TITLE -->
 
             <!-- USER STATUS TEXT -->
@@ -1377,7 +1378,7 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION BUTTON -->
-        <p class="dropdown-navigation-button button small secondary">Đăng xuất</p>
+        <p class="dropdown-navigation-button button small secondary" (click)="logout()">Đăng xuất</p>
         <!-- /DROPDOWN NAVIGATION BUTTON -->
       </div>
       <!-- /DROPDOWN NAVIGATION -->
