@@ -3,7 +3,7 @@ import {IImageGroup} from './image-group';
 import {IAccountGroup} from './account-group';
 import {IReport} from './report';
 
-export interface IGroup {
+export interface IUserGroup {
   id: number;
   name: string;
   about: string;

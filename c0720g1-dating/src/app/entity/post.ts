@@ -2,7 +2,7 @@ import {IAccount} from './account';
 import {IPolicy} from './policy';
 import {ICustomerView} from './customer-view';
 import {IComment} from './comment';
-import {IGroup} from './group';
+import {IUserGroup} from './user-group';
 
 export interface IPost {
   id: number;
@@ -11,7 +11,7 @@ export interface IPost {
   likeCount: number;
 
   account: IAccount;
-  group: IGroup;
+  group: IUserGroup;
   policy: IPolicy;
   customerViewList: ICustomerView[];
   commentList: IComment[];
