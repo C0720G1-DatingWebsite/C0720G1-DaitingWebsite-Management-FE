@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: 'list-group', component: ListGroupComponent}
 ];
 
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

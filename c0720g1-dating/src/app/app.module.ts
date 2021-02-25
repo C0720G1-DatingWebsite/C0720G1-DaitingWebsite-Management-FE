@@ -9,6 +9,7 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
+import {SuggestionsModule} from "./suggestions/suggestions.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {LoginModule} from "./login/login.module";
     AppRoutingModule,
     AccountSearchModule,
     GroupManagementModule,
-    LoginModule
+    LoginModule,
+    SuggestionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
