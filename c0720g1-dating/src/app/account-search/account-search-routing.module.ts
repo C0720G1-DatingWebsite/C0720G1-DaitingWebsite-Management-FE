@@ -7,7 +7,6 @@ const routes: Routes = [
   {path: '', component: AdvanceSearchComponent},
 ];
 
-
 @NgModule({
   imports: [CommonModule,
     RouterModule.forChild(routes)],
