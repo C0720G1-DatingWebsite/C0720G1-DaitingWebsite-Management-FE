@@ -1,0 +1,185 @@
+<div class="landing">
+  <div class="landing-decoration"></div>
+
+  <div class="landing-info">
+    <div class="logo">
+      <svg class="icon-logo-vikinger">
+        <use xlink:href="#svg-logo-vikinger"></use>
+      </svg>
+    </div>
+
+    <h2 class="landing-info-pretitle">Chào mừng bạn đến với</h2>
+    <h1 class="landing-info-title">TinTinder</h1>
+    <p class="landing-info-text">Bạn đang tìm kiếm một nửa của mình?</p>
+    <p class="landing-info-text">Chúng tôi sẽ giúp bạn thực hiện điều đó 👻</p>
+
+    <div class="tab-switch">
+      <p class="tab-switch-button login-register-form-trigger">Đăng nhập</p>
+      <p class="tab-switch-button login-register-form-trigger">Đăng ký</p>
+    </div>
+  </div>
+
+  <div class="landing-form">
+    <div class="form-box login-register-form-element">
+      <img class="form-box-decoration overflowing" src="img/landing/rocket.png" alt="rocket" height="300px">
+
+<!--      <div class="form">-->
+<!--        <div class="form-row">-->
+<!--          <div class="form-item">-->
+<!--            <div class="form-input">-->
+<!--              <label for="login-username">Username or Email</label>-->
+<!--              <input type="text" id="login-username" name="login_username">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--          <div class="form-item">-->
+<!--            <div class="form-input">-->
+<!--              <label for="login-password">Password</label>-->
+<!--              <input type="password" id="login-password" name="login_password">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row space-between">-->
+<!--          <div class="form-item">-->
+<!--            <div class="checkbox-wrap">-->
+<!--              <input type="checkbox" id="login-remember" name="login_remember" checked>-->
+<!--              <div class="checkbox-box">-->
+<!--                <svg class="icon-cross">-->
+<!--                  <use xlink:href="#svg-cross"></use>-->
+<!--                </svg>-->
+<!--              </div>-->
+<!--              <label for="login-remember">Remember Me</label>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="form-item">-->
+<!--            <a class="form-link" href="#">Forgot Password?</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--          <div class="form-item">-->
+<!--            <button class="button medium secondary">Login to your Account!</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+    </div>
+    <div class="form-box login-register-form-element">
+
+
+      <img class="form-box-decoration" src="img/landing/rocket.png" alt="rocket">
+
+      <h2 class="form-box-title">Đăng ký tài khoản!</h2>
+
+      <form class="form-signin" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="form-row">
+          <div class="form-item">
+            <div class="form-input">
+              <label for="register-email"></label>
+              <input type="text" id="register-email" name="register_email" formControlName="username"  placeholder="Email (Tên đăng nhập) *">
+              <div class="error-place" *ngFor="let validation of validation_messages.username">
+                <small class="text-danger"
+                       *ngIf="(formGroup.get('username').hasError(validation.type) && formGroup.get('username').touched)">
+                  {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-item">
+            <div class="form-input">
+              <label for="register-password-repeat4"></label>
+              <input type="password" id="register-password-repeat4" name="register_password_repeat" formControlName="password"
+                     placeholder="Mật khẩu *">
+              <div class="error-place" *ngFor="let validation of validation_messages.password">
+                <small class="text-danger"
+                       *ngIf="formGroup.get('password').hasError(validation.type) && (formGroup.get('password').touched || formGroup.get('password').pristine)">
+                  {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-item">
+            <div class="form-input">
+              <label for="register-password-repeat3"></label>
+              <input type="password" id="register-password-repeat3" name="register_password_repeat" formControlName="password"
+                     placeholder="Nhập lại mật khẩu *">
+              <div class="error-place" *ngFor="let validation of validation_messages.password">
+                <small class="text-danger"
+                       *ngIf="formGroup.get('password').hasError(validation.type) && (formGroup.get('password').touched || formGroup.get('password').pristine)">
+                  {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row split">
+          <div class="form-item">
+            <div class="form-input-decorated">
+              <div class="form-input small active">
+                <label for="profile-birthday">Birthday *</label>
+                <input type="date" id="profile-birthday" name="profile_birthday">
+              </div>
+              <svg class="form-input-icon icon-events">
+                <use xlink:href="#svg-events"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row split">
+          <div class="form-item">
+            <div class="form-select">
+              <label for="profile-country">Chọn giới tính *</label>
+              <select id="profile-country" name="profile_country">
+                <option value="0">Nữ</option>
+                <option value="1" selected>Nam</option>
+              </select>
+              <svg class="form-select-icon icon-small-arrow">
+                <use xlink:href="#svg-small-arrow"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-item">
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="register-newsletter" name="register_newsletter" checked>
+            <div class="checkbox-box">
+              <svg class="icon-cross">
+                <use xlink:href="#svg-cross"></use>
+              </svg>
+            </div>
+            <label for="register-newsletter">Gởi cho tôi tin tức và những cập nhật qua email</label>
+            <label style="color: red">Lưu ý: Những chỗ có dấu * là bắt buộc nhập</label>
+          </div>
+        </div>
+      </div>
+      <section>
+        <article>
+          <a href="https://policies.google.com/terms?hl=vi"> Click vào đây để xem điều khoản</a>
+        </article>
+      </section>
+      <div class="form-row">
+        <div class="form-item">
+          <button class="button medium primary" type="button">Đăng ký ngay!</button>
+        </div>
+
+      </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
