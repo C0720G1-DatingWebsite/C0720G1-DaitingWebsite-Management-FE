@@ -8,6 +8,7 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {LoginModule} from "./login/login.module";
+import {ChangePasswordModule} from "./change-password/change-password.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {LoginModule} from "./login/login.module";
     BrowserModule,
     AppRoutingModule,
     AccountSearchModule,
-    LoginModule
+    LoginModule,
+    ChangePasswordModule
   ],
   providers: [],
   bootstrap: [AppComponent]
