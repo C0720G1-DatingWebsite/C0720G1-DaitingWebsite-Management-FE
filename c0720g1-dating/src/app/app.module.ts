@@ -8,6 +8,7 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
+import {LoginModule} from "./login/login.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {GroupManagementModule} from "./group-management/group-management.module"
     BrowserModule,
     AppRoutingModule,
     AccountSearchModule,
-    GroupManagementModule
+    GroupManagementModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

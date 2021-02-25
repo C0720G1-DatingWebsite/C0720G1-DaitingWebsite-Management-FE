@@ -17,32 +17,25 @@
   <!-- /SECTION BANNER -->
 
   <!-- SECTION FILTERS BAR -->
-  <div class="section-filters-bar v1">
+  <div class="container col-12 mt-3 mb-3 p-3" style="background-color: white; border-radius: 10px">
     <!-- SECTION FILTERS BAR ACTIONS -->
-    <div class="section-filters-bar-actions">
       <!-- FORM -->
 
       <!-- FORM INPUT -->
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="friends-search">Tên</label>
-        <input type="text" id="friends-search" name="friends_search">
-        <!-- BUTTON -->
-        <!--            <button class="button primary">-->
-        <!-- ICON MAGNIFYING GLASS -->
-        <!--              <svg class="icon-magnifying-glass">-->
-        <!--                <use xlink:href="#svg-magnifying-glass"></use>-->
-        <!--              </svg>-->
-        <!-- /ICON MAGNIFYING GLASS -->
-        <!--            </button>-->
-        <!-- /BUTTON -->
+    <div class="row">
+      <div class="col-4 mb-3 mt-3">
+        <input class="form-control" type="text" id="friends-search" name="friends_search" placeholder="Tên">
       </div>
-      <!-- /FORM INPUT -->
+      <div class="col-4 mb-3 mt-3">
+        <input class="form-control" type="text" id="job-search" name="friends_search" placeholder="Nghề nghiệp">
+      </div>
+      <div class="col-4 mb-3 mt-3">
+        <input class="form-control" type="text" id="hobbies-search" name="friends_search" placeholder="Sở thích">
+      </div>
 
-      <!-- FORM SELECT -->
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="dob-search">Chọn năm sinh</label>
-        <select id="dob-search" name="friends_filter_category" style="height: 48px !important;">
-          <option value="0"></option>
+      <div class="col-4 mb-3 mt-3">
+        <select class="form-control" id="dob-search" name="friends_filter_category">
+          <option value="0">Chọn năm sinh</option>
           <option value="1">1980 - 1990</option>
           <option value="2">1990 - 2000</option>
           <option value="3">2000 - 2010</option>
@@ -50,35 +43,26 @@
         </select>
       </div>
 
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="gender-search">Chọn giới tính</label>
-        <select id="gender-search" name="friends_filter_category" style="height: 48px !important;">
-          <option value="0"></option>
-          <option value="1">Nam</option>
-          <option value="2">Nữ</option>
-        </select>
-      </div>
+        <div class="col-4 mb-3 mt-3">
+          <select class="form-control" id="gender-search" name="friends_filter_category">
+            <option value="0">Chọn giới tính</option>
+            <option value="1">Nam</option>
+            <option value="2">Nữ</option>
+          </select>
+        </div>
 
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="location-search">Chọn nơi sống</label>
-        <select id="location-search" name="friends_filter_category" style="height: 48px !important;">
-          <option value="0"></option>
-          <option value="1">Đà Nẵng</option>
-          <option value="2">Quảng Nam</option>
-        </select>
-      </div>
+        <div class="col-4 mb-3 mt-3">
+          <select class="form-control" id="location-search" name="friends_filter_category">
+            <option value="0">Chọn nơi sống</option>
+            <option value="1">Đà Nẵng</option>
+            <option value="2">Quảng Nam</option>
+          </select>
+        </div>
+    </div>
+    <div class="row mb-3 mt-3">
 
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="job-search">Nghề nghiệp</label>
-        <input type="text" id="job-search" name="friends_search">
-      </div>
 
-      <div class="form-input small with-button" style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
-        <label for="hobbies-search">Sở thích</label>
-        <input type="text" id="hobbies-search" name="friends_search">
-      </div>
-
-      <div style="margin-left: 20px !important; height: 48px !important; width: 120px !important;">
+      <div style="margin-left: 16px !important; height: 54px !important; width: 120px !important;">
         <button class="button primary">
           <svg class="icon-magnifying-glass"><use xlink:href="#svg-magnifying-glass"></use></svg> Tìm kiếm
         </button>
@@ -86,6 +70,8 @@
       <div class="filter-tabs">
       </div>
     </div>
+
+
   </div>
 
   <!-- GRID -->
@@ -1305,4 +1291,4 @@
   <p class="section-results-text">Hiển thị 9/ 255 bạn</p>
   <!-- /SECTION RESULTS TEXT -->
 </div>
-<!-- /CONTENT GRID -->
+
