@@ -1,35 +1,56 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
-import {GroupService} from "../group.service";
-import {IGroup} from "../IGroup";
+import {SuggestionsService} from "../suggestions.service";
+import {StorageService} from "../../security/storage.service";
+import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
 
 @Component({
-  selector: 'app-list-group',
-  templateUrl: './list-group.component.html',
-  styleUrls: ['./list-group.component.scss']
+  selector: 'app-suggested-pairing',
+  templateUrl: './suggested-pairing.component.html',
+  styleUrls: ['./suggested-pairing.component.scss']
 })
-export class ListGroupComponent implements OnInit {
-  public listGroup: IGroup [];
-  page = 0;
-  pageable: any;
+export class SuggestedPairingComponent implements OnInit {
+  accountId: 1;
+  infoAccountDTO: InfoAccountDTO;
 
-
-  constructor(private loadResourceService: LoadResourceService,
-              public groupService: GroupService) {
+  constructor(private loadResourceService:LoadResourceService,
+              public suggestionsService: SuggestionsService,
+              public storageService: StorageService ) {
     this.loadScript();
   }
 
   ngOnInit(): void {
-    this.getListGroup()
+    // this.getIdAccount();
+    this.getAccountInformation();
   }
 
-  getListGroup() {
-    this.groupService.getListGroup(this.page).subscribe(data => {
-      this.listGroup = data.content;
-      console.log(data.content)
-      this.pageable = data
-    })
+  getAccountInformation(){
+    this.suggestionsService.getAccountInformation(this.accountId).subscribe((data:InfoAccountDTO) =>{
+    this.infoAccountDTO = data;
+    console.log(data);
+    });
   }
+
+
+  getIdAccount() {
+    if (this.storageService.getUser()) {
+      const user = this.storageService.getUser();
+      this.accountId = this.storageService.getUser().id;
+      console.log(this.storageService.getUser().id);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   loadScript() {
@@ -43,13 +64,13 @@ export class ListGroupComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
-    setTimeout(() => {
+    setTimeout( () => {
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       this.loadResourceService.loadScript('assets/js/global/global.tooltips.js');
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
-    }, 200)
+    },200)
   }
 
 }
