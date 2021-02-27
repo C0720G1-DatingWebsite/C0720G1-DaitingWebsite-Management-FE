@@ -9,9 +9,9 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
+import {ChangePasswordModule} from "./change-password/change-password.module";
 import {SuggestionsModule} from "./suggestions/suggestions.module";
 import {HomeModule} from "./home/home.module";
-
 
 @NgModule({
   declarations: [
@@ -24,8 +24,9 @@ import {HomeModule} from "./home/home.module";
     BrowserModule,
     AppRoutingModule,
     AccountSearchModule,
-    GroupManagementModule,
     LoginModule,
+    ChangePasswordModule,
+    GroupManagementModule,
     SuggestionsModule,
     HomeModule
   ],
