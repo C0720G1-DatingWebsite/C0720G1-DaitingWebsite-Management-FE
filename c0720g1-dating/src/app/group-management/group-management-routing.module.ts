@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'detail-group/:id', component: DetailGroupComponent}
 ];
 
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
