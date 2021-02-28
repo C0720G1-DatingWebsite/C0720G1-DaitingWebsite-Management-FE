@@ -5,7 +5,7 @@
     <!-- USER AVATAR CONTENT -->
     <div class="user-avatar-content">
       <!-- HEXAGON -->
-      <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
+      <div class="hexagon-image-30-32" id="main-avatar2"></div>
       <!-- /HEXAGON -->
     </div>
     <!-- /USER AVATAR CONTENT -->
@@ -33,7 +33,7 @@
     <!-- MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" href="newsfeed.html" data-title="Bản Tin">
+      <a class="menu-item-link text-tooltip-tfr" routerLink="getAllPost" data-title="Bản Tin">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-newsfeed">
           <use xlink:href="#svg-newsfeed"></use>
@@ -45,13 +45,17 @@
     <!-- /MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" href="quan-ly-hop-thu.html.html" data-title="Tin nhắn" style="position: relative;">
+      <a class="menu-item-link text-tooltip-tfr" href="quan-ly-hop-thu.html.html" data-title="Tin nhắn"
+         style="position: relative;">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-forums">
           <use xlink:href="#svg-forums"></use>
         </svg>
         <!-- /MENU ITEM LINK ICON -->
-        <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -72px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Forums</p></div></a>
+        <div class="xm-tooltip"
+             style="white-space: nowrap; position: absolute; z-index: 99999; right: -72px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;">
+          <p class="xm-tooltip-text">Forums</p></div>
+      </a>
       <!-- /MENU ITEM LINK -->
     </li>
 
@@ -110,7 +114,11 @@
       <!-- USER AVATAR CONTENT -->
       <div class="user-avatar-content">
         <!-- HEXAGON -->
-        <div class="hexagon-image-82-90" data-src="assets/img/avatar/01.jpg"></div>
+        <div class="hexagon-image-82-90" id="main-avatar1"></div>
+
+        <!--        <div>-->
+        <!--          <img class="hexagon-image-82-90" [src]="account.avatar" alt="">-->
+        <!--        </div>-->
         <!-- /HEXAGON -->
       </div>
       <!-- /USER AVATAR CONTENT -->
@@ -135,7 +143,7 @@
     <!-- /USER SHORT DESCRIPTION AVATAR -->
 
     <!-- USER SHORT DESCRIPTION TITLE -->
-    <p class="user-short-description-title"><a href="profile-timeline.html">Phúc Duy</a></p>
+    <p class="user-short-description-title"><a href="profile-timeline.html"> {{account.username}}</a></p>
     <!-- /USER SHORT DESCRIPTION TITLE -->
 
     <!-- USER SHORT DESCRIPTION TEXT -->
@@ -275,7 +283,8 @@
         <!-- USER AVATAR CONTENT -->
         <div class="user-avatar-content">
           <!-- HEXAGON -->
-          <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
+          <div class="hexagon-image-30-32" id="main-avatar3"></div>
+
           <!-- /HEXAGON -->
         </div>
         <!-- /USER AVATAR CONTENT -->

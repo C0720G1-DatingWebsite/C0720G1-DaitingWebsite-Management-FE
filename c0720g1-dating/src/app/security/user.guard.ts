@@ -12,18 +12,13 @@ export class UserGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const user = this.storageService.getResponse();
+    const user = this.storageService.getUser();
 
     if (user == null) {
       this.router.navigate(['/login']);
       return false;
     } else {
-      if (user.roleList[2] === 'ROLE_USER') {
-        return true;
-      } else {
-        this.router.navigate(['/home']);
-        return false;
-      }
+      return true;
     }
   }
 

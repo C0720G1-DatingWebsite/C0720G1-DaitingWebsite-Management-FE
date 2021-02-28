@@ -38,9 +38,9 @@
 </div>
 <!-- /PAGE LOADER -->
 
-<app-left-sidebar></app-left-sidebar>
+<app-left-sidebar *ngIf="!check"></app-left-sidebar>
 <!--<app-right-sidebar></app-right-sidebar>-->
-<app-header></app-header>
+<app-header *ngIf="!check"></app-header>
 
 <!-- FLOATY BAR -->
 <!--<aside class="floaty-bar">-->
@@ -129,7 +129,7 @@
 <!-- /FLOATY BAR -->
 
 <!-- CONTENT GRID -->
-<router-outlet></router-outlet>
+<router-outlet #element></router-outlet>
 <!-- /CONTENT GRID -->
 
 <!-- app -->

@@ -10,18 +10,20 @@ export class StorageService {
   constructor() { }
 
   public saveInSessionStorage(response: any) {
-    window.sessionStorage.setItem(this.KEY, response);
+    window.sessionStorage.removeItem(this.KEY);
+    window.sessionStorage.setItem(this.KEY, JSON.stringify(response));
   }
 
   public saveInLocalStorage(response: any) {
-    window.localStorage.setItem(this.KEY, response);
+    window.localStorage.removeItem(this.KEY);
+    window.localStorage.setItem(this.KEY, JSON.stringify(response));
   }
 
-  public getResponse(): any {
+  public  getUser(): any {
     if (window.localStorage.getItem(this.KEY)) {
-      return window.localStorage.getItem(this.KEY);
+      return JSON.parse(window.localStorage.getItem(this.KEY));
     } else {
-      return window.sessionStorage.getItem(this.KEY);
+      return JSON.parse(window.sessionStorage.getItem(this.KEY));
     }
   }
 

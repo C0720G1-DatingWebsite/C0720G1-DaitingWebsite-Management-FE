@@ -1,0 +1,297 @@
+<!-- LANDING -->
+<div class="landing">
+  <!-- LANDING DECORATION -->
+  <div class="landing-decoration"></div>
+  <!-- /LANDING DECORATION -->
+
+  <!-- LANDING INFO -->
+  <div class="landing-info">
+    <!-- LOGO -->
+    <div class="logo">
+      <!-- ICON LOGO VIKINGER -->
+      <svg class="icon-logo-vikinger">
+        <use xlink:href="#svg-logo-vikinger"></use>
+      </svg>
+      <!-- /ICON LOGO VIKINGER -->
+    </div>
+    <!-- /LOGO -->
+
+    <!-- LANDING INFO PRETITLE -->
+    <h2 class="landing-info-pretitle">Welcome to</h2>
+    <!-- /LANDING INFO PRETITLE -->
+
+    <!-- LANDING INFO TITLE -->
+    <h1 class="landing-info-title">Vikinger</h1>
+    <!-- /LANDING INFO TITLE -->
+
+    <!-- LANDING INFO TEXT -->
+    <p class="landing-info-text">The next generation social network &amp; community! Connect with your friends and play with our quests and badges gamification system!</p>
+    <!-- /LANDING INFO TEXT -->
+
+    <!-- TAB SWITCH -->
+    <div class="tab-switch">
+      <!-- TAB SWITCH BUTTON -->
+      <p class="tab-switch-button login-register-form-trigger">Đăng nhập</p>
+      <!-- /TAB SWITCH BUTTON -->
+
+      <!-- TAB SWITCH BUTTON -->
+      <p class="tab-switch-button login-register-form-trigger">Đăng ký</p>
+      <!-- /TAB SWITCH BUTTON -->
+    </div>
+    <!-- /TAB SWITCH -->
+  </div>
+  <!-- /LANDING INFO -->
+
+  <!-- LANDING FORM -->
+  <div class="landing-form">
+    <!-- FORM BOX -->
+    <div class="form-box login-register-form-element">
+      <!-- FORM BOX DECORATION -->
+      <img class="form-box-decoration overflowing" src="src/assets/img/landing/rocket.png" alt="rocket">
+      <!-- /FORM BOX DECORATION -->
+
+      <!-- FORM BOX TITLE -->
+      <h2 class="form-box-title">Tài khoản đăng nhập</h2>
+
+      <!-- /FORM BOX TITLE -->
+
+      <!-- FORM -->
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <!-- FORM ROW -->
+        <div class="form-row">
+          <!-- FORM ITEM -->
+          <div class="form-item">
+            <!-- FORM INPUT -->
+            <div class="form-input">
+              <label for="login-username">Tài khoản hoặc Email</label>
+              <input type="text" id="login-username" name="login_username" formControlName="username">
+            </div>
+            <!-- /FORM INPUT -->
+          </div>
+          <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+          <!-- FORM ITEM -->
+          <div class="form-item">
+            <!-- FORM INPUT -->
+            <div class="form-input">
+              <label for="login-password">Mật khẩu</label>
+              <input type="password" id="login-password" name="login_password" formControlName="password">
+            </div>
+            <!-- /FORM INPUT -->
+          </div>
+          <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row space-between">
+          <!-- FORM ITEM -->
+          <div class="form-item">
+            <!-- CHECKBOX WRAP -->
+            <div class="checkbox-wrap">
+              <input type="checkbox" id="login-remember" name="login_remember" formControlName="rememberMe">
+              <!-- CHECKBOX BOX -->
+              <div class="checkbox-box">
+                <!-- ICON CROSS -->
+                <svg class="icon-cross">
+                  <use xlink:href="#svg-cross"></use>
+                </svg>
+                <!-- /ICON CROSS -->
+              </div>
+              <!-- /CHECKBOX BOX -->
+              <label for="login-remember">Nhớ mật khẩu</label>
+            </div>
+            <!-- /CHECKBOX WRAP -->
+          </div>
+          <!-- /FORM ITEM -->
+
+          <!-- FORM ITEM -->
+          <div class="form-item">
+            <!-- FORM LINK -->
+            <a class="form-link" href="#">Quên mật khẩu?</a>
+            <!-- /FORM LINK -->
+          </div>
+          <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+          <!-- FORM ITEM -->
+          <div class="form-item">
+            <!-- BUTTON -->
+            <button class="button medium secondary">Đăng nhập</button>
+            <!-- /BUTTON -->
+          </div>
+          <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+      </form>
+      <!-- /FORM -->
+
+      <!-- LINED TEXT -->
+      <p class="lined-text">Đăng nhập bằng mạng xã hội</p>
+      <!-- /LINED TEXT -->
+
+      <!-- SOCIAL LINKS -->
+      <div class="social-links">
+        <!-- SOCIAL LINK -->
+        <button class="social-link facebook" (click)="loginForFacebook()">
+          <!-- ICON FACEBOOK -->
+          <svg class="icon-facebook">
+            <use xlink:href="#svg-facebook"></use>
+          </svg>
+          <!-- /ICON FACEBOOK -->
+        </button>
+        <!-- /SOCIAL LINK -->
+
+
+        <!-- SOCIAL LINK -->
+        <button class="social-link youtube" #loginRef>
+          <!-- ICON TWITCH -->
+          <svg class="icon-google">
+            <use xlink:href="#svg-google"></use>
+          </svg>
+          <!-- /ICON TWITCH -->
+        </button>
+        <!-- /SOCIAL LINK -->
+
+      </div>
+      <!-- /SOCIAL LINKS -->
+    </div>
+    <!-- /FORM BOX -->
+
+    <!-- FORM BOX -->
+<!--    <div class="form-box login-register-form-element">-->
+<!--      &lt;!&ndash; FORM BOX DECORATION &ndash;&gt;-->
+<!--      <img class="form-box-decoration" src="src/assets/img/landing/rocket.png" alt="rocket">-->
+<!--      &lt;!&ndash; /FORM BOX DECORATION &ndash;&gt;-->
+
+<!--      &lt;!&ndash; FORM BOX TITLE &ndash;&gt;-->
+<!--      <h2 class="form-box-title">Create your Account!</h2>-->
+<!--      &lt;!&ndash; /FORM BOX TITLE &ndash;&gt;-->
+
+<!--      &lt;!&ndash; FORM &ndash;&gt;-->
+<!--      <form class="form">-->
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; FORM INPUT &ndash;&gt;-->
+<!--            <div class="form-input">-->
+<!--              <label for="register-email">Your Email</label>-->
+<!--              <input type="text" id="register-email" name="register_email">-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /FORM INPUT &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; FORM INPUT &ndash;&gt;-->
+<!--            <div class="form-input">-->
+<!--              <label for="register-username">Username</label>-->
+<!--              <input type="text" id="register-username" name="register_username">-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /FORM INPUT &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; FORM INPUT &ndash;&gt;-->
+<!--            <div class="form-input">-->
+<!--              <label for="register-password">Password</label>-->
+<!--              <input type="password" id="register-password" name="register_password">-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /FORM INPUT &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; FORM INPUT &ndash;&gt;-->
+<!--            <div class="form-input">-->
+<!--              <label for="register-password-repeat">Repeat Password</label>-->
+<!--              <input type="password" id="register-password-repeat" name="register_password_repeat">-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /FORM INPUT &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; CHECKBOX WRAP &ndash;&gt;-->
+<!--            <div class="checkbox-wrap">-->
+<!--              <input type="checkbox" id="register-newsletter" name="register_newsletter" checked>-->
+<!--              &lt;!&ndash; CHECKBOX BOX &ndash;&gt;-->
+<!--              <div class="checkbox-box">-->
+<!--                &lt;!&ndash; ICON CROSS &ndash;&gt;-->
+<!--                <svg class="icon-cross">-->
+<!--                  <use xlink:href="#svg-cross"></use>-->
+<!--                </svg>-->
+<!--                &lt;!&ndash; /ICON CROSS &ndash;&gt;-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /CHECKBOX BOX &ndash;&gt;-->
+<!--              <label for="register-newsletter">Send me news and updates via email</label>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /CHECKBOX WRAP &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+
+<!--        &lt;!&ndash; FORM ROW &ndash;&gt;-->
+<!--        <div class="form-row">-->
+<!--          &lt;!&ndash; FORM ITEM &ndash;&gt;-->
+<!--          <div class="form-item">-->
+<!--            &lt;!&ndash; BUTTON &ndash;&gt;-->
+<!--            <button class="button medium primary">Register Now!</button>-->
+<!--            &lt;!&ndash; /BUTTON &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; /FORM ITEM &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /FORM ROW &ndash;&gt;-->
+<!--      </form>-->
+<!--      &lt;!&ndash; /FORM &ndash;&gt;-->
+
+<!--      &lt;!&ndash; FORM TEXT &ndash;&gt;-->
+<!--      <p class="form-text">You'll receive a confirmation email in your inbox with a link to activate your account. If you have any problems, <a href="#">contact us</a>!</p>-->
+<!--      &lt;!&ndash; /FORM TEXT &ndash;&gt;-->
+<!--    </div>-->
+    <!-- /FORM BOX -->
+  </div>
+  <!-- /LANDING FORM -->
+</div>
+<!-- /LANDING -->
+
+<!-- app -->
+<script src="src/assets/js/utils/app.js"></script>
+<!-- XM_Plugins -->
+<script src="src/assets/js/vendor/xm_plugins.min.js"></script>
+<!-- form.utils -->
+<script src="src/assets/js/form/form.utils.js"></script>
+<!-- landing.tabs -->
+<script src="src/assets/js/landing/landing.tabs.js"></script>
+<!-- SVG icons -->
+<script src="src/assets/js/utils/svg-loader.js"></script>

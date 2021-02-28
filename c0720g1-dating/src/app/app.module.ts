@@ -7,6 +7,15 @@ import { HeaderComponent } from './header/header.component';
 import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
+import {GroupManagementModule} from "./group-management/group-management.module";
+import {LoginModule} from "./login/login.module";
+import {ChangePasswordModule} from "./change-password/change-password.module";
+
+import {CreatePostModule} from "./create-post/create-post.module";
+import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +27,12 @@ import {AccountSearchModule} from "./account-search/account-search.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AccountSearchModule
+    AccountSearchModule,
+    LoginModule,
+    ChangePasswordModule,
+    GroupManagementModule,
+    CreatePostModule,
+    ChangeAvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
