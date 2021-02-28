@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {ChangePasswordComponent} from "./change-password/change-password.component";
-
+import {ChangeAvatarComponent} from "./change-avatar/change-avatar.component";
 
 const routes: Routes = [
-  {path: 'change-password', component: ChangePasswordComponent},
+  {path:'change-avatar', component: ChangeAvatarComponent}
 ];
-
 
 @NgModule({
   imports: [CommonModule,
     RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ChangePasswordRoutingModule { }
+export class ChangeAvatarRoutingModule { }

@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {Router} from "@angular/router";
 import {ChangePasswordService} from "../change-password.service";
-import {FormGroup} from "@angular/forms";
 import {IAccountDTO} from "../IAccountDTO";
-import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-change-password',
@@ -12,21 +10,23 @@ import {error} from "@angular/compiler/src/util";
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  public check: boolean = false;
+  public check: boolean = true;
+  public checkNewPass: boolean = true;
   private account: IAccountDTO;
-  private newPassword: string;
-  private oldPassword: string;
-  constructor(private loadResourceService:LoadResourceService,
+  public newPassword: string = "";
+  public oldPassword: string = '';
+
+  constructor(private loadResourceService: LoadResourceService,
               private router: Router,
               private changePasswordService: ChangePasswordService
-             ) {
-    this.changePasswordService.findAccountDTOById(4).subscribe((data) =>{
-      console.log("Tin Change Password");
+  ) {
+    this.changePasswordService.findAccountDTOById(4).subscribe((data) => {
       console.log(data);
       this.account = data;
     });
     this.loadScript()
   }
+
   ngOnInit(): void {
 
   }
@@ -42,41 +42,40 @@ export class ChangePasswordComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
-    setTimeout( () => {
+    setTimeout(() => {
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       this.loadResourceService.loadScript('assets/js/global/global.tooltips.js');
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
-    },200)
+    }, 200)
   }
 
   checkPassword(value: string) {
     this.oldPassword = value;
-    this.changePasswordService.checkPassword(this.account.idAccount,value).subscribe((data :boolean)=>{
+    this.changePasswordService.checkPassword(this.account.idAccount,value).subscribe((data)=>{
       this.check = data;
-    });
-
-  }
-
-  newPass(value: string) {
-    this.newPassword = value
+    })
   }
 
   againPassword(value: string) {
-    if(value === this.newPassword){
-      this.check = true;
+    if (value !== this.newPassword) {
+      this.checkNewPass = false;
+    }else {
+      this.checkNewPass = true;
     }
   }
 
   savePassword() {
-    if(this.changePasswordService.checkPassword(this.account.idAccount,this.oldPassword).subscribe){
-      this.changePasswordService.changePassword(this.account.idAccount,this.newPassword).subscribe((data)=>{
-        console.log(data);
-        this.router.navigateByUrl('');
-      }, error=>{
-        this.router.navigateByUrl('change-password');
-      });
-    }
+    this.changePasswordService.checkPassword(this.account.idAccount, this.oldPassword).subscribe((data) => {
+      if (data == true) {
+        this.changePasswordService.changePassword(this.account.idAccount, this.newPassword).subscribe((data) => {
+          console.log(data);
+          this.router.navigateByUrl('');
+        })
+      } else {
+        this.router.navigateByUrl('change-password')
+      }
+    })
   }
 }

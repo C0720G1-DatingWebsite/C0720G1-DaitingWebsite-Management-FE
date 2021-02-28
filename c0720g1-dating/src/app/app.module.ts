@@ -10,8 +10,12 @@ import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
-import {SuggestionsModule} from "./suggestions/suggestions.module";
-import {HomeModule} from "./home/home.module";
+
+import {CreatePostModule} from "./create-post/create-post.module";
+import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,8 +31,8 @@ import {HomeModule} from "./home/home.module";
     LoginModule,
     ChangePasswordModule,
     GroupManagementModule,
-    SuggestionsModule,
-    HomeModule
+    CreatePostModule,
+    ChangeAvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
