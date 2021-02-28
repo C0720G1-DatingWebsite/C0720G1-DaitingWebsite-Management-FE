@@ -1,5 +1,8 @@
 <!-- CONTENT GRID -->
-<div class="content-grid">
+<div class="content-grid" infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="500"
+     (scrolled)="onScroll()">
   <!-- SECTION BANNER -->
   <div class="section-banner">
     <!-- SECTION BANNER ICON -->
@@ -7,7 +10,7 @@
     <!-- /SECTION BANNER ICON -->
 
     <!-- SECTION BANNER TITLE -->
-    <p class="section-banner-title">Bạn bè (256)</p>
+    <p class="section-banner-title" *ngIf="totalResult">Bạn bè ({{totalResult}})</p>
     <!-- /SECTION BANNER TITLE -->
 
     <!-- SECTION BANNER TEXT -->
@@ -24,38 +27,37 @@
       <!-- FORM INPUT -->
     <div class="row">
       <div class="col-4 mb-3 mt-3">
-        <input class="form-control" type="text" id="friends-search" name="friends_search" placeholder="Tên">
+        <input class="form-control" type="text" id="friends-search" name="friends_search" placeholder="Tên" [(ngModel)]="searchData.name">
       </div>
       <div class="col-4 mb-3 mt-3">
-        <input class="form-control" type="text" id="job-search" name="friends_search" placeholder="Nghề nghiệp">
+        <input class="form-control" type="text" id="job-search" name="friends_search" placeholder="Nghề nghiệp" [(ngModel)]="searchData.job">
       </div>
       <div class="col-4 mb-3 mt-3">
-        <input class="form-control" type="text" id="hobbies-search" name="friends_search" placeholder="Sở thích">
+        <input class="form-control" type="text" id="hobbies-search" name="friends_search" placeholder="Sở thích" [(ngModel)]="searchData.hobbies">
       </div>
 
       <div class="col-4 mb-3 mt-3">
-        <select class="form-control" id="dob-search" name="friends_filter_category">
-          <option value="0">Chọn năm sinh</option>
-          <option value="1">1980 - 1990</option>
-          <option value="2">1990 - 2000</option>
-          <option value="3">2000 - 2010</option>
-          <option value="4">2010 - 2020</option>
+        <select class="form-control" id="dob-search" name="friends_filter_category" [(ngModel)]="selectedYear">
+          <option value="">Chọn năm sinh</option>
+          <option value="1980 - 1990">1980 - 1990</option>
+          <option value="1990 - 2000">1990 - 2000</option>
+          <option value="2000 - 2010">2000 - 2010</option>
+          <option value="2010 - 2020">2010 - 2020</option>
         </select>
       </div>
 
         <div class="col-4 mb-3 mt-3">
-          <select class="form-control" id="gender-search" name="friends_filter_category">
-            <option value="0">Chọn giới tính</option>
+          <select class="form-control" id="gender-search" name="friends_filter_category" [(ngModel)]="searchData.gender">
+            <option value="3">Chọn giới tính</option>
             <option value="1">Nam</option>
-            <option value="2">Nữ</option>
+            <option value="0">Nữ</option>
           </select>
         </div>
 
         <div class="col-4 mb-3 mt-3">
-          <select class="form-control" id="location-search" name="friends_filter_category">
+          <select class="form-control" id="location-search" name="friends_filter_category" [(ngModel)]="searchData.city">
             <option value="0">Chọn nơi sống</option>
-            <option value="1">Đà Nẵng</option>
-            <option value="2">Quảng Nam</option>
+            <option *ngFor="let city of cityList" [value]="city.id">{{city.name}}</option>
           </select>
         </div>
     </div>
@@ -63,11 +65,14 @@
 
 
       <div style="margin-left: 16px !important; height: 54px !important; width: 120px !important;">
-        <button class="button primary">
+        <button class="button primary" (click)="searchMember()">
           <svg class="icon-magnifying-glass"><use xlink:href="#svg-magnifying-glass"></use></svg> Tìm kiếm
         </button>
       </div>
-      <div class="filter-tabs">
+      <div style="margin-left: 16px !important; height: 54px !important; width: 120px !important;">
+        <button class="button warning" (click)="clearSearch()">
+          <svg class="icon-delete"><use xlink:href="#svg-delete"></use></svg> Bỏ tìm kiếm
+        </button>
       </div>
     </div>
 
@@ -77,10 +82,10 @@
   <!-- GRID -->
   <div class="grid grid-4-4-4 centered">
     <!-- USER PREVIEW -->
-    <div class="user-preview">
+    <div class="user-preview" *ngFor="let user of displayList">
       <!-- USER PREVIEW COVER -->
       <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/04.jpg" alt="cover-04">
+        <img [src]="user.backgroundImage">
       </figure>
       <!-- /USER PREVIEW COVER -->
 
@@ -101,7 +106,7 @@
             <!-- USER AVATAR CONTENT -->
             <div class="user-avatar-content">
               <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/05.jpg"></div>
+              <div class="hexagon-image-82-90" [attr.data-src]="user.avatar"></div>
               <!-- /HEXAGON -->
             </div>
             <!-- /USER AVATAR CONTENT -->
@@ -126,11 +131,11 @@
           <!-- /USER SHORT DESCRIPTION AVATAR -->
 
           <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">NekoBebop</a></p>
+          <p class="user-short-description-title"><a href="profile-timeline.html">{{user.fullName}}</a></p>
           <!-- /USER SHORT DESCRIPTION TITLE -->
 
           <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text"><a href="#">www.store.com/nekoprints</a></p>
+          <p class="user-short-description-text"><a href="#">{{user.accountDescribe}}</a></p>
           <!-- /USER SHORT DESCRIPTION TEXT -->
         </div>
         <!-- /USER SHORT DESCRIPTION -->
@@ -145,7 +150,7 @@
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title">874</p>
+                <p class="user-stat-title">{{user.postCount}}</p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
@@ -157,7 +162,7 @@
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title">60</p>
+                <p class="user-stat-title">{{user.friendCount}}</p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
@@ -169,7 +174,7 @@
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title">3.9k</p>
+                <p class="user-stat-title">{{user.likeCount != null? user.likeCount: '0'}}</p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
@@ -202,1093 +207,11 @@
     </div>
     <!-- /USER PREVIEW -->
 
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/15.jpg" alt="cover-15">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/02.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Destroy Dex</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text"><a href="#">www.twitch.tv/d-destroyer</a></p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-02" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">890</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">79</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">4.6k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/23.jpg" alt="cover-23">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/03.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Nick Grissom</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text">aka Phantom Streamer</p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-03" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">562</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">77</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">2.3k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/05.jpg" alt="cover-05">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/07.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Sarah Diamond</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text"><a href="#">www.diamondart.com</a></p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-04" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">1046</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">107</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">12.1k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/06.jpg" alt="cover-06">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/04.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Bearded Wonder</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text">aka Jack Parker</p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-05" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">97</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">44</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">608</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/08.jpg" alt="cover-08">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/10.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">The Green Goo</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text"><a href="#">www.ggprints.com</a></p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-06" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">28</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">53</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">901</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/09.jpg" alt="cover-09">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/08.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Damian Greyson</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text">aka Samurai Stream</p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-07" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">29</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">17</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">218</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/18.jpg" alt="cover-18">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/23.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Rosie Sakura</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text"><a href="#">www.rosiesk.com</a></p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-08" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">1260</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">114</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">1.1k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
-
-    <!-- USER PREVIEW -->
-    <div class="user-preview">
-      <!-- USER PREVIEW COVER -->
-      <figure class="user-preview-cover liquid">
-        <img src="assets/img/cover/22.jpg" alt="cover-22">
-      </figure>
-      <!-- /USER PREVIEW COVER -->
-
-      <!-- USER PREVIEW INFO -->
-      <div class="user-preview-info">
-        <!-- USER SHORT DESCRIPTION -->
-        <div class="user-short-description">
-          <!-- USER SHORT DESCRIPTION AVATAR -->
-          <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
-            <!-- USER AVATAR BORDER -->
-            <div class="user-avatar-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-120-132"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR BORDER -->
-
-            <!-- USER AVATAR CONTENT -->
-            <div class="user-avatar-content">
-              <!-- HEXAGON -->
-              <div class="hexagon-image-82-90" data-src="assets/img/avatar/19.jpg"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR CONTENT -->
-
-            <!-- USER AVATAR PROGRESS -->
-            <div class="user-avatar-progress">
-              <!-- HEXAGON -->
-              <div class="hexagon-progress-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS -->
-
-            <!-- USER AVATAR PROGRESS BORDER -->
-            <div class="user-avatar-progress-border">
-              <!-- HEXAGON -->
-              <div class="hexagon-border-100-110"></div>
-              <!-- /HEXAGON -->
-            </div>
-            <!-- /USER AVATAR PROGRESS BORDER -->
-
-          </a>
-          <!-- /USER SHORT DESCRIPTION AVATAR -->
-
-          <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a href="profile-timeline.html">Sarah Rodgers</a></p>
-          <!-- /USER SHORT DESCRIPTION TITLE -->
-
-          <!-- USER SHORT DESCRIPTION TEXT -->
-          <p class="user-short-description-text">aka Raven999</p>
-          <!-- /USER SHORT DESCRIPTION TEXT -->
-        </div>
-        <!-- /USER SHORT DESCRIPTION -->
-
-
-        <!-- USER PREVIEW STATS SLIDES -->
-        <div id="user-preview-stats-slides-09" class="user-preview-stats-slides">
-          <!-- USER PREVIEW STATS SLIDE -->
-          <div class="user-preview-stats-slide">
-            <!-- USER STATS -->
-            <div class="user-stats">
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">204</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bài</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">35</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">2.3k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Quan tâm</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- /USER PREVIEW STATS SLIDE -->
-
-        </div>
-        <!-- /USER PREVIEW STATS SLIDES -->
-
-        <!-- USER PREVIEW ACTIONS -->
-        <div class="user-preview-actions">
-          <!-- BUTTON -->
-          <p class="button secondary">Thêm bạn +</p>
-          <!-- /BUTTON -->
-
-          <!-- BUTTON -->
-          <p class="button primary">Gửi tin nhắn</p>
-          <!-- /BUTTON -->
-        </div>
-        <!-- /USER PREVIEW ACTIONS -->
-      </div>
-      <!-- /USER PREVIEW INFO -->
-    </div>
-    <!-- /USER PREVIEW -->
   </div>
   <!-- /GRID -->
 
-  <!-- SECTION PAGER BAR -->
-  <div class="section-pager-bar">
-    <!-- SECTION PAGER -->
-    <div class="section-pager">
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item active">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">01</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">02</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">03</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">04</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">05</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">06</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-    </div>
-    <!-- /SECTION PAGER -->
-
-    <!-- SECTION PAGER CONTROLS -->
-    <div class="section-pager-controls">
-      <!-- SLIDER CONTROL -->
-      <div class="slider-control left disabled">
-        <!-- SLIDER CONTROL ICON -->
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-        <!-- /SLIDER CONTROL ICON -->
-      </div>
-      <!-- /SLIDER CONTROL -->
-
-      <!-- SLIDER CONTROL -->
-      <div class="slider-control right">
-        <!-- SLIDER CONTROL ICON -->
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-        <!-- /SLIDER CONTROL ICON -->
-      </div>
-      <!-- /SLIDER CONTROL -->
-    </div>
-    <!-- /SECTION PAGER CONTROLS -->
-  </div>
-  <!-- /SECTION PAGER BAR -->
-
   <!-- SECTION RESULTS TEXT -->
-  <p class="section-results-text">Hiển thị 9/ 255 bạn</p>
+  <p class="section-results-text" style="margin: 20px 0 !important;">Hiển thị {{totalDisplayed}}/ {{totalResult}} bạn</p>
   <!-- /SECTION RESULTS TEXT -->
 </div>
 
