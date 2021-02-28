@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import {ChangePasswordRoutingModule} from "./change-password-routing.module";
+import { ChangeAvatarComponent } from './change-avatar/change-avatar.component';
+import {ChangeAvatarRoutingModule} from "./change-avatar-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 
 
 
-
 @NgModule({
-  declarations: [ChangePasswordComponent],
+  declarations: [ChangeAvatarComponent],
   imports: [
     CommonModule,
+    ChangeAvatarRoutingModule,
     HttpClientModule,
     RouterModule,
-    ChangePasswordRoutingModule,
     FormsModule
   ]
 })
-export class ChangePasswordModule { }
+export class ChangeAvatarModule { }
