@@ -13,9 +13,9 @@ export class UserGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const user = this.storageService.getUser();
-
+    console.log(user);
     if (user == null) {
-      this.router.navigate(['/login']);
+      this.router.navigateByUrl('/login');
       return false;
     } else {
       return true;

@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { BlockAccountComponent } from './block-account/block-account.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangedPasswordComponent } from './changed-password/changed-password.component';
 
 
 /**
@@ -13,7 +14,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
  **/
 
 @NgModule({
-    declarations: [LoginComponent, BlockAccountComponent, ForgotPasswordComponent],
+    declarations: [LoginComponent, BlockAccountComponent, ForgotPasswordComponent, ChangedPasswordComponent],
     exports: [
         LoginComponent
     ],
