@@ -43,4 +43,13 @@ export class LoginService {
   forgotPassword(username: any) {
     return this.http.get(this.URL + '/forgot-password?username=' + username);
   }
+
+  checkVetifyCode(vetifyCode: string) {
+    return this.http.get(this.URL + '/check-vetify-password?vetifyCode=' + vetifyCode);
+  }
+
+  changedPassword(code: string, newPassword: string) {
+    return this.http.get(this.URL + '/changed-password?vetifyCode=' + code+ '&newPassword='+ newPassword);
+
+  }
 }
