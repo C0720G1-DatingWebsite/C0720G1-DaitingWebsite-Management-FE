@@ -38,4 +38,9 @@ export class LoginService {
   loginForGoogle(account: any) {
     return this.http.post(this.URL + '/login-google', account, this.httpOptions);
   }
+
+
+  forgotPassword(username: any) {
+    return this.http.get(this.URL + '/forgot-password?username=' + username);
+  }
 }

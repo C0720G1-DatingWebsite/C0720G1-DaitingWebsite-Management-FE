@@ -5,6 +5,7 @@ import {LoginRoutingModule} from "./login-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { BlockAccountComponent } from './block-account/block-account.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 /**
@@ -12,7 +13,7 @@ import { BlockAccountComponent } from './block-account/block-account.component';
  **/
 
 @NgModule({
-    declarations: [LoginComponent, BlockAccountComponent],
+    declarations: [LoginComponent, BlockAccountComponent, ForgotPasswordComponent],
     exports: [
         LoginComponent
     ],
