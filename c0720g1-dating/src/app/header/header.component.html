@@ -896,10 +896,6 @@
             <!-- USER STATUS TITLE -->
             <p class="user-status-title"><span class="bold">Xin chào <span class="font-weight-bold">{{account.username}}</span></span></p>
             <!-- /USER STATUS TITLE -->
-
-            <!-- USER STATUS TEXT -->
-            <p class="user-status-text small"><a href="profile-timeline.html">@marinavalentine</a></p>
-            <!-- /USER STATUS TEXT -->
           </div>
           <!-- /USER STATUS -->
         </div>
@@ -922,7 +918,7 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="hub-profile-requests.html">Lời mời kết bạn</a>
+        <a class="dropdown-navigation-link" [routerLink]="'profile/'+ account.id+'/friend-request'">Lời mời kết bạn</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION CATEGORY -->
@@ -938,7 +934,7 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION BUTTON -->
-        <p class="dropdown-navigation-button button small secondary" (click)="logout()">Đăng xuất</p>
+        <p class="dropdown-navigation-button button small secondary" (click)="logout(); emitLogin()">Đăng xuất</p>
         <!-- /DROPDOWN NAVIGATION BUTTON -->
       </div>
       <!-- /DROPDOWN NAVIGATION -->

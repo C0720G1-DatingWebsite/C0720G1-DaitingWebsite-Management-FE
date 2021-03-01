@@ -8,6 +8,11 @@ import {IAccountChat} from './account-chat';
 import {IAccountGroup} from './account-group';
 import {IReport} from './report';
 import {IFeedback} from './feedback';
+import {IMaritalStatus} from "./marital-status";
+import { IStatus } from './status';
+import {ICountry} from "./country";
+import {ICity} from "./city";
+import {IJob} from "./job";
 
 export interface IAccount {
   id: number;
@@ -24,11 +29,11 @@ export interface IAccount {
   backgroundImage: string;
   dateRegister: string;
 
-  marital_status: any;
-  status: any;
-  country: any;
-  city: any;
-  job: any;
+  marital_status: IMaritalStatus;
+  status: IStatus;
+  country: ICountry;
+  city: ICity;
+  job: IJob;
 
   imageAccountList: IImageAccount[];
   personalHobbiesList: IPersonalHobbies[];
