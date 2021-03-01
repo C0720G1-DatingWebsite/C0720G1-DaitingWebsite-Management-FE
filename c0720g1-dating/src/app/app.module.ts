@@ -13,6 +13,8 @@ import {ChangePasswordModule} from "./change-password/change-password.module";
 
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {FriendsModule} from "./friends/friends.module";
+import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
 
 
 
@@ -32,7 +34,8 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
-    ChangeAvatarModule
+    ChangeAvatarModule,
+    FriendsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
