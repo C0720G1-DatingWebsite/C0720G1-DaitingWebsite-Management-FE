@@ -19,6 +19,7 @@ import {ToastrModule} from "ngx-toastr";
 
 import {FriendsModule} from "./friends/friends.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
+import {HomeModule} from "./home/home.module";
 
 
 
@@ -42,7 +43,8 @@ import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.mo
     ChangeAvatarModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FriendsModule
+    FriendsModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
