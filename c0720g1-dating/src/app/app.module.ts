@@ -13,6 +13,8 @@ import {ChangePasswordModule} from "./change-password/change-password.module";
 
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -32,7 +34,9 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
-    ChangeAvatarModule
+    ChangeAvatarModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

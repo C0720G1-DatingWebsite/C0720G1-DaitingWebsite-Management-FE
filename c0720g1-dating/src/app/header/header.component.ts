@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {StorageService} from "../security/storage.service";
 import {Router} from "@angular/router";
 
@@ -11,10 +11,16 @@ export class HeaderComponent implements OnInit, DoCheck{
 
   account: any;
 
+  @Output() emit: EventEmitter<any>;
+
   constructor(private storageService: StorageService,
               private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  emitLogin() {
+    this.emit.emit();
   }
 
   logout() {

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
+/**
+ * PhuocTC
+ **/
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LoginService {
 
-  URL = 'http://localhost:8081';
+  URL = 'http://localhost:8080';
 
   httpOptions: any;
 
