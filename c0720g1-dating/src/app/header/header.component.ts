@@ -1,6 +1,7 @@
 import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StorageService} from "../security/storage.service";
 import {Router} from "@angular/router";
+import {MessageService} from "../chat-group/message.service";
 
 @Component({
   selector: 'app-header',
@@ -10,9 +11,12 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit, DoCheck{
 
   account: any;
-
+  sender: any;
+  content:any;
+  time_stamp:any;
   constructor(private storageService: StorageService,
-              private router: Router) { }
+              private router: Router,
+              private  messageService:MessageService) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +27,10 @@ export class HeaderComponent implements OnInit, DoCheck{
   }
 
   ngDoCheck(): void {
+    this.sender=this.messageService.obj_message.sender;
+    this.content=this.messageService.obj_message.content;
+    this.time_stamp=this.messageService.obj_message.time_stamp;
     this.account = this.storageService.getUser();
-    console.log(this.account.username);
     if (this.account.avatar) {
       document.getElementById('main-avatar4').setAttribute('data-src', this.account.avatar);
     } else {

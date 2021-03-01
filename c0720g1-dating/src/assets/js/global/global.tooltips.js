@@ -1,7 +1,6 @@
 /*----------------
     TOOLTIPS
 ----------------*/
-console.log("8");
 app.plugins.createTooltip({
   container: '.text-tooltip-tfr',
   offset: 4,

@@ -8,6 +8,11 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {LoginModule} from "./login/login.module";
+import {ChatGroupModule} from "./chat-group/chat-group.module";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import {LoginModule} from "./login/login.module";
     BrowserModule,
     AppRoutingModule,
     AccountSearchModule,
-    LoginModule
+    LoginModule,
+    ChatGroupModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
