@@ -4,6 +4,10 @@ import {LoginComponent} from "./login/login.component";
 import {BlockAccountComponent} from "./block-account/block-account.component";
 
 
+/**
+ * PhuocTC
+ **/
+
 const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "block", component: BlockAccountComponent}

@@ -13,8 +13,13 @@ import {ChangePasswordModule} from "./change-password/change-password.module";
 
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
+
 import {FriendsModule} from "./friends/friends.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
+
 
 
 
@@ -35,6 +40,8 @@ import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.mo
     GroupManagementModule,
     CreatePostModule,
     ChangeAvatarModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FriendsModule
   ],
   providers: [],

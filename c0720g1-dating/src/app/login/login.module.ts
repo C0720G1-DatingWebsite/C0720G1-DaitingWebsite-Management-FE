@@ -7,6 +7,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { BlockAccountComponent } from './block-account/block-account.component';
 
 
+/**
+ * PhuocTC
+ **/
+
 @NgModule({
     declarations: [LoginComponent, BlockAccountComponent],
     exports: [
