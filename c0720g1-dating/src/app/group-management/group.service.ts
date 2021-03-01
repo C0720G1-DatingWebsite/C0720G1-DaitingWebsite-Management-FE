@@ -23,10 +23,24 @@ export class GroupService {
   getListGroup(page: number): Observable<any> {
     return this.http.get(this.API + 'list-group?page=' + page)
   }
-  getGroupById(groupId: number): Observable<any>{
-    return this.http.get(this.API + 'get-group/'+groupId)
+
+  getGroupById(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-group/' + groupId)
   }
-  loadAvatarGroup(imgUrl:string){
+
+  getMemberQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-member-quantity/' + groupId)
+  }
+
+  getPostGroupQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-post-group-quantity/' + groupId)
+  }
+
+  getListMemberQuantity(): Observable<any> {
+    return this.http.get(this.API + 'get-list-member-quantity')
+  }
+
+  loadAvatarGroup(imgUrl: string) {
     document.getElementById('avatar-group').setAttribute('data-src', imgUrl);
     document.getElementById('background-group').setAttribute('data-src', imgUrl);
   }
