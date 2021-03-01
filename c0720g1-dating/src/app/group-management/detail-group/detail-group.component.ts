@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {GroupService} from "../group.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,9 +9,11 @@ import {IGroup} from "../IGroup";
   templateUrl: './detail-group.component.html',
   styleUrls: ['./detail-group.component.scss']
 })
-export class DetailGroupComponent implements OnInit {
+export class DetailGroupComponent implements OnInit, AfterViewChecked {
   public groupId: number;
-  public group : IGroup;
+  public group: IGroup;
+  public memberQuantity: number;
+  public postQuantity: number;
 
 
   constructor(private loadResourceService: LoadResourceService,
@@ -23,10 +25,16 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(data =>{
+    this.activatedRoute.params.subscribe(data => {
       this.groupId = Number(data.id)
-      this.groupService.getGroupById(this.groupId).subscribe(data =>{
+      this.groupService.getMemberQuantity(this.groupId).subscribe(data => {
+        this.memberQuantity = data
+      })
+      this.groupService.getGroupById(this.groupId).subscribe(data => {
         this.group = data
+      })
+      this.groupService.getPostGroupQuantity(this.groupId).subscribe(data =>{
+        this.postQuantity = data
       })
     })
   }
@@ -49,6 +57,11 @@ export class DetailGroupComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     }, 200)
+  }
+
+  ngAfterViewChecked(): void {
+
+    document.getElementById(String(this.groupId)).setAttribute('data-src', this.group.avatar)
   }
 
 }
