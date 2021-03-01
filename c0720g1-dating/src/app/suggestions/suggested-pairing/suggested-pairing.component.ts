@@ -3,6 +3,7 @@ import {LoadResourceService} from "../../load-resource.service";
 import {SuggestionsService} from "../suggestions.service";
 import {StorageService} from "../../security/storage.service";
 import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
+import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDTO";
 
 @Component({
   selector: 'app-suggested-pairing',
@@ -10,24 +11,40 @@ import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
   styleUrls: ['./suggested-pairing.component.scss']
 })
 export class SuggestedPairingComponent implements OnInit {
-  accountId: 1;
+  accountId = 1;
   infoAccountDTO: InfoAccountDTO;
+  suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
+  image : string;
+  size = 8;
 
   constructor(private loadResourceService:LoadResourceService,
               public suggestionsService: SuggestionsService,
               public storageService: StorageService ) {
     this.loadScript();
+    this.getAccountInformation();
   }
+
 
   ngOnInit(): void {
     // this.getIdAccount();
-    this.getAccountInformation();
   }
 
   getAccountInformation(){
     this.suggestionsService.getAccountInformation(this.accountId).subscribe((data:InfoAccountDTO) =>{
-    this.infoAccountDTO = data;
-    console.log(data);
+      this.infoAccountDTO = data;
+      var suggestedPairing = {
+        "hobbiesName":data.hobbiesName,
+        "cityName":data.cityName,
+        "gender" : data.gender,
+        "maritalStatusId" :data.maritalStatusId,
+        "accountId":data.accountId,
+        "size" : this.size
+      };
+      this.suggestionsService.getSuggestedPairing(suggestedPairing).subscribe((data1:SuggestionToMakeFriendsDTO[]) => {
+        this.suggestionToMakeFriendsDTO = data1;
+        console.log(data1)
+      });
+
     });
   }
 
@@ -71,6 +88,12 @@ export class SuggestedPairingComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     },200)
+  }
+
+  onScroll() {
+    this.size += 5;
+    this.getAccountInformation();
+    this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
   }
 
 }

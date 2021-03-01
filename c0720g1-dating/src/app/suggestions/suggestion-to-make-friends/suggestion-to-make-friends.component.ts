@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
 import {SuggestionsService} from "../suggestions.service";
@@ -13,11 +13,13 @@ import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDT
 export class SuggestionToMakeFriendsComponent implements OnInit {
   accountId = 1;
   infoAccountDTO: InfoAccountDTO;
-  suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[]=[];
+  suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
+  image: string;
+  size = 8;
 
-  constructor(private loadResourceService:LoadResourceService,
+  constructor(private loadResourceService: LoadResourceService,
               public suggestionsService: SuggestionsService,
-              public storageService: StorageService ) {
+              public storageService: StorageService) {
     this.loadScript();
     this.getAccountInformation();
   }
@@ -27,26 +29,21 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
     // this.getIdAccount();
   }
 
-  getAccountInformation(){
-    this.suggestionsService.getAccountInformation(this.accountId).subscribe((data:InfoAccountDTO) =>{
+  getAccountInformation() {
+    this.suggestionsService.getAccountInformation(this.accountId).subscribe((data: InfoAccountDTO) => {
       this.infoAccountDTO = data;
       var suggestionToMakeFriends = {
-        "hobbiesName":data.hobbiesName,
-        "cityName":data.cityName,
-        "accountId":data.accountId
+        "hobbiesName": data.hobbiesName,
+        "cityName": data.cityName,
+        "accountId": data.accountId,
+        "size" : this.size
       };
-      this.suggestionsService.getSuggestionToMakeFriends(suggestionToMakeFriends).subscribe((data1:SuggestionToMakeFriendsDTO[]) => {
+      this.suggestionsService.getSuggestionToMakeFriends(suggestionToMakeFriends).subscribe((data1: SuggestionToMakeFriendsDTO[]) => {
         this.suggestionToMakeFriendsDTO = data1;
-        // console.log(this.suggestionToMakeFriendsDTO);
-        for(let temp of this.suggestionToMakeFriendsDTO) {
-          console.log(temp)
-        }
       });
-
     });
+
   }
-
-
 
 
   loadScript() {
@@ -60,13 +57,18 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
-    setTimeout( () => {
+    setTimeout(() => {
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       this.loadResourceService.loadScript('assets/js/global/global.tooltips.js');
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
-    },200)
+    }, 200)
   }
 
+  onScroll() {
+    this.size += 5;
+    this.getAccountInformation();
+    this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+  }
 }
