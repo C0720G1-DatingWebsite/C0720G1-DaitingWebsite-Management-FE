@@ -49,6 +49,7 @@ export class MessageService {
 
     this.stompClient.connect({}, function (frame) {
       that.username = that.tokenStorageService.getUser().username;
+      
       that.stompClient.subscribe('/topic/1234', (message) => {
         if (message.body) {
           that.msg.push(JSON.parse(message.body));

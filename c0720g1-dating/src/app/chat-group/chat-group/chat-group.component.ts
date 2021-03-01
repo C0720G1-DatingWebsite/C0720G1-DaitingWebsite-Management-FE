@@ -51,10 +51,10 @@ export class ChatGroupComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-     this.messageService.getMessageList().subscribe(data=>{
-       this.messageList = data
-       console.log(this.messageList)
-     });
+     // this.messageService.getMessageList().subscribe(data=>{
+     //   this.messageList = data
+     //   console.log(this.messageList)
+     // });
     var chatHistory = document.getElementById("messageBody");
     chatHistory.scrollTop = chatHistory.scrollHeight;
     this.formGroup = this.formBuild.group({
@@ -74,8 +74,8 @@ export class ChatGroupComponent implements OnInit, DoCheck {
 
     // this.messageList = this.messageService.msg;
 
-    this.messageList.push(this.messageService.msg[this.messageService.msg.length-1]);
- console.log(this.messageService.msg[this.messageService.msg.length-1]);
+ //    this.messageList.push(this.messageService.msg[this.messageService.msg.length-1]);
+ // console.log(this.messageService.msg[this.messageService.msg.length-1]);
     this.formGroup.reset();
     this.notification_number += 1;
     console.log(this.messageList);
