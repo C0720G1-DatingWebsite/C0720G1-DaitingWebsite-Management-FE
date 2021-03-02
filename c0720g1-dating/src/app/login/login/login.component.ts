@@ -4,7 +4,7 @@ import {LoginService} from "../login.service";
 import {StorageService} from "../../security/storage.service";
 import {Router} from "@angular/router";
 import {LoadResourceService} from "../../load-resource.service";
-import {ToastrService} from "ngx-toastr";
+
 
 declare let FB: any;
 
@@ -209,6 +209,8 @@ export class LoginComponent implements OnInit {
         this.storageService.saveInSessionStorage(data);
       }
 
+      console.log(this.storageService.getUser());
+      this.router.navigateByUrl('');
       if (this.account.enable) {
         this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
         this.router.navigateByUrl('');

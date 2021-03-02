@@ -23,9 +23,8 @@ export class GroupService {
   getListGroup(page: number): Observable<any> {
     return this.http.get(this.API + 'list-group?page=' + page)
   }
-
-  getGroupById(groupId: number): Observable<any> {
-    return this.http.get(this.API + 'get-group/' + groupId)
+  getGroupById(groupId: number): Observable<any>{
+    return this.http.get(this.API + 'get-group/'+groupId)
   }
 
   getMemberQuantity(groupId: number): Observable<any> {
@@ -45,5 +44,4 @@ export class GroupService {
     document.getElementById('background-group').setAttribute('data-src', imgUrl);
   }
 }
-
 

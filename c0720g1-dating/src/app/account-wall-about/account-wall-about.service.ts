@@ -18,7 +18,6 @@ export class AccountWallAboutService {
     }),
     'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Methods': 'GET,PUT,POST'
   };
-
   private apiAccountAboutUrl = 'http://localhost:8080/api/public/wall-account/';
   private apiCommentUrl = 'http://localhost:8080/api/public/comment/';
 
