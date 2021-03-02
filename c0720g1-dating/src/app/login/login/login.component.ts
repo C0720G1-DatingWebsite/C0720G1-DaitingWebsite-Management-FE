@@ -156,9 +156,9 @@ export class LoginComponent implements OnInit {
         console.log(profile);
 
         let account = {
-          userName: profile.kt,
+          userName: profile.nt,
           password: '',
-          avatar: profile.vI,
+          avatar: profile.zI,
           fullName: profile.sd
         };
 
@@ -169,7 +169,6 @@ export class LoginComponent implements OnInit {
 
           this.account = data;
 
-          this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
 
           if (this.loginForm.value.rememberMe) {
             this.storageService.saveInLocalStorage(data)

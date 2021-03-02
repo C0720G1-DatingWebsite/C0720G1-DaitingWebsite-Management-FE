@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
-import {StorageService} from './storage.service';
+import { Observable } from 'rxjs';
+import {StorageService} from "./storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManagerGuard implements CanActivate {
-
+export class CheckLoginGuard implements CanActivate {
   constructor(private storageService: StorageService,
               private router: Router) {
   }
@@ -15,15 +15,10 @@ export class ManagerGuard implements CanActivate {
     const user = this.storageService.getUser();
 
     if (user == null) {
-      this.router.navigate(['/login']);
-      return false;
+      return true;
     } else {
-      if (user.roleList[2] === 'ROLE_MANAGER') {
-        return true;
-      } else {
-        this.router.navigate(['/home']);
-        return false;
-      }
+      this.router.navigate(['']);
+      return false;
     }
   }
 
