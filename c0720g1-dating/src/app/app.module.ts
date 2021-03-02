@@ -19,6 +19,7 @@ import {imagePost} from "../environments/image-post";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {FriendsModule} from "./friends/friends.module";
+import {HomeModule} from "./home/home.module";
 import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
 
 @NgModule({
@@ -44,8 +45,10 @@ import {AccountReportManagementModule} from "./account-report-management/account
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FriendsModule,
+    HomeModule,
     AccountReportManagementModule,
     AccountWallAboutModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
