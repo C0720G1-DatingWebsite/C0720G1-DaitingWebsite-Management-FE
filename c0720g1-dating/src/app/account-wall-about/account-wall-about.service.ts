@@ -17,7 +17,7 @@ export class AccountWallAboutService {
     'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Methods': 'GET,PUT,POST'
   };
 
-  private apiAccountAboutUrl = 'http://localhost:8080/api/public/wall-account/';
+  private apiAccountAboutUrl = 'http://localhost:8081/api/public/wall-account/';
 
   constructor(private httpClient: HttpClient) { }
 

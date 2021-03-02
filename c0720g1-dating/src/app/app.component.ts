@@ -30,5 +30,4 @@ export class AppComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     this.check = this.loginElement.nativeElement.nextElementSibling.localName == 'app-login';
   }
-
 }

@@ -1,8 +1,8 @@
 import {IPost} from './post';
 
 export interface IPolicy {
-  id: number;
-  name: string;
+  idPolicy: number;
+  namePolicy: string;
 
   postList: IPost[];
 }

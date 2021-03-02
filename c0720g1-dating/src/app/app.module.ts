@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {ReactiveFormsModule} from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +13,11 @@ import {ChangePasswordModule} from "./change-password/change-password.module";
 
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
+import {AngularFireModule} from "@angular/fire";
+import {changeAvatar} from "../environments/change-avatar";
+import {imagePost} from "../environments/image-post";
+
 
 
 
@@ -25,6 +30,7 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
     RightSidebarComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AccountSearchModule,
@@ -32,7 +38,10 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
-    ChangeAvatarModule
+    ChangeAvatarModule,
+    AccountWallAboutModule,
+    AngularFireModule.initializeApp(changeAvatar.firebaseConfig),
+    AngularFireModule.initializeApp(imagePost.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

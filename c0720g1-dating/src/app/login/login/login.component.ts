@@ -183,7 +183,6 @@ export class LoginComponent implements OnInit {
       }
 
       console.log(this.storageService.getUser());
-
       this.router.navigateByUrl('');
 
     }, error => {
