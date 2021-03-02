@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class GroupService {
-  public API = 'http://localhost:8081/api/';
+  public API = 'http://localhost:8080/api/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -26,7 +26,20 @@ export class GroupService {
   getGroupById(groupId: number): Observable<any>{
     return this.http.get(this.API + 'get-group/'+groupId)
   }
-  loadAvatarGroup(imgUrl:string){
+
+  getMemberQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-member-quantity/' + groupId)
+  }
+
+  getPostGroupQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-post-group-quantity/' + groupId)
+  }
+
+  getListMemberQuantity(): Observable<any> {
+    return this.http.get(this.API + 'get-list-member-quantity')
+  }
+
+  loadAvatarGroup(imgUrl: string) {
     document.getElementById('avatar-group').setAttribute('data-src', imgUrl);
     document.getElementById('background-group').setAttribute('data-src', imgUrl);
   }

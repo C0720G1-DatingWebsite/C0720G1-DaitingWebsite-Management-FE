@@ -7,7 +7,7 @@
     <!-- /SECTION BANNER ICON -->
 
     <!-- SECTION BANNER TITLE -->
-    <p class="section-banner-title">Hội nhóm (7)</p>
+    <p class="section-banner-title">Hội nhóm</p>
     <!-- /SECTION BANNER TITLE -->
 
     <!-- SECTION BANNER TEXT -->
@@ -42,7 +42,7 @@
         <div class="form-select">
           <label for="groups-filter-category">Tìm kiếm bằng</label>
           <select id="groups-filter-category" name="groups_filter_category">
-            <option value="0">Tạo mới nhất</option>
+            <option value="0">Nhóm tạo mới nhất</option>
             <option value="1">Nhiều thành viên nhất</option>
             <option value="2">Theo bảng chữ cái</option>
           </select>
@@ -63,7 +63,7 @@
         <!-- FILTER TAB -->
         <div class="filter-tab active">
           <!-- FILTER TAB TEXT -->
-          <p class="filter-tab-text">Tạo mới nhất</p>
+          <p class="filter-tab-text">Nhóm tạo mới nhất</p>
           <!-- /FILTER TAB TEXT -->
         </div>
         <!-- /FILTER TAB -->
@@ -101,7 +101,7 @@
       <div class="user-preview">
         <!-- USER PREVIEW COVER -->
         <figure class="user-preview-cover liquid">
-          <img src="assets/img/cover/29.jpg" alt="cover-29">
+          <img [src]="group.background" alt="no image">
         </figure>
         <!-- /USER PREVIEW COVER -->
 
@@ -123,7 +123,7 @@
               <!-- USER AVATAR CONTENT -->
               <div class="user-avatar-content">
                 <!-- HEXAGON -->
-                <div class="hexagon-image-100-110" data-src="assets/img/avatar/24.jpg"></div>
+                <div class="hexagon-image-100-110" [id]="group.id" ></div>
                 <!-- /HEXAGON -->
               </div>
               <!-- /USER AVATAR CONTENT -->
@@ -131,7 +131,7 @@
             <!-- /USER SHORT DESCRIPTION AVATAR -->
 
             <!-- USER SHORT DESCRIPTION TITLE -->
-            <p class="user-short-description-title"><a href="#">{{group.nameGroup}}</a></p>
+            <p class="user-short-description-title"><a href="#">{{group.name}}</a></p>
             <!-- /USER SHORT DESCRIPTION TITLE -->
 
             <!-- USER SHORT DESCRIPTION TEXT -->
@@ -145,26 +145,15 @@
             <!-- USER STAT -->
             <div class="user-stat">
               <!-- USER STAT TITLE -->
-              <p class="user-stat-title">139</p>
+              <p class="user-stat-title">{{group.dateRegister | date:'dd/MM/yyyy'}}</p>
               <!-- /USER STAT TITLE -->
 
               <!-- USER STAT TEXT -->
-              <p class="user-stat-text">Thành viên</p>
+              <p class="user-stat-text">Ngày tạo nhóm</p>
               <!-- /USER STAT TEXT -->
             </div>
             <!-- /USER STAT -->
 
-            <!-- USER STAT -->
-            <div class="user-stat">
-              <!-- USER STAT TITLE -->
-              <p class="user-stat-title">105</p>
-              <!-- /USER STAT TITLE -->
-
-              <!-- USER STAT TEXT -->
-              <p class="user-stat-text">Bài đăng</p>
-              <!-- /USER STAT TEXT -->
-            </div>
-            <!-- /USER STAT -->
 
           </div>
           <!-- /USER STATS -->

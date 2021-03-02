@@ -15,7 +15,7 @@
   <div class="profile-header v2">
     <!-- PROFILE HEADER COVER -->
     <figure class="profile-header-cover liquid">
-      <img src="assets/img/cover/29.jpg" alt="cover-29">
+      <img [src]="group.background" alt="no image">
     </figure>
     <!-- /PROFILE HEADER COVER -->
 
@@ -28,7 +28,7 @@
           <!-- USER AVATAR BORDER -->
           <div class="user-avatar-border">
             <!-- HEXAGON -->
-            <div class="hexagon-148-164"></div>
+            <div class="hexagon-148-164" ></div>
             <!-- /HEXAGON -->
           </div>
           <!-- /USER AVATAR BORDER -->
@@ -36,7 +36,7 @@
           <!-- USER AVATAR CONTENT -->
           <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div id="avatar-group" class="hexagon-image-124-136"></div>
+            <div  [id]="groupId" class="hexagon-image-124-136"></div>
             <!-- /HEXAGON -->
           </div>
           <!-- /USER AVATAR CONTENT -->
@@ -56,7 +56,7 @@
           <!-- USER AVATAR CONTENT -->
           <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div class="hexagon-image-100-110" data-src="img/avatar/24.jpg"></div>
+            <div class="hexagon-image-100-110" ></div>
             <!-- /HEXAGON -->
           </div>
           <!-- /USER AVATAR CONTENT -->
@@ -79,7 +79,7 @@
         <!-- USER STAT -->
         <div class="user-stat big">
           <!-- USER STAT TITLE -->
-          <p class="user-stat-title">139</p>
+          <p class="user-stat-title">{{memberQuantity}}</p>
           <!-- /USER STAT TITLE -->
 
           <!-- USER STAT TEXT -->
@@ -91,7 +91,7 @@
         <!-- USER STAT -->
         <div class="user-stat big">
           <!-- USER STAT TITLE -->
-          <p class="user-stat-title">105</p>
+          <p class="user-stat-title">{{postQuantity}}</p>
           <!-- /USER STAT TITLE -->
 
           <!-- USER STAT TEXT -->
@@ -100,17 +100,7 @@
         </div>
         <!-- /USER STAT -->
 
-        <!-- USER STAT -->
-        <div class="user-stat big">
-          <!-- USER STAT TITLE -->
-          <p class="user-stat-title">7.3k</p>
-          <!-- /USER STAT TITLE -->
-
-          <!-- USER STAT TEXT -->
-          <p class="user-stat-text">Ghé thăm</p>
-          <!-- /USER STAT TEXT -->
-        </div>
-        <!-- /USER STAT -->
+        
       </div>
       <!-- /USER STATS -->
 
@@ -176,8 +166,8 @@
       <!-- SECTION MENU ITEM -->
       <a class="section-menu-item active" href="group-Thành viên.html">
         <!-- SECTION MENU ITEM ICON -->
-        <svg class="section-menu-item-icon icon-Thành viên">
-          <use xlink:href="#svg-Thành viên"></use>
+        <svg class="section-menu-item-icon icon-members">
+          <use xlink:href="#svg-members"></use>
         </svg>
         <!-- /SECTION MENU ITEM ICON -->
 
@@ -226,7 +216,7 @@
         <!-- /SECTION PRETITLE -->
 
         <!-- SECTION TITLE -->
-        <h2 class="section-title">Thành viên <span class="highlighted secondary">82</span></h2>
+        <h2 class="section-title">Thành viên <span class="highlighted secondary">{{memberQuantity}}</span></h2>
         <!-- /SECTION TITLE -->
       </div>
       <!-- /SECTION HEADER INFO -->

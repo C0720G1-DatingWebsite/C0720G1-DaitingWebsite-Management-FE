@@ -10,17 +10,16 @@ import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
-
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
 import {AngularFireModule} from "@angular/fire";
 import {changeAvatar} from "../environments/change-avatar";
 import {imagePost} from "../environments/image-post";
-
-
-
-
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
+import {FriendsModule} from "./friends/friends.module";
+import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
 
 @NgModule({
   declarations: [
@@ -41,7 +40,12 @@ import {imagePost} from "../environments/image-post";
     ChangeAvatarModule,
     AccountWallAboutModule,
     AngularFireModule.initializeApp(changeAvatar.firebaseConfig),
-    AngularFireModule.initializeApp(imagePost.firebaseConfig)
+    AngularFireModule.initializeApp(imagePost.firebaseConfig),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    FriendsModule,
+    AccountReportManagementModule,
+    AccountWallAboutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

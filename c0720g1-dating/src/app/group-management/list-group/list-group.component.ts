@@ -1,33 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {GroupService} from "../group.service";
 import {IGroup} from "../IGroup";
+import {StorageService} from "../../security/storage.service";
 
 @Component({
   selector: 'app-list-group',
   templateUrl: './list-group.component.html',
   styleUrls: ['./list-group.component.scss']
 })
-export class ListGroupComponent implements OnInit {
+export class ListGroupComponent implements OnInit, AfterViewChecked {
   public listGroup: IGroup [];
   page = 0;
   pageable: any;
+  public listMemberQuantity: [];
 
 
   constructor(private loadResourceService: LoadResourceService,
-              public groupService: GroupService) {
+              public groupService: GroupService,
+              private storageService: StorageService) {
     this.loadScript();
   }
 
   ngOnInit(): void {
     this.getListGroup()
+
+    this.storageService.getUser().subscribe(data =>{
+      console.log(data)
+    });
   }
 
   getListGroup() {
     this.groupService.getListGroup(this.page).subscribe(data => {
+      console.log(data)
       this.listGroup = data.content;
-      console.log(data.content)
       this.pageable = data
+    })
+    this.groupService.getListMemberQuantity().subscribe(data => {
+      this.listMemberQuantity = data;
     })
   }
 
@@ -50,6 +60,13 @@ export class ListGroupComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     }, 200)
+  }
+
+  ngAfterViewChecked(): void {
+
+    for (let i = 0; i < this.listGroup.length; i++) {
+      document.getElementById(String(this.listGroup[i].id)).setAttribute('data-src', this.listGroup[i].avatar)
+    }
   }
 
 }

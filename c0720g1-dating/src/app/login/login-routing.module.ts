@@ -2,11 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {BlockAccountComponent} from "./block-account/block-account.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ChangedPasswordComponent} from "./changed-password/changed-password.component";
 
+
+/**
+ * PhuocTC
+ **/
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
-  {path: "block", component: BlockAccountComponent}
+  {path: "block", component: BlockAccountComponent},
+  {path: "forgot-password", component: ForgotPasswordComponent},
+  {path: "changed-password/:code", component: ChangedPasswordComponent}
 ];
 
 @NgModule({

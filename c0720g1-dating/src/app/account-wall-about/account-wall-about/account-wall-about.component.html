@@ -5,12 +5,11 @@
     <figure class="profile-header-cover liquid">
       <img src="assets/img/cover/01.jpg" alt="cover-01">
     </figure>
-    <!-- /PROFILE HEADER COVER --><!-- PROFILE HEADER INFO -->
     <div class="profile-header-info">
       <!-- USER SHORT DESCRIPTION -->
       <div class="user-short-description big">
         <!-- USER SHORT DESCRIPTION AVATAR -->
-        <a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
+        <a class="user-short-description-avatar user-avatar big" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
           <!-- USER AVATAR BORDER -->
           <div class="user-avatar-border">
 
@@ -20,7 +19,7 @@
           <!-- /USER AVATAR BORDER -->
           <div class="user-avatar-content">
 
-            <div class="hexagon-image-100-110" data-src="assets/img/avatar/01.jpg"></div>
+            <div class="hexagon-image-100-110" [id]="iAccount.userName"></div>
 
           </div>
 
@@ -36,9 +35,8 @@
 
           </div>
         </a>
-        <!-- /USER SHORT DESCRIPTION AVATAR --><!-- USER SHORT DESCRIPTION AVATAR -->
         <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium"
-           href="profile-timeline.html">
+           [routerLink]="['/account-wall/', iAccount.id ,'wall']">
           <!-- USER AVATAR BORDER -->
           <div class="user-avatar-border">
 
@@ -48,7 +46,7 @@
           <!-- /USER AVATAR BORDER -->
           <div class="user-avatar-content">
 
-            <div class="hexagon-image-82-90" data-src="assets/img/avatar/01.jpg"></div>
+            <div class="hexagon-image-82-90" data-src=""></div>
 
           </div>
 
@@ -64,7 +62,8 @@
 
           </div>
         </a>
-        <p class="user-short-description-title"><a href="profile-timeline.html">{{iAccount.userName}}</a></p>
+        <p class="user-short-description-title"><a
+          [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{iAccount.fullName}}</a></p>
       </div>
       <div class="profile-header-social-links-wrap">
         <div class="section-menu">
@@ -76,10 +75,11 @@
       </div>
 
       <div class="user-stats">
-        <div class="user-stat big"><p class="user-stat-title">930</p>
+        <div class="user-stat big"><p class="user-stat-title">{{iPosts.length}}</p>
           <p class="user-stat-text">Bài đăng</p></div>
-        <div class="user-stat big"><img class="user-stat-image" src="assets/img/flag/vietnamese.png" alt="flag-usa">
-          <p class="user-stat-text">VN</p></div>
+        <div class="user-stat big">
+          <img class="user-stat-image" src="assets/img/flag/vietnamese.png" alt="flag-usa">
+          <p class="user-stat-text">{{iAccount.country.name}}</p></div>
       </div>
       <div class="profile-header-info-actions">
         <p class="profile-header-info-action button secondary"><span class="hide-text-mobile">Thêm Bạn +</span>
@@ -91,12 +91,12 @@
   </div>
   <nav class="section-navigation">
     <div id="section-navigation-slider" class="section-menu">
-      <a class="section-menu-item active" href="profile-timeline.html">
+      <a class="section-menu-item active" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
         <svg class="section-menu-item-icon icon-timeline">
           <use xlink:href="#svg-timeline"></use>
         </svg>
         <p class="section-menu-item-text">Dòng thời gian</p></a>
-      <a class="section-menu-item" href="profile-friends.html">
+      <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'about']">
         <svg class="section-menu-item-icon icon-friend">
           <use xlink:href="#svg-friend"></use>
         </svg>
@@ -141,26 +141,7 @@
     <div class="grid-column">
       <!-- WIDGET BOX -->
       <div class="widget-box">
-        <!-- WIDGET BOX SETTINGS -->
-        <div class="widget-box-settings">
-          <!-- POST SETTINGS WRAP -->
-          <div class="post-settings-wrap">
-            <!-- POST SETTINGS -->
-            <div class="post-settings widget-box-post-settings-dropdown-trigger">
-              <svg class="post-settings-icon icon-more-dots">
-                <use xlink:href="#svg-more-dots"></use>
-              </svg>
-            </div>
-            <div class="simple-dropdown widget-box-post-settings-dropdown">
-              <!-- SIMPLE DROPDOWN LINK -->
-              <p class="simple-dropdown-link">Tiện ích</p>
-              <!-- /SIMPLE DROPDOWN LINK -->
-            </div>
-          </div>
-          <!-- /POST SETTINGS WRAP -->
-        </div>
-        <!-- /WIDGET BOX SETTINGS --><!-- WIDGET BOX TITLE -->
-        <p class="widget-box-title">Thông tin của {{iAccount.userName}}</p>
+        <p class="widget-box-title">Thông tin của {{iAccount.fullName}}</p>
         <!-- /WIDGET BOX TITLE --><!-- WIDGET BOX CONTENT -->
         <div class="widget-box-content">
           <!-- PARAGRAPH -->
@@ -204,21 +185,20 @@
       </div>
 
       <div class="widget-box">
-        <p class="widget-box-title">Friends <span class="highlighted">82</span></p>
+        <p class="widget-box-title">Friends <span class="highlighted">{{iFriends.length}}</span></p>
 
         <div class="widget-box-content">
           <!-- USER STATUS LIST -->
           <div class="user-status-list">
+            <div class="user-status request-small" *ngFor="let friends of iFriends, let i = index">
 
-            <div class="user-status request-small">
-
-              <a class="user-status-avatar" href="profile-timeline.html">
+              <a class="user-status-avatar"  (click)="abc(friends.friend.id)" [routerLink]="['/account-wall/', friends.friend.id ,'wall']">
 
                 <div class="user-avatar small no-outline">
 
                   <div class="user-avatar-content">
 
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
+                    <div class="hexagon-image-30-32" [id]="iAccount.userName + i"></div>
 
                   </div>
 
@@ -238,210 +218,8 @@
 
               </a>
 
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Nguyễn Văn C</a>
+              <p class="user-status-title"><a class="bold" >{{friends.friend.fullName}}</a>
               </p>
-
-              <p class="user-status-text small">2 bạn chung</p>
-              <!-- ACTION REQUEST LIST -->
-              <div class="action-request-list">
-                <!-- ACTION REQUEST -->
-                <div class="action-request accept">
-                  <!-- ACTION REQUEST ICON -->
-                  <svg class="action-request-icon icon-add-friend">
-                    <use xlink:href="#svg-add-friend"></use>
-                  </svg>
-                  <!-- /ACTION REQUEST ICON -->
-                </div>
-                <!-- /ACTION REQUEST -->
-              </div>
-              <!-- ACTION REQUEST LIST -->
-            </div>
-
-            <div class="user-status request-small">
-
-              <a class="user-status-avatar" href="profile-timeline.html">
-
-                <div class="user-avatar small no-outline">
-
-                  <div class="user-avatar-content">
-
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/03.jpg"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress">
-
-                    <div class="hexagon-progress-40-44"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress-border">
-
-                    <div class="hexagon-border-40-44"></div>
-
-                  </div>
-                </div>
-
-              </a>
-
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Nguyễn Văn B</a>
-              </p>
-
-              <p class="user-status-text small">5 bạn chung</p>
-              <!-- ACTION REQUEST LIST -->
-              <div class="action-request-list">
-                <!-- ACTION REQUEST -->
-                <div class="action-request accept">
-                  <!-- ACTION REQUEST ICON -->
-                  <svg class="action-request-icon icon-add-friend">
-                    <use xlink:href="#svg-add-friend"></use>
-                  </svg>
-                  <!-- /ACTION REQUEST ICON -->
-                </div>
-                <!-- /ACTION REQUEST -->
-              </div>
-              <!-- ACTION REQUEST LIST -->
-            </div>
-
-            <div class="user-status request-small">
-
-              <a class="user-status-avatar" href="profile-timeline.html">
-
-                <div class="user-avatar small no-outline">
-
-                  <div class="user-avatar-content">
-
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/02.jpg"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress">
-
-                    <div class="hexagon-progress-40-44"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress-border">
-
-                    <div class="hexagon-border-40-44"></div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Nguyễn Văn I</a>
-              </p>
-
-              <p class="user-status-text small">0 bạn chung</p>
-              <!-- ACTION REQUEST LIST -->
-              <div class="action-request-list">
-                <!-- ACTION REQUEST -->
-                <div class="action-request accept">
-                  <!-- ACTION REQUEST ICON -->
-                  <svg class="action-request-icon icon-add-friend">
-                    <use xlink:href="#svg-add-friend"></use>
-                  </svg>
-                  <!-- /ACTION REQUEST ICON -->
-                </div>
-                <!-- /ACTION REQUEST -->
-              </div>
-              <!-- ACTION REQUEST LIST -->
-            </div>
-
-            <div class="user-status request-small">
-
-              <a class="user-status-avatar" href="profile-timeline.html">
-
-                <div class="user-avatar small no-outline">
-
-                  <div class="user-avatar-content">
-
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/05.jpg"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress">
-
-                    <div class="hexagon-progress-40-44"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress-border">
-
-                    <div class="hexagon-border-40-44"></div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Nguyễn Văn A</a>
-              </p>
-
-              <p class="user-status-text small">1 bạn chung</p>
-              <!-- ACTION REQUEST LIST -->
-              <div class="action-request-list">
-                <!-- ACTION REQUEST -->
-                <div class="action-request decline">
-                  <!-- ACTION REQUEST ICON -->
-                  <svg class="action-request-icon icon-remove-friend">
-                    <use xlink:href="#svg-remove-friend"></use>
-                  </svg>
-                  <!-- /ACTION REQUEST ICON -->
-                </div>
-                <!-- /ACTION REQUEST -->
-              </div>
-              <!-- ACTION REQUEST LIST -->
-            </div>
-
-            <div class="user-status request-small">
-
-              <a class="user-status-avatar" href="profile-timeline.html">
-
-                <div class="user-avatar small no-outline">
-
-                  <div class="user-avatar-content">
-
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/10.jpg"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress">
-
-                    <div class="hexagon-progress-40-44"></div>
-
-                  </div>
-
-                  <div class="user-avatar-progress-border">
-
-                    <div class="hexagon-border-40-44"></div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Nguyễn Văn K</a>
-              </p>
-
-              <p class="user-status-text small">8 bạn chung</p>
-              <!-- ACTION REQUEST LIST -->
-              <div class="action-request-list">
-                <!-- ACTION REQUEST -->
-                <div class="action-request accept">
-                  <!-- ACTION REQUEST ICON -->
-                  <svg class="action-request-icon icon-add-friend">
-                    <use xlink:href="#svg-add-friend"></use>
-                  </svg>
-                  <!-- /ACTION REQUEST ICON -->
-                </div>
-                <!-- /ACTION REQUEST -->
-              </div>
-              <!-- ACTION REQUEST LIST -->
             </div>
 
           </div>
@@ -457,15 +235,15 @@
     <div class="grid-column">
       <!-- WIDGET BOX -->
 
-      <div class="widget-box no-padding" *ngFor=" let posts of iPosts">
+      <div class="widget-box no-padding" *ngFor=" let posts of iPosts, let i = index">
         <div class="widget-box-status">
           <div class="widget-box-status-content">
             <div class="user-status">
-              <a class="user-status-avatar" href="profile-timeline.html">
+              <a class="user-status-avatar" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
                 <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content" >
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg">
-                    </div>
+                  <div class="user-avatar-content">
+                    <div class="hexagon-image-30-32" [attr.data-src]="iAccount.avatar"></div>
+<!--                    <div class="hexagon-image-30-32" [id]="iAccount.userName + i"></div>-->
                   </div>
                   <div class="user-avatar-progress">
                     <div class="hexagon-progress-40-44"></div>
@@ -476,7 +254,7 @@
                 </div>
               </a>
               <p class="user-status-title medium">
-                <a class="bold" href="profile-timeline.html">{{posts.account.userName}}</a>
+                <a class="bold" [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{posts.account.fullName}}</a>
               </p>
               <p class="user-status-text small">{{posts.postTime}}</p>
             </div>
@@ -531,44 +309,75 @@
             <p class="post-option-text">Bình luận</p>
           </div>
         </div>
-        <div class="post-comment-form">
-          <form class="form">
-            <div class="form-row split">
-              <div class="form-item">
-                <div class="form-input small">
-                  <input type="text" id="post-reply" name="post_reply">
-                </div>
+        <div class="post-comment-list">
+          <p class="post-comment-heading"
+             (click)="showComment.show = !showComment.show; showComment.current = false; showComment.next = false">Xem
+            bình luận
+          </p>
+          <div *ngIf="showComment.show">
+            <app-comment-list [idPost]="posts.id"></app-comment-list>
+          </div>
+          <!-- POST COMMENT FORM -->
+          <div class="post-comment-form">
+
+            <div class="user-avatar small no-outline">
+
+              <div class="user-avatar-content">
+                <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
               </div>
-              <div class="form-item auto-width">
-                <!-- BUTTON -->
-                <p class="button primary padded">
-                  <!-- BUTTON ICON -->
-                  <svg class="button-icon no-space icon-send-message">
-                    <use xlink:href="#svg-send-message"></use>
-                  </svg>
-                  <!-- /BUTTON ICON -->
-                </p>
-                <!-- /BUTTON -->
+              <div class="user-avatar-progress">
+                <div class="hexagon-progress-40-44"></div>
               </div>
-              <div class="form-item auto-width">
-                <!-- BUTTON -->
-                <p class="button info padded">
-                  <!-- BUTTON ICON -->
-                  <svg class="interactive-input-action-icon icon-cross-thin">
-                    <use xlink:href="#svg-cross-thin"></use>
-                  </svg>
-                  <!-- /BUTTON ICON -->
-                </p>
-                <!-- /BUTTON -->
+              <div class="user-avatar-progress-border">
+                <div class="hexagon-border-40-44"></div>
               </div>
-              <!-- /FORM ITEM -->
             </div>
-            <!-- /FORM ROW -->
-          </form>
-          <!-- /FORM -->
+
+            <form class="form" [formGroup]="formGroup" (ngSubmit)="submitForm()" novalidate>
+<!--               FORM ROW-->
+              <div class="form-row split">
+                <!-- FORM ITEM -->
+                <div class="form-item">
+                  <!-- FORM INPUT -->
+                  <div class="form-input small">
+                    <input type="hidden" formControlName="postId" class="form-control">
+                    <input type="text" class="form-control" (click)="getIdPost(posts.id)" formControlName="content"
+                           placeholder="Viết bình luận">
+                  </div>
+                  <!-- /FORM INPUT -->
+                </div>
+                <div class="form-item auto-width">
+                  <!-- BUTTON -->
+                  <button type="submit" class="button primary padded">
+                    <!-- BUTTON ICON -->
+                    <svg class="button-icon no-space icon-send-message">
+                      <use xlink:href="#svg-send-message"></use>
+                    </svg>
+                    <!-- /BUTTON ICON -->
+                  </button>
+                  <!-- /BUTTON -->
+                </div>
+                <div class="form-item auto-width">
+                  <!-- BUTTON -->
+                  <button class="button info padded" type="reset">
+                    <!-- BUTTON ICON -->
+                    <svg class="interactive-input-action-icon icon-cross-thin">
+                      <use xlink:href="#svg-cross-thin"></use>
+                    </svg>
+                    <!-- /BUTTON ICON -->
+                  </button>
+                  <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+              </div>
+              <!-- /FORM ROW -->
+            </form>
+            <!-- /FORM -->
+          </div>
+          <!-- /POST COMMENT FORM -->
         </div>
       </div>
-
+      <p class="post-comment-heading">Xem thêm trạng thái <span class="highlighted">9+</span></p>
       <div class="loader-bars">
         <div class="loader-bar"></div>
         <div class="loader-bar"></div>
@@ -579,219 +388,120 @@
         <div class="loader-bar"></div>
         <div class="loader-bar"></div>
       </div>
+
     </div>
-    <div class="widget-box">
-      <!-- WIDGET BOX SETTINGS -->
-      <div class="widget-box-settings">
-        <!-- POST SETTINGS WRAP -->
-        <div class="post-settings-wrap">
-          <!-- POST SETTINGS -->
-          <div class="post-settings widget-box-post-settings-dropdown-trigger">
-            <svg class="post-settings-icon icon-more-dots">
-              <use xlink:href="#svg-more-dots"></use>
-            </svg>
-          </div>
-          <div class="simple-dropdown widget-box-post-settings-dropdown">
-            <!-- SIMPLE DROPDOWN LINK -->
-            <p class="simple-dropdown-link">Tiện ích</p>
-            <!-- /SIMPLE DROPDOWN LINK -->
-          </div>
+    <div class="grid-column">
+      <div class="widget-box">
+
+        <div class="widget-box-settings">
         </div>
-        <!-- /POST SETTINGS WRAP -->
+        <p class="widget-box-title">Thông tin chi tiết</p>
+        <!-- /WIDGET BOX TITLE -->
+
+        <!-- WIDGET BOX CONTENT -->
+        <div class="widget-box-content">
+          <!-- INFORMATION LINE LIST -->
+          <div class="information-line-list">
+            <!-- INFORMATION LINE -->
+            <div class="information-line">
+              <!-- INFORMATION LINE TITLE -->
+              <p class="information-line-title">Email</p>
+              <!-- /INFORMATION LINE TITLE -->
+
+              <!-- INFORMATION LINE TEXT -->
+              <p class="information-line-text">{{iAccount.userName}}</p>
+              <!-- /INFORMATION LINE TEXT -->
+            </div>
+            <!-- /INFORMATION LINE -->
+
+            <!-- INFORMATION LINE -->
+            <div class="information-line">
+              <!-- INFORMATION LINE TITLE -->
+              <p class="information-line-title">Ngày sinh</p>
+              <!-- /INFORMATION LINE TITLE -->
+
+              <!-- INFORMATION LINE TEXT -->
+              <p class="information-line-text">{{iAccount.dateOfBirth |date: 'dd/MM/yyyy'}}</p>
+              <!-- /INFORMATION LINE TEXT -->
+            </div>
+            <!-- /INFORMATION LINE -->
+
+            <!-- INFORMATION LINE -->
+            <div class="information-line">
+              <!-- INFORMATION LINE TITLE -->
+              <p class="information-line-title">Nghề nghiệp</p>
+              <!-- /INFORMATION LINE TITLE -->
+
+              <!-- INFORMATION LINE TEXT -->
+              <p class="information-line-text">{{iAccount.job.name}}</p>
+              <!-- /INFORMATION LINE TEXT -->
+            </div>
+            <!-- /INFORMATION LINE -->
+
+            <!-- INFORMATION LINE -->
+            <div class="information-line">
+              <!-- INFORMATION LINE TITLE -->
+              <p class="information-line-title">Mối quan hệ</p>
+              <!-- /INFORMATION LINE TITLE -->
+
+              <!-- INFORMATION LINE TEXT -->
+              <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>
+              <!-- /INFORMATION LINE TEXT -->
+            </div>
+            <div class="information-line">
+              <!-- INFORMATION LINE TITLE -->
+              <p class="information-line-title">Giới tính</p>
+              <div *ngIf="iAccount.gender; else noGender">
+                <p class="information-line-text">Nam</p>
+              </div>
+              <ng-template #noGender><p class="information-line-text">Nữ</p></ng-template>
+            </div>
+
+<!--            <div class="information-line">-->
+<!--              &lt;!&ndash; INFORMATION LINE TITLE &ndash;&gt;-->
+<!--              <p class="information-line-title">Mối quan hệ</p>-->
+<!--              &lt;!&ndash; /INFORMATION LINE TITLE &ndash;&gt;-->
+
+<!--              &lt;!&ndash; INFORMATION LINE TEXT &ndash;&gt;-->
+<!--              <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>-->
+<!--              &lt;!&ndash; /INFORMATION LINE TEXT &ndash;&gt;-->
+<!--            </div>-->
+
+          </div>
+          <!-- /INFORMATION LINE LIST -->
+        </div>
+        <!-- /WIDGET BOX CONTENT -->
       </div>
+      <div class="widget-box">
+        <p class="widget-box-title">Nhóm <span class="highlighted">{{iAccountGroups.length}}</span></p>
 
-      <p class="widget-box-title">Nhóm <span class="highlighted">7</span></p>
+        <div class="widget-box-content">
+          <div class="user-status-list" *ngFor="let groups of iAccountGroups">
 
-      <div class="widget-box-content">
-        <!-- FILTERS -->
-        <div class="filters">
-          <!-- FILTER -->
-          <p class="filter">Mới nhất</p>
-          <!-- /FILTER --><!-- FILTER -->
-          <p class="filter active">Phổ biến</p>
-          <!-- /FILTER --><!-- FILTER -->
-          <p class="filter">Hoạt động</p>
-          <!-- /FILTER -->
+            <div class="user-status request-small">
+
+              <a class="user-status-avatar" href="group-timeline.html">
+
+                <div class="user-avatar small no-border">
+
+                  <div class="user-avatar-content">
+
+                    <div class="hexagon-image-40-44" [attr.data-src]="groups.userGroup.avatar"></div>
+
+                  </div>
+
+                </div>
+
+              </a>
+
+              <p class="user-status-title"><a class="bold" href="group-timeline.html">{{groups.userGroup.name}}</a></p>
+            </div>
+
+          </div>
+          <!-- /USER STATUS LIST -->
         </div>
-        <!-- /FILTERS --><!-- USER STATUS LIST -->
-        <div class="user-status-list">
-
-          <div class="user-status request-small">
-
-            <a class="user-status-avatar" href="group-timeline.html">
-
-              <div class="user-avatar small no-border">
-
-                <div class="user-avatar-content">
-
-                  <div class="hexagon-image-40-44" data-src="assets/img/avatar/29.jpg"></div>
-
-                </div>
-
-              </div>
-
-            </a>
-
-            <p class="user-status-title"><a class="bold" href="group-timeline.html">Twitch Streamers</a></p>
-
-            <p class="user-status-text small">265 Thành viên</p>
-            <!-- ACTION REQUEST LIST -->
-            <div class="action-request-list">
-              <!-- ACTION REQUEST -->
-              <div class="action-request accept">
-                <!-- ACTION REQUEST ICON -->
-                <svg class="action-request-icon icon-join-group">
-                  <use xlink:href="#svg-join-group"></use>
-                </svg>
-                <!-- /ACTION REQUEST ICON -->
-              </div>
-              <!-- /ACTION REQUEST -->
-            </div>
-            <!-- ACTION REQUEST LIST -->
-          </div>
-
-          <div class="user-status request-small">
-
-            <a class="user-status-avatar" href="group-timeline.html">
-
-              <div class="user-avatar small no-border">
-
-                <div class="user-avatar-content">
-
-                  <div class="hexagon-image-40-44" data-src="assets/img/avatar/24.jpg"></div>
-
-                </div>
-
-              </div>
-
-            </a>
-
-            <p class="user-status-title"><a class="bold" href="group-timeline.html">Cosplayers of the
-              World</a></p>
-
-            <p class="user-status-text small">139 Thành viên</p>
-            <!-- ACTION REQUEST LIST -->
-            <div class="action-request-list">
-              <!-- ACTION REQUEST -->
-              <div class="action-request accept">
-                <!-- ACTION REQUEST ICON -->
-                <svg class="action-request-icon icon-join-group">
-                  <use xlink:href="#svg-join-group"></use>
-                </svg>
-                <!-- /ACTION REQUEST ICON -->
-              </div>
-              <!-- /ACTION REQUEST -->
-            </div>
-            <!-- ACTION REQUEST LIST -->
-          </div>
-
-          <div class="user-status request-small">
-
-            <a class="user-status-avatar" href="group-timeline.html">
-
-              <div class="user-avatar small no-border">
-
-                <div class="user-avatar-content">
-
-                  <div class="hexagon-image-40-44" data-src="assets/img/avatar/25.jpg"></div>
-
-                </div>
-
-              </div>
-
-            </a>
-
-            <p class="user-status-title"><a class="bold" href="group-timeline.html">Stream Designers</a></p>
-
-            <p class="user-status-text small">466 Thành viên</p>
-            <!-- ACTION REQUEST LIST -->
-            <div class="action-request-list">
-              <!-- ACTION REQUEST -->
-              <div class="action-request accept">
-                <!-- ACTION REQUEST ICON -->
-                <svg class="action-request-icon icon-join-group">
-                  <use xlink:href="#svg-join-group"></use>
-                </svg>
-                <!-- /ACTION REQUEST ICON -->
-              </div>
-              <!-- /ACTION REQUEST -->
-            </div>
-            <!-- ACTION REQUEST LIST -->
-          </div>
-
-          <div class="user-status request-small">
-
-            <a class="user-status-avatar" href="group-timeline.html">
-
-              <div class="user-avatar small no-border">
-
-                <div class="user-avatar-content">
-
-                  <div class="hexagon-image-40-44" data-src="assets/img/avatar/28.jpg"></div>
-
-                </div>
-
-              </div>
-
-            </a>
-
-            <p class="user-status-title"><a class="bold" href="group-timeline.html">Street Artists</a></p>
-
-            <p class="user-status-text small">951 Thành viên</p>
-            <!-- ACTION REQUEST LIST -->
-            <div class="action-request-list">
-              <!-- ACTION REQUEST -->
-              <div class="action-request decline">
-                <!-- ACTION REQUEST ICON -->
-                <svg class="action-request-icon icon-leave-group">
-                  <use xlink:href="#svg-leave-group"></use>
-                </svg>
-                <!-- /ACTION REQUEST ICON -->
-              </div>
-              <!-- /ACTION REQUEST -->
-            </div>
-            <!-- ACTION REQUEST LIST -->
-          </div>
-
-          <div class="user-status request-small">
-
-            <a class="user-status-avatar" href="group-timeline.html">
-
-              <div class="user-avatar small no-border">
-
-                <div class="user-avatar-content">
-
-                  <div class="hexagon-image-40-44" data-src="assets/img/avatar/27.jpg"></div>
-
-                </div>
-
-              </div>
-
-            </a>
-
-            <p class="user-status-title"><a class="bold" href="group-timeline.html">Gaming Watchtower</a>
-            </p>
-
-            <p class="user-status-text small">2.365 Thành viên</p>
-            <!-- ACTION REQUEST LIST -->
-            <div class="action-request-list">
-              <!-- ACTION REQUEST -->
-              <div class="action-request accept">
-                <!-- ACTION REQUEST ICON -->
-                <svg class="action-request-icon icon-join-group">
-                  <use xlink:href="#svg-join-group"></use>
-                </svg>
-                <!-- /ACTION REQUEST ICON -->
-              </div>
-              <!-- /ACTION REQUEST -->
-            </div>
-            <!-- ACTION REQUEST LIST -->
-          </div>
-
-        </div>
-        <!-- /USER STATUS LIST -->
+        <!-- WIDGET BOX CONTENT -->
       </div>
-      <!-- WIDGET BOX CONTENT -->
     </div>
   </div>
 </div>
