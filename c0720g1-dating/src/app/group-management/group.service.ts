@@ -40,9 +40,12 @@ export class GroupService {
     return this.http.get(this.API + 'get-list-member-quantity')
   }
 
-  loadAvatarGroup(imgUrl: string) {
-    document.getElementById('avatar-group').setAttribute('data-src', imgUrl);
-    document.getElementById('background-group').setAttribute('data-src', imgUrl);
+  deleteGroupById(groupId: number):Observable<any> {
+    return this.http.delete(this.API +'delete-group/'+groupId)
+  }
+
+  getListMember(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'list-member-group/'+groupId)
   }
 }
 

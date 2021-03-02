@@ -14,7 +14,8 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
   page = 0;
   pageable: any;
   public listMemberQuantity: [];
-
+  public id: number;
+  public name: string;
 
   constructor(private loadResourceService: LoadResourceService,
               public groupService: GroupService,
@@ -24,15 +25,12 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.getListGroup()
-
-    this.storageService.getUser().subscribe(data =>{
-      console.log(data)
+    this.storageService.getUser().subscribe(data => {
     });
   }
 
   getListGroup() {
     this.groupService.getListGroup(this.page).subscribe(data => {
-      console.log(data)
       this.listGroup = data.content;
       this.pageable = data
     })
@@ -49,7 +47,6 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
     this.loadResourceService.loadScript('assets/js/utils/liquidify.js');
     this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
     this.loadResourceService.loadScript('assets/js/sidebar/sidebar.js');
-    this.loadResourceService.loadScript('assets/js/global/global.popups.js');
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
@@ -59,6 +56,7 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
+      this.loadResourceService.loadScript('assets/js/global/global.popups.js');
     }, 200)
   }
 
@@ -69,4 +67,14 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  getContentDelete(id: any, name: any) {
+    this.id = id;
+    this.name = name
+  }
+
+  deleteGroup(id: number) {
+    this.groupService.deleteGroupById(id).subscribe(data =>{
+      this.ngOnInit()
+    })
+  }
 }

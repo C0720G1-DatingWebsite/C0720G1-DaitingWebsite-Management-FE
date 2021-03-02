@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {GroupService} from "../group.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {IGroup} from "../IGroup";
+import {IGroup, IUser} from "../IGroup";
 
 @Component({
   selector: 'app-detail-group',
@@ -12,14 +12,17 @@ import {IGroup} from "../IGroup";
 export class DetailGroupComponent implements OnInit, AfterViewChecked {
   public groupId: number;
   public group: IGroup;
+  public member: IUser;
   public memberQuantity: number;
   public postQuantity: number;
+  public listMember: IUser[];
+  public memberId: number
 
 
   constructor(private loadResourceService: LoadResourceService,
               public groupService: GroupService,
               private router: Router,
-              private activatedRoute: ActivatedRoute,) {
+              private activatedRoute: ActivatedRoute) {
     this.loadScript();
   }
 
@@ -33,8 +36,12 @@ export class DetailGroupComponent implements OnInit, AfterViewChecked {
       this.groupService.getGroupById(this.groupId).subscribe(data => {
         this.group = data
       })
-      this.groupService.getPostGroupQuantity(this.groupId).subscribe(data =>{
+      this.groupService.getPostGroupQuantity(this.groupId).subscribe(data => {
         this.postQuantity = data
+      })
+      this.groupService.getListMember(this.groupId).subscribe(data => {
+        this.listMember = data.content;
+        console.log(data.content);
       })
     })
   }
@@ -60,8 +67,10 @@ export class DetailGroupComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-
     document.getElementById(String(this.groupId)).setAttribute('data-src', this.group.avatar)
+    this.listMember.forEach(function (value) {
+      document.getElementById(String(value.id)).setAttribute('data-src', value.avatar)
+    })
   }
 
 }
