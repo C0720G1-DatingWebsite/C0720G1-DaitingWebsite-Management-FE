@@ -14,7 +14,7 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {FriendsModule} from "./friends/friends.module";
-import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
+import {HomeModule} from "./home/home.module";
 import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
 
 
@@ -40,8 +40,11 @@ import {AccountReportManagementModule} from "./account-report-management/account
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FriendsModule,
+    HomeModule,
+    AccountReportManagementModule
     AccountReportManagementModule,
     AccountWallAboutModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
