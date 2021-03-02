@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AdvanceSearchComponent} from './advance-search/advance-search.component';
-import {UserGuard} from "../security/user.guard";
+
 
 const routes: Routes = [
-  {path: '', component: AdvanceSearchComponent, canActivate: [UserGuard]},
+  {path: 'comment', redirectTo: 'comment', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -14,4 +13,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AccountSearchRoutingModule { }
+export class CommentRoutingModule { }

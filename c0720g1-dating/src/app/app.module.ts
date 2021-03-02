@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -10,13 +9,10 @@ import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
-
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
-
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
-
 import {FriendsModule} from "./friends/friends.module";
 import {HomeModule} from "./home/home.module";
 import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
@@ -46,6 +42,9 @@ import {AccountReportManagementModule} from "./account-report-management/account
     FriendsModule,
     HomeModule,
     AccountReportManagementModule
+    AccountReportManagementModule,
+    AccountWallAboutModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
