@@ -5,6 +5,7 @@ import {MemberReportService} from "../member-report.service";
 import {StorageService} from "../../security/storage.service";
 import {LoadResourceService} from "../../load-resource.service";
 import {IAccount} from "../../entity/account";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-report-member-list',
@@ -19,7 +20,9 @@ export class ReportMemberListComponent implements OnInit {
   temp = 1;
   constructor(private activatedRoute: ActivatedRoute,
               private memberReportService: MemberReportService,
-              private loadResourceService:LoadResourceService) {
+              private loadResourceService:LoadResourceService,
+              private toast: ToastrService,
+              private storageService: StorageService) {
   }
 
   ngOnInit(): void {
@@ -30,7 +33,7 @@ export class ReportMemberListComponent implements OnInit {
       this.memberReportService.reportMemberList(this.accountId).subscribe(data =>{
         this.reportMemberList = data;
       });
-    })
+    });
     this.memberReportService.findMemberById(this.accountId).subscribe((data)=>{
       this.accountMember = data;
     });
@@ -59,29 +62,30 @@ export class ReportMemberListComponent implements OnInit {
   getId() {
     if (this.temp == 1){
       this.memberReportService.sendEmailReport(this.accountId).subscribe(() =>{
-        alert('Gửi email thành công');
+        this.toast.success('Đã gửi email cảnh báo!', 'Thông báo');
+      },() =>{
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
       });
     } else if (this.temp == 2){
       this.memberReportService.lockAccountOneWeek(this.accountId).subscribe(() =>{
-        alert('Gửi email thành công');
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
       },() =>{
-        alert('Tài khoản đã bị khóa trước đó!')
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
       });
     } else if (this.temp == 3){
       this.memberReportService.lockAccountOneMonth(this.accountId).subscribe(() =>{
-        alert('Gửi email thành công');
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
       },() =>{
-        alert('Tài khoản đã bị khóa trước đó!')
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
       });
     }else if (this.temp == 4){
       this.memberReportService.lockAccountForever(this.accountId).subscribe(() =>{
-        alert('Gửi email thành công');
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
       },() =>{
-        alert('Tài khoản đã bị khóa trước đó!')
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
       });
     }
   }
-
   report(value: number) {
     this.temp = value
   }
