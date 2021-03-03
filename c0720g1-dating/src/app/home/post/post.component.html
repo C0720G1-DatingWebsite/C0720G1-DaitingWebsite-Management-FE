@@ -11,7 +11,6 @@
       <div class="widget-box">
         <div class="widget-box-content">
           <div class="user-status-list">
-            <!-- content -->
 
           </div>
         </div>
@@ -130,12 +129,12 @@
                     <button class="btn btn-outline-secondary" type="button">Quyền riêng tư</button>
                   </div>
                   <select formControlName="policy" class="custom-select">
-                    <option *ngFor="let ObPolicy of dtoPolicy" [ngValue]="ObPolicy" >{{ObPolicy.name}}</option>
+                    <option *ngFor="let ObPolicy of dtoPolicy" [ngValue]="ObPolicy" >{{ObPolicy.namePolicy}}</option>
                   </select>
                 </div>
                 <div class="container-fluid row ">
                   <div class="col-1">
-                    <img [src]="image" alt="" style="height: 100px;width: 100px">
+                    <img [src]="object.imagePost" alt="" style="height: 100px;width: 100px">
                   </div>
                 </div>
 <!--                <input type="file" (change)="show($event)">-->

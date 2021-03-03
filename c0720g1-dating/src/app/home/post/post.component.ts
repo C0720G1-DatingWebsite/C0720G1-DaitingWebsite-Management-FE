@@ -165,7 +165,7 @@ export class PostComponent implements OnInit {
     this.postEditForm = this.formBuilder.group({
       id: [object.id],
       content: [object.content],
-      imagePost: [object.imagePost],
+      imagePost: [object.image],
       postTime: [object.postTime],
       likeCount: [object.likeCount],
       account: [object.account],
