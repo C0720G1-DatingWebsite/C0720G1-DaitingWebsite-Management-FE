@@ -5,7 +5,12 @@ import {StorageService} from "../../security/storage.service";
 import {Router} from "@angular/router";
 import {LoadResourceService} from "../../load-resource.service";
 
+
 declare let FB: any;
+
+/**
+ * PhuocTC
+ **/
 
 @Component({
   selector: 'app-login',
@@ -17,20 +22,18 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginRef', {static: true}) loginElement: ElementRef;
   auth2: any;
 
+  account;
+
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
               private storageService: StorageService,
               private router: Router,
-              private loadResourceService: LoadResourceService) {
-    // this.loadResourceService.loadScript('src/assets/js/utils/app.js');
-    // this.loadResourceService.loadScript('src/assets/js/vendor/xm_plugins.min.js');
+              private loadResourceService: LoadResourceService,
+              private toastrService: ToastrService) {
     this.loadResourceService.loadScript('src/assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('src/assets/js/landing/landing.tabs.js');
-    // this.loadResourceService.loadScript('src/assets/js/utils/svg-loader.js');
-
-
     this.loadResourceService.loadScript('assets/js/utils/app.js');
     this.loadResourceService.loadScript('assets/js/utils/page-loader.js');
     this.loadResourceService.loadScript('assets/js/vendor/simplebar.min.js');
@@ -44,7 +47,6 @@ export class LoginComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/content/content.js');
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
-
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
   }
 
@@ -85,7 +87,6 @@ export class LoginComponent implements OnInit {
     FB.login((response) => {
       console.log('submit login', response);
       if (response.authResponse) {
-        alert("Successfully");
         console.log(response.authResponse.accessToken);
 
         let account = {
@@ -96,21 +97,31 @@ export class LoginComponent implements OnInit {
         this.loginService.loginForFacebook(account).subscribe(data => {
           console.log(data);
 
+          this.account = data;
+
           if (this.loginForm.value.rememberMe) {
             this.storageService.saveInLocalStorage(data)
           } else {
             this.storageService.saveInSessionStorage(data);
           }
 
-          console.log(this.storageService.getUser());
+          if (this.account.enable) {
+            this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
+            this.router.navigateByUrl('');
+          } else {
+            this.storageService.logout();
+            this.toastrService.error('Tài khoản của bạn đã bị khóa', 'Thất bại');
+            this.router.navigateByUrl('/block');
+          }
 
-          this.router.navigateByUrl('');
         }, error => {
           console.log(error);
+          this.toastrService.error( 'Đăng nhập thất bại');
         });
 
       } else {
-        alert("Failed");
+        this.toastrService.error( 'Đăng nhập thất bại');
+
       }
     });
   }
@@ -142,18 +153,22 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
         let profile = googleUser.getBasicProfile();
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
         console.log(profile);
 
         let account = {
-          userName: profile.kt,
+          userName: profile.nt,
           password: '',
-          avatar: profile.vI,
+          avatar: profile.zI,
           fullName: profile.sd
         };
 
+        console.log(account);
+
         this.loginService.loginForGoogle(account).subscribe(data => {
           console.log(data);
+
+          this.account = data;
+
 
           if (this.loginForm.value.rememberMe) {
             this.storageService.saveInLocalStorage(data)
@@ -161,20 +176,31 @@ export class LoginComponent implements OnInit {
             this.storageService.saveInSessionStorage(data);
           }
 
-          console.log(this.storageService.getUser());
+          if (this.account.enable) {
+            this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
+            this.router.navigateByUrl('');
+          } else {
+            this.storageService.logout();
+            this.toastrService.error('Tài khoản của bạn đã bị khóa', 'Thất bại');
+            this.router.navigateByUrl('/block');
+          }
 
-          this.router.navigateByUrl('');
         }, error => {
           console.log(error);
         });
 
       }, (error) => {
-        alert(JSON.stringify(error, undefined, 2));
+        this.toastrService.error( 'Đăng nhập thất bại');
+
       });
   }
 
   submitLogin() {
+
+    console.log(this.loginForm);
     this.loginService.login(this.loginForm.value).subscribe(data => {
+
+      this.account = data;
 
       if (this.loginForm.value.rememberMe) {
         this.storageService.saveInLocalStorage(data);
@@ -183,8 +209,15 @@ export class LoginComponent implements OnInit {
       }
 
       console.log(this.storageService.getUser());
-
       this.router.navigateByUrl('');
+      if (this.account.enable) {
+        this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
+        this.router.navigateByUrl('');
+      } else {
+        this.storageService.logout();
+        this.toastrService.error('Tài khoản của bạn đã bị khóa', 'Thất bại');
+        this.router.navigateByUrl('/block');
+      }
 
     }, error => {
       this.loginForm = this.fb.group({
@@ -193,6 +226,7 @@ export class LoginComponent implements OnInit {
         rememberMe: [false]
       });
 
+      this.toastrService.error('Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại', 'Đăng nhập thất bại');
       console.log(error);
     })
   }

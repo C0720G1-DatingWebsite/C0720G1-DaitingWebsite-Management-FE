@@ -29,7 +29,7 @@ export interface IAccount {
   backgroundImage: string;
   dateRegister: string;
 
-  marital_status: IMaritalStatus;
+  maritalStatus: IMaritalStatus;
   status: IStatus;
   country: ICountry;
   city: ICity;

@@ -1,41 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import {IPost} from "../../entity/post";
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {PostServiceService} from "../post-service.service";
 import {LoadResourceService} from "../../load-resource.service";
 import {StorageService} from "../../security/storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
+/** LuyenNT
+ */
 export class PostComponent implements OnInit {
 
   public iPosts: IPost[];
   public formGroup : FormGroup;
-  private s: any;
 
   constructor( private loadResourceService : LoadResourceService,
                private postServiceService : PostServiceService,
-               private storageService : StorageService) {
+               private storageService : StorageService,
+               private formBuilder: FormBuilder,
+               private router: Router) {
     this.loadScript();
   }
 
   ngOnInit(): void {
-    var s = this.storageService.getUser();
-    console.log(this.storageService.getUser());
-    console.log('alo alo');
     this.getListPost();
+    this.formGroup = this.formBuilder.group({
+      id:[this.storageService.getUser().id],
+      content: [''],
+      postTime: [''],
+      likeCount: [''],
+      policy: [''],
+      account: [''],
+      group: [''],
+      customerViewList: [''],
+      commentList: ['']
+    })
   }
+
+  increaseLike(){
+    let s = this.storageService.getUser().id;
+    this.postServiceService.increaseLike(s);
+  }
+
   getListPost(){
-    this.postServiceService.getListPost(this.s).subscribe(data => {
-      this.iPosts = data.content;
-      console.log(data);
+    let s = this.storageService.getUser().id;
+    this.postServiceService.getListPost(s).subscribe(data => {
+      console.log(s)
+      this.iPosts = data;
+      console.log(this.iPosts)
     }, error => console.log(error));
   }
 
-  loadScript() {
+  loadScript(){
     this.loadResourceService.loadScript('assets/js/utils/app.js');
     this.loadResourceService.loadScript('assets/js/utils/page-loader.js');
     this.loadResourceService.loadScript('assets/js/vendor/simplebar.min.js');
