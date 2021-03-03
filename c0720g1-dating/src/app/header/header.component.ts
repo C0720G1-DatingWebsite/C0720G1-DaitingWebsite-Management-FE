@@ -1,9 +1,10 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {StorageService} from "../security/storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FriendListService} from "../friends/friend-list.service";
 import {LoadResourceService} from "../load-resource.service";
 import {IAccount} from "../entity/account";
+import {MessageService} from "../chat-group/message.service";
 
 @Component({
   selector: 'app-header',
@@ -18,14 +19,29 @@ export class HeaderComponent implements OnInit, DoCheck{
   public friendList: IAccount[];
 
 
+  sender: any;
+  content:any;
+  time_stamp:any;
+
+
+  @Output() emit: EventEmitter<any>;
+
+
+
+  idAccount: number;
+
   constructor(private storageService: StorageService,
               private loadResourceService:LoadResourceService,
               private friendService: FriendListService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
-
+              private router: Router,
+              private messageService:MessageService) { }
   ngOnInit(): void {
     this.getAccountById();
+  }
+
+  emitLogin() {
+    this.emit.emit();
   }
 
   logout() {
@@ -34,14 +50,18 @@ export class HeaderComponent implements OnInit, DoCheck{
   }
 
   ngDoCheck(): void {
+    this.sender=this.messageService.obj_message.sender;
+    this.content=this.messageService.obj_message.content;
+    this.time_stamp=this.messageService.obj_message.time_stamp;
     this.account = this.storageService.getUser();
-    console.log(this.account.username);
+
+    this.idAccount = this.storageService.getUser().id;
+
     if (this.account.avatar) {
       document.getElementById('main-avatar4').setAttribute('data-src', this.account.avatar);
     } else {
       document.getElementById('main-avatar4').setAttribute('data-src', 'https://i.pinimg.com/originals/b4/52/4b/b4524b0e1c6173892715e952b10adbce.jpg');
     }
-
   }
 
   getAccountById(){
@@ -105,5 +125,7 @@ export class HeaderComponent implements OnInit, DoCheck{
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     },200)
   }
+  showPreview($event: Event) {
 
+  }
 }

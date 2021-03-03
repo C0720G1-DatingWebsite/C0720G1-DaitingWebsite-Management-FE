@@ -12,7 +12,7 @@ export class ManagerGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const user = this.storageService.getResponse();
+    const user = this.storageService.getUser();
 
     if (user == null) {
       this.router.navigate(['/login']);

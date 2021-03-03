@@ -7,7 +7,7 @@
     <!-- /SECTION BANNER ICON -->
 
     <!-- SECTION BANNER TITLE -->
-    <p class="section-banner-title">Hội nhóm (7)</p>
+    <p class="section-banner-title">Hội nhóm</p>
     <!-- /SECTION BANNER TITLE -->
 
     <!-- SECTION BANNER TEXT -->
@@ -25,70 +25,31 @@
         <!-- FORM INPUT -->
         <div class="form-input small with-button">
           <label for="groups-search">Tìm kiếm nhóm</label>
-          <input type="text" id="groups-search" name="groups_search">
-          <!-- BUTTON -->
-          <button class="button primary">
-            <!-- ICON MAGNIFYING GLASS -->
-            <svg class="icon-magnifying-glass">
-              <use xlink:href="#svg-magnifying-glass"></use>
-            </svg>
-            <!-- /ICON MAGNIFYING GLASS -->
-          </button>
+          <div>
+            <input type="text" id="groups-search" [(ngModel)]="searchName" name="nameGroup">
+            <!-- BUTTON -->
+            <button class="button primary" (click)="onSubmit()">
+              <!-- ICON MAGNIFYING GLASS -->
+              <svg class="icon-magnifying-glass">
+                <use xlink:href="#svg-magnifying-glass"></use>
+              </svg>
+              <!-- /ICON MAGNIFYING GLASS -->
+            </button>
+          </div>
+
           <!-- /BUTTON -->
         </div>
         <!-- /FORM INPUT -->
 
-        <!-- FORM SELECT -->
-        <div class="form-select">
-          <label for="groups-filter-category">Tìm kiếm bằng</label>
-          <select id="groups-filter-category" name="groups_filter_category">
-            <option value="0">Tạo mới nhất</option>
-            <option value="1">Nhiều thành viên nhất</option>
-            <option value="2">Theo bảng chữ cái</option>
-          </select>
-          <!-- FORM SELECT ICON -->
-          <svg class="form-select-icon icon-small-arrow">
-            <use xlink:href="#svg-small-arrow"></use>
-          </svg>
-          <!-- /FORM SELECT ICON -->
-        </div>
-        <!-- /FORM SELECT -->
 
       </form>
       <!-- /FORM -->
 
 
-      <!-- FILTER TABS -->
-      <div class="filter-tabs">
-        <!-- FILTER TAB -->
-        <div class="filter-tab active">
-          <!-- FILTER TAB TEXT -->
-          <p class="filter-tab-text">Tạo mới nhất</p>
-          <!-- /FILTER TAB TEXT -->
-        </div>
-        <!-- /FILTER TAB -->
-
-        <!-- FILTER TAB -->
-        <div class="filter-tab">
-          <!-- FILTER TAB TEXT -->
-          <p class="filter-tab-text">Nhiều thành viên nhất</p>
-          <!-- /FILTER TAB TEXT -->
-        </div>
-        <!-- /FILTER TAB -->
-
-        <!-- FILTER TAB -->
-        <div class="filter-tab">
-          <!-- FILTER TAB TEXT -->
-          <p class="filter-tab-text">Theo bảng chữ cái</p>
-          <!-- /FILTER TAB TEXT -->
-        </div>
-        <!-- /FILTER TAB -->
-      </div>
-      <!-- /FILTER TABS -->
     </div>
     <!-- /SECTION FILTERS BAR ACTIONS -->
     <!-- BUTTON -->
-    <p class="button secondary full popup-manage-group-trigger">Tạo nhóm!</p>
+    <p class="button secondary full">Tạo nhóm!</p>
     <!-- /BUTTON -->
   </div>
   <!-- /SECTION FILTERS BAR -->
@@ -101,7 +62,7 @@
       <div class="user-preview">
         <!-- USER PREVIEW COVER -->
         <figure class="user-preview-cover liquid">
-          <img src="assets/img/cover/29.jpg" alt="cover-29">
+          <img [src]="group.background" alt="no image">
         </figure>
         <!-- /USER PREVIEW COVER -->
 
@@ -111,7 +72,8 @@
           <!-- USER SHORT DESCRIPTION -->
           <div class="user-short-description">
             <!-- USER SHORT DESCRIPTION AVATAR -->
-            <a class="user-short-description-avatar user-avatar medium no-stats" [routerLink]="['/detail-group/'+group.id]">
+            <a class="user-short-description-avatar user-avatar medium no-stats"
+               [routerLink]="['/detail-group/'+group.id]">
               <!-- USER AVATAR BORDER -->
               <div class="user-avatar-border">
                 <!-- HEXAGON -->
@@ -123,7 +85,7 @@
               <!-- USER AVATAR CONTENT -->
               <div class="user-avatar-content">
                 <!-- HEXAGON -->
-                <div class="hexagon-image-100-110" data-src="assets/img/avatar/24.jpg"></div>
+                <div class="hexagon-image-100-110" [id]="group.id"></div>
                 <!-- /HEXAGON -->
               </div>
               <!-- /USER AVATAR CONTENT -->
@@ -131,7 +93,7 @@
             <!-- /USER SHORT DESCRIPTION AVATAR -->
 
             <!-- USER SHORT DESCRIPTION TITLE -->
-            <p class="user-short-description-title"><a href="#">{{group.nameGroup}}</a></p>
+            <p class="user-short-description-title"><a href="#">{{group.name}}</a></p>
             <!-- /USER SHORT DESCRIPTION TITLE -->
 
             <!-- USER SHORT DESCRIPTION TEXT -->
@@ -145,11 +107,11 @@
             <!-- USER STAT -->
             <div class="user-stat">
               <!-- USER STAT TITLE -->
-              <p class="user-stat-title">139</p>
+              <p class="user-stat-title">{{group.dateRegister | date:'dd/MM/yyyy'}}</p>
               <!-- /USER STAT TITLE -->
 
               <!-- USER STAT TEXT -->
-              <p class="user-stat-text">Thành viên</p>
+              <p class="user-stat-text">Ngày tạo nhóm</p>
               <!-- /USER STAT TEXT -->
             </div>
             <!-- /USER STAT -->
@@ -157,24 +119,24 @@
             <!-- USER STAT -->
             <div class="user-stat">
               <!-- USER STAT TITLE -->
-              <p class="user-stat-title">105</p>
+              <p class="user-stat-title">
+                <!-- BUTTON -->
+                <span class="button secondary full popup-manage-group-trigger"
+                      style="width: 65px;height: 45px" (click)="getContentDelete(group.id,group.name)">Xóa</span>
+                <!-- /BUTTON -->
+              </p>
               <!-- /USER STAT TITLE -->
-
-              <!-- USER STAT TEXT -->
-              <p class="user-stat-text">Bài đăng</p>
-              <!-- /USER STAT TEXT -->
             </div>
             <!-- /USER STAT -->
-
           </div>
           <!-- /USER STATS -->
-
           <!-- USER PREVIEW ACTIONS -->
           <div class="user-preview-actions">
             <!-- BUTTON -->
-            <p class="button secondary full">
+            <p *ngIf="!group.check" (click)="joinGroup(accountId,group.id)" class="button secondary full">
               <!-- BUTTON ICON -->
-              <svg class="button-icon icon-join-group">
+              <svg
+                class="button-icon icon-join-group popup-manage-group-trigger">
                 <use xlink:href="#svg-join-group"></use>
               </svg>
               <!-- /BUTTON ICON -->
@@ -195,76 +157,31 @@
   <div class="section-pager-bar">
     <!-- SECTION PAGER -->
     <div class="section-pager secondary">
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item active">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">01</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">02</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">03</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">04</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">05</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
-
-      <!-- SECTION PAGER ITEM -->
-      <div class="section-pager-item">
-        <!-- SECTION PAGER ITEM TEXT -->
-        <p class="section-pager-item-text">06</p>
-        <!-- /SECTION PAGER ITEM TEXT -->
-      </div>
-      <!-- /SECTION PAGER ITEM -->
     </div>
     <!-- /SECTION PAGER -->
 
     <!-- SECTION PAGER CONTROLS -->
     <div class="section-pager-controls">
       <!-- SLIDER CONTROL -->
-      <div class="slider-control left disabled">
+      <a class="slider-control left page-link" [hidden]="page==0"
+         (click)="page =page - 1;getListGroup()">
         <!-- SLIDER CONTROL ICON -->
         <svg class="slider-control-icon icon-small-arrow">
           <use xlink:href="#svg-small-arrow"></use>
         </svg>
         <!-- /SLIDER CONTROL ICON -->
-      </div>
+      </a>
       <!-- /SLIDER CONTROL -->
 
       <!-- SLIDER CONTROL -->
-      <div class="slider-control right">
+      <a class="slider-control right page-link" [hidden]="page >= pageable.totalPages - 1"
+         (click)="page= page +1; getListGroup()">
         <!-- SLIDER CONTROL ICON -->
         <svg class="slider-control-icon icon-small-arrow">
           <use xlink:href="#svg-small-arrow"></use>
         </svg>
         <!-- /SLIDER CONTROL ICON -->
-      </div>
+      </a>
       <!-- /SLIDER CONTROL -->
     </div>
     <!-- /SECTION PAGER CONTROLS -->
@@ -274,3 +191,39 @@
 <!-- /CONTENT GRID -->
 
 
+<!-- POPUP BOX -->
+<div class="popup-box mid popup-manage-group">
+  <!-- POPUP CLOSE BUTTON -->
+  <div class="popup-close-button popup-manage-group-trigger">
+    <!-- POPUP CLOSE BUTTON ICON -->
+    <svg class="popup-close-button-icon icon-cross">
+      <use xlink:href="#svg-cross"></use>
+    </svg>
+    <!-- /POPUP CLOSE BUTTON ICON -->
+  </div>
+
+  <div class="poll-box">
+    <h4 style="margin-left: 40%">Xóa nhóm</h4>
+    <form class="form">
+
+      <p>Bạn có muốn xóa nhóm <span class="text-danger">{{name}}</span> không?</p>
+      <br>
+      <i><span style="font-weight: bold">Hành động này không thể hoàn tác</span></i>
+      <!-- POLL BOX ACTIONS -->
+      <div class="poll-box-actions" style="margin-left: 58%;margin-top:10px">
+        <!-- BUTTON -->
+        <p class="button secondary small popup-manage-group-trigger" (click)="deleteGroup(id)">Xóa</p>
+        <!-- /BUTTON -->
+        <!-- BUTTON -->
+        <p class="button white small popup-manage-group-trigger">Đóng</p>
+        <!-- /BUTTON -->
+      </div>
+      <!-- /POLL BOX ACTIONS -->
+    </form>
+
+  </div>
+
+</div>
+<!-- /POPUP BOX BODY -->
+<!-- /POPUP BOX -->
+<!-- app -->

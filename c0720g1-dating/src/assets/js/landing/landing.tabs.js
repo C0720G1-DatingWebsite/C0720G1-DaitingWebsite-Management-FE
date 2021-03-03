@@ -1,4 +1,3 @@
-console.log("10");
 app.plugins.createTab({
   triggers: '.login-register-form-trigger',
   elements: '.login-register-form-element',

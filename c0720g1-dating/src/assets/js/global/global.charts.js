@@ -1,4 +1,3 @@
-console.log("4");
 const getLabelNumbers = function (count) {
   const labels = [];
   for (let i = 1; i <= count; i++) {

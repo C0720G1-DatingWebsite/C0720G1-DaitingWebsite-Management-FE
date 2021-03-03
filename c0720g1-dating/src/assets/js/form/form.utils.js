@@ -1,7 +1,6 @@
 /*-----------------
     FORM INPUT
 -----------------*/
-console.log("2");
 app.querySelector('.form-input', function (elements) {
   for (const el of elements) {
     if (el.classList.contains('always-active')) continue;

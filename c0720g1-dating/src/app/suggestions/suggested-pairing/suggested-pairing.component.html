@@ -1,6 +1,7 @@
-
-
-<div class="content-grid">
+<div class="content-grid" infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="200"
+     (scrolled)="onScroll()">
   <!-- GRID -->
   <div class="grid grid-3-6-3 mobile-prefer-content">
     <!-- GRID COLUMN -->
@@ -12,115 +13,70 @@
         <div class="widget-box-content">
           <div class="user-status-list">
             <!-- content -->
-            <div class="user-status request-small dropdown-item">
-              <a class="user-status-avatar" href="profile-timeline.html">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
+            <div *ngIf="suggestionToMakeFriendsDTO.length == 0 && displayData ">
+              <p style="text-align: center; color: red">Không có gợi ý phù hợp</p>
+            </div>
+            <div *ngFor="let a of suggestionToMakeFriendsDTO">
+              <div class="user-status request-small dropdown-item">
+                <a class="user-status-avatar" href="profile-timeline.html">
+                  <div class="user-avatar small no-outline">
+                    <div class="user-avatar-content">
+<!--                      <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>-->
+                      <img class="hexagon-image-30-32" src="{{a.avatar}}" style="border-radius: 50%; width: 30px;height: 30px;">
+                    </div>
+                  </div>
+                </a>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">{{a.fullName}}</a></p>
+                <p class="user-status-text small">{{a.mutualFriends}} bạn chung</p>
+                <div class="action-request-list">
+                  <div class="action-request accept">
+                    <i class="far fa-heart"></i>
+                  </div>
+                  <div class="action-request accept">
+                    <i class="fas fa-user-plus"></i>
                   </div>
                 </div>
-              </a>
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Phước </a></p>
-              <p class="user-status-text small">12 bạn bè chung</p>
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div class="action-request accept">
-                  <i class="fas fa-user-plus"></i>
-                </div>
+              </div>
+              &nbsp;
+            </div>
+            <div *ngIf="loadingData">
+              <div class="page-loader-indicator loader-bars">
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
               </div>
             </div>
             <!-- end content -->
-            <!-- content -->
-            <div class="user-status request-small dropdown-item">
-              <a class="user-status-avatar" href="profile-timeline.html">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
-                  </div>
-                </div>
-              </a>
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Tứ đẹp trai</a></p>
-              <p class="user-status-text small">34 bạn bè chung</p>
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div class="action-request accept">
-                  <i class="fas fa-user-clock"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end content -->
+            <!--            &lt;!&ndash; content &ndash;&gt;-->
+            <!--            <div class="user-status request-small dropdown-item">-->
+            <!--              <a class="user-status-avatar" href="profile-timeline.html">-->
+            <!--                <div class="user-avatar small no-outline">-->
+            <!--                  <div class="user-avatar-content">-->
+            <!--                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </a>-->
+            <!--              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Tứ đẹp trai</a></p>-->
+            <!--              <p class="user-status-text small">34 bạn bè chung</p>-->
+            <!--              <div class="action-request-list">-->
+            <!--                <div class="action-request accept">-->
+            <!--                  <i class="far fa-heart"></i>-->
+            <!--                </div>-->
+            <!--                <div class="action-request accept">-->
+            <!--                  <i class="fas fa-user-clock"></i>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash; end content &ndash;&gt;-->
 
-            <!-- content -->
-            <div class="user-status request-small dropdown-item">
-              <a class="user-status-avatar" href="profile-timeline.html">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
-                  </div>
-                </div>
-              </a>
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Khánh </a></p>
-              <p class="user-status-text small">57 bạn bè chung</p>
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div class="action-request accept">
-                  <i class="fas fa-user-plus"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end content -->
-            <!-- content -->
-            <div class="user-status request-small dropdown-item">
-              <a class="user-status-avatar" href="profile-timeline.html">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
-                  </div>
-                </div>
-              </a>
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Linh </a></p>
-              <p class="user-status-text small">5 bạn bè chung</p>
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div class="action-request accept">
-                  <i class="fas fa-user-clock"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end content -->
-            <!-- content -->
-            <div class="user-status request-small dropdown-item">
-              <a class="user-status-avatar" href="profile-timeline.html">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" data-src="assets/img/avatar/07.jpg"></div>
-                  </div>
-                </div>
-              </a>
-              <p class="user-status-title"><a class="bold" href="profile-timeline.html">Long </a></p>
-              <p class="user-status-text small">4 bạn bè chung</p>
-
-              <div class="action-request-list">
-                <div class="action-request accept">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div class="action-request accept">
-                  <i class="fas fa-user-plus"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end content -->
-            <div>
-              <button><i class="fas fa-plus"></i>&nbsp; Xem thêm</button>
-            </div>
+<!--            <div>-->
+<!--              <button><i class="fas fa-plus"></i>&nbsp; Xem thêm</button>-->
+<!--            </div>-->
           </div>
         </div>
       </div>

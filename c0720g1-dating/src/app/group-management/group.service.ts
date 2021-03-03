@@ -23,12 +23,45 @@ export class GroupService {
   getListGroup(page: number): Observable<any> {
     return this.http.get(this.API + 'list-group?page=' + page)
   }
-  getGroupById(groupId: number): Observable<any>{
-    return this.http.get(this.API + 'get-group/'+groupId)
+
+  getGroupById(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-group/' + groupId)
   }
-  loadAvatarGroup(imgUrl:string){
-    document.getElementById('avatar-group').setAttribute('data-src', imgUrl);
-    document.getElementById('background-group').setAttribute('data-src', imgUrl);
+
+  getMemberQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-member-quantity/' + groupId)
+  }
+
+  getPostGroupQuantity(groupId: number): Observable<any> {
+    return this.http.get(this.API + 'get-post-group-quantity/' + groupId)
+  }
+
+  getListMemberQuantity(): Observable<any> {
+    return this.http.get(this.API + 'get-list-member-quantity')
+  }
+
+  deleteGroupById(groupId: number): Observable<any> {
+    return this.http.delete(this.API + 'delete-group/' + groupId)
+  }
+
+  getListMember(groupId: number, page: number): Observable<any> {
+    return this.http.get(this.API + 'list-member-group/' + groupId + '?page=' + page)
+  }
+
+  joinGroup(id: number, groupId: number) {
+    return this.http.post(this.API + 'join-group/' + id + '/' + groupId, this.httpOptions)
+  }
+
+  findGroup(nameGroup: string, page: number) {
+    return this.http.get(this.API + 'find-name-group/' + nameGroup + '?page=' + page)
+  }
+
+  getListJoinedGroup(accountId) {
+    return this.http.get(this.API + 'account-joined-group/' + accountId)
+  }
+
+  searchMember(groupId: number, searchName: string, page: number) {
+    return this.http.get(this.API + 'search-member-group/' + groupId + '/' + searchName + '?page=' + page)
   }
 }
 

@@ -1,21 +1,10 @@
-
-
-
-
-
-
-
-
-
-
-
 <!-- CONTENT GRID -->
 <div class="content-grid">
   <!-- PROFILE HEADER -->
   <div class="profile-header v2">
     <!-- PROFILE HEADER COVER -->
     <figure class="profile-header-cover liquid">
-      <img src="assets/img/cover/29.jpg" alt="cover-29">
+      <img [src]="group.background" alt="no image">
     </figure>
     <!-- /PROFILE HEADER COVER -->
 
@@ -24,7 +13,7 @@
       <!-- USER SHORT DESCRIPTION -->
       <div class="user-short-description big">
         <!-- USER SHORT DESCRIPTION AVATAR -->
-        <a class="user-short-description-avatar user-avatar big no-stats" href="thong_tin_nhom.html">
+        <a class="user-short-description-avatar user-avatar big no-stats" href="#">
           <!-- USER AVATAR BORDER -->
           <div class="user-avatar-border">
             <!-- HEXAGON -->
@@ -36,7 +25,7 @@
           <!-- USER AVATAR CONTENT -->
           <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div id="avatar-group" class="hexagon-image-124-136"></div>
+            <div [id]="groupId" class="hexagon-image-124-136"></div>
             <!-- /HEXAGON -->
           </div>
           <!-- /USER AVATAR CONTENT -->
@@ -44,7 +33,8 @@
         <!-- /USER SHORT DESCRIPTION AVATAR -->
 
         <!-- USER SHORT DESCRIPTION AVATAR -->
-        <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium no-stats" href="thong_tin_nhom.html">
+        <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium no-stats"
+           href="#">
           <!-- USER AVATAR BORDER -->
           <div class="user-avatar-border">
             <!-- HEXAGON -->
@@ -56,7 +46,7 @@
           <!-- USER AVATAR CONTENT -->
           <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div class="hexagon-image-100-110" data-src="img/avatar/24.jpg"></div>
+            <div class="hexagon-image-100-110"></div>
             <!-- /HEXAGON -->
           </div>
           <!-- /USER AVATAR CONTENT -->
@@ -64,7 +54,7 @@
         <!-- /USER SHORT DESCRIPTION AVATAR -->
 
         <!-- USER SHORT DESCRIPTION TITLE -->
-        <p class="user-short-description-title"><a href="#">{{group.name}}</a></p>
+        <p class="user-short-description-title"><a [routerLink]="['/detail-group/'+groupId]">{{group.name}}</a></p>
         <!-- /USER SHORT DESCRIPTION TITLE -->
 
         <!-- USER SHORT DESCRIPTION TEXT -->
@@ -79,7 +69,7 @@
         <!-- USER STAT -->
         <div class="user-stat big">
           <!-- USER STAT TITLE -->
-          <p class="user-stat-title">139</p>
+          <p class="user-stat-title">{{memberQuantity}}</p>
           <!-- /USER STAT TITLE -->
 
           <!-- USER STAT TEXT -->
@@ -91,7 +81,7 @@
         <!-- USER STAT -->
         <div class="user-stat big">
           <!-- USER STAT TITLE -->
-          <p class="user-stat-title">105</p>
+          <p class="user-stat-title">{{postQuantity}}</p>
           <!-- /USER STAT TITLE -->
 
           <!-- USER STAT TEXT -->
@@ -100,53 +90,10 @@
         </div>
         <!-- /USER STAT -->
 
-        <!-- USER STAT -->
-        <div class="user-stat big">
-          <!-- USER STAT TITLE -->
-          <p class="user-stat-title">7.3k</p>
-          <!-- /USER STAT TITLE -->
 
-          <!-- USER STAT TEXT -->
-          <p class="user-stat-text">Ghé thăm</p>
-          <!-- /USER STAT TEXT -->
-        </div>
-        <!-- /USER STAT -->
       </div>
       <!-- /USER STATS -->
 
-      <!-- TAG STICKER -->
-      <div class="tag-sticker">
-        <!-- TAG STICKER ICON -->
-        <svg class="tag-sticker-icon icon-public">
-          <use xlink:href="#svg-public"></use>
-        </svg>
-        <!-- /TAG STICKER ICON -->
-      </div>
-      <!-- /TAG STICKER -->
-
-      <!-- PROFILE HEADER INFO ACTIONS -->
-      <div class="profile-header-info-actions">
-        <!-- PROFILE HEADER INFO ACTION -->
-        <p class="profile-header-info-action button secondary">
-          <!-- ICON JOIN GROUP -->
-          <svg class="icon-join-group">
-            <use xlink:href="#svg-join-group"></use>
-          </svg>
-          <!-- /ICON JOIN GROUP -->
-        </p>
-        <!-- /PROFILE HEADER INFO ACTION -->
-
-        <!-- PROFILE HEADER INFO ACTION -->
-        <a class="profile-header-info-action button" href="hub-group-management.html">
-          <!-- ICON MORE DOTS -->
-          <svg class="icon-more-dots">
-            <use xlink:href="#svg-more-dots"></use>
-          </svg>
-          <!-- /ICON MORE DOTS -->
-        </a>
-        <!-- /PROFILE HEADER INFO ACTION -->
-      </div>
-      <!-- /PROFILE HEADER INFO ACTIONS -->
     </div>
     <!-- /PROFILE HEADER INFO -->
   </div>
@@ -157,7 +104,7 @@
     <!-- SECTION MENU -->
     <div id="section-navigation-medium-slider" class="section-menu secondary">
       <!-- SECTION MENU ITEM -->
-      <a class="section-menu-item" href="thong_tin_nhom.html">
+      <a class="section-menu-item" [routerLink]="['/timeline-group/'+groupId]">
         <!-- SECTION MENU ITEM ICON -->
         <svg class="section-menu-item-icon icon-timeline">
           <use xlink:href="#svg-timeline"></use>
@@ -176,8 +123,8 @@
       <!-- SECTION MENU ITEM -->
       <a class="section-menu-item active" href="group-Thành viên.html">
         <!-- SECTION MENU ITEM ICON -->
-        <svg class="section-menu-item-icon icon-Thành viên">
-          <use xlink:href="#svg-Thành viên"></use>
+        <svg class="section-menu-item-icon icon-members">
+          <use xlink:href="#svg-members"></use>
         </svg>
         <!-- /SECTION MENU ITEM ICON -->
 
@@ -222,11 +169,11 @@
       <!-- SECTION HEADER INFO -->
       <div class="section-header-info">
         <!-- SECTION PRETITLE -->
-        <p class="section-pretitle">Browse Group</p>
+        <p class="section-pretitle">Nhóm</p>
         <!-- /SECTION PRETITLE -->
 
         <!-- SECTION TITLE -->
-        <h2 class="section-title">Thành viên <span class="highlighted secondary">82</span></h2>
+        <h2 class="section-title">Thành viên <span class="highlighted secondary">{{memberQuantity}}</span></h2>
         <!-- /SECTION TITLE -->
       </div>
       <!-- /SECTION HEADER INFO -->
@@ -242,9 +189,9 @@
           <!-- FORM INPUT -->
           <div class="form-input small with-button">
             <label for="Thành viên-Tìm kiếm">Tìm kiếm thành viên</label>
-            <input type="text" id="Thành viên-Tìm kiếm" name="members_search">
+            <input type="text" id="Thành viên-Tìm kiếm" name="members_search" [(ngModel)]="searchName">
             <!-- BUTTON -->
-            <button class="button secondary">
+            <button class="button secondary" (click)="onSubmit()">
               <!-- ICON MAGNIFYING GLASS -->
               <svg class="icon-magnifying-glass">
                 <use xlink:href="#svg-magnifying-glass"></use>
@@ -254,52 +201,7 @@
             <!-- /BUTTON -->
           </div>
           <!-- /FORM INPUT -->
-
-          <!-- FORM SELECT -->
-          <div class="form-select">
-            <label for="Thành viên-filter-category">Tìm kiếm bằng</label>
-            <select id="Thành viên-filter-category" name="members_filter_category">
-              <option value="0">Hoạt đông gần nhất</option>
-              <option value="1">Thành viên mới nhất</option>
-              <option value="2">Theo bảng chữ cái</option>
-            </select>
-            <!-- FORM SELECT ICON -->
-            <svg class="form-select-icon icon-small-arrow">
-              <use xlink:href="#svg-small-arrow"></use>
-            </svg>
-            <!-- /FORM SELECT ICON -->
-          </div>
-          <!-- /FORM SELECT -->
         </form>
-        <!-- /FORM -->
-
-        <!-- FILTER TABS -->
-        <div class="filter-tabs">
-          <!-- FILTER TAB -->
-          <div class="filter-tab secondary active">
-            <!-- FILTER TAB TEXT -->
-            <p class="filter-tab-text">Hoạt đông gần nhất</p>
-            <!-- /FILTER TAB TEXT -->
-          </div>
-          <!-- /FILTER TAB -->
-
-          <!-- FILTER TAB -->
-          <div class="filter-tab secondary">
-            <!-- FILTER TAB TEXT -->
-            <p class="filter-tab-text">Thành viên mới nhất</p>
-            <!-- /FILTER TAB TEXT -->
-          </div>
-          <!-- /FILTER TAB -->
-
-          <!-- FILTER TAB -->
-          <div class="filter-tab secondary">
-            <!-- FILTER TAB TEXT -->
-            <p class="filter-tab-text">Theo bảng chữ cái</p>
-            <!-- /FILTER TAB TEXT -->
-          </div>
-          <!-- /FILTER TAB -->
-        </div>
-        <!-- /FILTER TABS -->
       </div>
       <!-- /SECTION FILTERS BAR ACTIONS -->
 
@@ -309,10 +211,10 @@
     <!-- GRID -->
     <div class="grid grid-4-4-4 centered">
       <!-- USER PREVIEW -->
-      <div class="user-preview">
+      <div *ngFor="let member of listMember" class="user-preview">
         <!-- USER PREVIEW COVER -->
         <figure class="user-preview-cover liquid">
-          <img src="img/cover/04.jpg" alt="cover-04">
+          <img [src]="member.backgroundImage" alt="no image">
         </figure>
         <!-- /USER PREVIEW COVER -->
 
@@ -321,7 +223,7 @@
           <!-- USER SHORT DESCRIPTION -->
           <div class="user-short-description">
             <!-- USER SHORT DESCRIPTION AVATAR -->
-            <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
+            <a class="user-short-description-avatar user-avatar medium" href="#">
               <!-- USER AVATAR BORDER -->
               <div class="user-avatar-border">
                 <!-- HEXAGON -->
@@ -333,7 +235,7 @@
               <!-- USER AVATAR CONTENT -->
               <div class="user-avatar-content">
                 <!-- HEXAGON -->
-                <div class="hexagon-image-82-90" data-src="img/avatar/05.jpg"></div>
+                <div class="hexagon-image-82-90" [id]='member.id'></div>
                 <!-- /HEXAGON -->
               </div>
               <!-- /USER AVATAR CONTENT -->
@@ -354,112 +256,34 @@
               </div>
               <!-- /USER AVATAR PROGRESS BORDER -->
 
-              <!-- USER AVATAR BADGE -->
-              <div class="user-avatar-badge">
-                <!-- USER AVATAR BADGE BORDER -->
-                <div class="user-avatar-badge-border">
-                  <!-- HEXAGON -->
-                  <div class="hexagon-32-36"></div>
-                  <!-- /HEXAGON -->
-                </div>
-                <!-- /USER AVATAR BADGE BORDER -->
-
-                <!-- USER AVATAR BADGE CONTENT -->
-                <div class="user-avatar-badge-content">
-                  <!-- HEXAGON -->
-                  <div class="hexagon-dark-26-28"></div>
-                  <!-- /HEXAGON -->
-                </div>
-                <!-- /USER AVATAR BADGE CONTENT -->
-
-                <!-- USER AVATAR BADGE TEXT -->
-                <p class="user-avatar-badge-text">12</p>
-                <!-- /USER AVATAR BADGE TEXT -->
-              </div>
-              <!-- /USER AVATAR BADGE -->
             </a>
             <!-- /USER SHORT DESCRIPTION AVATAR -->
 
             <!-- USER SHORT DESCRIPTION TITLE -->
-            <p class="user-short-description-title"><a href="profile-timeline.html">NekoBebop</a></p>
+            <p class="user-short-description-title"><a [routerLink]="['/detail-group/'+groupId]">{{member.fullName}}</a>
+            </p>
             <!-- /USER SHORT DESCRIPTION TITLE -->
-
-            <!-- USER SHORT DESCRIPTION TEXT -->
-            <p class="user-short-description-text"><a href="#">www.store.com/nekoprints</a></p>
-            <!-- /USER SHORT DESCRIPTION TEXT -->
+            <!-- USER STAT -->
+            <div class="user-stat" *ngIf="member.groupRoleId==1">
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Chủ nhóm</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
           </div>
           <!-- /USER SHORT DESCRIPTION -->
 
-
           <!-- USER PREVIEW STATS SLIDES -->
           <div id="user-preview-stats-slides-01" class="user-preview-stats-slides">
-            <!-- USER PREVIEW STATS SLIDE -->
-            <div class="user-preview-stats-slide">
-              <!-- USER STATS -->
-              <div class="user-stats">
-                <!-- USER STAT -->
-                <div class="user-stat">
-                  <!-- USER STAT TITLE -->
-                  <p class="user-stat-title">874</p>
-                  <!-- /USER STAT TITLE -->
-
-                  <!-- USER STAT TEXT -->
-                  <p class="user-stat-text">Bài đăng</p>
-                  <!-- /USER STAT TEXT -->
-                </div>
-                <!-- /USER STAT -->
-
-                <!-- USER STAT -->
-                <div class="user-stat">
-                  <!-- USER STAT TITLE -->
-                  <p class="user-stat-title">60</p>
-                  <!-- /USER STAT TITLE -->
-
-                  <!-- USER STAT TEXT -->
-                  <p class="user-stat-text">Bàn bè</p>
-                  <!-- /USER STAT TEXT -->
-                </div>
-                <!-- /USER STAT -->
-
-                <!-- USER STAT -->
-                <div class="user-stat">
-                  <!-- USER STAT TITLE -->
-                  <p class="user-stat-title">3.9k</p>
-                  <!-- /USER STAT TITLE -->
-
-                  <!-- USER STAT TEXT -->
-                  <p class="user-stat-text">Ghé thăm</p>
-                  <!-- /USER STAT TEXT -->
-                </div>
-                <!-- /USER STAT -->
-              </div>
-              <!-- /USER STATS -->
-            </div>
-            <!-- /USER PREVIEW STATS SLIDE -->
 
           </div>
           <!-- /USER PREVIEW STATS SLIDES -->
 
 
-
-
-          <!-- USER PREVIEW ACTIONS -->
-          <div class="user-preview-actions">
-            <!-- BUTTON -->
-            <p class="button secondary">Thêm bạn +</p>
-            <!-- /BUTTON -->
-
-            <!-- BUTTON -->
-            <p class="button primary">Gửi tin nhắn</p>
-            <!-- /BUTTON -->
-          </div>
-          <!-- /USER PREVIEW ACTIONS -->
         </div>
         <!-- /USER PREVIEW INFO -->
       </div>
       <!-- /USER PREVIEW -->
-
-
     </div>
     <!-- /GRID -->
 
@@ -467,76 +291,30 @@
     <div class="section-pager-bar">
       <!-- SECTION PAGER -->
       <div class="section-pager secondary">
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item active">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">01</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">02</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">03</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">04</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">05</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-          <!-- SECTION PAGER ITEM TEXT -->
-          <p class="section-pager-item-text">06</p>
-          <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
       </div>
       <!-- /SECTION PAGER -->
 
       <!-- SECTION PAGER CONTROLS -->
       <div class="section-pager-controls">
         <!-- SLIDER CONTROL -->
-        <div class="slider-control left disabled">
+        <a class="slider-control left page-link" [hidden]="page==0"
+           (click)="page =page - 1;getListMember()">
           <!-- SLIDER CONTROL ICON -->
           <svg class="slider-control-icon icon-small-arrow">
             <use xlink:href="#svg-small-arrow"></use>
           </svg>
           <!-- /SLIDER CONTROL ICON -->
-        </div>
-        <!-- /SLIDER CONTROL -->
+        </a>        <!-- /SLIDER CONTROL -->
 
         <!-- SLIDER CONTROL -->
-        <div class="slider-control right">
+        <a class="slider-control right page-link" [hidden]="page >= pageable.totalPages - 1"
+           (click)="page= page +1; getListMember()">
           <!-- SLIDER CONTROL ICON -->
           <svg class="slider-control-icon icon-small-arrow">
             <use xlink:href="#svg-small-arrow"></use>
           </svg>
           <!-- /SLIDER CONTROL ICON -->
-        </div>
+        </a>
         <!-- /SLIDER CONTROL -->
       </div>
       <!-- /SECTION PAGER CONTROLS -->

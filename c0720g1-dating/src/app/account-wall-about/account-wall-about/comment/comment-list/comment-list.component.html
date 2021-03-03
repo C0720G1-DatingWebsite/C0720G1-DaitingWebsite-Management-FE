@@ -1,0 +1,62 @@
+<div class="post-comment-list">
+  <div class="post-comment" *ngFor="let comments of iComments, let i = index">
+
+    <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', comments.account.id ,'wall']">
+      <div class="user-avatar-content">
+        <div class="hexagon-image-30-32" [attr.data-src]="comments.account.avatar"></div>
+      </div>
+      <div class="user-avatar-progress">
+        <div class="hexagon-progress-40-44"></div>
+      </div>
+      <div class="user-avatar-progress-border">
+        <div class="hexagon-border-40-44"></div>
+      </div>
+    </a>
+    <p class="post-comment-text">
+      <a class="post-comment-text-author">{{comments.account.userName}}</a>
+      {{comments.content}}</p>
+    <div class="content-actions">
+
+      <div class="content-action">
+
+        <div class="meta-line">
+
+          <p class="meta-line-link light">Thích</p>
+
+        </div>
+        <div class="meta-line">
+
+          <p class="meta-line-link light">Trả lời</p>
+
+        </div>
+        <div class="meta-line">
+          <!-- META LINE TIMESTAMP -->
+          <p class="meta-line-timestamp">{{comments.dateComment}}</p>
+          <!-- /META LINE TIMESTAMP -->
+        </div>
+        <div class="meta-line settings">
+          <!-- POST SETTINGS WRAP -->
+          <div class="post-settings-wrap">
+            <!-- POST SETTINGS -->
+            <div class="post-settings post-settings-dropdown-trigger">
+              <svg class="post-settings-icon icon-more-dots">
+                <use xlink:href="#svg-more-dots"></use>
+              </svg>
+            </div>
+            <div class="simple-dropdown post-settings-dropdown">
+              <!-- SIMPLE DROPDOWN LINK -->
+              <p class="simple-dropdown-link">Báo cáo vi phạm</p>
+              <p class="simple-dropdown-link">Chỉnh sửa</p>
+              <p class="simple-dropdown-link" data-toggle="modal" data-target="#exampleModalCenter">Xóa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--      </div>-->
+    <!--        <div *ngIf="comments.comment.id!=null">-->
+    <!--<app-reply [idComment]="comments.id"></app-reply>-->
+
+  </div>
+</div>
+

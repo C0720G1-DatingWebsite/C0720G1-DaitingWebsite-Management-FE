@@ -3927,9 +3927,8 @@
     </div>
   </div>
   <!-- /CHAT WIDGET MESSAGES -->
-
   <!-- CHAT WIDGET FORM -->
-  <form class="chat-widget-form">
+  <div class="chat-widget-form">
     <!-- INTERACTIVE INPUT -->
     <div class="interactive-input small">
       <input type="text" id="chat-widget-search" name="chat_widget_search" placeholder="Search Messages...">
@@ -3954,7 +3953,7 @@
       <!-- /INTERACTIVE INPUT ACTION -->
     </div>
     <!-- /INTERACTIVE INPUT -->
-  </form>
+  </div>
   <!-- /CHAT WIDGET FORM -->
 
   <!-- CHAT WIDGET BUTTON -->
@@ -3986,7 +3985,7 @@
   <!-- /CHAT WIDGET BUTTON -->
 </aside>
 <!-- end right bar -->
-<div class="content-grid">
+<div class="content-grid" >
   <div class="grid grid-3-6-3 mobile-prefer-content">
     <div class="grid-column">
       <div class="widget-box">
@@ -4001,356 +4000,236 @@
 
     <div class="grid-column">
 
+      <div class="widget-box no-padding" *ngFor="let object of iPosts">
 
-      <!-- /WIDGET BOX -->
-
-      <!-- WIDGET BOX -->
-      <div class="widget-box no-padding">
-        <!-- WIDGET BOX SETTINGS -->
         <div class="widget-box-settings">
-          <!-- POST SETTINGS WRAP -->
+
           <div class="post-settings-wrap">
-            <!-- POST SETTINGS -->
+
             <div class="post-settings widget-box-post-settings-dropdown-trigger">
-              <!-- POST SETTINGS ICON -->
+
               <svg class="post-settings-icon icon-more-dots">
                 <use xlink:href="#svg-more-dots"></use>
               </svg>
-              <!-- /POST SETTINGS ICON -->
-            </div>
-            <!-- /POST SETTINGS -->
 
-            <!-- SIMPLE DROPDOWN -->
+            </div>
+
+
             <div class="simple-dropdown widget-box-post-settings-dropdown">
-              <!-- SIMPLE DROPDOWN LINK -->
-              <p onclick="getTrueFalse1();" class="simple-dropdown-link">Sửa</p>
-              <!-- /SIMPLE DROPDOWN LINK -->
 
-              <!-- SIMPLE DROPDOWN LINK -->
+              <p onclick="getTrueFalse1()" class="simple-dropdown-link">Sửa</p>
               <p class="simple-dropdown-link">Xóa</p>
-              <!-- /SIMPLE DROPDOWN LINK -->
 
             </div>
-            <!-- /SIMPLE DROPDOWN -->
           </div>
-          <!-- /POST SETTINGS WRAP -->
         </div>
-        <!-- /WIDGET BOX SETTINGS -->
-      </div>
-      <!-- /WIDGET BOX -->
-      <!-- WIDGET BOX STATUS -->
-      <div class="widget-box-status">
-        <!-- WIDGET BOX STATUS CONTENT -->
-        <div class="widget-box-status-content">
-          <!-- USER STATUS -->
-          <div class="user-status">
-            <!-- USER STATUS AVATAR -->
-            <a class="user-status-avatar" href="profile-timeline.html">
-              <!-- USER AVATAR -->
-              <div class="user-avatar small no-outline">
-                <!-- USER AVATAR CONTENT -->
-                <div class="user-avatar-content">
-                  <!-- HEXAGON -->
-                  <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
-                  <!-- /HEXAGON -->
-                </div>
-                <!-- /USER AVATAR CONTENT -->
 
-                <!-- USER AVATAR PROGRESS -->
-                <div class="user-avatar-progress">
-                  <!-- HEXAGON -->
-                  <div class="hexagon-progress-40-44"></div>
-                  <!-- /HEXAGON -->
-                </div>
-                <!-- /USER AVATAR PROGRESS -->
-
-                <!-- USER AVATAR PROGRESS BORDER -->
-                <div class="user-avatar-progress-border">
-                  <!-- HEXAGON -->
-                  <div class="hexagon-border-40-44"></div>
-                  <!-- /HEXAGON -->
-                </div>
-                <!-- /USER AVATAR PROGRESS BORDER -->
-
-                <!-- USER AVATAR BADGE -->
-                <div class="user-avatar-badge">
-                  <!-- USER AVATAR BADGE BORDER -->
-                  <div class="user-avatar-badge-border">
+        <div class="widget-box-status">
+          <!-- WIDGET BOX STATUS CONTENT -->
+          <div class="widget-box-status-content">
+            <!-- USER STATUS -->
+            <div class="user-status">
+              <!-- USER STATUS AVATAR -->
+              <a class="user-status-avatar" href="profile-timeline.html">
+                <!-- USER AVATAR -->
+                <div class="user-avatar small no-outline">
+                  <!-- USER AVATAR CONTENT -->
+                  <div class="user-avatar-content">
                     <!-- HEXAGON -->
-                    <div class="hexagon-22-24"></div>
+                    <div class="hexagon-image-30-32" [attr.data-src] = 'object.account.avatar'></div>
                     <!-- /HEXAGON -->
                   </div>
-                  <!-- /USER AVATAR BADGE BORDER -->
+                  <!-- /USER AVATAR CONTENT -->
 
-                  <!-- USER AVATAR BADGE CONTENT -->
-                  <div class="user-avatar-badge-content">
+                  <!-- USER AVATAR PROGRESS -->
+                  <div class="user-avatar-progress">
                     <!-- HEXAGON -->
-                    <div class="hexagon-dark-16-18"></div>
+                    <div class="hexagon-progress-40-44"></div>
                     <!-- /HEXAGON -->
                   </div>
-                  <!-- /USER AVATAR BADGE CONTENT -->
+                  <!-- /USER AVATAR PROGRESS -->
 
-                  <!-- USER AVATAR BADGE TEXT -->
-                  <!-- /USER AVATAR BADGE TEXT -->
-                </div>
-                <!-- /USER AVATAR BADGE -->
-              </div>
-              <!-- /USER AVATAR -->
-            </a>
-            <!-- /USER STATUS AVATAR -->
+                  <!-- USER AVATAR PROGRESS BORDER -->
+                  <div class="user-avatar-progress-border">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-border-40-44"></div>
+                    <!-- /HEXAGON -->
+                  </div>
+                  <!-- /USER AVATAR PROGRESS BORDER -->
 
-            <!-- USER STATUS TITLE -->
-            <p class="user-status-title medium"><a class="bold" href="profile-timeline.html">Thị Sương</a>
-              đã thêm <span class="bold">trạng thái mới</span></p>
-            <!-- /USER STATUS TITLE -->
-
-            <!-- USER STATUS TEXT -->
-            <p class="user-status-text small">17 phút truớc</p>
-            <!-- /USER STATUS TEXT -->
-          </div>
-          <!-- /USER STATUS -->
-
-          <!-- WIDGET BOX STATUS TEXT -->
-          <p class="widget-box-status-text" id="myK">Xin chào các bạn,mình là fan Manga!!</p>
-          <!-- /WIDGET BOX STATUS TEXT -->
-
-          <!-- PICTURE COLLAGE -->
-
-          <!-- /PICTURE COLLAGE -->
-
-          <!-- CONTENT ACTIONS -->
-          <div class="content-actions">
-            <!-- CONTENT ACTION -->
-            <div class="content-action">
-              <!-- META LINE -->
-              <div class="meta-line">
-                <!-- META LINE LIST -->
-                <div class="meta-line-list reaction-item-list">
-                  <!-- REACTION ITEM -->
-
-                  <!-- /REACTION ITEM -->
-
-                  <!-- REACTION ITEM -->
-                  <div class="reaction-item">
-                    <!-- REACTION IMAGE -->
-                    <img class="reaction-image reaction-item-dropdown-trigger"
-                         src="assets/img/reaction/like.png"
-                    >
-                    <!-- /REACTION IMAGE -->
-
-                    <!-- SIMPLE DROPDOWN -->
-                    <div class="simple-dropdown padded reaction-item-dropdown" >
-                      <!-- SIMPLE DROPDOWN TEXT -->
-                      <p class="simple-dropdown-text"><img class="reaction"
-                                                           src="assets/img/reaction/like.png"
-                                                           alt="reaction-like"> <span
-                        class="bold">Like</span></p>
-                      <!-- /SIMPLE DROPDOWN TEXT -->
-
-                      <!-- SIMPLE DROPDOWN TEXT -->
-                      <p class="simple-dropdown-text">Sandra Strange</p>
-                      <!-- /SIMPLE DROPDOWN TEXT -->
-
-                      <!-- SIMPLE DROPDOWN TEXT -->
-                      <p class="simple-dropdown-text">Jane Rodgers</p>
-                      <!-- /SIMPLE DROPDOWN TEXT -->
+                  <!-- USER AVATAR BADGE -->
+                  <div class="user-avatar-badge">
+                    <!-- USER AVATAR BADGE BORDER -->
+                    <div class="user-avatar-badge-border">
+                      <!-- HEXAGON -->
+                      <div class="hexagon-22-24"></div>
+                      <!-- /HEXAGON -->
                     </div>
-                    <!-- /SIMPLE DROPDOWN -->
+                    <!-- /USER AVATAR BADGE BORDER -->
+
+                    <!-- USER AVATAR BADGE CONTENT -->
+                    <div class="user-avatar-badge-content">
+                      <!-- HEXAGON -->
+                      <div class="hexagon-dark-16-18"></div>
+                      <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                    <!-- USER AVATAR BADGE TEXT -->
+                    <!-- /USER AVATAR BADGE TEXT -->
                   </div>
-                  <!-- /REACTION ITEM -->
+                  <!-- /USER AVATAR BADGE -->
                 </div>
-                <!-- /META LINE LIST -->
+                <!-- /USER AVATAR -->
+              </a>
+              <!-- /USER STATUS AVATAR -->
 
-                <!-- META LINE TEXT -->
-                <p class="meta-line-text">2</p>
-                <!-- /META LINE TEXT -->
-              </div>
+              <!-- USER STATUS TITLE -->
+              <p class="user-status-title medium"><a class="bold" href="profile-timeline.html">
+                {{object.account.fullName}}</a> thêm một <span class="bold">trạng thái mới</span></p>
+              <!-- /USER STATUS TITLE -->
+
+              <!-- USER STATUS TEXT -->
+              <p class="user-status-text small">{{object.postTime}}</p>
+              <!-- /USER STATUS TEXT -->
             </div>
-            <!-- /CONTENT ACTION -->
-
-            <!-- CONTENT ACTION -->
-            <div class="content-action">
-              <!-- META LINE -->
-              <div class="meta-line">
-                <!-- META LINE LINK -->
-                <p class="meta-line-link">3 Comments</p>
-                <!-- /META LINE LINK -->
-              </div>
-              <!-- /META LINE -->
-
-              <!-- META LINE -->
-
-              <!-- /META LINE -->
+            <!-- /USER STATUS -->
+            <div>
+              <p class="widget-box-status-text" id="myP">{{object.content}}</p>
             </div>
-            <!-- /CONTENT ACTION -->
+
+            <!-- /ThiWIDGET BOX STATUS TEXT -->
           </div>
-          <!-- /CONTENT ACTIONS -->
-        </div>
-        <!-- /WIDGET BOX STATUS CONTENT -->
-      </div>
-      <!-- /WIDGET BOX STATUS -->
-      <!-- POST OPTIONS -->
+          <!-- /WIDGET BOX STATUS CONTENT -->
 
-      <!-- POST OPTIONS -->
-      <div class="post-options">
-        <!-- POST OPTION WRAP -->
-        <div class="post-option-wrap">
+
+
+          <!-- WIDGET BOX STATUS CONTENT -->
+          <div class="widget-box-status-content">
+            <!-- CONTENT ACTIONS -->
+            <div class="content-actions">
+              <!-- CONTENT ACTION -->
+              <div class="content-action">
+                <!-- META LINE -->
+                <div class="meta-line">
+                  <!-- META LINE LIST -->
+                  <div class="meta-line-list reaction-item-list">
+                    <!-- REACTION ITEM -->
+
+                    <!-- /REACTION ITEM -->
+
+                    <!-- REACTION ITEM -->
+
+                    <!-- /REACTION ITEM -->
+
+                    <!-- REACTION ITEM -->
+                    <div class="reaction-item">
+                      <!-- REACTION IMAGE -->
+                      <img class="reaction-image reaction-item-dropdown-trigger"
+                           src="assets/img/reaction/like.png"
+                           alt="reaction-like">
+                      <!-- /REACTION IMAGE -->
+
+                      <!-- SIMPLE DROPDOWN -->
+                      <div class="simple-dropdown padded reaction-item-dropdown">
+                        <!-- SIMPLE DROPDOWN TEXT -->
+                        <p class="simple-dropdown-text"><img class="reaction"
+                                                             src="assets/img/reaction/like.png"
+                        > <span
+                          class="bold">Like</span></p>
+                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                        <!-- SIMPLE DROPDOWN TEXT -->
+                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                        <!-- SIMPLE DROPDOWN TEXT -->
+                        <!-- /SIMPLE DROPDOWN TEXT -->
+                      </div>
+                      <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /REACTION ITEM -->
+                  </div>
+                  <!-- /META LINE LIST -->
+
+                  <!-- META LINE TEXT -->
+                  <p class="meta-line-text">{{object.likeCount}}</p>
+                  <!-- /META LINE TEXT -->
+                </div>
+                <!-- /META LINE -->
+
+                <!-- /META LINE -->
+              </div>
+              <!-- /CONTENT ACTION -->
+
+              <!-- CONTENT ACTION -->
+              <div class="content-action">
+                <!-- META LINE -->
+                <div class="meta-line">
+                  <!-- META LINE LINK -->
+                  <!--                  <p class="meta-line-link">{{object.commentList}} Comments</p>-->
+                  <!-- /META LINE LINK -->
+                </div>
+                <!-- /META LINE -->
+
+                <!-- META LINE -->
+
+                <!-- /META LINE -->
+              </div>
+              <!-- /CONTENT ACTION -->
+            </div>
+            <!-- /CONTENT ACTIONS -->
+          </div>
+          <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <!-- /WIDGET BOX STATUS -->
+
+        <!-- POST OPTIONS -->
+        <div class="post-options">
+          <!-- POST OPTION WRAP -->
+          <div class="post-option-wrap">
+            <!-- POST OPTION -->
+            <div class="post-option reaction-options-dropdown-trigger">
+              <!-- POST OPTION ICON -->
+              <svg class="post-option-icon icon-thumbs-up">
+                <use xlink:href="#svg-thumbs-up"></use>
+              </svg>
+              <!-- /POST OPTION ICON -->
+
+              <!-- POST OPTION TEXT -->
+              <p class="post-option-text">Like</p>
+              <!-- /POST OPTION TEXT -->
+            </div>
+            <!-- /POST OPTION -->
+
+            <!-- REACTION OPTIONS -->
+            <!-- /REACTION OPTIONS -->
+          </div>
+          <!-- /POST OPTION WRAP -->
+
+
+
+          <!-- /POST OPTION -->
+
           <!-- POST OPTION -->
-          <div class="post-option reaction-options-dropdown-trigger">
+          <div class="post-option">
             <!-- POST OPTION ICON -->
-            <svg class="post-option-icon icon-thumbs-up">
-              <use xlink:href="#svg-thumbs-up"></use>
+            <svg class="post-option-icon icon-comment">
+              <use xlink:href="#svg-comment"></use>
             </svg>
             <!-- /POST OPTION ICON -->
 
             <!-- POST OPTION TEXT -->
-            <p class="post-option-text">Like</p>
+            <p class="post-option-text">Comment</p>
             <!-- /POST OPTION TEXT -->
           </div>
           <!-- /POST OPTION -->
-
         </div>
-        <!-- /POST OPTION WRAP -->
-
-        <!-- POST OPTION -->
-
-        <!-- /POST OPTION -->
-
-        <!-- POST OPTION -->
-        <div class="post-option">
-          <!-- POST OPTION ICON -->
-
-          <svg class="post-option-icon icon-comment">
-            <use xlink:href="#svg-comment"></use>
-          </svg>
-          <!-- /POST OPTION ICON -->
-
-          <!-- POST OPTION TEXT -->
-          <p class="post-option-text">Comment</p>
-          <!-- /POST OPTION TEXT -->
-        </div>
-        <!-- /POST OPTION -->
+        <!-- /POST OPTIONS -->
       </div>
-      <!-- /POST OPTIONS -->
-    </div>
-    <div class="grid-column">
-      <div class="widget-box">
-        <div class="widget-box-content">
-          <div class="user-status-list">
-            <!-- content -->
-            <!-- end content -->
+      <!-- /WIDGET BOX -->
 
-            <!-- content -->
 
-            <!-- end content -->
-            <!-- content -->
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-</div>
 
-<script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
-<script>
-  function getTrueFalse() {
-    let data = document.getElementById("myP").innerHTML;
-    let data1 = "<textarea id='myPO' rows='5' cols='80'>" + data + "</textarea>" +
 
-      "<div class=\"input-group mb-3\">" +
-      "<div class=\"input-group-prepend\">"+
-      "<label class=\"input-group-text\" for=\"inputGroupSelect01\">Quyền riêng tư</label>"+
-      "   </div>"+
-      "   <select class=\"custom-select\" id=\"inputGroupSelect01\">"+
-      "<option value=\"1\">Mọi người</option>"+
-      "   <option value=\"2\">Bạn bè</option>"+
-      "   <option value=\"3\">Riêng tư</option>"+
-      "   </select>"+
-      "   </div>"+
-
-      "<div class=\"quick-post\">\n" +
-      "\n" +
-      "    <div class=\"quick-post-footer\">\n" +
-      "        <!-- QUICK POST FOOTER ACTIONS -->\n" +
-      "        <div class=\"quick-post-footer-actions\">\n" +
-      "            <!-- QUICK POST FOOTER ACTION -->\n" +
-      "            <div class=\"quick-post-footer-action text-tooltip-tft-medium\" data-title=\"Insert Photo\">\n" +
-      "                <!-- QUICK POST FOOTER ACTION ICON -->\n" +
-      "                <svg class=\"quick-post-footer-action-icon icon-camera\">\n" +
-      "                    <use xlink:href=\"#svg-camera\"></use>\n" +
-      "                </svg>\n" +
-      "                <!-- /QUICK POST FOOTER ACTION ICON -->\n" +
-      "            </div>\n" +
-      "            <!-- /QUICK POST FOOTER ACTION -->\n" +
-      "\n" +
-      "            <!-- QUICK POST FOOTER ACTION -->\n" +
-      "\n" +
-      "            <!-- /QUICK POST FOOTER ACTION -->\n" +
-      "        </div>\n" +
-      "        <!-- /QUICK POST FOOTER ACTIONS -->\n" +
-      "\n" +
-      "        <!-- QUICK POST FOOTER ACTIONS -->\n" +
-      "        <div class=\"quick-post-footer-actions\">\n" +
-      "            <!-- BUTTON -->\n" +
-      "            <p class=\"button small void\">Hủy</p>\n" +
-      "            <!-- /BUTTON -->\n" +
-      "\n" +
-      "            <!-- BUTTON -->\n" +
-      "            <p class=\"button small secondary\">Lưu</p>\n" +
-      "            <!-- /BUTTON -->\n" +
-      "        </div>\n" +
-      "        <!-- /QUICK POST FOOTER ACTIONS -->\n" +
-      "    </div>\n" +
-      "    <!-- /QUICK POST FOOTER -->\n" +
-      "</div>";
-    document.getElementById("myP").innerHTML = data1;
-    CKEDITOR.replace('myPO');
-  }
-</script>
-<script>
-  function getTrueFalse1() {
-    let data = document.getElementById("myK").innerHTML;
-    let data1 = "<select>" +
-      "<option>Mọi người</option>" +
-      "<option>Bạn bè</option>" +
-      "<option>Riêng Tư</option>" +
-      "</select>" + "<br><textarea id='myPI' rows='5' cols='80'>" + data + "</textarea>" +
-      "<div class=\"quick-post\">\n" +
-      "\n" +
-      "    <div class=\"quick-post-footer\">\n" +
-      "        <!-- QUICK POST FOOTER ACTIONS -->\n" +
-      "        <div class=\"quick-post-footer-actions\">\n" +
-      "            <!-- QUICK POST FOOTER ACTION -->\n" +
-      "            <div class=\"quick-post-footer-action text-tooltip-tft-medium\" data-title=\"Insert Photo\">\n" +
-      "                <!-- QUICK POST FOOTER ACTION ICON -->\n" +
-      "                <svg class=\"quick-post-footer-action-icon icon-camera\">\n" +
-      "                    <use xlink:href=\"#svg-camera\"></use>\n" +
-      "                </svg>\n" +
-      "                <!-- /QUICK POST FOOTER ACTION ICON -->\n" +
-      "            </div>\n" +
-      "            <!-- /QUICK POST FOOTER ACTION -->\n" +
-      "\n" +
-      "            <!-- QUICK POST FOOTER ACTION -->\n" +
-      "\n" +
-      "            <!-- /QUICK POST FOOTER ACTION -->\n" +
-      "        </div>\n" +
-      "        <!-- /QUICK POST FOOTER ACTIONS -->\n" +
-      "\n" +
-      "        <!-- QUICK POST FOOTER ACTIONS -->\n" +
-      "        <div class=\"quick-post-footer-actions\">\n" +
-      "            <!-- BUTTON -->\n" +
-      "            <p class=\"button small void\">Hủy</p>\n" +
-      "            <!-- /BUTTON -->\n" +
-      "\n" +
-      "            <!-- BUTTON -->\n" +
-      "            <p class=\"button small secondary\">Lưu</p>\n" +
-      "            <!-- /BUTTON -->\n" +
-      "        </div>\n" +
-      "        <!-- /QUICK POST FOOTER ACTIONS -->\n" +
-      "    </div>\n" +
-      "    <!-- /QUICK POST FOOTER -->\n" +
-      "</div>";
-    document.getElementById("myK").innerHTML = data1;
-    CKEDITOR.replace('myPI');
-  }
-</script>
