@@ -9,6 +9,8 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
+import {AccountModule} from "./account/account.module";
+import {InformationModule} from "./information/information.module";
 import {ChatGroupModule} from "./chat-group/chat-group.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
 import {CreatePostModule} from "./create-post/create-post.module";
@@ -41,6 +43,9 @@ import {changeAvatar} from "../environments/change-avatar";
     ToastrModule.forRoot(),
     ChangePasswordModule,
     GroupManagementModule,
+    LoginModule,
+    AccountModule,
+    InformationModule,
     CreatePostModule,
     ChangeAvatarModule,
     SuggestionsModule,
@@ -54,7 +59,6 @@ import {changeAvatar} from "../environments/change-avatar";
     HomeModule,
     AccountReportManagementModule,
     AccountWallAboutModule
-
   ],
   providers: [],
   exports: [
