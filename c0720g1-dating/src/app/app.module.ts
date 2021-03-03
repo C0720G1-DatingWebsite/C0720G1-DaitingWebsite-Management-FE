@@ -15,14 +15,14 @@ import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
 import {SuggestionsModule} from "./suggestions/suggestions.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
-import {AngularFireModule} from "@angular/fire";
-import {changeAvatar} from "../environments/change-avatar";
 import {imagePost} from "../environments/image-post";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {FriendsModule} from "./friends/friends.module";
 import {HomeModule} from "./home/home.module";
 import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
+import {AngularFireModule} from "@angular/fire";
+import {changeAvatar} from "../environments/change-avatar";
 
 @NgModule({
   declarations: [
@@ -57,6 +57,9 @@ import {AccountReportManagementModule} from "./account-report-management/account
 
   ],
   providers: [],
+  exports: [
+    AppComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

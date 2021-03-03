@@ -9,7 +9,6 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {LoadResourceService} from './load-resource.service';
 import {StorageService} from "./security/storage.service";
 
 @Component({
@@ -38,4 +37,5 @@ export class AppComponent implements OnInit, DoCheck {
     let account = this.storageService.getUser();
     this.check = account == null;
   }
+
 }
