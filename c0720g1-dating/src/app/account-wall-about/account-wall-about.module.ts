@@ -5,17 +5,22 @@ import {AccountWallAboutRoutingModule} from "./account-wall-about-routing.module
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommentModule} from "./account-wall-about/comment/comment.module";
-import { CommentEditComponent } from './account-wall-about/comment-edit/comment-edit.component';
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
-  declarations: [AccountWallAboutComponent, CommentEditComponent],
+  declarations: [AccountWallAboutComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AccountWallAboutRoutingModule,
-    CommentModule
+    CommentModule,
+    InfiniteScrollModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class AccountWallAboutModule { }

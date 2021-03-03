@@ -1,56 +1,44 @@
-<div class="post-comment unread reply-2" *ngFor="let reply of iComment">
-  <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', reply.comment.account.id ,'wall']">
-    <div class="user-avatar-content">
-      <div class="hexagon-image-30-32" data-src="img/avatar/03.jpg"></div>
-    </div>
-    <div class="user-avatar-progress">
-      <div class="hexagon-progress-40-44"></div>
-    </div>
-    <div class="user-avatar-progress-border">
-      <div class="hexagon-border-40-44"></div>
-    </div>
-  </a>
-  <p class="post-comment-text"><a class="post-comment-text-author"
-                                  [routerLink]="['/account-wall/', reply.comment.account.id ,'wall']">
-    {{reply.comment.account.userName}}
-  </a>{{reply.comment.content}}</p>
-  <div class="content-actions">
-    <div class="content-action">
-      <div class="meta-line">
-
-        <p class="meta-line-link light">Thích</p>
-
-      </div>
-      <div class="meta-line">
-
-        <p class="meta-line-link light">Trả lời</p>
-
-      </div>
-      <div class="meta-line">
-        <!-- META LINE TIMESTAMP -->
-        <p class="meta-line-timestamp">{{reply.comment.dateComment}}</p>
-        <!-- /META LINE TIMESTAMP -->
-      </div>
-      <div class="meta-line settings">
-        <!-- POST SETTINGS WRAP -->
-        <div class="post-settings-wrap">
-          <!-- POST SETTINGS -->
-          <div class="post-settings post-settings-dropdown-trigger">
-            <svg class="post-settings-icon icon-more-dots">
-              <use xlink:href="#svg-more-dots"></use>
-            </svg>
+<div class="post-comment-list">
+  <div class="post-comment unread reply-2" *ngFor="let reply of iComment">
+    <div>
+      <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', reply.account.id ,'wall']">
+        <div class="user-avatar-content">
+          <div class="hexagon-image-30-32" [attr.data-src]="reply.account.avatar"></div>
+        </div>
+        <div class="user-avatar-progress">
+          <div class="hexagon-progress-40-44"></div>
+        </div>
+        <div class="user-avatar-progress-border">
+          <div class="hexagon-border-40-44"></div>
+        </div>
+      </a>
+      <p class="post-comment-text"><a class="post-comment-text-author"
+                                      [routerLink]="['/account-wall/', reply.account.id ,'wall']">
+        {{reply.account.fullName}}</a>{{reply.content}}</p>
+      <div class="content-actions">
+        <div class="content-action">
+          <div class="meta-line">
+            <p class="meta-line-link light">Thích</p>
           </div>
-          <div class="simple-dropdown post-settings-dropdown">
-            <!-- SIMPLE DROPDOWN LINK -->
-            <p class="simple-dropdown-link">Báo cáo vi phạm</p>
-            <p class="simple-dropdown-link">Chỉnh sửa</p>
-            <p class="simple-dropdown-link" data-toggle="modal" data-target="#exampleModalCenter">Xóa</p>
+          <div class="meta-line">
+            <p class="meta-line-link light" (click)="getIdReply(reply)">Trả lời</p>
+          </div>
+          <div class="meta-line">
+            <p class="meta-line-timestamp">{{reply.dateComment|date:'dd/MM/yyyy - HH:mm:ss'}}</p>
           </div>
         </div>
       </div>
-
+      <div *ngIf="flagReplyReply && idReply == reply.id">
+        <form [formGroup]="formGroup">
+          <div class="form-group">
+            <textarea formControlName="content" required></textarea>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="exitReply()">Hủy</button>
+          <button type="submit" class="btn btn-primary" (click)="submitForReply()">Lưu</button>
+        </form>
+      </div>
     </div>
 
   </div>
-
 </div>
+

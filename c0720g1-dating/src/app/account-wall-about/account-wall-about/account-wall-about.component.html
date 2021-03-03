@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -34,516 +35,557 @@
 
             <div class="hexagon-148-164"></div>
 
+<div>
+  <div class="content-grid"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="200"
+       (scrolled)="onScroll()">
+    <!-- PROFILE HEADER -->
+    <div class="profile-header">
+      <!-- PROFILE HEADER COVER -->
+      <figure class="profile-header-cover liquid">
+        <img src="assets/img/cover/01.jpg" alt="cover-01">
+      </figure>
+      <div class="profile-header-info">
+        <!-- USER SHORT DESCRIPTION -->
+        <div class="user-short-description big">
+          <!-- USER SHORT DESCRIPTION AVATAR -->
+          <a class="user-short-description-avatar user-avatar big"
+             [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+            <!-- USER AVATAR BORDER -->
+            <div class="user-avatar-border">
+
+              <div class="hexagon-148-164"></div>
+
+
+            </div>
+            <!-- /USER AVATAR BORDER -->
+            <div class="user-avatar-content">
+
+              <div class="hexagon-image-100-110" [attr.data-src]="iAccount.avatar"></div>
+
+            </div>
+
+            <div class="user-avatar-progress">
+
+              <div class="hexagon-progress-124-136"></div>
+
+            </div>
+
+            <div class="user-avatar-progress-border">
+
+              <div class="hexagon-border-124-136"></div>
+
+            </div>
+          </a>
+          <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium"
+             [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+            <!-- USER AVATAR BORDER -->
+            <div class="user-avatar-border">
+
+              <div class="hexagon-120-132"></div>
+
+            </div>
+            <!-- /USER AVATAR BORDER -->
+            <div class="user-avatar-content">
+
+              <div class="hexagon-image-82-90" data-src=""></div>
+
+            </div>
+
+            <div class="user-avatar-progress">
+
+              <div class="hexagon-progress-100-110"></div>
+
+            </div>
+
+            <div class="user-avatar-progress-border">
+
+              <div class="hexagon-border-100-110"></div>
+
+            </div>
+          </a>
+          <p class="user-short-description-title"><a
+            [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{iAccount.fullName}}</a></p>
+        </div>
+        <div *ngIf="iAccount.id == account.id; else checkUser">
+
+        </div>
+        <ng-template #checkUser>
+          <div class="profile-header-social-links-wrap">
+            <div class="section-menu">
+              <a class="section-menu-item" href="#">
+                <img src="assets/img/Warning.svg" style="width: 20%">
+                <p class="section-menu-item-text">Báo cáo vi phạm</p></a>
+            </div>
           </div>
-          <!-- /USER AVATAR BORDER -->
-          <div class="user-avatar-content">
+        </ng-template>
 
-            <div class="hexagon-image-100-110" [id]="iAccount.userName"></div>
-
+        <div class="user-stats">
+          <div class="user-stat big"><p class="user-stat-title">{{iPosts.length}}</p>
+            <p class="user-stat-text">Bài đăng</p></div>
+          <div class="user-stat big">
+            <img class="user-stat-image" src="assets/img/flag/vietnamese.png" alt="flag-usa">
+            <p class="user-stat-text">{{iAccount.country.name}}</p></div>
+        </div>
+        <div *ngIf="iAccount.id == account.id; else checkPersonalPage">
+        </div>
+        <ng-template #checkPersonalPage>
+          <div *ngFor="let friends of iFriends">
+            <div *ngIf="iAccount.id != friends.friend.id || friends.friend == null ; else checkFriends">
+              <div class="profile-header-info-actions">
+                <button class="profile-header-info-action button secondary">Thêm Bạn +</button>
+                <button class="profile-header-info-action button primary">Gửi Tin Nhắn</button>
+              </div>
+            </div>
+            <ng-template #checkFriends>
+              <div class="profile-header-info-actions">
+                <button class="profile-header-info-action button primary">Gửi Tin Nhắn</button>
+              </div>
+            </ng-template>
           </div>
 
-          <div class="user-avatar-progress">
-
-            <div class="hexagon-progress-124-136"></div>
-
-          </div>
-
-          <div class="user-avatar-progress-border">
-
-            <div class="hexagon-border-124-136"></div>
-
-          </div>
-        </a>
-        <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium"
-           [routerLink]="['/account-wall/', iAccount.id ,'wall']">
-          <!-- USER AVATAR BORDER -->
-          <div class="user-avatar-border">
-
-            <div class="hexagon-120-132"></div>
-
-          </div>
-          <!-- /USER AVATAR BORDER -->
-          <div class="user-avatar-content">
-
-            <div class="hexagon-image-82-90" data-src=""></div>
-
-          </div>
-
-          <div class="user-avatar-progress">
-
-            <div class="hexagon-progress-100-110"></div>
-
-          </div>
-
-          <div class="user-avatar-progress-border">
-
-            <div class="hexagon-border-100-110"></div>
-
-          </div>
-        </a>
-        <p class="user-short-description-title"><a
-          [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{iAccount.fullName}}</a></p>
+        </ng-template>
       </div>
-      <div class="profile-header-social-links-wrap">
-        <div class="section-menu">
-          <a class="section-menu-item" href="#">
-            <img src="assets/img/Warning.svg" style="width: 20%">
-            <p class="section-menu-item-text">Báo cáo vi phạm</p></a>
+    </div>
+    <nav class="section-navigation">
+      <div id="section-navigation-slider" class="section-menu">
+        <a class="section-menu-item active" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+          <svg class="section-menu-item-icon icon-timeline">
+            <use xlink:href="#svg-timeline"></use>
+          </svg>
+          <p class="section-menu-item-text">Dòng thời gian</p></a>
+        <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'about']">
+          <svg class="section-menu-item-icon icon-friend">
+            <use xlink:href="#svg-friend"></use>
+          </svg>
+          <p class="section-menu-item-text">Danh sách bạn</p></a>
+        <a class="section-menu-item" href="profile-groups.html">
+          <svg class="section-menu-item-icon icon-group">
+            <use xlink:href="#svg-group"></use>
+          </svg>
+          <p class="section-menu-item-text">Nhóm</p></a>
+        <a class="section-menu-item" href="profile-photos.html">
+          <svg class="section-menu-item-icon icon-photos">
+            <use xlink:href="#svg-photos"></use>
+          </svg>
+          <p class="section-menu-item-text">Hình Ảnh</p></a>
+        <!-- /SECTION MENU ITEM -->
+      </div>
+      <!-- /SECTION MENU --><!-- SLIDER CONTROLS -->
+      <div id="section-navigation-slider-controls" class="slider-controls">
+        <!-- SLIDER CONTROL -->
+        <div class="slider-control left">
+          <!-- SLIDER CONTROL ICON -->
+          <svg class="slider-control-icon icon-small-arrow">
+            <use xlink:href="#svg-small-arrow"></use>
+          </svg>
+          <!-- /SLIDER CONTROL ICON -->
+        </div>
+        <!-- /SLIDER CONTROL --><!-- SLIDER CONTROL -->
+        <div class="slider-control right">
+          <!-- SLIDER CONTROL ICON -->
+          <svg class="slider-control-icon icon-small-arrow">
+            <use xlink:href="#svg-small-arrow"></use>
+          </svg>
+          <!-- /SLIDER CONTROL ICON -->
+        </div>
+        <!-- /SLIDER CONTROL -->
+      </div>
+      <!-- /SLIDER CONTROLS -->
+    </nav>
+    <!-- /SECTION NAVIGATION --><!-- GRID -->
+    <div class="grid grid-3-6-3 mobile-prefer-content">
+      <!-- GRID COLUMN -->
+      <div class="grid-column">
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+          <p class="widget-box-title">Thông tin của: </p>
+          <p class="widget-box-title">{{iAccount.fullName}}</p>
+          <!-- /WIDGET BOX TITLE --><!-- WIDGET BOX CONTENT -->
+          <div class="widget-box-content">
+            <!-- PARAGRAPH -->
+            <p class="paragraph">{{iAccount.accountDescribe}}</p>
+            <!-- /PARAGRAPH --><!-- INFORMATION LINE LIST -->
+            <div class="information-line-list">
+              <!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Tham gia</p>
+                <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.dateRegister | date: 'dd/MM/yyyy'}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Thành Phố</p>
+                <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.city.name}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Quốc tịch</p>
+                <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.country.name}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Tuổi</p>
+                <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{getAge(iAccount.dateOfBirth |date: 'dd/MM/yyyy')}} tuổi</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+            </div>
+          </div>
         </div>
 
-      </div>
+        <div class="widget-box">
+          <p class="widget-box-title">Friends <span class="highlighted">{{iFriends.length}}</span></p>
 
-      <div class="user-stats">
-        <div class="user-stat big"><p class="user-stat-title">{{iPosts.length}}</p>
-          <p class="user-stat-text">Bài đăng</p></div>
-        <div class="user-stat big">
-          <img class="user-stat-image" src="assets/img/flag/vietnamese.png" alt="flag-usa">
-          <p class="user-stat-text">{{iAccount.country.name}}</p></div>
-      </div>
-      <div class="profile-header-info-actions">
-        <p class="profile-header-info-action button secondary"><span class="hide-text-mobile">Thêm Bạn +</span>
-        </p>
-        <p class="profile-header-info-action button primary"><span class="hide-text-mobile">Gửi Tin Nhắn</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <nav class="section-navigation">
-    <div id="section-navigation-slider" class="section-menu">
-      <a class="section-menu-item active" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
-        <svg class="section-menu-item-icon icon-timeline">
-          <use xlink:href="#svg-timeline"></use>
-        </svg>
-        <p class="section-menu-item-text">Dòng thời gian</p></a>
-      <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'about']">
-        <svg class="section-menu-item-icon icon-friend">
-          <use xlink:href="#svg-friend"></use>
-        </svg>
-        <p class="section-menu-item-text">Danh sách bạn</p></a>
-      <a class="section-menu-item" href="profile-groups.html">
-        <svg class="section-menu-item-icon icon-group">
-          <use xlink:href="#svg-group"></use>
-        </svg>
-        <p class="section-menu-item-text">Nhóm</p></a>
-      <a class="section-menu-item" href="profile-photos.html">
-        <svg class="section-menu-item-icon icon-photos">
-          <use xlink:href="#svg-photos"></use>
-        </svg>
-        <p class="section-menu-item-text">Hình Ảnh</p></a>
-      <!-- /SECTION MENU ITEM -->
-    </div>
-    <!-- /SECTION MENU --><!-- SLIDER CONTROLS -->
-    <div id="section-navigation-slider-controls" class="slider-controls">
-      <!-- SLIDER CONTROL -->
-      <div class="slider-control left">
-        <!-- SLIDER CONTROL ICON -->
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-        <!-- /SLIDER CONTROL ICON -->
-      </div>
-      <!-- /SLIDER CONTROL --><!-- SLIDER CONTROL -->
-      <div class="slider-control right">
-        <!-- SLIDER CONTROL ICON -->
-        <svg class="slider-control-icon icon-small-arrow">
-          <use xlink:href="#svg-small-arrow"></use>
-        </svg>
-        <!-- /SLIDER CONTROL ICON -->
-      </div>
-      <!-- /SLIDER CONTROL -->
-    </div>
-    <!-- /SLIDER CONTROLS -->
-  </nav>
-  <!-- /SECTION NAVIGATION --><!-- GRID -->
-  <div class="grid grid-3-6-3 mobile-prefer-content">
-    <!-- GRID COLUMN -->
-    <div class="grid-column">
-      <!-- WIDGET BOX -->
-      <div class="widget-box">
-        <p class="widget-box-title">Thông tin của {{iAccount.fullName}}</p>
-        <!-- /WIDGET BOX TITLE --><!-- WIDGET BOX CONTENT -->
-        <div class="widget-box-content">
-          <!-- PARAGRAPH -->
-          <p class="paragraph">{{iAccount.accountDescribe}}</p>
-          <!-- /PARAGRAPH --><!-- INFORMATION LINE LIST -->
-          <div class="information-line-list">
-            <!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Tham gia</p>
-              <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.dateRegister | date: 'dd/MM/yyyy'}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Thành Phố</p>
-              <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.city.name}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Quốc tịch</p>
-              <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.country.name}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE --><!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Tuổi</p>
-              <!-- /INFORMATION LINE TITLE --><!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{getAge(iAccount.dateOfBirth)}} tuổi</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-          </div>
-        </div>
-      </div>
+          <div class="widget-box-content">
+            <!-- USER STATUS LIST -->
+            <div class="user-status-list">
+              <div class="user-status request-small" *ngFor="let friends of iFriends">
 
-      <div class="widget-box">
-        <p class="widget-box-title">Friends <span class="highlighted">{{iFriends.length}}</span></p>
+                <a class="user-status-avatar" (click)="getLinkAccount(friends.friend.id)"
+                   [routerLink]="['/account-wall/', friends.friend.id ,'wall']">
 
-        <div class="widget-box-content">
-          <!-- USER STATUS LIST -->
-          <div class="user-status-list">
-            <div class="user-status request-small" *ngFor="let friends of iFriends, let i = index">
+                  <div class="user-avatar small no-outline">
 
-              <a class="user-status-avatar"  (click)="abc(friends.friend.id)" [routerLink]="['/account-wall/', friends.friend.id ,'wall']">
+                    <div class="user-avatar-content">
 
-                <div class="user-avatar small no-outline">
+                      <div class="hexagon-image-30-32" [attr.data-src]="friends.friend.avatar"></div>
 
-                  <div class="user-avatar-content">
+                    </div>
 
-                    <div class="hexagon-image-30-32" [id]="iAccount.userName + i"></div>
+                    <div class="user-avatar-progress">
 
-                  </div>
+                      <div class="hexagon-progress-40-44"></div>
 
-                  <div class="user-avatar-progress">
+                    </div>
 
-                    <div class="hexagon-progress-40-44"></div>
+                    <div class="user-avatar-progress-border">
 
-                  </div>
+                      <div class="hexagon-border-40-44"></div>
 
-                  <div class="user-avatar-progress-border">
-
-                    <div class="hexagon-border-40-44"></div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-              <p class="user-status-title"><a class="bold" >{{friends.friend.fullName}}</a>
-              </p>
-            </div>
-
-          </div>
-          <!-- /USER STATUS LIST -->
-        </div>
-        <!-- WIDGET BOX CONTENT --><!-- WIDGET BOX BUTTON -->
-        <a class="widget-box-button button small secondary" href="profile-friends.html">Danh sách bạn bè</a>
-        <!-- /WIDGET BOX BUTTON -->
-      </div>
-      <!-- /WIDGET BOX -->
-    </div>
-
-    <div class="grid-column">
-      <!-- WIDGET BOX -->
-
-      <div class="widget-box no-padding" *ngFor=" let posts of iPosts, let i = index">
-        <div class="widget-box-status">
-          <div class="widget-box-status-content">
-            <div class="user-status">
-              <a class="user-status-avatar" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
-                <div class="user-avatar small no-outline">
-                  <div class="user-avatar-content">
-                    <div class="hexagon-image-30-32" [attr.data-src]="iAccount.avatar"></div>
-<!--                    <div class="hexagon-image-30-32" [id]="iAccount.userName + i"></div>-->
-                  </div>
-                  <div class="user-avatar-progress">
-                    <div class="hexagon-progress-40-44"></div>
-                  </div>
-                  <div class="user-avatar-progress-border">
-                    <div class="hexagon-border-40-44"></div>
-                  </div>
-                </div>
-              </a>
-              <p class="user-status-title medium">
-                <a class="bold" [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{posts.account.fullName}}</a>
-              </p>
-              <p class="user-status-text small">{{posts.postTime}}</p>
-            </div>
-            <p class="widget-box-status-text">{{posts.content}}</p>
-            <div class="content-actions">
-              <div class="content-action">
-                <div class="meta-line"></div>
-                <div class="meta-line">
-
-                  <div class="meta-line-list reaction-item-list">
-
-                    <div class="reaction-item">
-
-                      <img class="reaction-image reaction-item-dropdown-trigger"
-                           src="assets/img/reaction/like.png" alt="reaction-like">
                     </div>
 
                   </div>
 
-                  <p class="meta-line-text">{{posts.likeCount}} like</p>
+                </a>
 
-                </div>
+                <p class="user-status-title"><a class="bold">{{friends.friend.fullName}}</a>
+                </p>
               </div>
-              <div class="content-action">
-                <div class="meta-line">
 
-                  <p class="meta-line-link">8 Bình luận</p>
+            </div>
+            <!-- /USER STATUS LIST -->
+          </div>
+          <!-- WIDGET BOX CONTENT --><!-- WIDGET BOX BUTTON -->
+          <a class="widget-box-button button small secondary" href="profile-friends.html">Danh sách bạn bè</a>
+          <!-- /WIDGET BOX BUTTON -->
+        </div>
+        <!-- /WIDGET BOX -->
+      </div>
 
+      <div class="grid-column">
+        <!-- WIDGET BOX -->
+
+        <div class="widget-box no-padding" *ngFor=" let posts of iPosts">
+          <div class="widget-box-status">
+            <div class="widget-box-status-content">
+              <div class="user-status">
+                <a class="user-status-avatar" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+                  <div class="user-avatar small no-outline">
+                    <div class="user-avatar-content">
+                      <div class="hexagon-image-30-32" [attr.data-src]="iAccount.avatar"></div>
+                    </div>
+                    <div class="user-avatar-progress">
+                      <div class="hexagon-progress-40-44"></div>
+                    </div>
+                    <div class="user-avatar-progress-border">
+                      <div class="hexagon-border-40-44"></div>
+                    </div>
+                  </div>
+                </a>
+                <p class="user-status-title medium">
+                  <a class="bold"
+                     [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{posts.account.fullName}}</a>
+                </p>
+                <p class="user-status-text small">{{posts.postTime |date:'dd/MM/yyyy - HH:mm:ss'}}</p>
+              </div>
+              <p class="widget-box-status-text">{{posts.content}}</p>
+              <div class="content-actions">
+                <div class="content-action">
+                  <div class="meta-line"></div>
+                  <div class="meta-line">
+
+                    <div class="meta-line-list reaction-item-list">
+
+                      <div class="reaction-item">
+
+                        <img class="reaction-image reaction-item-dropdown-trigger"
+                             src="assets/img/reaction/like.png" alt="reaction-like">
+                      </div>
+
+                    </div>
+
+                    <p class="meta-line-text">{{posts.likeCount}} like</p>
+
+                  </div>
                 </div>
-                <div class="meta-line"></div>
+                <div class="content-action">
+                  <div class="meta-line">
+                    <p class="meta-line-link">8 Bình luận</p>
+                  </div>
+                  <div class="meta-line"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /WIDGET BOX STATUS --><!-- POST OPTIONS -->
-        <div class="post-options">
-          <!-- POST OPTION WRAP -->
-          <div class="post-option-wrap">
-            <!-- POST OPTION -->
-            <div class="post-option reaction-options-dropdown-trigger">
-              <svg class="post-option-icon icon-thumbs-up">
-                <use xlink:href="#svg-thumbs-up"></use>
+          <!-- /WIDGET BOX STATUS --><!-- POST OPTIONS -->
+          <div class="post-options">
+            <!-- POST OPTION WRAP -->
+            <div class="post-option-wrap">
+              <!-- POST OPTION -->
+              <div class="post-option reaction-options-dropdown-trigger">
+                <svg class="post-option-icon icon-thumbs-up">
+                  <use xlink:href="#svg-thumbs-up"></use>
+                </svg>
+                <p class="post-option-text">Thích!</p>
+              </div>
+            </div>
+
+            <div class="post-option">
+              <svg class="post-option-icon icon-comment">
+                <use xlink:href="#svg-comment"></use>
               </svg>
-              <p class="post-option-text">Thích!</p>
+              <p class="post-option-text">Bình luận</p>
             </div>
           </div>
+          <div class="post-comment-list">
+            <app-comment-list [idPost]="posts.id"
+                              (onDeleteComment)="getIdCommentDelete($event)">
 
-          <div class="post-option">
-            <svg class="post-option-icon icon-comment">
-              <use xlink:href="#svg-comment"></use>
-            </svg>
-            <p class="post-option-text">Bình luận</p>
-          </div>
-        </div>
-        <div class="post-comment-list">
-          <p class="post-comment-heading"
-             (click)="showComment.show = !showComment.show; showComment.current = false; showComment.next = false">Xem
-            bình luận
-          </p>
-          <div *ngIf="showComment.show">
-            <app-comment-list [idPost]="posts.id"></app-comment-list>
-          </div>
-          <!-- POST COMMENT FORM -->
-          <div class="post-comment-form">
-
-            <div class="user-avatar small no-outline">
-
-              <div class="user-avatar-content">
-                <div class="hexagon-image-30-32" data-src="assets/img/avatar/01.jpg"></div>
+            </app-comment-list>
+            <div class="post-comment-form">
+              <div class="user-avatar small no-outline">
+                <div class="user-avatar-content">
+                  <div class="hexagon-image-30-32" [attr.data-src]="account.avatar"></div>
+                </div>
+                <div class="user-avatar-progress">
+                  <div class="hexagon-progress-40-44"></div>
+                </div>
+                <div class="user-avatar-progress-border">
+                  <div class="hexagon-border-40-44"></div>
+                </div>
               </div>
-              <div class="user-avatar-progress">
-                <div class="hexagon-progress-40-44"></div>
-              </div>
-              <div class="user-avatar-progress-border">
-                <div class="hexagon-border-40-44"></div>
-              </div>
-            </div>
-
-            <form class="form" [formGroup]="formGroup" (ngSubmit)="submitForm()" novalidate>
-<!--               FORM ROW-->
-              <div class="form-row split">
-                <!-- FORM ITEM -->
-                <div class="form-item">
-                  <!-- FORM INPUT -->
-                  <div class="form-input small">
-                    <input type="hidden" formControlName="postId" class="form-control">
-                    <input type="text" class="form-control" (click)="getIdPost(posts.id)" formControlName="content"
-                           placeholder="Viết bình luận">
+              <form class="form" [formGroup]="formGroup" (ngSubmit)="submitFormCreate()">
+                <div class="form-row split">
+                  <div class="form-item">
+                    <div class="form-input small">
+                      <input type="hidden" formControlName="postId" class="form-control">
+                      <input type="text" class="form-control" (click)="getIdPost(posts.id)" formControlName="content"
+                             placeholder="Viết bình luận" required>
+                    </div>
                   </div>
-                  <!-- /FORM INPUT -->
+                  <div class="form-item auto-width">
+                    <button type="submit" class="button primary padded" [disabled]="formGroup.invalid">
+                      <svg class="button-icon no-space icon-send-message">
+                        <use xlink:href="#svg-send-message"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="form-item auto-width">
+                    <button class="button info padded" type="reset">
+                      <svg class="interactive-input-action-icon icon-cross-thin">
+                        <use xlink:href="#svg-cross-thin"></use>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <div class="form-item auto-width">
-                  <!-- BUTTON -->
-                  <button type="submit" class="button primary padded">
-                    <!-- BUTTON ICON -->
-                    <svg class="button-icon no-space icon-send-message">
-                      <use xlink:href="#svg-send-message"></use>
-                    </svg>
-                    <!-- /BUTTON ICON -->
-                  </button>
-                  <!-- /BUTTON -->
-                </div>
-                <div class="form-item auto-width">
-                  <!-- BUTTON -->
-                  <button class="button info padded" type="reset">
-                    <!-- BUTTON ICON -->
-                    <svg class="interactive-input-action-icon icon-cross-thin">
-                      <use xlink:href="#svg-cross-thin"></use>
-                    </svg>
-                    <!-- /BUTTON ICON -->
-                  </button>
-                  <!-- /BUTTON -->
-                </div>
-                <!-- /FORM ITEM -->
-              </div>
-              <!-- /FORM ROW -->
-            </form>
-            <!-- /FORM -->
+              </form>
+            </div>
           </div>
-          <!-- /POST COMMENT FORM -->
         </div>
-      </div>
-      <p class="post-comment-heading">Xem thêm trạng thái <span class="highlighted">9+</span></p>
-      <div class="loader-bars">
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-        <div class="loader-bar"></div>
-      </div>
-
-    </div>
-    <div class="grid-column">
-      <div class="widget-box">
-
-        <div class="widget-box-settings">
-        </div>
-        <p class="widget-box-title">Thông tin chi tiết</p>
-        <!-- /WIDGET BOX TITLE -->
-
-        <!-- WIDGET BOX CONTENT -->
-        <div class="widget-box-content">
-          <!-- INFORMATION LINE LIST -->
-          <div class="information-line-list">
-            <!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Email</p>
-              <!-- /INFORMATION LINE TITLE -->
-
-              <!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.userName}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE -->
-
-            <!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Ngày sinh</p>
-              <!-- /INFORMATION LINE TITLE -->
-
-              <!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.dateOfBirth |date: 'dd/MM/yyyy'}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE -->
-
-            <!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Nghề nghiệp</p>
-              <!-- /INFORMATION LINE TITLE -->
-
-              <!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.job.name}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <!-- /INFORMATION LINE -->
-
-            <!-- INFORMATION LINE -->
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Mối quan hệ</p>
-              <!-- /INFORMATION LINE TITLE -->
-
-              <!-- INFORMATION LINE TEXT -->
-              <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>
-              <!-- /INFORMATION LINE TEXT -->
-            </div>
-            <div class="information-line">
-              <!-- INFORMATION LINE TITLE -->
-              <p class="information-line-title">Giới tính</p>
-              <div *ngIf="iAccount.gender; else noGender">
-                <p class="information-line-text">Nam</p>
-              </div>
-              <ng-template #noGender><p class="information-line-text">Nữ</p></ng-template>
-            </div>
-
-<!--            <div class="information-line">-->
-<!--              &lt;!&ndash; INFORMATION LINE TITLE &ndash;&gt;-->
-<!--              <p class="information-line-title">Mối quan hệ</p>-->
-<!--              &lt;!&ndash; /INFORMATION LINE TITLE &ndash;&gt;-->
-
-<!--              &lt;!&ndash; INFORMATION LINE TEXT &ndash;&gt;-->
-<!--              <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>-->
-<!--              &lt;!&ndash; /INFORMATION LINE TEXT &ndash;&gt;-->
-<!--            </div>-->
-
+        <div *ngIf="iPosts.length == 0 ; else checkPost">
+          <p class="post-comment-heading">Xem thêm trạng thái</p>
+          <div class="loader-bars">
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
+            <div class="loader-bar"></div>
           </div>
-          <!-- /INFORMATION LINE LIST -->
         </div>
-        <!-- /WIDGET BOX CONTENT -->
+        <ng-template #checkPost>
+          <p class="post-comment-heading">Bạn đã đến cuối trang</p>
+        </ng-template>
       </div>
-      <div class="widget-box">
-        <p class="widget-box-title">Nhóm <span class="highlighted">{{iAccountGroups.length}}</span></p>
+      <div class="grid-column">
+        <div class="widget-box">
 
-        <div class="widget-box-content">
-          <div class="user-status-list" *ngFor="let groups of iAccountGroups">
+          <div class="widget-box-settings">
+          </div>
+          <p class="widget-box-title">Thông tin chi tiết</p>
+          <!-- /WIDGET BOX TITLE -->
 
-            <div class="user-status request-small">
+          <!-- WIDGET BOX CONTENT -->
+          <div class="widget-box-content">
+            <!-- INFORMATION LINE LIST -->
+            <div class="information-line-list">
+              <!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Email</p>
+                <!-- /INFORMATION LINE TITLE -->
 
-              <a class="user-status-avatar" href="group-timeline.html">
+                <!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.userName}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE -->
 
-                <div class="user-avatar small no-border">
+              <!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Ngày sinh</p>
+                <!-- /INFORMATION LINE TITLE -->
 
-                  <div class="user-avatar-content">
+                <!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.dateOfBirth |date: 'dd/MM/yyyy'}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE -->
 
-                    <div class="hexagon-image-40-44" [attr.data-src]="groups.userGroup.avatar"></div>
+              <!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Nghề nghiệp</p>
+                <!-- /INFORMATION LINE TITLE -->
+
+                <!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.job.name}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <!-- /INFORMATION LINE -->
+
+              <!-- INFORMATION LINE -->
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Mối quan hệ</p>
+                <!-- /INFORMATION LINE TITLE -->
+
+                <!-- INFORMATION LINE TEXT -->
+                <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>
+                <!-- /INFORMATION LINE TEXT -->
+              </div>
+              <div class="information-line">
+                <!-- INFORMATION LINE TITLE -->
+                <p class="information-line-title">Giới tính</p>
+                <div *ngIf="iAccount.gender; else noGender">
+                  <p class="information-line-text">Nam</p>
+                </div>
+                <ng-template #noGender><p class="information-line-text">Nữ</p></ng-template>
+              </div>
+
+              <!--            <div class="information-line">-->
+              <!--              &lt;!&ndash; INFORMATION LINE TITLE &ndash;&gt;-->
+              <!--              <p class="information-line-title">Mối quan hệ</p>-->
+              <!--              &lt;!&ndash; /INFORMATION LINE TITLE &ndash;&gt;-->
+
+              <!--              &lt;!&ndash; INFORMATION LINE TEXT &ndash;&gt;-->
+              <!--              <p class="information-line-text">{{iAccount.maritalStatus.name}}</p>-->
+              <!--              &lt;!&ndash; /INFORMATION LINE TEXT &ndash;&gt;-->
+              <!--            </div>-->
+
+            </div>
+            <!-- /INFORMATION LINE LIST -->
+          </div>
+          <!-- /WIDGET BOX CONTENT -->
+        </div>
+        <div class="widget-box">
+          <p class="widget-box-title">Nhóm <span class="highlighted">{{iAccountGroups.length}}</span></p>
+
+          <div class="widget-box-content">
+            <div class="user-status-list" *ngFor="let groups of iAccountGroups">
+
+              <div class="user-status request-small">
+
+                <a class="user-status-avatar" href="group-timeline.html">
+
+                  <div class="user-avatar small no-border">
+
+                    <div class="user-avatar-content">
+
+                      <div class="hexagon-image-40-44" [attr.data-src]="groups.userGroup.avatar"></div>
+
+                    </div>
 
                   </div>
 
-                </div>
+                </a>
 
-              </a>
+                <p class="user-status-title"><a class="bold" href="group-timeline.html">{{groups.userGroup.name}}</a>
+                </p>
+              </div>
 
-              <p class="user-status-title"><a class="bold" href="group-timeline.html">{{groups.userGroup.name}}</a></p>
             </div>
-
+            <!-- /USER STATUS LIST -->
           </div>
-          <!-- /USER STATUS LIST -->
+          <!-- WIDGET BOX CONTENT -->
         </div>
-        <!-- WIDGET BOX CONTENT -->
       </div>
     </div>
   </div>
 </div>
-
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Xóa bình luận</h5>
+        <h5 class="modal-title" id="deleteModalLongTitle">Xóa bình luận</h5>
       </div>
       <div class="modal-body" style="text-align: center">
-        Bạn có chắc chắn phải xóa bình luận này không.
-        Bình luận với nội dung : (Nội dung bình luận bị cắt bớt)..... sẽ bị xóa. Không thể hoàn tác công việc trên
+        - Bạn có chắc chắn phải xóa bình luận này không.
+        - Không thể hoàn tác công việc này
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Đồng ý</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="getDeleteCommentById(idComment)">Đồng ý
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-
-
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLongTitle">Chỉnh sửa bình luận</h5>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <form>
+          <div class="form-group">
+            <textarea class="form-control" formControlName="content" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-danger" data-dismiss="modal">Đồng ý</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>

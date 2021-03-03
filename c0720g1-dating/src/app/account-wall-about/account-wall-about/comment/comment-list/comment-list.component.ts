@@ -1,39 +1,123 @@
-import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IComment} from "../../../../entity/comment";
 import {CommentService} from "../comment.service";
-import {IAccount} from "../../../../entity/account";
-import {IPost} from "../../../../entity/post";
 import {LoadResourceService} from "../../../../load-resource.service";
+import {StorageService} from "../../../../security/storage.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
+import {MessageManager} from "../../../message-manager";
 
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.scss']
 })
-export class CommentListComponent implements OnInit{
+export class CommentListComponent implements OnInit {
 
-  page: number;
+  page: number = 0;
+  size: number = 1;
   id: number;
+  idComment: number;
   iComments: IComment[];
-  iAccount: IAccount;
+  account;
+  flagEdit = false;
+  flagReply = false;
+  idCommentEdit: number;
+  formGroup: FormGroup;
 
-  @Input()
-  idPost: number;
+
+  @Input() idPost: number;
+
+  @Output() onDeleteComment = new EventEmitter();
 
   constructor(private commentService: CommentService,
-              private loadResourceService: LoadResourceService) {
+              private storageService: StorageService,
+              private loadResourceService: LoadResourceService,
+              public formBuilder: FormBuilder, public toastrService: ToastrService,
+              public messageManager:MessageManager) {
     this.loadScript();
   }
 
   ngOnInit(): void {
-    this.getAllListCommentInPost();
+    this.getAllListCommentSizeInPost();
+    this.account = this.storageService.getUser();
   }
 
-  getAllListCommentInPost() {
-    this.commentService.getAllComment(this.idPost, this.page).subscribe(data =>{
+  getAllListCommentSizeInPost() {
+    this.commentService.getAllCommentSize(this.idPost, this.page, this.size).subscribe(data => {
       this.iComments = data.content;
-      console.log(data.content);
     });
+  }
+
+  onClickShowComment() {
+    this.size = this.size + 2;
+    this.getAllListCommentSizeInPost();
+    this.ngOnInit();
+  }
+
+  onClickHideComment() {
+    this.size = 1;
+    this.getAllListCommentSizeInPost();
+    this.ngOnInit();
+  }
+
+  getCommentDeleteById(idComment: number) {
+    this.onDeleteComment.emit(idComment);
+  }
+
+  getEditComments(comments: IComment) {
+    this.flagEdit = true;
+    this.idCommentEdit = comments.id;
+    this.formGroup = this.formBuilder.group({
+      id: [comments.id],
+      content: [comments.content]
+    })
+  }
+
+  getIdComment(comments: IComment) {
+    this.flagReply = true;
+    this.idComment = comments.id;
+    this.formGroup = this.formBuilder.group({
+      content: ['', [Validators.required]],
+      accountId: [this.account.id],
+      commentId: [this.idComment]
+    })
+  }
+
+  submitForReply() {
+    if (this.formGroup.invalid) {
+      this.messageManager.showMessageCreateNotRole();
+      return;
+    } else {
+      this.commentService.saveReply(this.formGroup.value).subscribe(data => {
+        this.flagReply = false;
+        this.ngOnInit();
+        this.toastrService.success('Đăng trả lời bình luận thành công!', 'Thông báo')
+      })
+    }
+  }
+
+  saveComment() {
+    if (this.formGroup.invalid) {
+      this.messageManager.showMessageCreateNotRole();
+      return;
+    } else {
+      this.commentService.editComment(this.idCommentEdit, this.formGroup.value).subscribe(data => {
+        this.flagEdit = false;
+        this.ngOnInit();
+        this.toastrService.success('Sửa bình luận thành công!', 'Thông báo')
+      })
+    }
+  }
+
+  exitEditComment() {
+    this.flagEdit = false;
+    this.ngOnInit();
+  }
+
+  exitReply() {
+    this.flagReply = false;
+    this.ngOnInit();
   }
 
   loadScript() {
