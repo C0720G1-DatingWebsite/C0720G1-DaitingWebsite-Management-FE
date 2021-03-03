@@ -13,6 +13,8 @@ import {ChangePasswordModule} from "./change-password/change-password.module";
 
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {SuggestionsRoutingModule} from "./suggestions/suggestions-routing.module";
+import {SuggestionsModule} from "./suggestions/suggestions.module";
 
 
 
@@ -32,7 +34,8 @@ import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
-    ChangeAvatarModule
+    ChangeAvatarModule,
+    SuggestionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

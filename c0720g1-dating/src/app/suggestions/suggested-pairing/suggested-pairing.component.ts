@@ -11,19 +11,28 @@ import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDT
   styleUrls: ['./suggested-pairing.component.scss']
 })
 export class SuggestedPairingComponent implements OnInit {
-  accountId = 1;
+  accountId : number;
   infoAccountDTO: InfoAccountDTO;
   suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
   image : string;
   size = 8;
+  loadingData: boolean = false;
+  displayData: boolean = false;
 
   constructor(private loadResourceService:LoadResourceService,
               public suggestionsService: SuggestionsService,
               public storageService: StorageService ) {
     this.loadScript();
+    this.getIdAccount();
     this.getAccountInformation();
   }
 
+  getIdAccount() {
+    if (this.storageService.getUser()) {
+      const user = this.storageService.getUser();
+      this.accountId = this.storageService.getUser().id;
+    }
+  }
 
   ngOnInit(): void {
     // this.getIdAccount();
@@ -41,31 +50,22 @@ export class SuggestedPairingComponent implements OnInit {
         "size" : this.size
       };
       this.suggestionsService.getSuggestedPairing(suggestedPairing).subscribe((data1:SuggestionToMakeFriendsDTO[]) => {
-        this.suggestionToMakeFriendsDTO = data1;
-        console.log(data1)
+        // this.suggestionToMakeFriendsDTO = data1;
+        var that = this;
+        setTimeout(function () {
+          if (that.suggestionToMakeFriendsDTO.length == data1.length) {
+            that.loadingData = false;
+            that.displayData =  true;
+          } else {
+            that.suggestionToMakeFriendsDTO = data1;
+            that.loadingData = false;
+            that.displayData = false;
+          }
+        }, 1000);
       });
 
     });
   }
-
-
-  getIdAccount() {
-    if (this.storageService.getUser()) {
-      const user = this.storageService.getUser();
-      this.accountId = this.storageService.getUser().id;
-      console.log(this.storageService.getUser().id);
-    }
-  }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -91,7 +91,8 @@ export class SuggestedPairingComponent implements OnInit {
   }
 
   onScroll() {
-    this.size += 5;
+    this.size += 3;
+    this.loadingData = true;
     this.getAccountInformation();
     this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
   }

@@ -11,19 +11,28 @@ import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDT
   styleUrls: ['./suggestion-to-make-friends.component.scss']
 })
 export class SuggestionToMakeFriendsComponent implements OnInit {
-  accountId = 1;
+  accountId: number;
   infoAccountDTO: InfoAccountDTO;
   suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
   image: string;
   size = 8;
+  loadingData: boolean = false;
+  displayData: boolean = false;
 
   constructor(private loadResourceService: LoadResourceService,
               public suggestionsService: SuggestionsService,
               public storageService: StorageService) {
     this.loadScript();
+    this.getIdAccount();
     this.getAccountInformation();
   }
 
+  getIdAccount() {
+    if (this.storageService.getUser()) {
+      const user = this.storageService.getUser();
+      this.accountId = this.storageService.getUser().id;
+    }
+  }
 
   ngOnInit(): void {
     // this.getIdAccount();
@@ -36,10 +45,21 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
         "hobbiesName": data.hobbiesName,
         "cityName": data.cityName,
         "accountId": data.accountId,
-        "size" : this.size
+        "size": this.size
       };
       this.suggestionsService.getSuggestionToMakeFriends(suggestionToMakeFriends).subscribe((data1: SuggestionToMakeFriendsDTO[]) => {
-        this.suggestionToMakeFriendsDTO = data1;
+        // this.suggestionToMakeFriendsDTO = data1;
+        var that = this;
+        setTimeout(function () {
+          if (that.suggestionToMakeFriendsDTO.length == data1.length) {
+            that.loadingData = false;
+            that.displayData = true;
+          } else {
+            that.suggestionToMakeFriendsDTO = data1;
+            that.loadingData = false;
+            that.displayData = false;
+          }
+        }, 1000);
       });
     });
 
@@ -67,7 +87,8 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
   }
 
   onScroll() {
-    this.size += 5;
+    this.loadingData = true;
+    this.size += 3;
     this.getAccountInformation();
     this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
   }
