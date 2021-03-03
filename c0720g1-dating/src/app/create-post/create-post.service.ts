@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IStatus} from "../entity/status";
 import {IPolicy} from "../entity/policy";
+import {PostDTO} from "../entity/PostDTO";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatePostService {
 
-  public API: string = "http://localhost:8080/api";
+  public API: string = "http://localhost:8081/api";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ export class CreatePostService {
    * Create New Post
    * @return
    */
-  // createPost(): Observable<boolean>{
-  //   return this.http.post<boolean>(this.API + "/create-post/")
-  // }
+  createPost(postDTO: PostDTO): Observable<boolean>{
+    return this.http.post<boolean>(this.API + "/create-post/", JSON.stringify(postDTO), this.httpOptions)
+  }
 }

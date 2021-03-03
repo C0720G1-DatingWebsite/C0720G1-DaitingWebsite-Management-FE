@@ -83,4 +83,8 @@ export class ChangePasswordComponent implements OnInit {
       }
     })
   }
+
+  exit() {
+    this.router.navigateByUrl('');
+  }
 }

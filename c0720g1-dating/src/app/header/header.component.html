@@ -1,5 +1,6 @@
 <!-- HEADER -->
 <header class="header">
+
   <!-- HEADER ACTIONS -->
   <div class="header-actions">
     <!-- HEADER BRAND -->
@@ -1013,7 +1014,8 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Hoàng Nhan</a> đã đăng một bài viết mới <a class="highlighted" href="profile-timeline.html">Cập nhật trạng thái?</a></p>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Hoàng Nhan</a> đã đăng một bài
+                  viết mới <a class="highlighted" href="profile-timeline.html">Cập nhật trạng thái?</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TIMESTAMP -->
@@ -1072,7 +1074,9 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Minh Nhật</a> dã thích <img class="reaction" src="assets/img/reaction/like.png" alt="reaction-like"> một bình luận <a class="highlighted" href="profile-timeline.html"> cập nhật trạng thái</a></p>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Minh Nhật</a> dã thích <img
+                  class="reaction" src="assets/img/reaction/like.png" alt="reaction-like"> một bình luận <a
+                  class="highlighted" href="profile-timeline.html"> cập nhật trạng thái</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TIMESTAMP -->
@@ -1131,7 +1135,8 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Hoàng Tứ</a> dã bình luận một  <a class="highlighted" href="profile-photos.html">hình ảnh</a></p>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Hoàng Tứ</a> dã bình luận một
+                  <a class="highlighted" href="profile-photos.html">hình ảnh</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TIMESTAMP -->
@@ -1190,7 +1195,9 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Thi Thi</a> đã yêu thích <img class="reaction" src="assets/img/reaction/love.png" alt="reaction-love"> một bình luận của bạn <a class="highlighted" href="profile-timeline.html">cập nhật trạng thái</a></p>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Thi Thi</a> đã yêu thích <img
+                  class="reaction" src="assets/img/reaction/love.png" alt="reaction-love"> một bình luận của bạn <a
+                  class="highlighted" href="profile-timeline.html">cập nhật trạng thái</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TIMESTAMP -->
@@ -1249,7 +1256,8 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Phương Trinh</a> bình luận về bạn <a class="highlighted" href="profile-timeline.html">trong một trạng thái</a></p>
+                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Phương Trinh</a> bình luận về
+                  bạn <a class="highlighted" href="profile-timeline.html">trong một trạng thái</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TIMESTAMP -->
@@ -1308,7 +1316,7 @@
                 <div class="user-avatar-content">
                   <!-- HEXAGON -->
                   <div class="hexagon-image-30-32" id="main-avatar4"></div>
-<!--                  <img [src]="account.avatar" alt="">-->
+                  <!--                  <img [src]="account.avatar" alt="">-->
                   <!-- /HEXAGON -->
                 </div>
                 <!-- /USER AVATAR CONTENT -->
@@ -1334,7 +1342,8 @@
             <!-- /USER STATUS AVATAR -->
 
             <!-- USER STATUS TITLE -->
-            <p class="user-status-title"><span class="bold">Xin chào <span class="font-weight-bold">{{account.username}}</span></span></p>
+            <p class="user-status-title"><span class="bold">Xin chào <span
+              class="font-weight-bold">{{account.username}}</span></span></p>
             <!-- /USER STATUS TITLE -->
           </div>
           <!-- /USER STATUS -->
@@ -1371,9 +1380,7 @@
 
         <!-- DROPDOWN NAVIGATION LINK -->
         <a class="dropdown-navigation-link" [routerLink]="['change-password/'+ idAccount]">Đổi mật khẩu</a>
-        <!-- /DROPDOWN NAVIGATION LINK -->
-        <!-- Button trigger modal -->
-        <!-- DROPDOWN NAVIGATION BUTTON -->
+        <a class="dropdown-navigation-link" [routerLink]="['change-avatar/'+ idAccount]">Đổi Ảnh Đại Diện</a>
         <p class="dropdown-navigation-button button small secondary" (click)="logout(); emitLogin()">Đăng xuất</p>
         <!-- /DROPDOWN NAVIGATION BUTTON -->
       </div>
@@ -1381,6 +1388,5 @@
     </div>
     <!-- /ACTION ITEM WRAP -->
   </div>
-  <!-- /HEADER ACTIONS -->
 </header>
 <!-- /HEADER -->

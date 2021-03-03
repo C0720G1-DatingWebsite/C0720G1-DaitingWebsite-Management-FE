@@ -8,7 +8,7 @@ import {IAccountDTO} from "./IAccountDTO";
 })
 export class ChangePasswordService {
 
-  public API: string = "http://localhost:8080/api";
+  public API: string = "http://localhost:8081/api";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
