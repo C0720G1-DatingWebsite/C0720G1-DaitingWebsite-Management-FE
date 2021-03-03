@@ -1,45 +1,54 @@
-import {Component, OnInit} from '@angular/core';
-import {IFriend} from "../../entity/friend";
+import { Component, OnInit } from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
-import {IAccount} from "../../entity/account";
 import {FriendListService} from "../friend-list.service";
 import {ActivatedRoute} from "@angular/router";
-import {FriendDTO} from "../../entity/friendDTO";
+import {StorageService} from "../../security/storage.service";
+import {IFriend} from "../../entity/friend";
+import {IAccount} from "../../entity/account";
 
 @Component({
-  selector: 'app-friend-request',
-  templateUrl: './friend-request.component.html',
-  styleUrls: ['./friend-request.component.scss']
+  selector: 'app-add-friends',
+  templateUrl: './add-friends.component.html',
+  styleUrls: ['./add-friends.component.scss']
 })
-export class FriendRequestComponent implements OnInit{
+export class AddFriendsComponent implements OnInit {
 
-  public friendList: IAccount[];
+  public friendList: IFriend[];
   public id: number;
-  public iAccount: IAccount;
-
 
   constructor( private loadResourceService:LoadResourceService,
                private friendService: FriendListService,
-               private activatedRoute: ActivatedRoute,) {
+               private activatedRoute: ActivatedRoute,
+               private storageService: StorageService) {
     this.loadScript()
   }
 
   ngOnInit(): void {
-    this.getAccountById();
+    this.search();
   }
 
-  getAccountById(){
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.friendService.getAccountById(this.id).subscribe((data: IAccount) =>
-    {
-      this.iAccount = data;
-      console.log(data);
-      this.friendService.getFriendRequest(this.id).subscribe(data =>{
+  search(){
+    this.activatedRoute.paramMap.subscribe(param => {
+      this.friendService.searchAddFriend(this.storageService.getUser().id, param.get('nameSearch')).subscribe(data => {
         this.friendList = data;
         this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
         console.log(data);
-      })
-    })
+      }, error => {
+        console.log(error);
+        this.friendList = [];
+      });
+    });
+  }
+
+  addFriend(id: number) {
+    this.friendService.addFriend(this.storageService.getUser().id, id).subscribe(data => {
+      this.friendList = data;
+      console.log(data);
+      this.ngOnInit();
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+    }, error => {
+      console.log(error);
+    });
   }
 
   loadScript() {
@@ -62,25 +71,4 @@ export class FriendRequestComponent implements OnInit{
     },200)
   }
 
-  acceptFriend(id: number) {
-    this.friendService.acceptFriend(this.id, id).subscribe(data => {
-      this.friendList = data;
-      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
-      console.log(data);
-      this.ngOnInit();
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  delFriend(id: number) {
-    this.friendService.delFriend(this.id, id).subscribe(data => {
-      this.friendList = data;
-      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
-      console.log(data);
-      this.ngOnInit();
-    }, error => {
-      console.log(error);
-    });
-  }
 }

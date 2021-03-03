@@ -1,4 +1,3 @@
-console.log("12");
 const app = {
     deepExtend: function (a, b) {
       for (const prop in b) {
