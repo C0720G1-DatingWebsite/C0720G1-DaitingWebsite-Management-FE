@@ -10,6 +10,7 @@ export interface IUserGroup {
   avatar: string;
   background: string;
   dateRegister: string;
+  check: boolean;
 
   postList: IPost[];
   imageGroupList: IImageGroup[];

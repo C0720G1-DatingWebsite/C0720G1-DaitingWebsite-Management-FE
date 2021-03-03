@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IStatus} from "../entity/status";
+import {IPolicy} from "../entity/policy";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatePostService {
 
-  public API: string = "http://localhost:8081/api";
+  public API: string = "http://localhost:8080/api";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -21,7 +22,21 @@ export class CreatePostService {
     private http: HttpClient
   ) { }
 
-  getAllStatus(): Observable<IStatus[]>{
-    return this.http.get<IStatus[]>(this.API + "/get-list-status")
+  /**
+   * TinVT
+   * Get All Status
+   * @return
+   */
+  getAllPolicy(): Observable<IPolicy[]>{
+    return this.http.get<IPolicy[]>(this.API + "/get-list-policy")
   }
+
+  /**
+   * TinVT
+   * Create New Post
+   * @return
+   */
+  // createPost(): Observable<boolean>{
+  //   return this.http.post<boolean>(this.API + "/create-post/")
+  // }
 }

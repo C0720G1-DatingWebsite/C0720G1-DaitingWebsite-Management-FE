@@ -1,4 +1,13 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {MessageService} from "../message.service";
@@ -12,7 +21,7 @@ import {Emoji} from 'emoji-mart'
   templateUrl: './chat-group.component.html',
   styleUrls: ['./chat-group.component.scss']
 })
-export class ChatGroupComponent implements OnInit, DoCheck {
+export class ChatGroupComponent implements OnInit, DoCheck, AfterViewChecked {
   formGroup: FormGroup;
   message;
   username: string;
@@ -23,7 +32,14 @@ export class ChatGroupComponent implements OnInit, DoCheck {
   x: Array<any>;
   public imagePath;
   imgURL: any;
+  loading: false;
+  hiddenLoadMessage: any;
+  limit: any;
+  isUpToDate: any;
+  scrolling = false;
+  disableScrollDown=false;
   title = 'websocket-frontend';
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   constructor(private loadResourceService: LoadResourceService,
               private messageService: MessageService,
@@ -34,29 +50,40 @@ export class ChatGroupComponent implements OnInit, DoCheck {
   ) {
     this.loadScript();
     this.username = this.tokenStorageService.getUser().username;
+    this.hiddenLoadMessage = false;
+    this.limit = 5;
+    this.isUpToDate = false;
+    this.scrolling = false
   }
 
-  ngDoCheck(): void {
-    var chatHistory = document.getElementById("messageBody");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-    var account = this.tokenStorageService.getUser();
+  ngAfterViewChecked(): void {
+    // if (this.scrolling) {
+    //   return;
+    // } else {
+    //   this.scrollToBottom();
+    // }
 
+  }
+
+
+  ngDoCheck(): void {
+    var account = this.tokenStorageService.getUser();
     document.getElementById('main-avatar9').setAttribute('data-src', 'https://i.pinimg.com/originals/b4/52/4b/b4524b0e1c6173892715e952b10adbce.jpg');
-    var chatHistory = document.getElementById("messageBody");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+
     this.sender = this.messageService.obj_message.sender;
     this.content = this.messageService.obj_message.content;
-
-
   }
 
   ngOnInit(): void {
-     // this.messageService.getMessageList().subscribe(data=>{
-     //   this.messageList = data
-     //   console.log(this.messageList)
-     // });
-    var chatHistory = document.getElementById("messageBody");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    this.scrollToBottom();
+    setTimeout(function () {
+    }, 700);
+
+    window.addEventListener('scroll', this.scroll, true);
+    this.messageService.getMessageList(7).subscribe((data) => {
+      this.messageList = data
+    });
+
     this.formGroup = this.formBuild.group({
         message: ['']
       }
@@ -64,24 +91,19 @@ export class ChatGroupComponent implements OnInit, DoCheck {
 
   }
 
+  scroll = (event): void => {
+    this.scrolling = true;
+  };
+
 
   sendMessage() {
-    var chatHistory = document.getElementById("messageBody");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-    this.loadImgService.loadImg('https://i.pinimg.com/originals/b4/52/4b/b4524b0e1c6173892715e952b10adbce.jpg')
     console.log(this.formGroup.value.message);
     this.messageService.sendMessage(this.formGroup.value.message);
-
-    // this.messageList = this.messageService.msg;
-
- //    this.messageList.push(this.messageService.msg[this.messageService.msg.length-1]);
- // console.log(this.messageService.msg[this.messageService.msg.length-1]);
+    this.messageList = this.messageService.msg;
     this.formGroup.reset();
     this.notification_number += 1;
-    console.log(this.messageList);
     this.sender = this.messageService.obj_message.sender;
     this.content = this.messageService.obj_message.content;
-    this.notification_number += 1;
   }
 
   loadScript() {
@@ -118,7 +140,7 @@ export class ChatGroupComponent implements OnInit, DoCheck {
   addEmoji($event: any) {
     var emoji = $event.emoji.native;
     console.log($event);
-    var new_message=(<HTMLInputElement>document.getElementById('input-chat')).value +=emoji
+    var new_message = (<HTMLInputElement>document.getElementById('input-chat')).value += emoji
     this.formGroup.setValue({
       message: new_message
     })
@@ -145,5 +167,33 @@ export class ChatGroupComponent implements OnInit, DoCheck {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     }
+  }
+
+  onScroll1() {
+    this.hiddenLoadMessage = true;
+    console.log(this.isUpToDate)
+    var that = this;
+      this.limit += 5;
+      console.log(this.limit);
+      this.messageService.getMessageList(this.limit).subscribe((data) => {
+        setTimeout(function () {
+          if (that.messageList.length == data.length) {
+            that.isUpToDate = true;
+            that.hiddenLoadMessage = false;
+
+          } else {
+            that.isUpToDate = false;
+            that.messageList = data;
+            that.hiddenLoadMessage = false;
+            that.scrollToBottom();
+          }
+        }, 1000);
+      });
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }
   }
 }

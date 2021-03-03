@@ -40,9 +40,28 @@ export class GroupService {
     return this.http.get(this.API + 'get-list-member-quantity')
   }
 
-  loadAvatarGroup(imgUrl: string) {
-    document.getElementById('avatar-group').setAttribute('data-src', imgUrl);
-    document.getElementById('background-group').setAttribute('data-src', imgUrl);
+  deleteGroupById(groupId: number): Observable<any> {
+    return this.http.delete(this.API + 'delete-group/' + groupId)
+  }
+
+  getListMember(groupId: number, page: number): Observable<any> {
+    return this.http.get(this.API + 'list-member-group/' + groupId + '?page=' + page)
+  }
+
+  joinGroup(id: number, groupId: number) {
+    return this.http.post(this.API + 'join-group/' + id + '/' + groupId, this.httpOptions)
+  }
+
+  findGroup(nameGroup: string, page: number) {
+    return this.http.get(this.API + 'find-name-group/' + nameGroup + '?page=' + page)
+  }
+
+  getListJoinedGroup(accountId) {
+    return this.http.get(this.API + 'account-joined-group/' + accountId)
+  }
+
+  searchMember(groupId: number, searchName: string, page: number) {
+    return this.http.get(this.API + 'search-member-group/' + groupId + '/' + searchName + '?page=' + page)
   }
 }
 

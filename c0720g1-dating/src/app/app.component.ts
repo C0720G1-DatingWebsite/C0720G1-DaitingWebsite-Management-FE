@@ -38,6 +38,4 @@ export class AppComponent implements OnInit, DoCheck {
     let account = this.storageService.getUser();
     this.check = account == null;
   }
-
-
 }

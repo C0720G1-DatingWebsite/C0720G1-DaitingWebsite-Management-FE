@@ -265,7 +265,8 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><span class="bold">Hội những người yêu Moè {{(notification_number)}}</span>
+                <p class="user-status-title"><span class="bold">Hội những người yêu Moè</span><span
+                  *ngIf="notification_number"> ({{notification_number}})</span>
                 </p>
                 <!-- /USER STATUS TITLE -->
 
@@ -373,31 +374,6 @@
           <!-- CHAT WIDGET HEADER -->
           <div class="chat-widget-header">
             <!-- CHAT WIDGET SETTINGS -->
-            <div class="chat-widget-settings">
-              <!-- POST SETTINGS WRAP -->
-              <div class="post-settings-wrap">
-                <!-- POST SETTINGS -->
-                <div class="post-settings widget-box-post-settings-dropdown-trigger">
-                  <!-- POST SETTINGS ICON -->
-                  <svg class="post-settings-icon icon-more-dots">
-                    <use xlink:href="#svg-more-dots"></use>
-                  </svg>
-                  <!-- /POST SETTINGS ICON -->
-                </div>
-                <!-- /POST SETTINGS -->
-
-                <!-- SIMPLE DROPDOWN -->
-                <div class="simple-dropdown widget-box-post-settings-dropdown">
-                  <!-- SIMPLE DROPDOWN LINK -->
-                  <p class="simple-dropdown-link">Tố Cáo</p>
-                  <!-- SIMPLE DROPDOWN LINK -->
-                  <p class="simple-dropdown-link">Xóa hội thoại</p>
-                  <!-- /SIMPLE DROPDOWN LINK -->
-                </div>
-                <!-- /SIMPLE DROPDOWN -->
-              </div>
-              <!-- /POST SETTINGS WRAP -->
-            </div>
             <!-- CHAT WIDGET SETTINGS -->
 
             <!-- USER STATUS -->
@@ -447,8 +423,40 @@
           <!-- /CHAT WIDGET HEADER -->
 
           <!-- CHAT WIDGET CONVERSATION -->
-          <div class="position-relative" id="messageBody">
-            <div class="chat-messages p-4" >
+          <div class="position-relative">
+            <div class="chat-messages p-4" #scrollMe infiniteScroll
+                 [infiniteScrollUpDistance]="1"
+                 [alwaysCallback]="true"
+                 [infiniteScrollThrottle]="200"
+                 [scrollWindow]="false"
+                 (scrolledUp)="onScroll1()">
+              <div *ngIf="hiddenLoadMessage">
+                <ng-container *ngIf="isUpToDate; else notUpToDate ">
+                  <div class="page-loader-indicator loader-bars">
+                   Tất cả đã được cập nhập 🎉 🎉 🎉
+                  </div>
+                </ng-container>
+                <ng-template #notUpToDate>
+                  <div class="page-loader-indicator loader-bars">
+                    Tải thêm ...
+                  </div>
+                </ng-template>
+                <div class="page-loader-indicator loader-bars">
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                  <div class="loader-bar"></div>
+                </div>
+              </div>
+              <!--              <div *ngIf="">-->
+              <!--                <span class="page-loader-indicator loader-bars">Đã hết tin nhắn</span>-->
+              <!--              </div>-->
+
+
               <div *ngFor="let msg of messageList">
                 <div *ngIf="msg.content == null; then join else chat"></div>
                 <ng-template #join>
@@ -489,28 +497,31 @@
             </div>
           </div>
           <!-- CHAT WIDGET FORM -->
-          <form  [formGroup]="formGroup" (ngSubmit)="sendMessage()">
+          <form [formGroup]="formGroup" (ngSubmit)="sendMessage()">
             <div class="rec-container" *ngIf="imgURL">
               <div class="publisher-btn-close">
-               <button><i class="fa fa-times-circle"></i></button>
+                <button><i class="fa fa-times-circle"></i></button>
               </div>
-              <div class="rec-1" >
+              <div class="rec-1">
                 <img [src]="imgURL" height="50" class="rec-2">
               </div>
             </div>
 
 
             <div class="publisher bt-1 border-light">
-              <input id="input-chat" class="publisher-input" type="text" placeholder="Write something" ngModel formControlName="message">
-<!--              <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>-->
-              <a type="file" class="publisher-btn" data-abc="true" (click)="toggleEmoji()"><i class="fa fa-smile"></i> <input type="file"
-                                                                                                      style="display:none;">
+              <input id="input-chat" class="publisher-input" type="text" placeholder="Write something" ngModel
+                     formControlName="message">
+              <!--              <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>-->
+              <a type="file" class="publisher-btn" data-abc="true" (click)="toggleEmoji()"><i class="fa fa-smile"></i>
+                <input type="file"
+                       style="display:none;">
               </a>
               <a (click)="uploadImg()" class="publisher-btn" data-abc="true"><i class="fa fa-paperclip"></i></a>
-              <input #file type="file" id="upload-img" accept="image/x-png,image/gif,image/jpeg" (change)="preview(file.files)" hidden />
+              <input #file type="file" id="upload-img" accept="image/x-png,image/gif,image/jpeg"
+                     (change)="preview(file.files)" hidden/>
 
               <div id="emoji">
-                <emoji-mart set="facebook"  (emojiClick)="addEmoji($event)"></emoji-mart>
+                <emoji-mart set="facebook" (emojiClick)="addEmoji($event)"></emoji-mart>
               </div>
 
               <button class="publisher-btn text-info" type="submit" data-abc="true"><i class="fa fa-paper-plane"></i>
@@ -518,7 +529,7 @@
             </div>
 
             <!--            emoji picker zone-->
-                        <!--            /emoji picker zone-->
+            <!--            /emoji picker zone-->
           </form>
           <!-- /CHAT WIDGET FORM -->
         </div>

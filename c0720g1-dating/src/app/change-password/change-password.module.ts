@@ -4,7 +4,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import {ChangePasswordRoutingModule} from "./change-password-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 @NgModule({
   declarations: [ChangePasswordComponent],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     RouterModule,

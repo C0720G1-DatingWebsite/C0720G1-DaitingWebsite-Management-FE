@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit, DoCheck{
   @Output() emit: EventEmitter<any>;
 
 
+
+  idAccount: number;
+
   constructor(private storageService: StorageService,
               private router: Router,
               private  messageService:MessageService) { }
@@ -41,13 +44,17 @@ export class HeaderComponent implements OnInit, DoCheck{
     this.content=this.messageService.obj_message.content;
     this.time_stamp=this.messageService.obj_message.time_stamp;
     this.account = this.storageService.getUser();
+
+    this.idAccount = this.storageService.getUser().id;
+
     if (this.account.avatar) {
       document.getElementById('main-avatar4').setAttribute('data-src', this.account.avatar);
     } else {
       document.getElementById('main-avatar4').setAttribute('data-src', 'https://i.pinimg.com/originals/b4/52/4b/b4524b0e1c6173892715e952b10adbce.jpg');
     }
-
   }
 
+  showPreview($event: Event) {
 
+  }
 }
