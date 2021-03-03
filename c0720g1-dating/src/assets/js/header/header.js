@@ -1,7 +1,6 @@
 /*--------------------
     HEADER SEARCH
 --------------------*/
-console.log("9");
 app.querySelector('#search-main', function (el) {
   const headerSearchDropdown = app.plugins.createDropdown({
     container: '.header-search-dropdown',

@@ -9,6 +9,7 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
+import {ChatGroupModule} from "./chat-group/chat-group.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
@@ -36,6 +37,8 @@ import {AccountReportManagementModule} from "./account-report-management/account
     AppRoutingModule,
     AccountSearchModule,
     LoginModule,
+    ChatGroupModule,
+    ToastrModule.forRoot(),
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
@@ -47,6 +50,7 @@ import {AccountReportManagementModule} from "./account-report-management/account
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FriendsModule,
+    AccountReportManagementModule,
     HomeModule,
     AccountReportManagementModule,
     AccountWallAboutModule
