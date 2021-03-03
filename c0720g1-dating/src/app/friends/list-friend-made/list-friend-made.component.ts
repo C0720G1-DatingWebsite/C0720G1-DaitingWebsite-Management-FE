@@ -5,6 +5,7 @@ import {LoadResourceService} from "../../load-resource.service";
 import {FriendListService} from "../friend-list.service";
 import { ActivatedRoute } from '@angular/router';
 import {StorageService} from "../../security/storage.service";
+import {FriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-list-friend-made',
@@ -15,7 +16,8 @@ export class ListFriendMadeComponent implements OnInit {
 
   public friendList: IFriend[];
   public id: number;
-  public iAccount: IAccount;
+  public iAccount: IFriend;
+  public name = '';
 
 
   constructor( private loadResourceService:LoadResourceService,
@@ -27,13 +29,11 @@ export class ListFriendMadeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAccountById();
-
-    console.log(this.storageService.getUser());
   }
 
   getAccountById(){
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.friendService.getAccountById(this.id).subscribe((data: IAccount) =>
+    this.friendService.getAccountById(this.id).subscribe((data: IFriend) =>
     {
       this.iAccount = data;
       console.log(data);
@@ -52,6 +52,17 @@ export class ListFriendMadeComponent implements OnInit {
       this.ngOnInit();
     }, error => {
       console.log(error);
+    });
+  }
+
+  search(){
+    this.friendService.searchFriend(this.id,this.name).subscribe(data => {
+      this.friendList = data;
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+      console.log(data);
+    }, error => {
+      console.log(error);
+      this.friendList = [];
     });
   }
 

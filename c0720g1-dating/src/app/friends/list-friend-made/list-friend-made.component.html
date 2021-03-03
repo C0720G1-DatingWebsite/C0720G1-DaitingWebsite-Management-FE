@@ -212,13 +212,13 @@
       <!-- SECTION FILTERS BAR ACTIONS -->
       <div class="section-filters-bar-actions">
         <!-- FORM -->
-        <form class="form">
+        <div class="form">
           <!-- FORM INPUT -->
           <div class="form-input small with-button">
             <label for="friends-search">Search Friends</label>
-            <input type="text" id="friends-search" name="friends_search">
+            <input type="text" id="friends-search" (change)="name = $event.target.value" (keyup.enter)="search()">
             <!-- BUTTON -->
-            <button class="button primary">
+            <button class="button primary" (click)="search()" type="button">
               <!-- ICON MAGNIFYING GLASS -->
               <svg class="icon-magnifying-glass">
                 <use xlink:href="#svg-magnifying-glass"></use>
@@ -230,7 +230,7 @@
           <!-- /FORM INPUT -->
 
           <!-- FORM SELECT -->
-        </form>
+        </div>
         <!-- /FORM -->
 
         <!-- FILTER TABS -->
@@ -318,40 +318,19 @@
             <!-- USER STATS -->
             <div class="user-stats">
               <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">874</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">posts</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
 
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title">60</p>
+                <p class="user-stat-title">1</p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
-                <p class="user-stat-text">friends</p>
+                <p class="user-stat-text">Bạn</p>
                 <!-- /USER STAT TEXT -->
               </div>
               <!-- /USER STAT -->
 
-              <!-- USER STAT -->
-              <div class="user-stat">
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">3.9k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">visits</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
             </div>
             <!-- /USER STATS -->
 
