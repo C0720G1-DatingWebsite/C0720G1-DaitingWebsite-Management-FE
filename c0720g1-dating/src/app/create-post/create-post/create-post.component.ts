@@ -9,6 +9,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {UploadFireService} from "../../../upload-fire-service/upload-fire.service";
 import {finalize} from "rxjs/operators";
 import {IPost} from "../../entity/post";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-post',
@@ -16,7 +17,8 @@ import {IPost} from "../../entity/post";
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
-  image:string = '';
+  image: string = '';
+  checkImage: boolean = false;
   formCreatePost: FormGroup;
   listPolicy: IPolicy[] = [];
   check: boolean = true;
@@ -24,13 +26,15 @@ export class CreatePostComponent implements OnInit {
   url: string;
   idProject: string = 'project-dating-c8c29';
   file: string;
-  constructor(  @Inject(AngularFireStorage) private storage: AngularFireStorage,
-                @Inject(UploadFireService) private uploadFileService: UploadFireService,
-                private loadResourceService:LoadResourceService,
-                private createPostService: CreatePostService,
-                private storageService: StorageService) {
 
-    this.createPostService.getAllPolicy().subscribe((data)=>{
+  constructor(@Inject(AngularFireStorage) private storage: AngularFireStorage,
+              private router: Router,
+              @Inject(UploadFireService) private uploadFileService: UploadFireService,
+              private loadResourceService: LoadResourceService,
+              private createPostService: CreatePostService,
+              private storageService: StorageService) {
+
+    this.createPostService.getAllPolicy().subscribe((data) => {
       this.listPolicy = data;
       console.log(data);
     });
@@ -58,34 +62,16 @@ export class CreatePostComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
-    setTimeout( () => {
+    setTimeout(() => {
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       this.loadResourceService.loadScript('assets/js/global/global.tooltips.js');
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
-    },200)
+    }, 200)
   }
 
   savePost() {
-    this.formCreatePost.value.imagePost = this.url;
-   console.log(this.formCreatePost.value);
-  }
-
-  showPreview(event: any) {
-    if(event.target.files){
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0])
-      reader.onload = (event: any)=>{
-        this.image = event.target.result
-      }
-    }
-    this.selectedImage = event.target.files[0];
-    this.url = this.selectedImage;
-    console.log(this.url);
-  }
-
-  saveImagePost() {
     const name = this.selectedImage.name;
     const fileRef = this.storage.ref(name);
     this.storage.upload(name, this.selectedImage).snapshotChanges().pipe(
@@ -93,10 +79,33 @@ export class CreatePostComponent implements OnInit {
         fileRef.getDownloadURL().subscribe((url) => {
           this.url = url;
           this.uploadFileService.insertImageDetails(this.idProject, this.url);
-          alert("SuccessFull !");
           console.log(this.url);
+          this.formCreatePost.value.imagePost = this.url;
+          console.log(this.formCreatePost.value);
+          this.createPostService.createPost(this.formCreatePost.value).subscribe(data=>{
+            if (data){
+              this.router.navigateByUrl('');
+            }else {
+              alert("Fail !");
+            }
+          });
         });
       })
     ).subscribe();
   }
+
+  showPreview(event: any) {
+    if (event.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.image = event.target.result
+      }
+      this.checkImage = true;
+    }
+    this.selectedImage = event.target.files[0];
+    this.url = this.selectedImage + Date.now();
+    console.log(this.url);
+  }
+
 }

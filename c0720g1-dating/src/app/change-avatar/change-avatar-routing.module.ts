@@ -4,7 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {ChangeAvatarComponent} from "./change-avatar/change-avatar.component";
 
 const routes: Routes = [
-  {path:'change-avatar', component: ChangeAvatarComponent}
+  {path:'change-avatar/:idAccount', component: ChangeAvatarComponent}
 ];
 
 @NgModule({
