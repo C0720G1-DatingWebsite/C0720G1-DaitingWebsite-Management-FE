@@ -1,7 +1,6 @@
 /*----------------
     POPUPS
 ----------------*/
-console.log("7");
 app.plugins.createPopup({
   container: '.popup-video',
   trigger: '.popup-video-trigger',

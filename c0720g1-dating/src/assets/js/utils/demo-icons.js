@@ -1,4 +1,3 @@
-console.log("13");
 app.querySelector('.icon-demo-list', function (lists) {
   const icons = [
     {

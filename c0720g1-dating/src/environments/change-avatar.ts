@@ -1,10 +1,21 @@
+
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build --prod` replaces `change-avatar.ts` with `changeAvatar.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
+export const changeAvatar = {
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyAPsEKjd1EB6VZkkC93pD4RWyGfd06yg1A",
+    authDomain: "project-dating-c8c29.firebaseapp.com",
+    projectId: "project-dating-c8c29",
+    storageBucket: "project-dating-c8c29.appspot.com",
+    messagingSenderId: "597750326479",
+    appId: "1:597750326479:web:f19ed772684b66e45443ba",
+    measurementId: "G-85JGBMJ4G2"
+  }
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
+/**
+ * PhuocTC
+ **/
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LoginService {
 
-  URL = 'http://localhost:8080';
+  URL = 'http://localhost:8081';
 
   httpOptions: any;
 
@@ -30,5 +37,19 @@ export class LoginService {
 
   loginForGoogle(account: any) {
     return this.http.post(this.URL + '/login-google', account, this.httpOptions);
+  }
+
+
+  forgotPassword(username: any) {
+    return this.http.get(this.URL + '/forgot-password?username=' + username);
+  }
+
+  checkVetifyCode(vetifyCode: string) {
+    return this.http.get(this.URL + '/check-vetify-password?vetifyCode=' + vetifyCode);
+  }
+
+  changedPassword(code: string, newPassword: string) {
+    return this.http.get(this.URL + '/changed-password?vetifyCode=' + code+ '&newPassword='+ newPassword);
+
   }
 }

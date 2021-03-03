@@ -1,7 +1,6 @@
 /*-------------------
     CONTENT GRID
 -------------------*/
-console.log("11");
 app.querySelector('.content-grid', function (el) {
   const sidebar = {
           chat: {

@@ -1,0 +1,313 @@
+<body>
+
+
+<!-- end right bar -->
+<div class="content-grid" infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="200"
+     (scrolled)="onScroll()">
+  <div class="grid grid-3-6-3 mobile-prefer-content">
+    <div class="grid-column">
+      <div class="widget-box">
+        <div class="widget-box-content">
+          <div class="user-status-list">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-column">
+
+      <div class="widget-box no-padding" *ngFor="let object of iPosts">
+
+        <div class="widget-box-settings">
+
+          <div class="post-settings-wrap">
+
+<!--            <div class="post-settings widget-box-post-settings-dropdown-trigger">-->
+
+
+<!--            </div>-->
+
+
+<!--            <div class="simple-dropdown widget-box-post-settings-dropdown">-->
+<!--              &lt;!&ndash;              *ngIf="object.account.id === getIdAccount()"&ndash;&gt;-->
+<!--              <button type="button" class="simple-dropdown-link" (click)="editViewPost(object)">Sửa</button>-->
+<!--              <button class="simple-dropdown-link">Xóa</button>-->
+
+<!--            </div>-->
+            <div class="dropdown" *ngIf="object.account.id == getIdAccount()">
+              <button type="button"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span >
+                  <i class="fas fa-ellipsis-h"></i>
+                </span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button type="button" class="simple-dropdown-link" (click)="editViewPost(object)">Sửa</button>
+                <button class="simple-dropdown-link">Xóa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-box-status">
+          <!-- WIDGET BOX STATUS CONTENT -->
+          <div class="widget-box-status-content">
+            <!-- USER STATUS -->
+            <div class="user-status">
+              <!-- USER STATUS AVATAR -->
+              <a class="user-status-avatar" href="profile-timeline.html">
+                <!-- USER AVATAR -->
+                <div class="user-avatar small no-outline">
+                  <!-- USER AVATAR CONTENT -->
+                  <div class="user-avatar-content">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-image-30-32" [attr.data-src]='object.account.avatar'></div>
+                    <!-- /HEXAGON -->
+                  </div>
+                  <!-- /USER AVATAR CONTENT -->
+
+                  <!-- USER AVATAR PROGRESS -->
+                  <div class="user-avatar-progress">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-progress-40-44"></div>
+                    <!-- /HEXAGON -->
+                  </div>
+                  <!-- /USER AVATAR PROGRESS -->
+
+                  <!-- USER AVATAR PROGRESS BORDER -->
+                  <div class="user-avatar-progress-border">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-border-40-44"></div>
+                    <!-- /HEXAGON -->
+                  </div>
+                  <!-- /USER AVATAR PROGRESS BORDER -->
+
+                  <!-- USER AVATAR BADGE -->
+                  <div class="user-avatar-badge">
+                    <!-- USER AVATAR BADGE BORDER -->
+                    <div class="user-avatar-badge-border">
+                      <!-- HEXAGON -->
+                      <div class="hexagon-22-24"></div>
+                      <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BADGE BORDER -->
+
+                    <!-- USER AVATAR BADGE CONTENT -->
+                    <div class="user-avatar-badge-content">
+                      <!-- HEXAGON -->
+                      <div class="hexagon-dark-16-18"></div>
+                      <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                    <!-- USER AVATAR BADGE TEXT -->
+                    <!-- /USER AVATAR BADGE TEXT -->
+                  </div>
+                  <!-- /USER AVATAR BADGE -->
+                </div>
+                <!-- /USER AVATAR -->
+              </a>
+              <!-- /USER STATUS AVATAR -->
+
+              <!-- USER STATUS TITLE -->
+              <p class="user-status-title medium"><a class="bold" href="profile-timeline.html">
+                {{object.account.fullName}}</a> thêm một <span class="bold">trạng thái mới</span></p>
+              <!-- /USER STATUS TITLE -->
+
+              <!-- USER STATUS TEXT -->
+              <p class="user-status-text small">{{object.postTime}}</p>
+              <!-- /USER STATUS TEXT -->
+            </div>
+            <!-- /USER STATUS -->
+            <div *ngIf="booleanEdit && id == object.id; else blockElse">
+              <form [formGroup]="postEditForm" >
+                <textarea [value]="object.content" formControlName="content"></textarea>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button">Quyền riêng tư</button>
+                  </div>
+                  <select formControlName="policy" class="custom-select">
+                    <option *ngFor="let ObPolicy of dtoPolicy" [ngValue]="ObPolicy" >{{ObPolicy.namePolicy}}</option>
+                  </select>
+                </div>
+                <div class="container-fluid row ">
+                  <div class="col-1">
+                    <img [src]="object.imagePost" alt="" style="height: 100px;width: 100px">
+                  </div>
+                </div>
+<!--                <input type="file" (change)="show($event)">-->
+                <div class="quick-post">
+
+                  <div class="quick-post-footer" style="justify-content: flex-end">
+                    <input formControlName="img" type="file" (change)="showPreview($event)">
+                    <div class="quick-post-footer-actions">
+<!--                      <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Thêm ảnh">-->
+<!--                        <svg class="quick-post-footer-action-icon icon-camera">-->
+<!--                          <use xlink:href="#svg-camera"></use>-->
+<!--                        </svg>-->
+<!--                      </div>-->
+
+
+                    </div>
+
+                    <div class="quick-post-footer-actions">
+                      <button class="button small void" (click)="cancel()">Hủy</button>
+
+                      <button type='submit' class="button small secondary" (click)="save()">Lưu</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <ng-template #blockElse>
+              <p class="widget-box-status-text" id="myP">{{object.content}}</p>
+              <div class="col-sm-3">
+                <img src="{{object.imagePost}}" style="width: auto; height: 500px;">
+              </div>
+            </ng-template>
+            <!-- /ThiWIDGET BOX STATUS TEXT -->
+          </div>
+          <!-- /WIDGET BOX STATUS CONTENT -->
+
+
+          <!-- WIDGET BOX STATUS CONTENT -->
+          <div class="widget-box-status-content">
+            <!-- CONTENT ACTIONS -->
+            <div class="content-actions">
+              <!-- CONTENT ACTION -->
+              <div class="content-action">
+                <!-- META LINE -->
+                <div class="meta-line">
+                  <!-- META LINE LIST -->
+                  <div class="meta-line-list reaction-item-list">
+                    <!-- REACTION ITEM -->
+
+                    <!-- /REACTION ITEM -->
+
+                    <!-- REACTION ITEM -->
+
+                    <!-- /REACTION ITEM -->
+
+                    <!-- REACTION ITEM -->
+                    <div class="reaction-item">
+                      <!-- REACTION IMAGE -->
+                      <img class="reaction-image reaction-item-dropdown-trigger"
+                           src="assets/img/reaction/like.png"
+                           alt="reaction-like">
+                      <!-- /REACTION IMAGE -->
+
+                      <!-- SIMPLE DROPDOWN -->
+                      <!--                      <div class="simple-dropdown padded reaction-item-dropdown">-->
+                      <!--                        &lt;!&ndash; SIMPLE DROPDOWN TEXT &ndash;&gt;-->
+                      <!--                        <p class="simple-dropdown-text"><img class="reaction"-->
+                      <!--                                                             src="assets/img/reaction/like.png"-->
+                      <!--                        > <span-->
+                      <!--                          class="bold">Like</span></p>-->
+                      <!--                      </div>-->
+                      <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /REACTION ITEM -->
+                  </div>
+                  <!-- /META LINE LIST -->
+
+                  <!-- META LINE TEXT -->
+                  <p class="meta-line-text">{{object.likeCount}}</p>
+                  <!-- /META LINE TEXT -->
+                </div>
+                <!-- /META LINE -->
+
+                <!-- /META LINE -->
+              </div>
+              <!-- /CONTENT ACTION -->
+
+              <!-- CONTENT ACTION -->
+              <div class="content-action">
+                <!-- META LINE -->
+                <div class="meta-line">
+                  <!-- META LINE LINK -->
+                  <!--                  <p class="meta-line-link">{{object.commentList}} Comments</p>-->
+                  <!-- /META LINE LINK -->
+                </div>
+                <!-- /META LINE -->
+
+                <!-- META LINE -->
+
+                <!-- /META LINE -->
+              </div>
+              <!-- /CONTENT ACTION -->
+            </div>
+            <!-- /CONTENT ACTIONS -->
+          </div>
+          <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <!-- /WIDGET BOX STATUS -->
+
+        <!-- POST OPTIONS -->
+        <div class="post-options">
+          <!-- POST OPTION WRAP -->
+          <div class="post-option-wrap">
+            <!-- POST OPTION -->
+            <div class="post-option reaction-options-dropdown-trigger">
+              <!-- POST OPTION ICON -->
+              <!--              <svg class="post-option-icon icon-thumbs-up">-->
+              <!--                <use xlink:href="#svg-thumbs-up"></use>-->
+              <!--              </svg>-->
+              <!-- /POST OPTION ICON -->
+
+              <!-- POST OPTION TEXT -->
+              <button (click)="increaseLike(object.id)" class="post-option-text">
+                <svg class="post-option-icon icon-thumbs-up">
+                  <use xlink:href="#svg-thumbs-up"></use>
+                </svg>
+                Like
+              </button>
+              <!-- /POST OPTION TEXT -->
+            </div>
+            <!-- /POST OPTION -->
+
+            <!-- REACTION OPTIONS -->
+            <!-- /REACTION OPTIONS -->
+          </div>
+          <!-- /POST OPTION WRAP -->
+
+
+          <!-- /POST OPTION -->
+
+          <!-- POST OPTION -->
+          <div class="post-option">
+            <!-- POST OPTION ICON -->
+            <svg class="post-option-icon icon-comment">
+              <use xlink:href="#svg-comment"></use>
+            </svg>
+            <!-- /POST OPTION ICON -->
+
+            <!-- POST OPTION TEXT -->
+            <p class="post-option-text">Comment</p>
+            <!-- /POST OPTION TEXT -->
+          </div>
+          <!-- /POST OPTION -->
+        </div>
+        <!-- /POST OPTIONS -->
+      </div>
+      <div *ngIf="checkLoading">
+        <div class="page-loader-indicator loader-bars">
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+        </div>
+      </div>
+
+      <!-- /WIDGET BOX -->
+    </div>
+  </div>
+</div>
+

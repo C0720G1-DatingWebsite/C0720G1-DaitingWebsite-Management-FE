@@ -1,0 +1,287 @@
+<div class="content-grid" style="transform: translate(167.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+
+  <!--  <div class="section-banner">-->
+
+  <!--    <img class="section-banner-icon" src="img/banner/overview-icon.png" alt="overview-icon">-->
+
+  <!--    <p class="section-banner-title">Overview</p>-->
+
+  <!--    <p class="section-banner-text">Review your account, see stats and more!</p>-->
+  <!--  </div>-->
+  <div class="grid">
+  </div>
+  <div class="grid">
+    <div class="grid grid-9-3 stretched">
+      <div class="grid-column">
+        <div class="widget-box">
+          <p class="widget-box-title" style="font-size: large">Phản hồi từ thành viên</p>
+          <!--          <a href="warning-member.html" class="button secondary float-right" style="width: auto; padding: 0 15px; color: lightgoldenrodyellow">List of members warned</a>-->
+          <div class="widget-box-content no-margin-top">
+            <div class="table table-top-friends join-rows">
+              <div class="table-header">
+                <div class="table-header-column centered padded"  style="width: 10%">
+                  <p class="table-header-title">STT</p>
+                </div>
+                <div class="table-header-column" style="width: 18%">
+                  <p class="table-header-title">Người gửi</p>
+                </div>
+                <div class="table-header-column padded">
+                  <p class="table-header-title">Nội dung</p>
+                </div>
+                <div class="table-header-column centered padded">
+                  <p class="table-header-title">Ngày gửi</p>
+                </div>
+                <div class="table-header-column padded" style="width: 14%">
+                  <p class="table-header-title">Trạng thái</p>
+                </div>
+              </div>
+              <div class="table-body">
+                <div class="table-row tiny" *ngFor="let feedback of getFeedbackList, index as i">
+                  <div class="table-column centered padded">
+                    <p class="table-title">{{i+1}}</p>
+                  </div>
+                  <div class="table-column">
+                    <p class="table-title">{{feedback.sender}}</p>
+                  </div>
+                  <div class="table-column">
+                    <p class="table-title">{{feedback.content}}</p>
+                  </div>
+                  <div class="table-column centered padded">
+                    <p class="table-title">{{feedback.sentDate | date: 'dd-MM-yyyy'}}</p>
+                  </div>
+                  <div class="table-column centered padded" style="width:16%">
+                    <div class="table-title" *ngIf="feedback.status == true; else elseBlock">
+                    <p class="tag-item bg-success float-left">Đã xử lý</p>
+                    </div>
+                    <ng-template #elseBlock>
+                      <p class="tag-item float-left">Chưa xử lý</p>
+                    </ng-template>
+                  </div>
+                </div>
+                <!-- /TABLE ROW -->
+              </div>
+              <!-- /TABLE BODY -->
+
+            </div>
+            <!-- /TABLE -->
+            <div class="section-pager-bar">
+              <!-- SECTION PAGER -->
+              <div class="section-pager">
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item active">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">01</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">02</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">03</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">04</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">05</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+
+                <!-- SECTION PAGER ITEM -->
+                <div class="section-pager-item">
+                  <!-- SECTION PAGER ITEM TEXT -->
+                  <p class="section-pager-item-text">06</p>
+                  <!-- /SECTION PAGER ITEM TEXT -->
+                </div>
+                <!-- /SECTION PAGER ITEM -->
+              </div>
+              <!-- /SECTION PAGER -->
+
+              <!-- SECTION PAGER CONTROLS -->
+              <div class="section-pager-controls">
+                <!-- SLIDER CONTROL -->
+                <div class="slider-control left disabled">
+                  <!-- SLIDER CONTROL ICON -->
+                  <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                  </svg>
+                  <!-- /SLIDER CONTROL ICON -->
+                </div>
+                <!-- /SLIDER CONTROL -->
+
+                <!-- SLIDER CONTROL -->
+                <div class="slider-control right">
+                  <!-- SLIDER CONTROL ICON -->
+                  <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                  </svg>
+                  <!-- /SLIDER CONTROL ICON -->
+                </div>
+
+                <!-- /SLIDER CONTROL -->
+              </div>
+              <!-- /SECTION PAGER CONTROLS -->
+
+            </div>
+
+            <!-- /SECTION PAGER BAR -->
+
+          </div>
+          <!-- WIDGET BOX CONTENT -->
+          <a class="tag-item float-left centered padded float-lg-right" href="manager-member.html"
+             style="margin-right: 50px">Quay lại</a>
+        </div>
+        <!-- /WIDGET BOX -->
+      </div>
+      <!-- /GRID COLUMN -->
+
+      <!-- GRID COLUMN -->
+      <div class="grid-column">
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+          <!-- WIDGET BOX ACTIONS -->
+          <div class="widget-box-actions">
+            <!-- WIDGET BOX ACTION -->
+            <div class="widget-box-action">
+              <!-- WIDGET BOX TITLE -->
+              <p class="widget-box-title">Thống kê</p>
+              <!-- /WIDGET BOX TITLE -->
+            </div>
+            <!-- /WIDGET BOX ACTION -->
+          </div>
+          <!-- /WIDGET BOX ACTIONS -->
+
+          <!-- WIDGET BOX CONTENT -->
+          <div class="widget-box-content">
+            <!-- PROGRESS ARC WRAP -->
+            <div class="progress-arc-wrap">
+              <!-- PROGRESS ARC -->
+              <div class="progress-arc"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <canvas id="engagements-chart" style="display: block; height: 140px; width: 140px;" width="175" height="175" class="chartjs-render-monitor"></canvas>
+              </div>
+              <!-- PROGRESS ARC -->
+
+              <!-- PROGRESS ARC INFO -->
+              <div class="progress-arc-info">
+                <!-- PROGRESS ARC TITLE -->
+                <p class="progress-arc-title">28.8K</p>
+                <!-- /PROGRESS ARC TITLE -->
+
+                <!-- PROGRESS ARC TEXT -->
+                <p class="progress-arc-text">Tổng thành viên</p>
+                <!-- /PROGRESS ARC TEXT -->
+              </div>
+              <!-- /PROGRESS ARC INFO -->
+            </div>
+            <!-- /PROGRESS ARC WRAP -->
+
+            <!-- USER STATS -->
+            <div class="user-stats reference">
+              <!-- USER STAT -->
+              <div class="user-stat big">
+                <!-- REFERENCE BULLET -->
+                <div class="reference-bullet secondary"></div>
+                <!-- /REFERENCE BULLET -->
+
+                <!-- USER STAT TITLE -->
+                <p class="user-stat-title">18.3K</p>
+                <!-- /USER STAT TITLE -->
+
+                <!-- USER STAT TEXT -->
+                <p class="user-stat-text">Tổng lượng tương tác</p>
+                <!-- /USER STAT TEXT -->
+              </div>
+              <!-- /USER STAT -->
+
+              <!-- USER STAT -->
+              <div class="user-stat big">
+                <!-- REFERENCE BULLET -->
+                <div class="reference-bullet primary"></div>
+                <!-- /REFERENCE BULLET -->
+
+                <!-- USER STAT TITLE -->
+                <p class="user-stat-title">33.2K</p>
+                <!-- /USER STAT TITLE -->
+
+                <!-- USER STAT TEXT -->
+                <p class="user-stat-text">Bình luận</p>
+                <!-- /USER STAT TEXT -->
+              </div>
+              <!-- /USER STAT -->
+            </div>
+            <!-- /USER STATS -->
+
+            <!-- USER STATS -->
+            <div class="user-stats reference">
+              <!-- USER STAT -->
+              <div class="user-stat big">
+                <!-- REFERENCE BULLET -->
+                <div class="reference-bullet blue"></div>
+                <!-- /REFERENCE BULLET -->
+
+                <!-- USER STAT TITLE -->
+                <p class="user-stat-title">18.1K</p>
+                <!-- /USER STAT TITLE -->
+
+                <!-- USER STAT TEXT -->
+                <p class="user-stat-text">Chia sẽ</p>
+                <!-- /USER STAT TEXT -->
+              </div>
+              <!-- /USER STAT -->
+
+              <!-- USER STAT -->
+              <div class="user-stat big">
+                <!-- REFERENCE BULLET -->
+                <div class="reference-bullet light-blue"></div>
+                <!-- /REFERENCE BULLET -->
+
+                <!-- USER STAT TITLE -->
+                <p class="user-stat-title">4.3k</p>
+                <!-- /USER STAT TITLE -->
+
+                <!-- USER STAT TEXT -->
+                <p class="user-stat-text">Trả lời
+                </p>
+                <!-- /USER STAT TEXT -->
+              </div>
+              <!-- /USER STAT -->
+            </div>
+            <!-- /USER STATS -->
+          </div>
+          <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+      </div>
+      <!-- /GRID COLUMN -->
+    </div>
+    <!-- /GRID -->
+
+    <!-- GRID -->
+    <div class="grid grid-3-9 stretched">
+      <!-- /GRID -->
+
+      <!-- WIDGET BOX -->
+      <!-- /WIDGET BOX -->
+    </div>
+    <!-- /GRID -->
+  </div>

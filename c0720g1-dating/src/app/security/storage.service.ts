@@ -19,7 +19,7 @@ export class StorageService {
     window.localStorage.setItem(this.KEY, JSON.stringify(response));
   }
 
-  public getUser(): any {
+  public  getUser(): any {
     if (window.localStorage.getItem(this.KEY)) {
       return JSON.parse(window.localStorage.getItem(this.KEY));
     } else {

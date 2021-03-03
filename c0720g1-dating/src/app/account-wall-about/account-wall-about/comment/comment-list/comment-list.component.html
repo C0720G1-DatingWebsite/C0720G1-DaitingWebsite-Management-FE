@@ -1,0 +1,99 @@
+<div class="post-comment-list">
+  <div class="content-actions">
+    <div class="content-action">
+      <div class="meta-line">
+        <p class="meta-line-link light"></p>
+      </div>
+      <div class="meta-line">
+        <p class="meta-line-link light" (click)="onClickShowComment()">Xem thêm bình luận</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-comment" *ngFor="let comments of iComments">
+
+    <div *ngIf="comments.content == null; else checkContent"></div>
+    <ng-template #checkContent>
+      <div>
+        <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', comments.account.id ,'wall']">
+          <div class="user-avatar-content">
+            <div class="hexagon-image-30-32" [attr.data-src]="comments.account.avatar"></div>
+          </div>
+          <div class="user-avatar-progress">
+            <div class="hexagon-progress-40-44"></div>
+          </div>
+          <div class="user-avatar-progress-border">
+            <div class="hexagon-border-40-44"></div>
+          </div>
+        </a>
+        <p class="post-comment-text">
+          <a class="post-comment-text-author">{{comments.account.fullName}}</a>
+          {{comments.content}}</p>
+        <div class="content-actions">
+          <div class="content-action">
+            <div class="meta-line">
+              <p class="meta-line-link light">Thích</p>
+            </div>
+            <div class="meta-line">
+              <p class="meta-line-link light" (click)="getIdComment(comments)">Trả lời</p>
+            </div>
+            <div class="meta-line">
+              <p class="meta-line-timestamp">{{comments.dateComment|date:'dd/MM/yyyy - HH:mm:ss'}}</p>
+            </div>
+            <div class="meta-line">
+              <div *ngIf="account.id != comments.account.id; else checkAccountComment">
+                <p class="meta-line-link light">Báo cáo</p>
+              </div>
+            </div>
+            <ng-template #checkAccountComment>
+              <div class="meta-line">
+                <p class="meta-line-link light" (click)="getEditComments(comments)">Chỉnh sửa</p>
+              </div>
+              <div class="meta-line">
+                <p class="meta-line-link light" data-toggle="modal" data-target="#deleteModal"
+                   (click)="getCommentDeleteById(comments.id)">Xóa</p>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div *ngIf="flagEdit && idCommentEdit == comments.id">
+          <form [formGroup]="formGroup">
+            <div class="form-group">
+              <textarea formControlName="content" required></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary" (click)="exitEditComment()">Hủy</button>
+            <button type="submit" class="btn btn-primary" (click)="saveComment()">Lưu</button>
+          </form>
+        </div>
+
+        <div *ngIf="flagReply && idComment == comments.id">
+          <form [formGroup]="formGroup">
+            <div class="form-group">
+              <textarea [value]="comments.content" formControlName="content" required></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary" (click)="exitReply()">Hủy</button>
+            <button type="submit" class="btn btn-primary" (click)="submitForReply()">Lưu</button>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+    <app-reply [idComment]="comments.id"></app-reply>
+  </div>
+  <div class="content-actions">
+    <div class="content-action">
+      <div class="meta-line">
+        <p class="meta-line-link light"></p>
+      </div>
+      <div class="meta-line">
+        <p class="meta-line-link light" (click)="onClickShowComment()">Xem thêm bình luận</p>
+      </div>
+      <div class="meta-line">
+        <p class="meta-line-link light" (click)="onClickHideComment()">Ẩn bớt bình luận</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

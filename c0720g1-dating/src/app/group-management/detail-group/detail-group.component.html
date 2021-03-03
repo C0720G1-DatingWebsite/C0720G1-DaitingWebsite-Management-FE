@@ -1,1 +1,327 @@
-<p>detail-group works!</p>
+<!-- CONTENT GRID -->
+<div class="content-grid">
+  <!-- PROFILE HEADER -->
+  <div class="profile-header v2">
+    <!-- PROFILE HEADER COVER -->
+    <figure class="profile-header-cover liquid">
+      <img [src]="group.background" alt="no image">
+    </figure>
+    <!-- /PROFILE HEADER COVER -->
+
+    <!-- PROFILE HEADER INFO -->
+    <div class="profile-header-info">
+      <!-- USER SHORT DESCRIPTION -->
+      <div class="user-short-description big">
+        <!-- USER SHORT DESCRIPTION AVATAR -->
+        <a class="user-short-description-avatar user-avatar big no-stats" href="#">
+          <!-- USER AVATAR BORDER -->
+          <div class="user-avatar-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-148-164"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR BORDER -->
+
+          <!-- USER AVATAR CONTENT -->
+          <div class="user-avatar-content">
+            <!-- HEXAGON -->
+            <div [id]="groupId" class="hexagon-image-124-136"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR CONTENT -->
+        </a>
+        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+        <!-- USER SHORT DESCRIPTION AVATAR -->
+        <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium no-stats"
+           href="#">
+          <!-- USER AVATAR BORDER -->
+          <div class="user-avatar-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-120-130"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR BORDER -->
+
+          <!-- USER AVATAR CONTENT -->
+          <div class="user-avatar-content">
+            <!-- HEXAGON -->
+            <div class="hexagon-image-100-110"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR CONTENT -->
+        </a>
+        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+        <!-- USER SHORT DESCRIPTION TITLE -->
+        <p class="user-short-description-title"><a [routerLink]="['/detail-group/'+groupId]">{{group.name}}</a></p>
+        <!-- /USER SHORT DESCRIPTION TITLE -->
+
+        <!-- USER SHORT DESCRIPTION TEXT -->
+        <p class="user-short-description-text">{{group.about}}</p>
+        <!-- /USER SHORT DESCRIPTION TEXT -->
+      </div>
+      <!-- /USER SHORT DESCRIPTION -->
+
+      <!-- USER STATS -->
+      <div class="user-stats">
+
+        <!-- USER STAT -->
+        <div class="user-stat big">
+          <!-- USER STAT TITLE -->
+          <p class="user-stat-title">{{memberQuantity}}</p>
+          <!-- /USER STAT TITLE -->
+
+          <!-- USER STAT TEXT -->
+          <p class="user-stat-text">Thành viên</p>
+          <!-- /USER STAT TEXT -->
+        </div>
+        <!-- /USER STAT -->
+
+        <!-- USER STAT -->
+        <div class="user-stat big">
+          <!-- USER STAT TITLE -->
+          <p class="user-stat-title">{{postQuantity}}</p>
+          <!-- /USER STAT TITLE -->
+
+          <!-- USER STAT TEXT -->
+          <p class="user-stat-text">Bài đăng</p>
+          <!-- /USER STAT TEXT -->
+        </div>
+        <!-- /USER STAT -->
+
+
+      </div>
+      <!-- /USER STATS -->
+
+    </div>
+    <!-- /PROFILE HEADER INFO -->
+  </div>
+  <!-- /PROFILE HEADER -->
+
+  <!-- SECTION NAVIGATION -->
+  <nav class="section-navigation">
+    <!-- SECTION MENU -->
+    <div id="section-navigation-medium-slider" class="section-menu secondary">
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item" [routerLink]="['/timeline-group/'+groupId]">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-timeline">
+          <use xlink:href="#svg-timeline"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Dòng thời gian</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+
+      <!-- SECTION MENU ITEM -->
+      <!-- /SECTION MENU ITEM -->
+
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item active" href="group-Thành viên.html">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-members">
+          <use xlink:href="#svg-members"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Thành viên</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+    </div>
+    <!-- /SECTION MENU -->
+
+    <!-- SLIDER CONTROLS -->
+    <div id="section-navigation-medium-slider-controls" class="slider-controls">
+      <!-- SLIDER CONTROL -->
+      <div class="slider-control left">
+        <!-- SLIDER CONTROL ICON -->
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
+        </svg>
+        <!-- /SLIDER CONTROL ICON -->
+      </div>
+      <!-- /SLIDER CONTROL -->
+
+      <!-- SLIDER CONTROL -->
+      <div class="slider-control right">
+        <!-- SLIDER CONTROL ICON -->
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
+        </svg>
+        <!-- /SLIDER CONTROL ICON -->
+      </div>
+      <!-- /SLIDER CONTROL -->
+    </div>
+    <!-- /SLIDER CONTROLS -->
+  </nav>
+  <!-- /SECTION NAVIGATION -->
+
+  <!-- SECTION -->
+  <section class="section">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <!-- SECTION HEADER INFO -->
+      <div class="section-header-info">
+        <!-- SECTION PRETITLE -->
+        <p class="section-pretitle">Nhóm</p>
+        <!-- /SECTION PRETITLE -->
+
+        <!-- SECTION TITLE -->
+        <h2 class="section-title">Thành viên <span class="highlighted secondary">{{memberQuantity}}</span></h2>
+        <!-- /SECTION TITLE -->
+      </div>
+      <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v1">
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <div class="section-filters-bar-actions">
+        <!-- FORM -->
+        <form class="form">
+          <!-- FORM INPUT -->
+          <div class="form-input small with-button">
+            <label for="Thành viên-Tìm kiếm">Tìm kiếm thành viên</label>
+            <input type="text" id="Thành viên-Tìm kiếm" name="members_search" [(ngModel)]="searchName">
+            <!-- BUTTON -->
+            <button class="button secondary" (click)="onSubmit()">
+              <!-- ICON MAGNIFYING GLASS -->
+              <svg class="icon-magnifying-glass">
+                <use xlink:href="#svg-magnifying-glass"></use>
+              </svg>
+              <!-- /ICON MAGNIFYING GLASS -->
+            </button>
+            <!-- /BUTTON -->
+          </div>
+          <!-- /FORM INPUT -->
+        </form>
+      </div>
+      <!-- /SECTION FILTERS BAR ACTIONS -->
+
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- GRID -->
+    <div class="grid grid-4-4-4 centered">
+      <!-- USER PREVIEW -->
+      <div *ngFor="let member of listMember" class="user-preview">
+        <!-- USER PREVIEW COVER -->
+        <figure class="user-preview-cover liquid">
+          <img [src]="member.backgroundImage" alt="no image">
+        </figure>
+        <!-- /USER PREVIEW COVER -->
+
+        <!-- USER PREVIEW INFO -->
+        <div class="user-preview-info">
+          <!-- USER SHORT DESCRIPTION -->
+          <div class="user-short-description">
+            <!-- USER SHORT DESCRIPTION AVATAR -->
+            <a class="user-short-description-avatar user-avatar medium" href="#">
+              <!-- USER AVATAR BORDER -->
+              <div class="user-avatar-border">
+                <!-- HEXAGON -->
+                <div class="hexagon-120-132"></div>
+                <!-- /HEXAGON -->
+              </div>
+              <!-- /USER AVATAR BORDER -->
+
+              <!-- USER AVATAR CONTENT -->
+              <div class="user-avatar-content">
+                <!-- HEXAGON -->
+                <div class="hexagon-image-82-90" [id]='member.id'></div>
+                <!-- /HEXAGON -->
+              </div>
+              <!-- /USER AVATAR CONTENT -->
+
+              <!-- USER AVATAR PROGRESS -->
+              <div class="user-avatar-progress">
+                <!-- HEXAGON -->
+                <div class="hexagon-progress-100-110"></div>
+                <!-- /HEXAGON -->
+              </div>
+              <!-- /USER AVATAR PROGRESS -->
+
+              <!-- USER AVATAR PROGRESS BORDER -->
+              <div class="user-avatar-progress-border">
+                <!-- HEXAGON -->
+                <div class="hexagon-border-100-110"></div>
+                <!-- /HEXAGON -->
+              </div>
+              <!-- /USER AVATAR PROGRESS BORDER -->
+
+            </a>
+            <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+            <!-- USER SHORT DESCRIPTION TITLE -->
+            <p class="user-short-description-title"><a [routerLink]="['/detail-group/'+groupId]">{{member.fullName}}</a>
+            </p>
+            <!-- /USER SHORT DESCRIPTION TITLE -->
+            <!-- USER STAT -->
+            <div class="user-stat" *ngIf="member.groupRoleId==1">
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Chủ nhóm</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
+          </div>
+          <!-- /USER SHORT DESCRIPTION -->
+
+          <!-- USER PREVIEW STATS SLIDES -->
+          <div id="user-preview-stats-slides-01" class="user-preview-stats-slides">
+
+          </div>
+          <!-- /USER PREVIEW STATS SLIDES -->
+
+
+        </div>
+        <!-- /USER PREVIEW INFO -->
+      </div>
+      <!-- /USER PREVIEW -->
+    </div>
+    <!-- /GRID -->
+
+    <!-- SECTION PAGER BAR -->
+    <div class="section-pager-bar">
+      <!-- SECTION PAGER -->
+      <div class="section-pager secondary">
+      </div>
+      <!-- /SECTION PAGER -->
+
+      <!-- SECTION PAGER CONTROLS -->
+      <div class="section-pager-controls">
+        <!-- SLIDER CONTROL -->
+        <a class="slider-control left page-link" [hidden]="page==0"
+           (click)="page =page - 1;getListMember()">
+          <!-- SLIDER CONTROL ICON -->
+          <svg class="slider-control-icon icon-small-arrow">
+            <use xlink:href="#svg-small-arrow"></use>
+          </svg>
+          <!-- /SLIDER CONTROL ICON -->
+        </a>        <!-- /SLIDER CONTROL -->
+
+        <!-- SLIDER CONTROL -->
+        <a class="slider-control right page-link" [hidden]="page >= pageable.totalPages - 1"
+           (click)="page= page +1; getListMember()">
+          <!-- SLIDER CONTROL ICON -->
+          <svg class="slider-control-icon icon-small-arrow">
+            <use xlink:href="#svg-small-arrow"></use>
+          </svg>
+          <!-- /SLIDER CONTROL ICON -->
+        </a>
+        <!-- /SLIDER CONTROL -->
+      </div>
+      <!-- /SECTION PAGER CONTROLS -->
+    </div>
+    <!-- /SECTION PAGER BAR -->
+  </section>
+  <!-- /SECTION -->
+</div>
+<!-- /CONTENT GRID -->
+

@@ -1,0 +1,364 @@
+<div class="content-grid">
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+    <!-- PROFILE HEADER COVER -->
+    <figure class="profile-header-cover liquid">
+      <img [src]="iAccount.backgroundImage">
+    </figure>
+    <!-- /PROFILE HEADER COVER -->
+
+    <!-- PROFILE HEADER INFO -->
+    <div class="profile-header-info">
+      <!-- USER SHORT DESCRIPTION -->
+      <div class="user-short-description big">
+        <!-- USER SHORT DESCRIPTION AVATAR -->
+        <a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
+          <!-- USER AVATAR BORDER -->
+          <div class="user-avatar-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-148-164"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR BORDER -->
+
+          <!-- USER AVATAR CONTENT -->
+          <div class="user-avatar-content">
+            <!-- HEXAGON -->
+            <div class="hexagon-image-100-110" [attr.data-src]="iAccount.avatar"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR CONTENT -->
+
+          <!-- USER AVATAR PROGRESS -->
+          <div class="user-avatar-progress">
+            <!-- HEXAGON -->
+            <div class="hexagon-progress-124-136"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR PROGRESS -->
+
+          <!-- USER AVATAR PROGRESS BORDER -->
+          <div class="user-avatar-progress-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-border-124-136"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR PROGRESS BORDER -->
+        </a>
+        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+        <!-- USER SHORT DESCRIPTION AVATAR -->
+        <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium"
+           href="profile-timeline.html">
+          <!-- USER AVATAR BORDER -->
+          <div class="user-avatar-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-120-132"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR BORDER -->
+
+          <!-- USER AVATAR CONTENT -->
+          <div class="user-avatar-content">
+            <!-- HEXAGON -->
+            <div class="hexagon-image-82-90" [attr.data-src]="iAccount.avatar"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR CONTENT -->
+
+          <!-- USER AVATAR PROGRESS -->
+          <div class="user-avatar-progress">
+            <!-- HEXAGON -->
+            <div class="hexagon-progress-100-110"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR PROGRESS -->
+
+          <!-- USER AVATAR PROGRESS BORDER -->
+          <div class="user-avatar-progress-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-border-100-110"></div>
+            <!-- /HEXAGON -->
+          </div>
+          <!-- /USER AVATAR PROGRESS BORDER -->
+
+        </a>
+        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+        <!-- USER SHORT DESCRIPTION TITLE -->
+        <p class="user-short-description-title"><a>{{iAccount.fullName}}</a></p>
+        <!-- /USER SHORT DESCRIPTION TITLE -->
+
+        <!-- USER SHORT DESCRIPTION TEXT -->
+        <p class="user-short-description-text"><a>{{iAccount.accountDescribe}}</a></p>
+        <!-- /USER SHORT DESCRIPTION TEXT -->
+      </div>
+      <!-- /USER SHORT DESCRIPTION -->
+    </div>
+    <!-- /PROFILE HEADER INFO -->
+  </div>
+  <!-- /PROFILE HEADER -->
+
+  <!-- SECTION NAVIGATION -->
+  <nav class="section-navigation">
+    <!-- SECTION MENU -->
+    <div id="section-navigation-slider" class="section-menu">
+
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-timeline">
+          <use xlink:href="#svg-timeline"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Dòng Thời Gian</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item active" [routerLink]="['/profile/', iAccount.id ,'friend-list']">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-friend">
+          <use xlink:href="#svg-friend"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Danh Sách Bạn</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item" href="profile-groups.html">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-group">
+          <use xlink:href="#svg-group"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Nhóm</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+
+      <!-- SECTION MENU ITEM -->
+      <a class="section-menu-item" href="profile-photos.html">
+        <!-- SECTION MENU ITEM ICON -->
+        <svg class="section-menu-item-icon icon-photos">
+          <use xlink:href="#svg-photos"></use>
+        </svg>
+        <!-- /SECTION MENU ITEM ICON -->
+
+        <!-- SECTION MENU ITEM TEXT -->
+        <p class="section-menu-item-text">Hình Ảnh</p>
+        <!-- /SECTION MENU ITEM TEXT -->
+      </a>
+      <!-- /SECTION MENU ITEM -->
+
+    </div>
+    <!-- /SECTION MENU -->
+
+    <!-- SLIDER CONTROLS -->
+    <div id="section-navigation-slider-controls" class="slider-controls">
+      <!-- SLIDER CONTROL -->
+      <div class="slider-control left">
+        <!-- SLIDER CONTROL ICON -->
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
+        </svg>
+        <!-- /SLIDER CONTROL ICON -->
+      </div>
+      <!-- /SLIDER CONTROL -->
+
+      <!-- SLIDER CONTROL -->
+      <div class="slider-control right">
+        <!-- SLIDER CONTROL ICON -->
+        <svg class="slider-control-icon icon-small-arrow">
+          <use xlink:href="#svg-small-arrow"></use>
+        </svg>
+        <!-- /SLIDER CONTROL ICON -->
+      </div>
+      <!-- /SLIDER CONTROL -->
+    </div>
+    <!-- /SLIDER CONTROLS -->
+  </nav>
+  <!-- /SECTION NAVIGATION -->
+
+  <!-- SECTION -->
+  <section class="section">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <!-- SECTION HEADER INFO -->
+      <div class="section-header-info">
+        <!-- SECTION PRETITLE -->
+        <p class="section-pretitle">{{iAccount.fullName}}</p>
+        <!-- /SECTION PRETITLE -->
+
+        <!-- SECTION TITLE -->
+        <h2 class="section-title">Bạn bè <span class="highlighted"> ( {{friendList.length}} )</span></h2>
+        <!-- /SECTION TITLE -->
+      </div>
+      <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v1">
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <div class="section-filters-bar-actions">
+        <!-- FORM -->
+        <div class="form">
+          <!-- FORM INPUT -->
+          <div class="form-input small with-button">
+            <label for="friends-search">Search Friends</label>
+            <input type="text" id="friends-search" (change)="name = $event.target.value" (keyup.enter)="search()">
+            <!-- BUTTON -->
+            <button class="button primary" (click)="search()" type="button">
+              <!-- ICON MAGNIFYING GLASS -->
+              <svg class="icon-magnifying-glass">
+                <use xlink:href="#svg-magnifying-glass"></use>
+              </svg>
+              <!-- /ICON MAGNIFYING GLASS -->
+            </button>
+            <!-- /BUTTON -->
+          </div>
+          <!-- /FORM INPUT -->
+
+          <!-- FORM SELECT -->
+        </div>
+        <!-- /FORM -->
+
+        <!-- FILTER TABS -->
+      </div>
+      <!-- /SECTION FILTERS BAR ACTIONS -->
+
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <div class="section-filters-bar-actions">
+        <!-- VIEW ACTIONS -->
+        <div class="view-actions">
+
+        </div>
+        <!-- /VIEW ACTIONS -->
+      </div>
+      <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- GRID -->
+    <div *ngFor="let fri of friendList">
+      <div class="grid">
+        <!-- USER PREVIEW -->
+
+        <div class="user-preview landscape">
+          <!-- USER PREVIEW COVER -->
+          <a  [routerLink]="['/account-wall/', fri.id ,'wall']">
+            <figure class="user-preview-cover liquid">
+              <img [src]="fri.backgroundImage">
+            </figure>
+          </a>
+          <!-- /USER PREVIEW COVER -->
+
+          <!-- USER PREVIEW INFO -->
+          <div class="user-preview-info">
+            <!-- USER SHORT DESCRIPTION -->
+            <div class="user-short-description landscape tiny">
+              <!-- USER SHORT DESCRIPTION AVATAR -->
+              <a class="user-short-description-avatar user-avatar small" [routerLink]="['/account-wall/', fri.id ,'wall']">
+                <!-- USER AVATAR BORDER -->
+                <div class="user-avatar-border">
+                  <!-- HEXAGON -->
+                  <div class="hexagon-50-56"></div>
+                  <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR BORDER -->
+
+                <!-- USER AVATAR CONTENT -->
+                <div class="user-avatar-content">
+                  <!-- HEXAGON -->
+                  <div class="hexagon-image-30-32" [attr.data-src]="fri.avatar">
+
+                  </div>
+                  <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR CONTENT -->
+
+                <!-- USER AVATAR PROGRESS -->
+                <div class="user-avatar-progress">
+                  <!-- HEXAGON -->
+                  <div class="hexagon-progress-40-44"></div>
+                  <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR PROGRESS -->
+
+                <!-- USER AVATAR PROGRESS BORDER -->
+                <div class="user-avatar-progress-border">
+                  <!-- HEXAGON -->
+                  <div class="hexagon-border-40-44"></div>
+                  <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR PROGRESS BORDER -->
+              </a>
+              <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+              <!-- USER SHORT DESCRIPTION TITLE -->
+              <p class="user-short-description-title"><a  [routerLink]="['/account-wall/', fri.id ,'wall']"> {{fri.fullName}} </a></p>
+              <!-- /USER SHORT DESCRIPTION TITLE -->
+
+              <!-- USER SHORT DESCRIPTION TEXT -->
+              <p class="user-short-description-text">{{fri.accountDescribe}}</p>
+              <!-- /USER SHORT DESCRIPTION TEXT -->
+            </div>
+            <!-- /USER SHORT DESCRIPTION -->
+
+            <!-- USER STATS -->
+            <div class="user-stats">
+              <!-- USER STAT -->
+
+              <!-- USER STAT -->
+              <div class="user-stat">
+                <!-- USER STAT TITLE -->
+                <p class="user-stat-title">1</p>
+                <!-- /USER STAT TITLE -->
+
+                <!-- USER STAT TEXT -->
+                <p class="user-stat-text">Bạn</p>
+                <!-- /USER STAT TEXT -->
+              </div>
+              <!-- /USER STAT -->
+
+            </div>
+            <!-- /USER STATS -->
+
+            <!-- USER PREVIEW ACTIONS -->
+            <div class="action-request-list">
+              <!-- ACTION REQUEST -->
+              <p class="action-request decline with-text" (click)="delFriend(fri.id)">
+                <!-- ACTION REQUEST ICON -->
+                <svg class="action-request-icon icon-remove-friend">
+                  <use xlink:href="#svg-remove-friend"></use>
+                </svg>
+                <!-- /ACTION REQUEST ICON -->
+
+                <!-- ACTION REQUEST TEXT -->
+                <span class="action-request-text">Del Friend</span>
+                <!-- /ACTION REQUEST TEXT -->
+              </p>
+              <!-- /ACTION REQUEST -->
+            </div>
+            <!-- /USER PREVIEW ACTIONS -->
+          </div>
+          <!-- /USER PREVIEW INFO -->
+        </div>
+        <!-- /USER PREVIEW -->
+      </div>
+    </div>
+    <!-- /GRID -->
+
+  </section>
+  <!-- /SECTION -->
+</div>

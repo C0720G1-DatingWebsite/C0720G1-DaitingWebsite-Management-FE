@@ -18,8 +18,7 @@ export class LeftSidebarComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.account = this.storageService.getUser();
-    console.log(this.account.username);
+     this.account = this.storageService.getUser();
     if (this.account.avatar) {
       document.getElementById('main-avatar1').setAttribute('data-src', this.account.avatar);
       document.getElementById('main-avatar2').setAttribute('data-src', this.account.avatar);
