@@ -33,7 +33,21 @@ export class SuggestionsService {
     return this.http.post<SuggestionToMakeFriendsDTO[]>(this.baseURL + '/suggestionToMakeFriends', {
       hobbiesName: suggestionToMakeFriends.hobbiesName,
       cityName: suggestionToMakeFriends.cityName,
-      accountId: suggestionToMakeFriends.accountId
+      accountId: suggestionToMakeFriends.accountId,
+      size: suggestionToMakeFriends.size
     }, this.httpOptions);
   }
+
+  getSuggestedPairing(suggestedPairing): Observable<SuggestionToMakeFriendsDTO[]> {
+    return this.http.post<SuggestionToMakeFriendsDTO[]>(this.baseURL + '/datingSuggestion', {
+      hobbiesName: suggestedPairing.hobbiesName,
+      cityName: suggestedPairing.cityName,
+      gender: suggestedPairing.gender,
+      maritalStatusId: suggestedPairing.maritalStatusId,
+      accountId: suggestedPairing.accountId,
+      size: suggestedPairing.size
+    }, this.httpOptions);
+  }
+
+
 }

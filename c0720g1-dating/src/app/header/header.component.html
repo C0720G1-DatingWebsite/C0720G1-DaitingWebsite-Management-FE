@@ -1370,9 +1370,9 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="hub-account-password.html">Đổi mật khẩu</a>
+        <a class="dropdown-navigation-link" [routerLink]="['change-password/'+ idAccount]">Đổi mật khẩu</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
-
+        <!-- Button trigger modal -->
         <!-- DROPDOWN NAVIGATION BUTTON -->
         <p class="dropdown-navigation-button button small secondary" (click)="logout(); emitLogin()">Đăng xuất</p>
         <!-- /DROPDOWN NAVIGATION BUTTON -->

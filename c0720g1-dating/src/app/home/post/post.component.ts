@@ -64,16 +64,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.getListPolicy();
     this.getListPost();
-    // this.postEditForm = this.formBuilder.group({
-    //   id: [''],
-    //   content: [],
-    //   img: [''],
-    //   postTime: [''],
-    //   likeCount: [''],
-    //   account: [''],
-    //   group: [''],
-    //   policy: ['']
-    // })
+
 
   }
 
@@ -166,7 +157,7 @@ export class PostComponent implements OnInit {
 
   editViewPost(object: any) {
 
-    this.image = object.img;
+    this.image = object.imagePost;
     this.booleanEdit = true;
     this.id = object.id;
     this.object = object;
@@ -174,7 +165,7 @@ export class PostComponent implements OnInit {
     this.postEditForm = this.formBuilder.group({
       id: [object.id],
       content: [object.content],
-      img: [object.img],
+      imagePost: [object.imagePost],
       postTime: [object.postTime],
       likeCount: [object.likeCount],
       account: [object.account],
@@ -202,8 +193,8 @@ export class PostComponent implements OnInit {
             this.url = url;
             this.uploadFileService.insertImageDetails(this.idProject, this.url);
             this.post = this.postEditForm.value;
-            this.post.img = this.url;
-            console.log(this.post.img);
+            this.post.imagePost = this.url;
+            console.log(this.post.imagePost);
             console.log(this.post)
             this.postServiceService.editPost(this.post).subscribe(data => {
               this.toastr.success('Sửa Thành Công','thông báo')

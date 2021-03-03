@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {BlockAccountComponent} from "./block-account/block-account.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ChangedPasswordComponent} from "./changed-password/changed-password.component";
+import {CheckLoginGuard} from "../security/check-login.guard";
 
 
 /**
@@ -10,9 +12,10 @@ import {ForgotPasswordComponent} from "./forgot-password/forgot-password.compone
  **/
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent},
+  {path: "login", component: LoginComponent, canActivate: [CheckLoginGuard]},
   {path: "block", component: BlockAccountComponent},
-  {path: "forgot-password", component: ForgotPasswordComponent}
+  {path: "forgot-password", component: ForgotPasswordComponent},
+  {path: "changed-password/:code", component: ChangedPasswordComponent}
 ];
 
 @NgModule({

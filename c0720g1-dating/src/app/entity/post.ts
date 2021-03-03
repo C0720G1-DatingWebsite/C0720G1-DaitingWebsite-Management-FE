@@ -9,7 +9,7 @@ export interface IPost {
   content: string;
   postTime: string;
   likeCount: number;
-  img: string;
+  imagePost: string;
   account: IAccount;
   group: IUserGroup;
   policy: IPolicy;
