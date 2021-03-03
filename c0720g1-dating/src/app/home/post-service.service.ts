@@ -15,13 +15,29 @@ export class PostServiceService {
     this.header = new Headers( {'Content-Type' : 'application/context'})
 
   }
-  increaseLike(idAccount): Observable<any>{
-    return this.http.get(this.url + 'increaseLike/' + idAccount);
+
+  getAllPolicy(): Observable<any>{
+    return  this.http.get(this.url + 'policyList');
   }
-  getListPost(idAccount): Observable<any> {
-    return this.http.get<any>(this.url + 'postGetAll/' + idAccount);
+
+  getAllAccountPost(): Observable<any>{
+    return this.http.get(this.url + 'accountPost');
+  }
+
+  reductionLike(idPost,idAccountPost): Observable<any>{
+    // @ts-ignore
+    return this.http.patch(this.url + 'reductionLike/' + idPost + '/oke/' + idAccountPost)
+  }
+
+  increaseLike(idAccount,idPost): Observable<any>{
+    // @ts-ignore
+    return this.http.patch(this.url + 'increaseLike/' + idAccount + "/oke/" + idPost);
+  }
+  getListPost(idAccount,size): Observable<any> {
+    return this.http.get<any>(this.url + 'postGetAll/' + idAccount + '/size/' + size);
   }
   editPost(post): Observable<IPost>{
-    return this.http.put<IPost>(this.url + '/editPost/' , post);
+    // @ts-ignore
+    return this.http.put<IPost>(this.url + 'editPost' , post, this.header);
   }
 }

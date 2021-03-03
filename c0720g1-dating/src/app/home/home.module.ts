@@ -3,7 +3,9 @@ import {CommonModule} from '@angular/common';
 import {PostComponent} from './post/post.component';
 import {HttpClientModule} from "@angular/common/http";
 import {HomeRoutingModule} from "./home-routing.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {RouterModule} from "@angular/router";
 
 /** LuyenNT
  */
@@ -13,7 +15,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     HttpClientModule,
     HomeRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule,
+    FormsModule,
+    RouterModule
   ]
 })
 export class HomeModule {

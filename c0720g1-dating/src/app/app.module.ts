@@ -20,6 +20,8 @@ import {ToastrModule} from "ngx-toastr";
 import {FriendsModule} from "./friends/friends.module";
 import {HomeModule} from "./home/home.module";
 import {AccountReportManagementModule} from "./account-report-management/account-report-management.module";
+import {AngularFireModule} from "@angular/fire";
+import {changeAvatar} from "../environments/change-avatar";
 
 
 
@@ -45,9 +47,13 @@ import {AccountReportManagementModule} from "./account-report-management/account
     ToastrModule.forRoot(),
     FriendsModule,
     HomeModule,
-    AccountReportManagementModule
+    AngularFireModule.initializeApp(changeAvatar.firebaseConfig),
+    AccountReportManagementModule,
   ],
   providers: [],
+  exports: [
+    AppComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
