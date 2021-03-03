@@ -17,6 +17,7 @@
       <div class="grid-column">
         <div class="widget-box">
           <p class="widget-box-title" style="font-size: large">Cảnh báo thành viên</p>
+<!--          <p class="text-center text-danger" style="font-size: 30px" *ngIf="reportMemberList.length == 0">Không tìm thấy dữ liệu</p>-->
           <!--          <a href="warning-member.html" class="button secondary float-right" style="width: auto; padding: 0 15px; color: lightgoldenrodyellow">List of members warned</a>-->
           <div class="widget-box-content no-margin-top">
             <div class="table table-top-friends join-rows">
@@ -37,13 +38,12 @@
               </div>
 
               <div class="table-body">
-                <div *ngIf="reportMemberList.length == 0">List trong</div>
-                <div class="table-row tiny"  *ngFor="let report of reportMemberList, index as i">
+                <div class="table-row tiny" *ngFor="let report of reportMemberList, index as i">
                   <div class="table-column centered padded">
                     <p class="table-title">{{i+1}}</p>
                   </div>
                   <div class="table-column centered padded">
-                    <p class="table-title">{{report.dateReport}}</p>
+                    <p class="table-title">{{report.dateReport | date: 'dd-MM-yyyy'}}</p>
                   </div>
                   <div class="table-column">
                     <p class="table-title">{{report.reportContent}}</p>
@@ -152,7 +152,7 @@
 <!--              <p class="button small secondary" style="width: 150px">Khóa vĩnh viễn</p>-->
 <!--            </div>-->
           </div>
-          <a class="tag-item float-left mt-5 centered padded float-lg-right" href="manager-member.html"
+          <a class="tag-item float-left mt-5 centered padded float-lg-right" href="/member"
              style="margin-right: 50px">Quay lại</a>
         </div>
 
@@ -332,6 +332,9 @@
           <option value="2">Khóa 1 tuần</option>
           <option value="3">Khóa 1 tháng</option>
           <option value="4">Khóa vĩnh viễn</option>
+        </select>
+        <select name="" id="">
+          <option *ngFor="let rep of reportMemberList">{{rep.reportContent}}</option>
         </select>
       </div>
       <!-- /FORM ROW -->

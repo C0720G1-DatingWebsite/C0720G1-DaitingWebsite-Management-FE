@@ -6,6 +6,7 @@ import {IReportMemberListDTO} from "../entity/IReportMemberListDTO";
 import {IAccount} from "../entity/account";
 import {IReportMemberDTO} from "../entity/IReportMemberDTO";
 import {IReportContent} from "../entity/report-content";
+import {GetFeedbackDTO} from "../entity/GetFeedbackDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,17 @@ export class MemberReportService {
   ) {
   }
 
-  findAllMember(): Observable<IMemberDTO[]> {
-    return this.http.get<IMemberDTO[]>(this.API + '/member');
+  findAllMember(size: number): Observable<IMemberDTO[]> {
+    return this.http.get<IMemberDTO[]>(this.API + '/member?size=' + size );
   }
-
+  /*
+  tim kiem theo username, ngay sinh, ngay tham gia
+   */
+  searchMemberByUserNameAndDateOfBirthAndDateRegister(userNameSearch: string, dateOfBirthSearch:
+    string, dateRegisterSearch: string): Observable<IMemberDTO[]>{
+    return this.http.get<IMemberDTO[]>(this.API + '/member?userNameSearch=' + userNameSearch + '&dateOfBirthSearch=' +
+      dateOfBirthSearch + '&dateRegisterSearch=' + dateRegisterSearch);
+  }
   /*
   * lay account theo id
    */
@@ -83,5 +91,11 @@ export class MemberReportService {
    */
   getAllReportContent(): Observable<IReportContent[]> {
     return this.http.get<IReportContent[]>(this.API + '/report-content');
+  }
+  /*
+  get-feedback list
+   */
+  findAllFeedback(): Observable<GetFeedbackDTO[]>{
+    return this.http.get<GetFeedbackDTO[]>(this.API + '/get-feedback');
   }
 }

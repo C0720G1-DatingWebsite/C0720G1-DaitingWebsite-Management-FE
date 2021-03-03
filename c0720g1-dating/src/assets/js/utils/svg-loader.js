@@ -1,4 +1,3 @@
-console.log("17");
 const svgWrap = document.createElement('div'),
       svgData = `
   <!-- SVG FACEBOOK -->

@@ -9,9 +9,11 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import {AccountSearchModule} from "./account-search/account-search.module";
 import {GroupManagementModule} from "./group-management/group-management.module";
 import {LoginModule} from "./login/login.module";
+import {ChatGroupModule} from "./chat-group/chat-group.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {SuggestionsModule} from "./suggestions/suggestions.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
 import {AngularFireModule} from "@angular/fire";
 import {changeAvatar} from "../environments/change-avatar";
@@ -35,16 +37,20 @@ import {AccountReportManagementModule} from "./account-report-management/account
     AppRoutingModule,
     AccountSearchModule,
     LoginModule,
+    ChatGroupModule,
+    ToastrModule.forRoot(),
     ChangePasswordModule,
     GroupManagementModule,
     CreatePostModule,
     ChangeAvatarModule,
+    SuggestionsModule,
     AccountWallAboutModule,
     AngularFireModule.initializeApp(changeAvatar.firebaseConfig),
     AngularFireModule.initializeApp(imagePost.firebaseConfig),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FriendsModule,
+    AccountReportManagementModule,
     HomeModule,
     AccountReportManagementModule,
     AccountWallAboutModule

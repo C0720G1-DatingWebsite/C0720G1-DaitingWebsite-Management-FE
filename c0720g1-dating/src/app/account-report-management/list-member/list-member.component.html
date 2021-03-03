@@ -139,7 +139,10 @@
   </div>
 
 </div>
-<div class="content-grid" style="transform: translate(167.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
+<div class="content-grid" style="transform: translate(167.5px, 0px); transition: transform 0.4s ease-in-out 0s;" infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="1000"
+     (scrolled)="onScroll()">
 
   <!--  <div class="section-banner">-->
 
@@ -150,71 +153,46 @@
   <!--    <p class="section-banner-text">Review your account, see stats and more!</p>-->
   <!--  </div>-->
   <div class="grid">
-  </div>
-  <div class="grid">
+    <div class="container col-12 mt-3 mb-3 p-3" style="background-color: white; border-radius: 10px">
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <!-- FORM -->
+
+      <!-- FORM INPUT -->
+      <div class="row">
+        <div class="col-4 mb-3 mt-3">
+          <input (keyup.enter)="search()" (change)="userNameSearch = $event.target.value" class="form-control" type="text" id="friends-search" name="friends_search" placeholder="Tên tài khoản">
+        </div>
+        <div class="col-4 mb-3 mt-3">
+          <input (keyup.enter)="search()" (change)="dateOfBirthSearch = $event.target.value" class="form-control" type="text" id="job-search" name="friends_search" placeholder="Ngày sinh">
+        </div>
+        <div class="col-4 mb-3 mt-3">
+          <input (keyup.enter)="search()" (change)="dateRegisterSearch = $event.target.value" class="form-control" type="text" id="hobbies-search" name="friends_search" placeholder="Ngày tham gia">
+        </div>
+      </div>
+      <div class="row mb-3 mt-3">
+
+
+        <div style="margin-left: 16px !important; height: 54px !important; width: 120px !important;">
+          <button class="button primary" (click)="search()">
+            <svg class="icon-magnifying-glass"><use xlink:href="#svg-magnifying-glass"></use></svg> Tìm kiếm
+          </button>
+        </div>
+        <div style="margin-left: 16px !important; height: 54px !important; width: 120px !important;">
+          <button class="button warning">
+            <svg class="icon-delete"><use xlink:href="#svg-delete"></use></svg> Bỏ tìm kiếm
+          </button>
+        </div>
+      </div>
+
+
+    </div>
     <div class="grid grid-9-3 stretched">
       <div class="grid-column">
         <div class="widget-box">
           <p class="widget-box-title" style="font-size: large">Quản lý thành viên</p>
-          <!--          <a href="warning-member.html" class="button secondary float-right" style="width: auto; padding: 0 15px; color: lightgoldenrodyellow">List of members warned</a>-->
+          <p class="text-center text-danger" style="font-size: 30px" *ngIf="memberList.length == 0">Không tìm thấy dữ liệu</p>
           <div class="container">
             <div class="row">
-<!--              <div class="col-md-6 col-xl-4">-->
-<!--                <div class="card m-b-30">-->
-<!--                  <div class="card-body row">-->
-<!--                    <div class="col-6">-->
-<!--                      <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="img-fluid rounded-circle w-60"></a>-->
-<!--                    </div>-->
-<!--                    <div class="col-6 card-title align-self-center mb-0">-->
-<!--                      <h5>Emma A. Main</h5>-->
-<!--                      <p class="m-0">Graphics Designer</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <ul class="list-group list-group-flush">-->
-<!--                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>-->
-<!--                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>-->
-<!--                  </ul>-->
-<!--                  <div class="card-body">-->
-<!--                    <div class="float-right btn-group btn-group-sm">-->
-<!--                      <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>-->
-<!--                      <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>-->
-<!--                    </div>-->
-<!--                    <ul class="social-links list-inline mb-0">-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>-->
-<!--                    </ul>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-md-6 col-xl-4">-->
-<!--                <div class="card m-b-30">-->
-<!--                  <div class="card-body row">-->
-<!--                    <div class="col-6">-->
-<!--                      <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="img-fluid rounded-circle w-60"></a>-->
-<!--                    </div>-->
-<!--                    <div class="col-6 card-title align-self-center mb-0">-->
-<!--                      <h5>Paul L. Goyette</h5>-->
-<!--                      <p class="m-0">Graphics Designer</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <ul class="list-group list-group-flush">-->
-<!--                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>-->
-<!--                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>-->
-<!--                  </ul>-->
-<!--                  <div class="card-body">-->
-<!--                    <div class="float-right btn-group btn-group-sm">-->
-<!--                      <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>-->
-<!--                      <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>-->
-<!--                    </div>-->
-<!--                    <ul class="social-links list-inline mb-0">-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>-->
-<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>-->
-<!--                    </ul>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
               <div *ngFor="let member of memberList" class="col-md-6 col-xl-4 mt-3">
                 <div class="card m-b-30">
                   <div class="card-body row">
@@ -227,21 +205,23 @@
                     </div>
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Ngày sinh : <a href="#">{{member.dateRegister}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Ngày sinh : <a href="#">{{member.dateOfBirth | date: 'dd-MM-yyyy'}}</a></li>
                     <li class="list-group-item"><i class="fa fa-phone float-right"></i>Số lần vi phạm : {{member.numberOfViolations}}</li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Ngày sinh : {{member.dateOfBirth}}</li>
+                    <li class="list-group-item">Ngày tham gia : {{member.dateRegister | date: 'dd-MM-yyyy'}}</li>
                   </ul>
-                  <div class="card-body">
+                  <div class="card-body cus">
                     <div class="float-right btn-group btn-group-sm">
-                      <a class="btn btn-danger full popup-manage-group-trigger" (click)="patchValue(member.userName)" data-placement="top" data-toggle="tooltip" data-original-title="warning" title="Báo cáo lạm dụng"><i class="fa fa-exclamation-triangle"></i> </a>
-                      <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete" title="Xóa thành viên"><i class="fa fa-times"></i></a>
+                      <a class="btn btn-danger full popup-manage-group-trigger" (click)="patchValue(member.userName)"
+                         data-placement="top" data-toggle="tooltip" data-original-title="warning" title="Báo cáo lạm dụng" style="height: 35px"><i class="fa fa-exclamation-triangle mt-1"></i> </a>
+<!--                      <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete" title="Xóa thành viên"><i class="fa fa-times"></i></a>-->
                     </div>
                     <ul class="social-links list-inline mb-0">
-                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
-                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>-->
+<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>-->
+<!--                      <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>-->
                     </ul>
-                      <a class="btn btn-success mr-1" [routerLink]="['/report-member-list', member.accountId]">Cảnh báo</a>
+                      <a class="btn btn-warning mr-1"data-placement="top" data-toggle="tooltip" title="Cảnh báo thành viên"
+                         [routerLink]="['/report-member-list', member.accountId]">Cảnh báo</a>
                   </div>
 
                 </div>

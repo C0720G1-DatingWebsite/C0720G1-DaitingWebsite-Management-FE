@@ -1,7 +1,6 @@
 /*---------------------------
     USER AVATAR HEXAGONS
 ---------------------------*/
-console.log("5");
 app.plugins.createHexagon({
   container: '.hexagon-148-164',
   width: 148,
@@ -309,7 +308,7 @@ app.plugins.createHexagon({
   height: 26,
   roundedCorners: true,
   roundedCornerRadius: 1,
-  clip: true
+  clip: true,
 });
 
 app.plugins.createHexagon({
