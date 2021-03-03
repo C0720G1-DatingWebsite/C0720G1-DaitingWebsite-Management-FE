@@ -11,6 +11,7 @@ import {IReportMemberDTO} from "../../entity/IReportMemberDTO";
 import {Router} from "@angular/router";
 import {StorageService} from "../../security/storage.service";
 import {DatePipe} from "@angular/common";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-list-member',
@@ -25,18 +26,18 @@ export class ListMemberComponent implements OnInit {
   reportMemberList: IReportMemberListDTO[];
   accountMember: IAccount;
   reportMemberDTO: IReportMemberDTO;
-  private sub: Subscription;
-  private getUserName;
-
+  size = 3;
   account;
   dateReport = new Date();
-
+  userNameSearch = "";
+  dateOfBirthSearch = "";
+  dateRegisterSearch = "";
   constructor(private loadResourceService: LoadResourceService,
               private memberReportService: MemberReportService,
               private formBuilder: FormBuilder,
               private router: Router,
               private storageService: StorageService,
-              private datePipe: DatePipe
+              private toast: ToastrService
   ) {
     this.memberReportService.getAllReportContent().subscribe(data =>{
       this.reportContentList = data;
@@ -51,7 +52,7 @@ export class ListMemberComponent implements OnInit {
       accountVictim: [''],
       accountTarget: ['']
     });
-    this.memberReportService.findAllMember().subscribe(value => {
+    this.memberReportService.findAllMember(this.size).subscribe(value => {
         this.memberList = value;
       }, error => {
       },
@@ -71,9 +72,6 @@ export class ListMemberComponent implements OnInit {
     return [year, month, day].join('-');
   }
 
-  getUserNameReport(name: string){
-    this.getUserName = name;
-  }
   loadScript() {
     this.loadResourceService.loadScript('assets/js/utils/app.js');
     this.loadResourceService.loadScript('assets/js/utils/page-loader.js');
@@ -96,10 +94,9 @@ export class ListMemberComponent implements OnInit {
 
   report() {
     this.memberReportService.sendReportAccount(this.reportForm.value).subscribe(() => {
-      this.router.navigateByUrl('/member').then(r => alert('Tố cáo thành công!'));
+      this.router.navigateByUrl('/member').then(r => this.toast.success('Tố cáo thành công!', 'Thông báo'));
       console.log(this.reportForm.value);
     });
-
   }
 
   patchValue(userName: string) {
@@ -110,6 +107,18 @@ export class ListMemberComponent implements OnInit {
       accountTarget: [userName]
     });
     this.reportForm.get('dateReport').patchValue(this.formatDate(new Date()));
+  }
+  search(){
+    this.memberReportService.searchMemberByUserNameAndDateOfBirthAndDateRegister(this.userNameSearch.trim(),
+      this.dateOfBirthSearch.trim(), this.dateRegisterSearch.trim()).subscribe(data =>{
+        this.memberList = data;
+    },() =>{
+        alert('Khong tim thay du lieu');
+    })
+  }
 
+  onScroll() {
+    this.size += 3;
+    this.ngOnInit();
   }
 }

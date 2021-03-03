@@ -5,15 +5,18 @@ import {AccountReportManagementRoutingModule} from "./account-report-management-
 import { ReportMemberListComponent } from './report-member-list/report-member-list.component';
 import { SendReportComponent } from './send-report/send-report.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { GetFeedbackComponent } from './get-feedback/get-feedback.component';
 
 
 
 @NgModule({
-  declarations: [ListMemberComponent, ReportMemberListComponent, SendReportComponent],
+  declarations: [ListMemberComponent, ReportMemberListComponent, SendReportComponent, GetFeedbackComponent],
   imports: [
     CommonModule,
     AccountReportManagementRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ]
 })
 export class AccountReportManagementModule { }
