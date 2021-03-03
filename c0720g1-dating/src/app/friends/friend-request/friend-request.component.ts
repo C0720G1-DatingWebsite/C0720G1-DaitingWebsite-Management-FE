@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IFriend} from "../../entity/friend";
 import {LoadResourceService} from "../../load-resource.service";
 import {IAccount} from "../../entity/account";
 import {FriendListService} from "../friend-list.service";
 import {ActivatedRoute} from "@angular/router";
+import {FriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-friend-request',
   templateUrl: './friend-request.component.html',
   styleUrls: ['./friend-request.component.scss']
 })
-export class FriendRequestComponent implements OnInit {
+export class FriendRequestComponent implements OnInit{
 
-  public friendList: IFriend[];
+  public friendList: IAccount[];
   public id: number;
   public iAccount: IAccount;
-  public idFriend:number;
 
 
   constructor( private loadResourceService:LoadResourceService,
@@ -36,6 +36,7 @@ export class FriendRequestComponent implements OnInit {
       console.log(data);
       this.friendService.getFriendRequest(this.id).subscribe(data =>{
         this.friendList = data;
+        this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
         console.log(data);
       })
     })
@@ -64,6 +65,7 @@ export class FriendRequestComponent implements OnInit {
   acceptFriend(id: number) {
     this.friendService.acceptFriend(this.id, id).subscribe(data => {
       this.friendList = data;
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();
     }, error => {
@@ -74,11 +76,11 @@ export class FriendRequestComponent implements OnInit {
   delFriend(id: number) {
     this.friendService.delFriend(this.id, id).subscribe(data => {
       this.friendList = data;
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();
     }, error => {
       console.log(error);
     });
   }
-
 }

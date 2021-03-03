@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {LoadResourceService} from "../../load-resource.service";
 import {ToastrService} from "ngx-toastr";
 
+
 declare let FB: any;
 
 /**
@@ -156,9 +157,9 @@ export class LoginComponent implements OnInit {
         console.log(profile);
 
         let account = {
-          userName: profile.kt,
+          userName: profile.nt,
           password: '',
-          avatar: profile.vI,
+          avatar: profile.zI,
           fullName: profile.sd
         };
 
@@ -169,7 +170,6 @@ export class LoginComponent implements OnInit {
 
           this.account = data;
 
-          this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
 
           if (this.loginForm.value.rememberMe) {
             this.storageService.saveInLocalStorage(data)
@@ -209,6 +209,8 @@ export class LoginComponent implements OnInit {
         this.storageService.saveInSessionStorage(data);
       }
 
+      console.log(this.storageService.getUser());
+      this.router.navigateByUrl('');
       if (this.account.enable) {
         this.toastrService.success('Đăng nhập thành công', 'Đăng nhập');
         this.router.navigateByUrl('');

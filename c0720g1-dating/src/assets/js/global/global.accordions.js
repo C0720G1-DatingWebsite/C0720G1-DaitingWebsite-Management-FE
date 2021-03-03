@@ -1,4 +1,3 @@
-console.log("3");
 app.plugins.createAccordion({
   triggerSelector: '.accordion-trigger',
   contentSelector: '.accordion-content',

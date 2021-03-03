@@ -17,17 +17,9 @@ import {LoadResourceService} from "../../load-resource.service";
 })
 export class BlockAccountComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private loginService: LoginService,
-              private storageService: StorageService,
-              private router: Router,
-              private loadResourceService: LoadResourceService) {
-    // this.loadResourceService.loadScript('src/assets/js/utils/app.js');
-    // this.loadResourceService.loadScript('src/assets/js/vendor/xm_plugins.min.js');
+  constructor(private loadResourceService: LoadResourceService) {
     this.loadResourceService.loadScript('src/assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('src/assets/js/landing/landing.tabs.js');
-    // this.loadResourceService.loadScript('src/assets/js/utils/svg-loader.js');
-
 
     this.loadResourceService.loadScript('assets/js/utils/app.js');
     this.loadResourceService.loadScript('assets/js/utils/page-loader.js');

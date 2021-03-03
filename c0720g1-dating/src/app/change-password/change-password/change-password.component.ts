@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ChangePasswordService} from "../change-password.service";
 import {IAccountDTO} from "../IAccountDTO";
 
@@ -15,12 +15,17 @@ export class ChangePasswordComponent implements OnInit {
   private account: IAccountDTO;
   public newPassword: string = "";
   public oldPassword: string = '';
+  private id: number;
 
   constructor(private loadResourceService: LoadResourceService,
               private router: Router,
-              private changePasswordService: ChangePasswordService
+              private changePasswordService: ChangePasswordService,
+              public activatedRoute: ActivatedRoute,
   ) {
-    this.changePasswordService.findAccountDTOById(4).subscribe((data) => {
+    this.activatedRoute.paramMap.subscribe((data)=>{
+      this.id = Number(data.get('idAccount'))
+    });
+    this.changePasswordService.findAccountDTOById(this.id).subscribe((data) => {
       console.log(data);
       this.account = data;
     });

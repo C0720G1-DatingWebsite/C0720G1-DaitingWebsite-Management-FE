@@ -5,5 +5,12 @@ export interface IGroup {
   avatar: string;
   background: string;
   dateRegister: string;
+}
 
+export interface IUser {
+  id: number;
+  avatar : string;
+  backgroundImage: string;
+  fullName: string;
+  groupRoleId
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
 import {SuggestionsService} from "../suggestions.service";
@@ -11,42 +11,59 @@ import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDT
   styleUrls: ['./suggestion-to-make-friends.component.scss']
 })
 export class SuggestionToMakeFriendsComponent implements OnInit {
-  accountId = 1;
+  accountId: number;
   infoAccountDTO: InfoAccountDTO;
-  suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[]=[];
+  suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
+  image: string;
+  size = 8;
+  loadingData: boolean = false;
+  displayData: boolean = false;
 
-  constructor(private loadResourceService:LoadResourceService,
+  constructor(private loadResourceService: LoadResourceService,
               public suggestionsService: SuggestionsService,
-              public storageService: StorageService ) {
+              public storageService: StorageService) {
     this.loadScript();
+    this.getIdAccount();
     this.getAccountInformation();
   }
 
+  getIdAccount() {
+    if (this.storageService.getUser()) {
+      const user = this.storageService.getUser();
+      this.accountId = this.storageService.getUser().id;
+    }
+  }
 
   ngOnInit(): void {
     // this.getIdAccount();
   }
 
-  getAccountInformation(){
-    this.suggestionsService.getAccountInformation(this.accountId).subscribe((data:InfoAccountDTO) =>{
+  getAccountInformation() {
+    this.suggestionsService.getAccountInformation(this.accountId).subscribe((data: InfoAccountDTO) => {
       this.infoAccountDTO = data;
       var suggestionToMakeFriends = {
-        "hobbiesName":data.hobbiesName,
-        "cityName":data.cityName,
-        "accountId":data.accountId
+        "hobbiesName": data.hobbiesName,
+        "cityName": data.cityName,
+        "accountId": data.accountId,
+        "size": this.size
       };
-      this.suggestionsService.getSuggestionToMakeFriends(suggestionToMakeFriends).subscribe((data1:SuggestionToMakeFriendsDTO[]) => {
-        this.suggestionToMakeFriendsDTO = data1;
-        // console.log(this.suggestionToMakeFriendsDTO);
-        for(let temp of this.suggestionToMakeFriendsDTO) {
-          console.log(temp)
-        }
+      this.suggestionsService.getSuggestionToMakeFriends(suggestionToMakeFriends).subscribe((data1: SuggestionToMakeFriendsDTO[]) => {
+        // this.suggestionToMakeFriendsDTO = data1;
+        var that = this;
+        setTimeout(function () {
+          if (that.suggestionToMakeFriendsDTO.length == data1.length) {
+            that.loadingData = false;
+            that.displayData = true;
+          } else {
+            that.suggestionToMakeFriendsDTO = data1;
+            that.loadingData = false;
+            that.displayData = false;
+          }
+        }, 1000);
       });
-
     });
+
   }
-
-
 
 
   loadScript() {
@@ -60,13 +77,19 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
     this.loadResourceService.loadScript('assets/js/form/form.utils.js');
     this.loadResourceService.loadScript('assets/js/utils/svg-loader.js');
     this.loadResourceService.loadScript('assets/js/global/global.accordions.js');
-    setTimeout( () => {
+    setTimeout(() => {
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       this.loadResourceService.loadScript('assets/js/global/global.tooltips.js');
       this.loadResourceService.loadScript('assets/js/header/header.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
-    },200)
+    }, 200)
   }
 
+  onScroll() {
+    this.loadingData = true;
+    this.size += 3;
+    this.getAccountInformation();
+    this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+  }
 }

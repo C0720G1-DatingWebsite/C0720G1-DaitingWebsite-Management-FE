@@ -1,7 +1,7 @@
 /*-------------------
     CONTENT TABS
 -------------------*/
-console.log("1");
+
 app.plugins.createTab({
   triggers: '.tab-box-option',
   elements: '.tab-box-item'

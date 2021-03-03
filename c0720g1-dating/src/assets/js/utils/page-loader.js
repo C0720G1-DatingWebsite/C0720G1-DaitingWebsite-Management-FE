@@ -1,4 +1,3 @@
-console.log("15");
 app.querySelector('.page-loader', function (el) {
     const pageLoader = el[0];
 
