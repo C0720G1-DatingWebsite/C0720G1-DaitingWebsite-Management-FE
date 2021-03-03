@@ -44,8 +44,10 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuild.group({
-        username: ['', [Validators.required, Validators.minLength(6)]],
+        userName: ['', [Validators.required, Validators.minLength(6)]],
         password: ['', [Validators.required, Validators.minLength(8)]],
+      dateOfBirth: '',
+      gender:1
       }
     );
   }
@@ -70,16 +72,16 @@ export class AccountComponent implements OnInit {
     }, 200)
 
   }
-
   onSubmit() {
-    if (this.formGroup.invalid) {
-    } else {
+    var a = this.formGroup.value;
+    console.log(a);
       this.isSubmited = true;
       this.registerService.register(this.formGroup.value).subscribe(data => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.router.navigateByUrl("/information")
       });
-      this.router.navigateByUrl("/verification")
-    }
+
+
   }
 }

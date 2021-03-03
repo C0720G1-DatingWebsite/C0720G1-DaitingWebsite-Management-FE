@@ -1,13 +1,20 @@
 <div style="margin: 100px">
   <div class="widget-box">
+    <form [formGroup]="formGroup" (ngSubmit)="updateInformation()">
     <p class="widget-box-title">Hãy điền những thông tin bên dưới *</p>
     <div class="widget-box-content">
-      <form class="form">
+      <div   class="form">
         <div class="form-row split">
           <div class="form-item">
             <div class="form-input small active">
               <label for="profile-name">Tên thường gọi *</label>
               <input type="text" id="profile-name" name="profile_name" placeholder="Tên thường gọi">
+              <div class="error-place" *ngFor="let validation of validation_messages.fullName">
+                <small class="text-danger"
+                       *ngIf="(formGroup.get('fullName').hasError(validation.type) && formGroup.get('fullName' +
+                        '').touched)">
+                  {{validation.message}}</small>
+              </div>
             </div>
           </div>
 
@@ -86,6 +93,8 @@
           </div>
         </div>
 
+
+
         <div class="form-row split">
           <div class="form-item">
             <div class="form-input small full">
@@ -104,10 +113,11 @@
         </div>
         <div class="form-row">
           <div class="form-item">
-            <button class="button secondary full popup-manage-group-trigger" type="button">Cập nhật thông tin</button>
+            <button class="button secondary full popup-manage-group-trigger" type="submit">Cập nhật thông tin</button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
+    </form>
   </div>
 </div>

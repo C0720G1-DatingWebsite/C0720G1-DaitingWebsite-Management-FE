@@ -82,10 +82,10 @@
           <div class="form-item">
             <div class="form-input">
               <label for="register-email"></label>
-              <input type="text" id="register-email" name="register_email" formControlName="username"  placeholder="Email (Tên đăng nhập) *">
+              <input type="text" id="register-email" name="register_email" formControlName="userName"  placeholder="Email (Tên đăng nhập) *">
               <div class="error-place" *ngFor="let validation of validation_messages.username">
                 <small class="text-danger"
-                       *ngIf="(formGroup.get('username').hasError(validation.type) && formGroup.get('username').touched)">
+                       *ngIf="(formGroup.get('userName').hasError(validation.type) && formGroup.get('userName').touched)">
                   {{validation.message}}</small>
               </div>
             </div>
@@ -127,7 +127,7 @@
             <div class="form-input-decorated">
               <div class="form-input small active">
                 <label for="profile-birthday">Birthday *</label>
-                <input type="date" id="profile-birthday" name="profile_birthday">
+                <input type="date" id="profile-birthday" formControlName="dateOfBirth" name="profile_birthday">
               </div>
               <svg class="form-input-icon icon-events">
                 <use xlink:href="#svg-events"></use>
@@ -140,7 +140,7 @@
           <div class="form-item">
             <div class="form-select">
               <label for="profile-country">Chọn giới tính *</label>
-              <select id="profile-country" name="profile_country">
+              <select formControlName="gender" id="profile-country" name="profile_country">
                 <option value="0">Nữ</option>
                 <option value="1" selected>Nam</option>
               </select>
@@ -172,7 +172,7 @@
       </section>
       <div class="form-row">
         <div class="form-item">
-          <button class="button medium primary" type="button">Đăng ký ngay!</button>
+          <button class="button medium primary" type="submit">Đăng ký ngay!</button>
         </div>
 
       </div>

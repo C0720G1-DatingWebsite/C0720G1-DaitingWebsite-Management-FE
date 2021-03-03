@@ -19,8 +19,10 @@ export class RegisterService {
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
     };
   }
-  register(account: IAccount){
-    return this.http.post(API + 'signup', JSON.stringify(account), this.httpOptions);
+  register(account: IAccount): Observable<any>{
+    console.log(account.userName);
+    console.log(account.password);
+      return this.http.post(API + 'signup',JSON.stringify(account), this.httpOptions);
   }
   verify(code:string): Observable<any> {
     console.log(code)
