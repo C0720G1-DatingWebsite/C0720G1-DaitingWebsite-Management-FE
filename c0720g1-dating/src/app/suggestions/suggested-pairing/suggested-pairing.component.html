@@ -13,6 +13,9 @@
         <div class="widget-box-content">
           <div class="user-status-list">
             <!-- content -->
+            <div *ngIf="suggestionToMakeFriendsDTO.length == 0 && displayData ">
+              <p style="text-align: center; color: red">Không có gợi ý phù hợp</p>
+            </div>
             <div *ngFor="let a of suggestionToMakeFriendsDTO">
               <div class="user-status request-small dropdown-item">
                 <a class="user-status-avatar" href="profile-timeline.html">
@@ -36,7 +39,18 @@
               </div>
               &nbsp;
             </div>
-
+            <div *ngIf="loadingData">
+              <div class="page-loader-indicator loader-bars">
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+              </div>
+            </div>
             <!-- end content -->
             <!--            &lt;!&ndash; content &ndash;&gt;-->
             <!--            <div class="user-status request-small dropdown-item">-->

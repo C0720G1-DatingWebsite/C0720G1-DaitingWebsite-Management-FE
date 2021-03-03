@@ -1,6 +1,6 @@
 <div class="content-grid" infiniteScroll
      [infiniteScrollDistance]="1"
-     [infiniteScrollThrottle]="200"
+     [infiniteScrollThrottle]="1000"
      (scrolled)="onScroll()">
   <!-- GRID -->
   <div class="grid grid-3-6-3 mobile-prefer-content">
@@ -13,13 +13,17 @@
         <div class="widget-box-content">
           <div class="user-status-list">
             <!-- content -->
+            <div *ngIf="suggestionToMakeFriendsDTO.length == 0 && displayData">
+              <p style="text-align: center; color: red">Không có gợi ý phù hợp</p>
+            </div>
             <div *ngFor="let data of suggestionToMakeFriendsDTO">
               <div class="user-status request-small dropdown-item">
                 <a class="user-status-avatar" href="profile-timeline.html">
                   <div class="user-avatar small no-outline">
                     <div class="user-avatar-content">
                       <!--                      <div class="hexagon-image-30-32" [data-src] = 'a.avatar'> </div>-->
-                      <img class="hexagon-image-30-32" src="{{data.avatar}}" style="border-radius: 50%; width: 30px;height: 30px;">
+                      <img class="hexagon-image-30-32" src="{{data.avatar}}"
+                           style="border-radius: 50%; width: 30px;height: 30px;">
                     </div>
                   </div>
                 </a>
@@ -36,14 +40,27 @@
                   <div class="action-request accept">
                     <i class="fas fa-user-plus"></i>
                   </div>
-<!--                  <div class="action-request accept">-->
-<!--                    <i class="far fa-trash-alt"></i>-->
-<!--                  </div>-->
+                  <!--                  <div class="action-request accept">-->
+                  <!--                    <i class="far fa-trash-alt"></i>-->
+                  <!--                  </div>-->
                 </div>
               </div>
               &nbsp;
             </div>
-            &nbsp;
+
+            <div *ngIf="loadingData">
+              <div class="page-loader-indicator loader-bars">
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+                <div class="loader-bar"></div>
+              </div>
+            </div>
+
             <!-- end content -->
             <!--            &lt;!&ndash; content &ndash;&gt;-->
             <!--            <div class="user-status request-small dropdown-item">-->

@@ -13,6 +13,7 @@ import {ChatGroupModule} from "./chat-group/chat-group.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
 import {CreatePostModule} from "./create-post/create-post.module";
 import {ChangeAvatarModule} from "./change-avatar/change-avatar.module";
+import {SuggestionsModule} from "./suggestions/suggestions.module";
 import {AccountWallAboutModule} from "./account-wall-about/account-wall-about.module";
 import {AngularFireModule} from "@angular/fire";
 import {changeAvatar} from "../environments/change-avatar";
@@ -42,6 +43,7 @@ import {AccountReportManagementModule} from "./account-report-management/account
     GroupManagementModule,
     CreatePostModule,
     ChangeAvatarModule,
+    SuggestionsModule,
     AccountWallAboutModule,
     AngularFireModule.initializeApp(changeAvatar.firebaseConfig),
     AngularFireModule.initializeApp(imagePost.firebaseConfig),
