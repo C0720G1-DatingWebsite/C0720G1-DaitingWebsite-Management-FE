@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {IFriend} from "../../entity/friend";
-import {IAccount} from "../../entity/account";
 import {LoadResourceService} from "../../load-resource.service";
 import {FriendListService} from "../friend-list.service";
 import { ActivatedRoute } from '@angular/router';
 import {StorageService} from "../../security/storage.service";
-import {FriendDTO} from "../../entity/friendDTO";
+import {IAccount} from "../../entity/account";
 
 @Component({
   selector: 'app-list-friend-made',
@@ -16,7 +15,7 @@ export class ListFriendMadeComponent implements OnInit {
 
   public friendList: IFriend[];
   public id: number;
-  public iAccount: IFriend;
+  public iAccount: IAccount;
   public name = '';
 
 
@@ -33,7 +32,7 @@ export class ListFriendMadeComponent implements OnInit {
 
   getAccountById(){
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.friendService.getAccountById(this.id).subscribe((data: IFriend) =>
+    this.friendService.getAccountById(this.id).subscribe((data: IAccount) =>
     {
       this.iAccount = data;
       console.log(data);
