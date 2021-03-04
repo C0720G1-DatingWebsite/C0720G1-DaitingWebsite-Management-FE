@@ -56,6 +56,7 @@ export class PostComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event: any) => {
         this.image = event.target.result
+        console.log(this.image)
       }
     }
     this.selectedImage = event.target.files[0];
@@ -157,8 +158,9 @@ export class PostComponent implements OnInit {
   }
 
   editViewPost(object: any) {
-
-    this.image = object.imagePost;
+    console.log('alo alo')
+    console.log(object.img)
+    this.image = object.img;
     this.booleanEdit = true;
     this.id = object.id;
     this.object = object;
@@ -166,7 +168,7 @@ export class PostComponent implements OnInit {
     this.postEditForm = this.formBuilder.group({
       id: [object.id],
       content: [object.content],
-      imagePost: [object.image],
+      img: [object.img],
       postTime: [object.postTime],
       likeCount: [object.likeCount],
       account: [object.account],
@@ -194,8 +196,8 @@ export class PostComponent implements OnInit {
             this.url = url;
             this.uploadFileService.insertImageDetails(this.idProject, this.url);
             this.post = this.postEditForm.value;
-            this.post.imagePost = this.url;
-            console.log(this.post.imagePost);
+            this.post.img = this.url;
+            console.log(this.post.img);
             console.log(this.post)
             this.postServiceService.editPost(this.post).subscribe(data => {
               this.toastr.success('Sửa Thành Công','thông báo')
