@@ -7,10 +7,11 @@ import {StorageService} from "../../security/storage.service";
 import {Router} from "@angular/router";
 import {IAccountPost} from "../../entity/account_post";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {UploadFireService} from "../../upload-fire-service/upload-fire-service";
+
 import {finalize} from "rxjs/operators";
 import {IPolicy} from "../../entity/policy";
 import {ToastrService} from "ngx-toastr";
+import {UploadFireService} from "../../../upload-fire-service/upload-fire.service";
 
 @Component({
   selector: 'app-post',

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IAccount} from "../entity/account";
 import {StorageService} from "../security/storage.service";
-import {FriendDTO} from "../entity/friendDTO";
 import {IFriend} from "../entity/friend";
 
 @Injectable({
@@ -19,8 +17,8 @@ export class FriendListService {
     this.header = new Headers({'Content-Type': 'application/context'})
   }
 
-  getAccountById(id: number) : Observable<IFriend>{
-    return this.http.get<IFriend>(this.url + '/profile/' +id);
+  getAccountById(id: number) : Observable<any>{
+    return this.http.get<any>(this.url + '/profile/' +id);
   }
 
   getListFriend(id: number): Observable<any>{

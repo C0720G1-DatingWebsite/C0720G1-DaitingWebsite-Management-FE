@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {IFriend} from "../../entity/friend";
 import {LoadResourceService} from "../../load-resource.service";
 import {IAccount} from "../../entity/account";
 import {FriendListService} from "../friend-list.service";
 import {ActivatedRoute} from "@angular/router";
-import {FriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-friend-request',
