@@ -18,7 +18,7 @@
             </div>
             <div *ngFor="let data of suggestionToMakeFriendsDTO">
               <div class="user-status request-small dropdown-item">
-                <a class="user-status-avatar" href="profile-timeline.html">
+                <a class="user-status-avatar" [routerLink]="['/account-wall/', data.friendId ,'wall']">
                   <div class="user-avatar small no-outline">
                     <div class="user-avatar-content">
                       <!--                      <div class="hexagon-image-30-32" [data-src] = 'a.avatar'> </div>-->

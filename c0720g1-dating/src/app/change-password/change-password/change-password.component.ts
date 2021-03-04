@@ -3,7 +3,6 @@ import {LoadResourceService} from "../../load-resource.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChangePasswordService} from "../change-password.service";
 import {IAccountDTO} from "../IAccountDTO";
-
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -16,7 +15,6 @@ export class ChangePasswordComponent implements OnInit {
   public newPassword: string = "";
   public oldPassword: string = '';
   private id: number;
-
   constructor(private loadResourceService: LoadResourceService,
               private router: Router,
               private changePasswordService: ChangePasswordService,
@@ -31,11 +29,8 @@ export class ChangePasswordComponent implements OnInit {
     });
     this.loadScript()
   }
-
   ngOnInit(): void {
-
   }
-
   loadScript() {
     this.loadResourceService.loadScript('assets/js/utils/app.js');
     this.loadResourceService.loadScript('assets/js/utils/page-loader.js');
@@ -55,14 +50,12 @@ export class ChangePasswordComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     }, 200)
   }
-
   checkPassword(value: string) {
     this.oldPassword = value;
     this.changePasswordService.checkPassword(this.account.idAccount,value).subscribe((data)=>{
       this.check = data;
     })
   }
-
   againPassword(value: string) {
     if (value !== this.newPassword) {
       this.checkNewPass = false;
@@ -70,7 +63,6 @@ export class ChangePasswordComponent implements OnInit {
       this.checkNewPass = true;
     }
   }
-
   savePassword() {
     this.changePasswordService.checkPassword(this.account.idAccount, this.oldPassword).subscribe((data) => {
       if (data == true) {
@@ -83,7 +75,6 @@ export class ChangePasswordComponent implements OnInit {
       }
     })
   }
-
   exit() {
     this.router.navigateByUrl('');
   }

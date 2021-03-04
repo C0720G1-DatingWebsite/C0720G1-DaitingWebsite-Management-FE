@@ -8,7 +8,7 @@ import {AddFriendsComponent} from "./add-friends/add-friends.component";
 
 const routes: Routes = [
   {
-    path: 'profile/:id/friend-list', component: ListFriendMadeComponent
+    path: 'profile/:id/list-friend', component: ListFriendMadeComponent
   },
   {
     path: 'profile/:id/friend-request', component: FriendRequestComponent

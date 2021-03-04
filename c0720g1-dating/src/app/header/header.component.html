@@ -16,7 +16,7 @@
       <!-- /LOGO -->
 
       <!-- HEADER BRAND TEXT -->
-      <h1 class="header-brand-text">Vikinger</h1>
+      <h1 class="header-brand-text">C0720G1</h1>
       <!-- /HEADER BRAND TEXT -->
     </div>
     <!-- /HEADER BRAND -->
@@ -552,9 +552,9 @@
 
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Minh Nhật</a> dã thích <img
-                  class="reaction" src="assets/img/reaction/like.png" alt="reaction-like"> một bình luận <a
-                  class="highlighted" href="profile-timeline.html"> cập nhật trạng thái</a></p>
+<!--                <p class="user-status-title"><a class="bold" href="profile-timeline.html">Minh Nhật</a> dã thích <img-->
+<!--                  class="reaction" src="assets/img/reaction/like.png" alt="reaction-like"> một bình luận <a-->
+<!--                  class="highlighted" href="profile-timeline.html"> cập nhật trạng thái</a></p>-->
                 <!-- /USER STATUS TITLE -->
 
         <!-- DROPDOWN BOX -->
@@ -831,7 +831,7 @@
 
             <!-- USER STATUS TITLE -->
             <p class="user-status-title"><span class="bold">Xin chào <span
-              class="font-weight-bold">{{account.username}}</span></span></p>
+              class="font-weight-bold">{{account.username.length > 10 ? account.username.substring(0,10) + '...' : account.username}}</span></span></p>
             <!-- /USER STATUS TITLE -->
           </div>
           <!-- /USER STATUS -->
@@ -869,6 +869,8 @@
         <!-- DROPDOWN NAVIGATION LINK -->
         <a class="dropdown-navigation-link" [routerLink]="['change-password/'+ idAccount]">Đổi mật khẩu</a>
         <a class="dropdown-navigation-link" [routerLink]="['change-avatar/'+ idAccount]">Đổi Ảnh Đại Diện</a>
+        <a class="dropdown-navigation-link" [routerLink]="['create-post']">Đăng Bài</a>
+        <a class="dropdown-navigation-link" [routerLink]="'/member'">Quản lí thành viên</a>
         <p class="dropdown-navigation-button button small secondary" (click)="logout(); emitLogin()">Đăng xuất</p>
         <!-- /DROPDOWN NAVIGATION BUTTON -->
       </div>

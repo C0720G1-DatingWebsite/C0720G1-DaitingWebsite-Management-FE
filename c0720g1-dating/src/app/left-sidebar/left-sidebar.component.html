@@ -62,7 +62,7 @@
     <!-- MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" href="groups.html" data-title="Nhóm">
+      <a class="menu-item-link text-tooltip-tfr" [routerLink]="['/list-group']" data-title="Nhóm">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-group">
           <use xlink:href="#svg-group"></use>
@@ -77,6 +77,28 @@
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
       <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'profile/'+ account.id +'/list-friend'" data-title="Bạn bè">
+        <!-- MENU ITEM LINK ICON -->
+        <svg class="menu-item-link-icon icon-members">
+          <use xlink:href="#svg-members"></use>
+        </svg>
+        <!-- /MENU ITEM LINK ICON -->
+      </a>
+      <!-- /MENU ITEM LINK -->
+    </li>
+    <li class="menu-item">
+      <!-- MENU ITEM LINK -->
+      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'suggestion-to-make-friends'" data-title="Bạn bè">
+        <!-- MENU ITEM LINK ICON -->
+        <svg class="menu-item-link-icon icon-members">
+          <use xlink:href="#svg-members"></use>
+        </svg>
+        <!-- /MENU ITEM LINK ICON -->
+      </a>
+      <!-- /MENU ITEM LINK -->
+    </li>
+    <li class="menu-item">
+      <!-- MENU ITEM LINK -->
+      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'suggested-pairing'" data-title="Bạn bè">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-members">
           <use xlink:href="#svg-members"></use>
@@ -229,7 +251,7 @@
     <!-- MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link" href="groups.html">
+      <a class="menu-item-link" [routerLink]="['/list-group']">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-group">
           <use xlink:href="#svg-group"></use>
@@ -363,7 +385,7 @@
     <!-- MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link" href="groups.html">
+      <a class="menu-item-link" [routerLink]="['/list-group']">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-group">
           <use xlink:href="#svg-group"></use>
