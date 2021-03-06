@@ -33,6 +33,8 @@ export class InformationService {
    }
 
 
-
+  getInformationByUserName(name:string): Observable<InformationDTO>{
+    return this.http.get<InformationDTO>(this.API + '/account' + name)
+  }
 
 }

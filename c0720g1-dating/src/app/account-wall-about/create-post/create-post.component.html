@@ -1,0 +1,47 @@
+<div class="quick-post">
+  <form [formGroup]="formCreatePost" (ngSubmit)="savePost()" action="">
+    <!-- QUICK POST HEADER -->
+    <div class="quick-post-header">
+      <!-- OPTION ITEMS -->
+      <div class="option-items">
+        <!-- OPTION ITEM -->
+        <div class="option-item active">
+          <p class="option-item-title">Cập Nhật Trạng Thái</p>
+        </div>
+      </div>
+    </div>
+    <div class="quick-post-body">
+      <div class="form-row">
+        <!-- FORM ITEM -->
+        <div class="form-item">
+          <!-- FORM TEXTAREA -->
+          <div class="form-textarea">
+                                    <textarea formControlName="contentPost" id="quick-post-text" name="quick-post-text"
+                                              placeholder="Chào bạn ! Hãy chia sẻ trạng thái của bạn ở đây..."></textarea>
+            <p class="form-textarea-limit-text">998/1000</p>
+          </div>
+          <div class="container-fluid row ">
+            <div class="col-1">
+              <img [hidden]="!checkImage" [src]="image" alt="" style="height: 100px;width: 100px">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quick-post-footer" style="justify-content: flex-end">
+      <input formControlName="imagePost" id="chooseImage" hidden type="file" (change)="showPreview($event)">
+      <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Thêm Ảnh"
+           id="update-image-for-new-feed" (click)="chooseImage()">
+        <svg class="quick-post-footer-action-icon icon-camera">
+          <use xlink:href="#svg-camera"></use>
+        </svg>
+      </div>
+      <div class="quick-post-footer-actions ml-5">
+        <select formControlName="idPolicy">
+          <option *ngFor="let policy of listPolicy" [value]="policy.idPolicy">{{policy.namePolicy}}</option>
+        </select>
+        <button type="submit" class="button small secondary ml-2">Đăng</button>
+      </div>
+    </div>
+  </form>
+</div>

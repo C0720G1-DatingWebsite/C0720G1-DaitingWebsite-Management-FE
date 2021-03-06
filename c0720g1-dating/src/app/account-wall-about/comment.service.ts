@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {IAccount} from "../../../entity/account";
-import {IPost} from "../../../entity/post";
-import {IComment} from "../../../entity/comment";
+import {IComment} from "../entity/comment";
 
 @Injectable({
   providedIn: 'root'

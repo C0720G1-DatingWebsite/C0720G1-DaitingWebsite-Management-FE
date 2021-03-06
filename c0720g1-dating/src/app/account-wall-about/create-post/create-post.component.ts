@@ -26,7 +26,7 @@ export class CreatePostComponent implements OnInit {
   url: string;
   idProject: string = 'project-dating-c8c29';
   file: string;
-
+  user;
   constructor(@Inject(AngularFireStorage) private storage: AngularFireStorage,
               private router: Router,
               @Inject(UploadFireService) private uploadFileService: UploadFireService,
@@ -43,6 +43,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser().fullName;
     this.formCreatePost = new FormGroup({
       idAccount: new FormControl(this.storageService.getUser().id),
       contentPost: new FormControl(''),
@@ -84,7 +85,7 @@ export class CreatePostComponent implements OnInit {
           console.log(this.formCreatePost.value);
           this.createPostService.createPost(this.formCreatePost.value).subscribe(data=>{
             if (data){
-              this.router.navigateByUrl('');
+              window.location.reload();
             }else {
               alert("Fail !");
             }

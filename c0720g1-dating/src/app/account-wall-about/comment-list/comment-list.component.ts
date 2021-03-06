@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IComment} from "../../../../entity/comment";
 import {CommentService} from "../comment.service";
-import {LoadResourceService} from "../../../../load-resource.service";
-import {StorageService} from "../../../../security/storage.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {MessageManager} from "../../../message-manager";
+import {IComment} from "../../entity/comment";
+import {StorageService} from "../../security/storage.service";
+import {MessageManager} from "../message-manager";
+import {LoadResourceService} from "../../load-resource.service";
+
 
 @Component({
   selector: 'app-comment-list',
@@ -20,6 +21,7 @@ export class CommentListComponent implements OnInit {
   idComment: number;
   iComments: IComment[];
   account;
+  flagShow = false;
   flagEdit = false;
   flagReply = false;
   idCommentEdit: number;
@@ -35,18 +37,23 @@ export class CommentListComponent implements OnInit {
               private loadResourceService: LoadResourceService,
               public formBuilder: FormBuilder, public toastrService: ToastrService,
               public messageManager:MessageManager) {
+
     this.loadScript();
   }
 
   ngOnInit(): void {
     this.getAllListCommentSizeInPost();
     this.account = this.storageService.getUser();
+    this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
+    this.loadResourceService.loadScript('assets/js/content/content.js');
   }
 
   getAllListCommentSizeInPost() {
     this.commentService.getAllCommentSize(this.idPost, this.page, this.size).subscribe(data => {
       this.iComments = data.content;
     });
+    // this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
+    // this.loadResourceService.loadScript('assets/js/content/content.js');
   }
 
   onClickShowComment() {

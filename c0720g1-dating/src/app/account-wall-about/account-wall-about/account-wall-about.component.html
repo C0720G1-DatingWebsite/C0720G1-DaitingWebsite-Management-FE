@@ -2,7 +2,8 @@
   <div class="content-grid"
        infiniteScroll
        [infiniteScrollDistance]="2"
-       [infiniteScrollThrottle]="200"
+       [infiniteScrollThrottle]="50"
+       [fromRoot]="true"
        (scrolled)="onScroll()">
     <!-- PROFILE HEADER -->
     <div class="profile-header">
@@ -72,17 +73,25 @@
             [routerLink]="['/account-wall/', iAccount.id ,'wall']">{{iAccount.fullName}}</a></p>
         </div>
         <div *ngIf="iAccount.id == account.id; else checkUser">
-
+          <div>
+            <div class="profile-header-social-links-wrap">
+              <div class="section-menu">
+                <a class="section-menu-item" href="#">
+                  <p class="section-menu-item-text">Đăng bài</p></a>
+              </div>
+            </div>
+          </div>
         </div>
         <ng-template #checkUser>
           <div class="profile-header-social-links-wrap">
             <div class="section-menu">
               <a class="section-menu-item" href="#">
                 <img src="assets/img/Warning.svg" style="width: 20%">
-                <p class="section-menu-item-text">Báo cáo vi phạm</p></a>
+                <p class="section-menu-item-text" [routerLink]="'/member'">Báo cáo vi phạm</p></a>
             </div>
           </div>
         </ng-template>
+
 
         <div class="user-stats">
           <div class="user-stat big"><p class="user-stat-title">{{iPosts.length}}</p>
@@ -98,12 +107,12 @@
             <div *ngIf="iAccount.id != friends.friend.id || friends.friend == null ; else checkFriends">
               <div class="profile-header-info-actions">
                 <button class="profile-header-info-action button secondary">Thêm Bạn +</button>
-                <button class="profile-header-info-action button primary">Gửi Tin Nhắn</button>
+                <a class="profile-header-info-action button primary" routerLink="/chat-group">Gửi Tin Nhắn</a>
               </div>
             </div>
             <ng-template #checkFriends>
               <div class="profile-header-info-actions">
-                <button class="profile-header-info-action button primary">Gửi Tin Nhắn</button>
+                <a class="profile-header-info-action button primary" routerLink="/chat-group">Gửi Tin Nhắn</a>
               </div>
             </ng-template>
           </div>
@@ -118,7 +127,7 @@
             <use xlink:href="#svg-timeline"></use>
           </svg>
           <p class="section-menu-item-text">Dòng thời gian</p></a>
-        <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'about']">
+        <a class="section-menu-item" [routerLink]="['/profile/'+ iAccount.id +'/friend-list']">
           <svg class="section-menu-item-icon icon-friend">
             <use xlink:href="#svg-friend"></use>
           </svg>
@@ -161,9 +170,11 @@
     <div class="grid grid-3-6-3 mobile-prefer-content">
       <!-- GRID COLUMN -->
       <div class="grid-column">
+
         <!-- WIDGET BOX -->
         <div class="widget-box">
-          <p class="widget-box-title">Thông tin của: </p>
+          <p class="widget-box-title" style="text-align: center">Thông tin của</p>
+          <br>
           <p class="widget-box-title">{{iAccount.fullName}}</p>
           <!-- /WIDGET BOX TITLE --><!-- WIDGET BOX CONTENT -->
           <div class="widget-box-content">
@@ -258,7 +269,7 @@
 
       <div class="grid-column">
         <!-- WIDGET BOX -->
-
+        <app-create-post ></app-create-post>
         <div class="widget-box no-padding" *ngFor=" let posts of iPosts">
           <div class="widget-box-status">
             <div class="widget-box-status-content">
@@ -285,7 +296,7 @@
               <p class="widget-box-status-text">{{posts.content}}</p>
               <div *ngIf="posts.image !== null">
                 <figure class="widget-box-picture popup-picture-trigger">
-                  <img src="{{posts.img}}" alt="cover-04">
+                  <img src="{{posts.image}}" alt="cover-04">
                 </figure>
               </div>
               <div class="content-actions">
@@ -339,7 +350,6 @@
           <div class="post-comment-list">
             <app-comment-list [idPost]="posts.id"
                               (onDeleteComment)="getIdCommentDelete($event)">
-
             </app-comment-list>
             <div class="post-comment-form">
               <div class="user-avatar small no-outline">
@@ -381,9 +391,8 @@
             </div>
           </div>
         </div>
-        <div *ngIf="iPosts.length == 0 ; else checkPost">
-          <p class="post-comment-heading">Xem thêm trạng thái</p>
-          <div class="loader-bars">
+        <div *ngIf="loadingData ; else checkPost">
+          <div class="page-loader-indicator loader-bars">
             <div class="loader-bar"></div>
             <div class="loader-bar"></div>
             <div class="loader-bar"></div>
@@ -394,6 +403,7 @@
             <div class="loader-bar"></div>
           </div>
         </div>
+
         <ng-template #checkPost>
           <p class="post-comment-heading">Bạn đã đến cuối trang</p>
         </ng-template>
@@ -535,24 +545,3 @@
   </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalCenterTitle"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLongTitle">Chỉnh sửa bình luận</h5>
-      </div>
-      <div class="modal-body" style="text-align: center">
-        <form>
-          <div class="form-group">
-            <textarea class="form-control" formControlName="content" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-danger" data-dismiss="modal">Đồng ý</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-      </div>
-    </div>
-  </div>
-</div>

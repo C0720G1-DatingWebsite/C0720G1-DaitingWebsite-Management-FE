@@ -280,7 +280,7 @@
             <!-- USER STATUS -->
             <div class="user-status request">
               <!-- USER STATUS AVATAR -->
-              <a class="user-status-avatar" [routerLink]="['/account-wall/', fri.id ,'wall']">
+              <a class="user-status-avatar" [routerLink]="['/account-wall/', fri.friendID ,'wall']">
                 <!-- USER AVATAR -->
                 <div class="user-avatar small no-outline">
                   <!-- USER AVATAR CONTENT -->
@@ -312,17 +312,17 @@
               <!-- /USER STATUS AVATAR -->
 
               <!-- USER STATUS TITLE -->
-              <p class="user-status-title"><a class="bold" [routerLink]="['/account-wall/', fri.id ,'wall']">{{fri.fullName}}</a></p>
+              <p class="user-status-title"><a class="bold" [routerLink]="['/account-wall/', fri.friendID ,'wall']">{{fri.fullName}}</a></p>
               <!-- /USER STATUS TITLE -->
 
               <!-- USER STATUS TEXT -->
-              <p class="user-status-text small-space">6 friends in common</p>
+              <p class="user-status-text small-space">{{fri.mutualFriends}} bạn chung</p>
               <!-- /USER STATUS TEXT -->
 
               <!-- ACTION REQUEST LIST -->
               <div class="action-request-list">
                 <!-- ACTION REQUEST -->
-                <p class="action-request accept with-text" (click)="acceptFriend(fri.id)">
+                <p class="action-request accept with-text" (click)="acceptFriend(fri.friendID)">
                   <!-- ACTION REQUEST ICON -->
                   <svg class="action-request-icon icon-add-friend">
                     <use xlink:href="#svg-add-friend" ></use>
@@ -330,13 +330,13 @@
                   <!-- /ACTION REQUEST ICON -->
 
                   <!-- ACTION REQUEST TEXT -->
-                  <span class="action-request-text">Add Friend</span>
+                  <span class="action-request-text">Đồng ý</span>
                   <!-- /ACTION REQUEST TEXT -->
                 </p>
                 <!-- /ACTION REQUEST -->
 
                 <!-- ACTION REQUEST -->
-                <p class="action-request decline with-text" (click)="delFriend(fri.id)">
+                <p class="action-request decline with-text" (click)="delFriend(fri.friendID)">
                   <!-- ACTION REQUEST ICON -->
                   <svg class="action-request-icon icon-remove-friend">
                     <use xlink:href="#svg-remove-friend"></use>
@@ -344,7 +344,7 @@
                   <!-- /ACTION REQUEST ICON -->
 
                   <!-- ACTION REQUEST TEXT -->
-                  <span class="action-request-text">Del Friend</span>
+                  <span class="action-request-text">Từ chối</span>
                   <!-- /ACTION REQUEST TEXT -->
                 </p>
                 <!-- /ACTION REQUEST -->

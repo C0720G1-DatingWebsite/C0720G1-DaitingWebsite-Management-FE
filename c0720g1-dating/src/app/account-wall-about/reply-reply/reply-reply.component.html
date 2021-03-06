@@ -1,0 +1,44 @@
+<div class="post-comment-list" *ngFor="let replyMulti of iReply">
+  <div class="post-comment unread reply-2">
+    <div>
+      <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', replyMulti.account.id ,'wall']">
+        <div class="user-avatar-content">
+          <div class="hexagon-image-30-32" [attr.data-src]="replyMulti.account.avatar"></div>
+        </div>
+        <div class="user-avatar-progress">
+          <div class="hexagon-progress-40-44"></div>
+        </div>
+        <div class="user-avatar-progress-border">
+          <div class="hexagon-border-40-44"></div>
+        </div>
+      </a>
+      <p class="post-comment-text"><a class="post-comment-text-author"
+                                      [routerLink]="['/account-wall/', replyMulti.account.id ,'wall']">
+        {{replyMulti.account.fullName}}</a>{{replyMulti.content}}</p>
+      <div class="content-actions">
+        <div class="content-action">
+          <div class="meta-line">
+            <p class="meta-line-link light">Thích</p>
+          </div>
+          <div class="meta-line">
+            <p class="meta-line-link light">Trả lời</p>
+<!--            <p class="meta-line-link light" (click)="getIdReply(replyMulti)">Trả lời</p>-->
+          </div>
+          <div class="meta-line">
+            <p class="meta-line-timestamp">{{replyMulti.dateComment|date:'dd/MM/yyyy - HH:mm:ss'}}</p>
+          </div>
+        </div>
+      </div>
+<!--      <div *ngIf="flagReplyReply && idReply == reply.id">-->
+<!--        <form [formGroup]="formGroup">-->
+<!--          <div class="form-group">-->
+<!--            <textarea formControlName="content" required></textarea>-->
+<!--          </div>-->
+<!--          <button type="button" class="btn btn-secondary" (click)="exitReply()">Hủy</button>-->
+<!--          <button type="submit" class="btn btn-primary" (click)="submitForReply()">Lưu</button>-->
+<!--        </form>-->
+<!--      </div>-->
+    </div>
+  </div>
+  <app-reply-reply [idReplyMulti]="replyMulti.id"></app-reply-reply>
+</div>

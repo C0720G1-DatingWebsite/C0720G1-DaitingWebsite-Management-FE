@@ -1,5 +1,5 @@
-<div class="content-grid">
-  <div class="grid-column">
+<!--<div class="content-grid">-->
+<!--  <div class="grid-column">-->
     <!-- QUICK POST -->
     <div class="quick-post">
       <form [formGroup]="formCreatePost" (ngSubmit)="savePost()" action="">
@@ -32,10 +32,10 @@
           </div>
         </div>
         <div class="quick-post-footer" style="justify-content: flex-end">
-          <input formControlName="imagePost" type="file" (change)="showPreview($event)">
+          <input formControlName="imagePost" id="chooseImage" hidden  type="file" (change)="showPreview($event)">
           <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Thêm Ảnh"
-               id="update-image-for-new-feed" >
-            <svg class="quick-post-footer-action-icon icon-camera">
+               id="update-image-for-new-feed" (click)="chooseImage()" >
+            <svg class="quick-post-footer-action-icon icon-camera" >
               <use xlink:href="#svg-camera"></use>
             </svg>
           </div>
@@ -48,5 +48,5 @@
         </div>
       </form>
     </div>
-  </div>
-</div>
+<!--  </div>-->
+<!--</div>-->

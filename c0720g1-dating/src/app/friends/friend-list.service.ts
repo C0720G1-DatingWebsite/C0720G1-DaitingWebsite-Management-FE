@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {IAccount} from "../entity/account";
 import {StorageService} from "../security/storage.service";
+import {IFriendDTO} from "../entity/friendDTO";
 import {IFriend} from "../entity/friend";
 
 @Injectable({
@@ -17,8 +19,8 @@ export class FriendListService {
     this.header = new Headers({'Content-Type': 'application/context'})
   }
 
-  getAccountById(id: number) : Observable<any>{
-    return this.http.get<any>(this.url + '/profile/' +id);
+  getAccountById(id: number) : Observable<IFriendDTO>{
+    return this.http.get<IFriendDTO>(this.url + '/profile/' +id);
   }
 
   getListFriend(id: number): Observable<any>{
@@ -29,12 +31,12 @@ export class FriendListService {
     return this.http.get<any>(this.url+'/profile/'+id+'/friend-request')
   }
 
-  acceptFriend(idAccount, idFriend): Observable<any> {
-    return this.http.get(this.url + '/accept-friend-request?idAccount=' + idAccount + '&idFriend=' +idFriend);
+  acceptFriend(accountID, friendID): Observable<IFriendDTO> {
+    return this.http.get<IFriendDTO>(this.url + '/accept-friend-request?accountID=' + accountID + '&friendID=' +friendID);
   }
 
-  delFriend(idAccount, idFriend): Observable<any> {
-    return this.http.get(this.url + '/del-friend-request?idAccount=' + idAccount + '&idFriend=' +idFriend);
+  delFriend(accountID, friendID): Observable<IFriendDTO> {
+    return this.http.get<IFriendDTO>(this.url + '/del-friend-request?idAccount=' + accountID + '&idFriend=' +friendID);
   }
 
   searchFriend(id:number, name:string): Observable<any>{

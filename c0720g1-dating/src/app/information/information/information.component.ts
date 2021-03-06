@@ -21,12 +21,6 @@ export class InformationComponent implements OnInit {
      private loadResourceService: LoadResourceService,
 
   ) {
-    this.loadScript() }
-
-
-
-  ngOnInit(): void {
-    this.loadScript();
     this.formGroup = this.formBuilder.group({
       id:[''],
       fullName: new FormControl([Validators.required, Validators.maxLength(255), Validators.minLength(1)]),
@@ -37,10 +31,16 @@ export class InformationComponent implements OnInit {
       audience: new FormControl([Validators.required]),
       accountDescribe: new FormControl([Validators.maxLength(2000)])
     });
-    this.informationService.getInformationById(this.route.snapshot.paramMap.get('id')).subscribe(data =>{
-        console.log(this.formGroup.patchValue(data));
-        console.log(data)
+    this.informationService.getInformationByUserName(this.route.snapshot.paramMap.get('userName')).subscribe(data =>{
+      console.log(this.formGroup.patchValue(data));
+      console.log(data)
     });
+    this.loadScript() }
+
+
+
+  ngOnInit(): void {
+
   }
 
   updateInformation(){

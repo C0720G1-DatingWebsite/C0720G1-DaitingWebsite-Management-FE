@@ -3,6 +3,7 @@ import {ICity} from "../app/entity/city";
 import {IJob} from "../app/entity/job";
 
 export interface InformationDTO {
+  id: number;
   fullName: string;
   address: String;
   county: any;
@@ -11,5 +12,4 @@ export interface InformationDTO {
   audience: boolean;
   accountDescribe: string;
   avatar: string;
-
 }

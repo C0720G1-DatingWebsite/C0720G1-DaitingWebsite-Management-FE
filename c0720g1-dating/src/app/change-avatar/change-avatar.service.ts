@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ChangeAvatarService {
-  public API: string = "http://localhost:8081/api";
+  public API: string = "http://localhost:8080/api";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

@@ -73,7 +73,7 @@
           <div class="user-short-description">
             <!-- USER SHORT DESCRIPTION AVATAR -->
             <a class="user-short-description-avatar user-avatar medium no-stats"
-               [routerLink]="['/detail-group/'+group.id]">
+               [routerLink]="['/timeline-group/'+group.id]">
               <!-- USER AVATAR BORDER -->
               <div class="user-avatar-border">
                 <!-- HEXAGON -->
@@ -93,7 +93,7 @@
             <!-- /USER SHORT DESCRIPTION AVATAR -->
 
             <!-- USER SHORT DESCRIPTION TITLE -->
-            <p class="user-short-description-title"><a href="#">{{group.name}}</a></p>
+            <p class="user-short-description-title"><a [routerLink]="['/timeline-group/'+group.id]">{{group.name}}</a></p>
             <!-- /USER SHORT DESCRIPTION TITLE -->
 
             <!-- USER SHORT DESCRIPTION TEXT -->
