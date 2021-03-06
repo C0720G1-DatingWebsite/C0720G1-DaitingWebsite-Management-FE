@@ -354,7 +354,7 @@
               <!-- USER STATUS -->
               <div class="user-status request">
                 <!-- USER STATUS AVATAR -->
-                <a class="user-status-avatar" [routerLink]="['/account-wall/', fri.id ,'wall']">
+                <a class="user-status-avatar" [routerLink]="['/account-wall/', fri.friendID ,'wall']">
                   <!-- USER AVATAR -->
                   <div class="user-avatar small no-outline">
                     <!-- USER AVATAR CONTENT -->
@@ -386,17 +386,17 @@
                 <!-- /USER STATUS AVATAR -->
 
                 <!-- USER STATUS TITLE -->
-                <p class="user-status-title"><a class="bold" [routerLink]="['/account-wall/', fri.id ,'wall']">{{fri.fullName}}</a></p>
+                <p class="user-status-title"><a class="bold" [routerLink]="['/account-wall/', fri.friendID ,'wall']">{{fri.fullName}}</a></p>
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TEXT -->
-                <p class="user-status-text">6 bạn chung</p>
+                <p class="user-status-text">{{fri.mutualFriends}} bạn chung</p>
                 <!-- /USER STATUS TEXT -->
 
                 <!-- ACTION REQUEST LIST -->
                 <div class="action-request-list">
                   <!-- ACTION REQUEST -->
-                  <div class="action-request accept" (click)="acceptFriend(fri.id)">
+                  <div class="action-request accept" (click)="acceptFriend(fri.friendID)">
                     <!-- ACTION REQUEST ICON -->
                     <svg class="action-request-icon icon-add-friend">
                       <use xlink:href="#svg-add-friend"></use>
@@ -406,7 +406,7 @@
                   <!-- /ACTION REQUEST -->
 
                   <!-- ACTION REQUEST -->
-                  <div class="action-request decline" (click)="delFriend(fri.id)">
+                  <div class="action-request decline" (click)="delFriend(fri.friendID)">
                     <!-- ACTION REQUEST ICON -->
                     <svg class="action-request-icon icon-remove-friend">
                       <use xlink:href="#svg-remove-friend"></use>

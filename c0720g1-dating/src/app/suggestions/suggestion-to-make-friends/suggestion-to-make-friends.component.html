@@ -28,7 +28,7 @@
                   </div>
                 </a>
                 <p class="user-status-title"><a class="bold" data-toggle="tooltip"
-                                                href="profile-timeline.html">{{data.fullName}}</a>
+                                                [routerLink]="['/account-wall/', data.friendId ,'wall']">{{data.fullName}}</a>
                 </p>
                 <p class="user-status-text small">{{data.mutualFriends}} bạn chung</p>
                 <!--                <div class="action-request-list">-->

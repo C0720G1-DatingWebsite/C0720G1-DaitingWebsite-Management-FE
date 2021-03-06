@@ -2,6 +2,8 @@ import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
 import {GroupService} from "../group.service";
 import {StorageService} from "../../security/storage.service";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -22,7 +24,9 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
 
   constructor(private loadResourceService: LoadResourceService,
               public groupService: GroupService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private toastrService: ToastrService,
+              private router: Router) {
     this.loadScript();
   }
 
@@ -36,18 +40,18 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
       this.listGroup = data.content;
       this.pageable = data
 
-      this.groupService.getListJoinedGroup(this.storageService.getUser().id).subscribe(data2 =>{
+      this.groupService.getListJoinedGroup(this.storageService.getUser().id).subscribe(data2 => {
           this.listJoinedGroup = data2;
 
-        for (let i = 0; i < this.listGroup.length; i++) {
-          for (let j = 0; j < this.listJoinedGroup.length; j++) {
-            console.log(this.listGroup[i].id + '' + this.listJoinedGroup[j])
-            if (this.listGroup[i].id === this.listJoinedGroup[j]) {
-              this.listGroup[i].check = true;
-              break;
+          for (let i = 0; i < this.listGroup.length; i++) {
+            for (let j = 0; j < this.listJoinedGroup.length; j++) {
+              console.log(this.listGroup[i].id + '' + this.listJoinedGroup[j])
+              if (this.listGroup[i].id === this.listJoinedGroup[j]) {
+                this.listGroup[i].check = true;
+                break;
+              }
             }
           }
-        }
         }
       )
     })
@@ -92,19 +96,21 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
 
   deleteGroup(id: number) {
     this.groupService.deleteGroupById(id).subscribe(data => {
+      this.toastrService.success('xóa nhóm thành công!', 'Thông báo:');
       this.ngOnInit()
     })
   }
 
   joinGroup(accountId: number, groupId: number) {
     this.groupService.joinGroup(accountId, groupId).subscribe(data => {
-
+      this.toastrService.success('tham giá nhóm thành công!', 'Thông báo:');
+      this.ngOnInit()
     })
   }
 
 
   onSubmit() {
-    if (this.searchName =='') {
+    if (this.searchName == '') {
       this.getListGroup()
     } else {
       this.groupService.findGroup(this.searchName, this.page).subscribe(data => {

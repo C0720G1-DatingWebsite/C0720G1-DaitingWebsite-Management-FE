@@ -75,14 +75,15 @@ export class PostComponent implements OnInit {
 
   increaseLike(idPost) {
     this.postServiceService.getAllAccountPost().subscribe(data => {
-      this.accountPost = data
+      this.accountPost = data;
       let check = true;
       for (let i = 0; i < this.accountPost.length; i++) {
         if (idPost === data[i].post.id && this.getIdAccount() === data[i].account.id) {
+          console.log('giam')
           this.postServiceService.reductionLike(idPost, data[i].id).subscribe(data => {
             this.getListPost();
             this.loadResourceService.loadScript('assets/js/content/content.js');
-          })
+          });
           check = true;
           break;
         } else {
@@ -90,6 +91,7 @@ export class PostComponent implements OnInit {
         }
       }
       if (check == false) {
+        console.log('tang')
         this.postServiceService.increaseLike(this.getIdAccount(), idPost).subscribe(data => {
           this.getListPost();
           this.loadResourceService.loadScript('assets/js/content/content.js');
@@ -158,7 +160,7 @@ export class PostComponent implements OnInit {
 
   editViewPost(object: any) {
 
-    this.image = object.img;
+    this.image = object.image;
     this.booleanEdit = true;
     this.id = object.id;
     this.object = object;
@@ -166,7 +168,7 @@ export class PostComponent implements OnInit {
     this.postEditForm = this.formBuilder.group({
       id: [object.id],
       content: [object.content],
-      img: [object.img],
+      image: [object.image],
       postTime: [object.postTime],
       likeCount: [object.likeCount],
       account: [object.account],
@@ -200,7 +202,7 @@ export class PostComponent implements OnInit {
             this.postServiceService.editPost(this.post).subscribe(data => {
               this.toastr.success('Sửa Thành Công','thông báo')
               this.booleanEdit = false;
-              // this.ngOnInit();
+              this.ngOnInit();
             })
           });
         })

@@ -18,9 +18,11 @@ import {MessageManager} from "../message-manager";
 })
 export class AccountWallAboutComponent implements OnInit {
   id: number;
+  loading = false;
   idComment: number;
   iAccount: IAccount;
   page: number = 0;
+  pageable: any;
   size: number = 2;
   iPosts: IPost[];
   iAccountGroups: IAccountGroup[] = [];
@@ -28,6 +30,7 @@ export class AccountWallAboutComponent implements OnInit {
   formGroup: FormGroup;
   idPost: number;
   account;
+  loadingData = false;
 
   constructor(private route: ActivatedRoute,
               private accountWallAboutService: AccountWallAboutService,
@@ -39,7 +42,6 @@ export class AccountWallAboutComponent implements OnInit {
               public messageManager: MessageManager) {
     this.loadScript();
   }
-
 
   ngOnInit(): void {
     this.getFindById();
@@ -59,13 +61,21 @@ export class AccountWallAboutComponent implements OnInit {
 
   getAllPost() {
     this.accountWallAboutService.getAllPost(this.page, this.size, this.id).subscribe((data) => {
-      this.iPosts = data.content;
+      // if (this.iPosts.length == data.length){
+        this.iPosts = data.content;
+        this.pageable = data;
+      // }
+
+
     });
   }
 
   onScroll() {
     this.size += 2;
+    this.loadingData = true;
     this.getAllPost();
+    this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
+    this.loadResourceService.loadScript('assets/js/content/content.js');
     // this.loadScript();
   }
 
@@ -83,7 +93,7 @@ export class AccountWallAboutComponent implements OnInit {
 
   createCommentForm() {
     this.formGroup = this.formBuilder.group({
-      content: ['', [Validators.required]],
+      content: ['', [Validators.required ,Validators.maxLength(200)]],
       accountId: [this.account.id],
       postId: ['']
     });

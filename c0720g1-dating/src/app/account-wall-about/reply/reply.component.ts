@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IComment} from "../../../../entity/comment";
-import {CommentService} from "../comment.service";
-import {LoadResourceService} from "../../../../load-resource.service";
+import {IComment} from "../../entity/comment";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StorageService} from "../../../../security/storage.service";
+import {StorageService} from "../../security/storage.service";
+import {LoadResourceService} from "../../load-resource.service";
+import {CommentService} from "../comment.service";
+
 
 @Component({
   selector: 'app-reply',
@@ -18,6 +19,7 @@ export class ReplyComponent implements OnInit {
   idReply: number;
   account;
   iComment: IComment[];
+
   @Input() idComment: number;
 
   flagReplyReply= false;
@@ -27,7 +29,10 @@ export class ReplyComponent implements OnInit {
               private storageService: StorageService,
               private loadResourceService: LoadResourceService,
               public formBuilder:FormBuilder) {
-    this.loadScript();
+    this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
+    this.loadResourceService.loadScript('assets/js/content/content.js');
+
+    // this.loadScript();
   }
 
   ngOnInit(): void {
@@ -35,17 +40,17 @@ export class ReplyComponent implements OnInit {
     this.account = this.storageService.getUser();
     this.loadScript();
   }
-  // onClickShowReply() {
-  //   this.size = this.size + 2;
-  //   this.getAllListReplySizeInComment();
-  //   this.ngOnInit();
-  // }
-  //
-  // onClickHideReply() {
-  //   this.size = 1;
-  //   this.getAllListReplySizeInComment();
-  //   this.ngOnInit();
-  // }
+  onClickShowReply() {
+    this.size = this.size + 2;
+    this.getAllListReplySizeInComment();
+    this.ngOnInit();
+  }
+
+  onClickHideReply() {
+    this.size = 1;
+    this.getAllListReplySizeInComment();
+    this.ngOnInit();
+  }
 
   loadScript() {
     this.loadResourceService.loadScript('assets/js/utils/app.js');
@@ -71,10 +76,12 @@ export class ReplyComponent implements OnInit {
     this.commentService.getAllReply(this.idComment, this.page).subscribe(data => {
       this.iComment = data.content;
     })
+    // this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
+    // this.loadResourceService.loadScript('assets/js/content/content.js');
   }
 
   getAllListReplySizeInComment() {
-    this.commentService.getAllCommentSize(this.idComment, this.page, this.size).subscribe(data => {
+    this.commentService.getAllReplySize(this.idComment, this.page, this.size).subscribe(data => {
       this.iComment = data.content;
       console.log('reply');
       console.log(data.content);

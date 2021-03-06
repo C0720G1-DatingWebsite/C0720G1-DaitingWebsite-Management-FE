@@ -1,4 +1,10 @@
 <div class="post-comment-list">
+<!--  <div *ngIf="iComments.length !== null ; else commentShow">-->
+<!--    33-->
+<!--  </div>-->
+<!--  <ng-template #commentShow>-->
+<!--    12-->
+<!--  </ng-template>-->
   <div class="content-actions">
     <div class="content-action">
       <div class="meta-line">
@@ -9,9 +15,7 @@
       </div>
     </div>
   </div>
-
   <div class="post-comment" *ngFor="let comments of iComments">
-
     <div *ngIf="comments.content == null; else checkContent"></div>
     <ng-template #checkContent>
       <div>

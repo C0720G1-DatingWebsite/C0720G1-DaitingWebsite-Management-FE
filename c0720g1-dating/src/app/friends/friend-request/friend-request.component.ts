@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LoadResourceService} from "../../load-resource.service";
-import {IAccount} from "../../entity/account";
 import {FriendListService} from "../friend-list.service";
 import {ActivatedRoute} from "@angular/router";
+import {IFriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-friend-request',
@@ -11,9 +11,9 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class FriendRequestComponent implements OnInit{
 
-  public friendList: IAccount[];
+  public friendList: IFriendDTO[];
   public id: number;
-  public iAccount: IAccount;
+  public iAccount: IFriendDTO;
 
 
   constructor( private loadResourceService:LoadResourceService,
@@ -22,18 +22,20 @@ export class FriendRequestComponent implements OnInit{
     this.loadScript()
   }
 
+
   ngOnInit(): void {
     this.getAccountById();
   }
 
   getAccountById(){
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.friendService.getAccountById(this.id).subscribe((data: IAccount) =>
+    this.friendService.getAccountById(this.id).subscribe((data: IFriendDTO) =>
     {
       this.iAccount = data;
       console.log(data);
       this.friendService.getFriendRequest(this.id).subscribe(data =>{
         this.friendList = data;
+        console.log(this.friendList);
         this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
         console.log(data);
       })
@@ -60,9 +62,10 @@ export class FriendRequestComponent implements OnInit{
     },200)
   }
 
-  acceptFriend(id: number) {
-    this.friendService.acceptFriend(this.id, id).subscribe(data => {
-      this.friendList = data;
+  acceptFriend(idFri:number) {
+    console.log(idFri)
+    this.friendService.acceptFriend(this.id,idFri).subscribe(data => {
+      this.iAccount = data;
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();
@@ -71,9 +74,9 @@ export class FriendRequestComponent implements OnInit{
     });
   }
 
-  delFriend(id: number) {
-    this.friendService.delFriend(this.id, id).subscribe(data => {
-      this.friendList = data;
+  delFriend(idFri: number) {
+    this.friendService.delFriend(this.id, idFri).subscribe(data => {
+      this.iAccount = data;
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();

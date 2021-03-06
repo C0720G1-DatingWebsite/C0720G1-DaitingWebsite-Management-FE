@@ -4,7 +4,7 @@ import {InformationComponent} from "./information/information.component";
 
 
 const routes: Routes = [
-  {path: 'information', component: InformationComponent}
+  {path: 'information/:userName', component: InformationComponent}
 ];
 
 @NgModule({

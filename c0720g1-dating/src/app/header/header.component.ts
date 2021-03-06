@@ -3,8 +3,8 @@ import {StorageService} from "../security/storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FriendListService} from "../friends/friend-list.service";
 import {LoadResourceService} from "../load-resource.service";
-import {IAccount} from "../entity/account";
 import {MessageService} from "../chat-group/message.service";
+import {IFriendDTO} from "../entity/friendDTO";
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit, DoCheck{
   account: any;
   public id: number;
   public nameFriends: string;
-  public friendList: IAccount[];
+  public friendList: IFriendDTO[];
+  public iAccount: IFriendDTO;
 
 
   sender: any;
@@ -74,19 +75,11 @@ export class HeaderComponent implements OnInit, DoCheck{
 
   search(){
     this.router.navigateByUrl('profile/'+this.storageService.getUser().id+'/search/'+this.nameFriends);
-    this.friendService.searchAddFriend(this.storageService.getUser().id,this.nameFriends).subscribe(data => {
-      this.friendList = data;
-      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
-      console.log(data);
-    }, error => {
-      console.log(error);
-      this.friendList = [];
-    })
   }
 
   acceptFriend(id: number) {
     this.friendService.acceptFriend(this.storageService.getUser().id, id).subscribe(data => {
-      this.friendList = data;
+      this.iAccount = data;
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();
@@ -97,7 +90,7 @@ export class HeaderComponent implements OnInit, DoCheck{
 
   delFriend(id: number) {
     this.friendService.delFriend(this.storageService.getUser().id, id).subscribe(data => {
-      this.friendList = data;
+      this.iAccount = data;
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
       console.log(data);
       this.ngOnInit();

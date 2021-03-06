@@ -15,7 +15,7 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
   infoAccountDTO: InfoAccountDTO;
   suggestionToMakeFriendsDTO: SuggestionToMakeFriendsDTO[] = [];
   image: string;
-  size = 8;
+  size = 10;
   loadingData: boolean = false;
   displayData: boolean = false;
 

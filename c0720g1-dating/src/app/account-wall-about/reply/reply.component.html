@@ -1,4 +1,14 @@
 <div class="post-comment-list">
+<!--  <div class="content-actions">-->
+<!--    <div class="content-action">-->
+<!--      <div class="meta-line">-->
+<!--        <p class="meta-line-link light"></p>-->
+<!--      </div>-->
+<!--      <div class="meta-line">-->
+<!--        <p class="meta-line-link light" (click)="onClickShowReply()">Xem thêm bình luận</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="post-comment unread reply-2" *ngFor="let reply of iComment">
     <div>
       <a class="user-avatar small no-outline" [routerLink]="['/account-wall/', reply.account.id ,'wall']">
@@ -38,7 +48,20 @@
         </form>
       </div>
     </div>
-
+  <app-reply-reply [idReplyMulti]="reply.id"></app-reply-reply>
   </div>
+<!--  <div class="content-actions">-->
+<!--    <div class="content-action">-->
+<!--      <div class="meta-line">-->
+<!--        <p class="meta-line-link light"></p>-->
+<!--      </div>-->
+<!--      <div class="meta-line">-->
+<!--        <p class="meta-line-link light" (click)="onClickShowReply()">Xem thêm bình luận</p>-->
+<!--      </div>-->
+<!--      <div class="meta-line">-->
+<!--        <p class="meta-line-link light" (click)="onClickHideReply()">Ẩn bớt bình luận</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 

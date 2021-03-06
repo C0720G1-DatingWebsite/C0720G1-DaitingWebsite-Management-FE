@@ -105,7 +105,7 @@
     <div id="section-navigation-slider" class="section-menu">
 
       <!-- SECTION MENU ITEM -->
-      <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.id ,'wall']">
+      <a class="section-menu-item" [routerLink]="['/account-wall/', iAccount.accountID ,'wall']">
         <!-- SECTION MENU ITEM ICON -->
         <svg class="section-menu-item-icon icon-timeline">
           <use xlink:href="#svg-timeline"></use>
@@ -119,7 +119,7 @@
       <!-- /SECTION MENU ITEM -->
 
       <!-- SECTION MENU ITEM -->
-      <a class="section-menu-item active" [routerLink]="['/profile/', iAccount.id ,'friend-list']">
+      <a class="section-menu-item active" [routerLink]="['/profile/', iAccount.accountID ,'friend-list']">
         <!-- SECTION MENU ITEM ICON -->
         <svg class="section-menu-item-icon icon-friend">
           <use xlink:href="#svg-friend"></use>
@@ -256,7 +256,7 @@
 
         <div class="user-preview landscape">
           <!-- USER PREVIEW COVER -->
-          <a  [routerLink]="['/account-wall/', fri.id ,'wall']">
+          <a  [routerLink]="['/account-wall/', fri.accountID ,'wall']">
             <figure class="user-preview-cover liquid">
               <img [src]="fri.backgroundImage">
             </figure>
@@ -268,7 +268,7 @@
             <!-- USER SHORT DESCRIPTION -->
             <div class="user-short-description landscape tiny">
               <!-- USER SHORT DESCRIPTION AVATAR -->
-              <a class="user-short-description-avatar user-avatar small" [routerLink]="['/account-wall/', fri.id ,'wall']">
+              <a class="user-short-description-avatar user-avatar small" [routerLink]="['/account-wall/', fri.accountID ,'wall']">
                 <!-- USER AVATAR BORDER -->
                 <div class="user-avatar-border">
                   <!-- HEXAGON -->
@@ -306,7 +306,7 @@
               <!-- /USER SHORT DESCRIPTION AVATAR -->
 
               <!-- USER SHORT DESCRIPTION TITLE -->
-              <p class="user-short-description-title"><a  [routerLink]="['/account-wall/', fri.id ,'wall']"> {{fri.fullName}} </a></p>
+              <p class="user-short-description-title"><a  [routerLink]="['/account-wall/', fri.accountID ,'wall']"> {{fri.fullName}} </a></p>
               <!-- /USER SHORT DESCRIPTION TITLE -->
 
               <!-- USER SHORT DESCRIPTION TEXT -->
@@ -322,11 +322,11 @@
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title">1</p>
+                <p class="user-stat-title">{{fri.mutualFriends}}</p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
+                <p class="user-stat-text">Bạn chung</p>
                 <!-- /USER STAT TEXT -->
               </div>
               <!-- /USER STAT -->
@@ -337,7 +337,7 @@
             <!-- USER PREVIEW ACTIONS -->
             <div class="action-request-list">
               <!-- ACTION REQUEST -->
-              <p class="action-request decline with-text" (click)="delFriend(fri.id)">
+              <p class="action-request decline with-text" (click)="delFriend(fri.accountID)">
                 <!-- ACTION REQUEST ICON -->
                 <svg class="action-request-icon icon-remove-friend">
                   <use xlink:href="#svg-remove-friend"></use>
@@ -345,7 +345,7 @@
                 <!-- /ACTION REQUEST ICON -->
 
                 <!-- ACTION REQUEST TEXT -->
-                <span class="action-request-text">Del Friend</span>
+                <span class="action-request-text">Xoá bạn</span>
                 <!-- /ACTION REQUEST TEXT -->
               </p>
               <!-- /ACTION REQUEST -->

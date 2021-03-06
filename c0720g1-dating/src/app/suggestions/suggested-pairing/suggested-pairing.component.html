@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </a>
-                <p class="user-status-title"><a class="bold" href="profile-timeline.html">{{a.fullName}}</a></p>
+                <p class="user-status-title"><a class="bold" [routerLink]="['/account-wall/', a.friendId ,'wall']">{{a.fullName}}</a></p>
                 <p class="user-status-text small">{{a.mutualFriends}} bạn chung</p>
                 <div class="action-request-list">
                   <div class="action-request accept" routerLink="/chat-group">

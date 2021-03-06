@@ -4,7 +4,7 @@ import {FriendListService} from "../friend-list.service";
 import {ActivatedRoute} from "@angular/router";
 import {StorageService} from "../../security/storage.service";
 import {IFriend} from "../../entity/friend";
-import {IAccount} from "../../entity/account";
+import {IFriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-add-friends',
@@ -13,8 +13,9 @@ import {IAccount} from "../../entity/account";
 })
 export class AddFriendsComponent implements OnInit {
 
-  public friendList: IFriend[];
+  public friendList: IFriendDTO[];
   public id: number;
+  public iAccount: IFriendDTO;
 
   constructor( private loadResourceService:LoadResourceService,
                private friendService: FriendListService,
@@ -40,9 +41,20 @@ export class AddFriendsComponent implements OnInit {
     });
   }
 
-  addFriend(id: number) {
-    this.friendService.addFriend(this.storageService.getUser().id, id).subscribe(data => {
-      this.friendList = data;
+  addFriend(idFri: number) {
+    this.friendService.addFriend(this.storageService.getUser().id, idFri).subscribe(data => {
+      this.iAccount = data;
+      console.log(data);
+      this.ngOnInit();
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  delFriend(idFri: number) {
+    this.friendService.delFriend(this.storageService.getUser().id, idFri).subscribe(data => {
+      this.iAccount = data;
       console.log(data);
       this.ngOnInit();
       this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');

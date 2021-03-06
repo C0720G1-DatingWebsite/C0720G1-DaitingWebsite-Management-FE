@@ -50,7 +50,7 @@
           <!-- /USER SHORT DESCRIPTION AVATAR -->
 
           <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a [routerLink]="['/account-wall/', user.id ,'wall']">{{user.fullName}}</a></p>
+          <p class="user-short-description-title"><a [routerLink]="['/account-wall/', user.accountID ,'wall']">{{user.fullName}}</a></p>
           <!-- /USER SHORT DESCRIPTION TITLE -->
 
           <!-- USER SHORT DESCRIPTION TEXT -->
@@ -70,11 +70,11 @@
               <!-- USER STAT -->
               <div class="user-stat">
                 <!-- USER STAT TITLE -->
-                <p class="user-stat-title"> 1 </p>
+                <p class="user-stat-title"> {{user.mutualFriends}} </p>
                 <!-- /USER STAT TITLE -->
 
                 <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bạn</p>
+                <p class="user-stat-text">Bạn chung</p>
                 <!-- /USER STAT TEXT -->
               </div>
               <!-- /USER STAT -->
@@ -90,19 +90,31 @@
         <div class="user-preview-actions">
           <!-- BUTTON -->
 
-<!--          <div *ngIf="user.state.name === 'Đã kết bạn' then logged else notLogged"></div>-->
-<!--          <ng-template #logged>-->
-<!--            <span class="button danger" (click)="addFriend(user.id)">Xoá bạn +</span>-->
-<!--          </ng-template>-->
-<!--          <ng-template #notLogged>-->
-<!--            <span class="button secondary" (click)="addFriend(user.id)">Thêm bạn +</span>-->
-<!--          </ng-template>-->
+          <div *ngIf="user.stateID == 1 then logged else notLogged"></div>
+          <ng-template #logged>
+            <span class="button twitch">Bạn bè</span>
+          </ng-template>
+          <ng-template #notLogged>
+            <div *ngIf="user.stateID == 2 then block else notBlock"></div>
+            <ng-template #block>
+              <span class="button secondary" (click)="addFriend(user.accountID)">Xác nhận lời mời</span>
+            </ng-template>
+            <ng-template #notBlock>
+              <div *ngIf="user.stateID == 3 then yes else notYes"></div>
+              <ng-template #yes>
+                <span class="button tertiary" (click)="delFriend(user.accountID)">Huỷ lời mời -</span>
+              </ng-template>
+              <ng-template #notYes>
+              <span class="button primary" (click)="addFriend(user.accountID)">Kết bạn +</span>
+              </ng-template>
+            </ng-template>
+          </ng-template>
 
-          <p class="button secondary" (click)="addFriend(user.id)">Thêm bạn +</p>
+<!--          <p class="button secondary" (click)="addFriend(user.accountID)">Thêm bạn +</p>-->
           <!-- /BUTTON -->
 
           <!-- BUTTON -->
-          <p class="button primary" routerLink="/chat-group">Gửi tin nhắn</p>
+          <p class="button primary">Gửi tin nhắn</p>
           <!-- /BUTTON -->
         </div>
         <!-- /USER PREVIEW ACTIONS -->

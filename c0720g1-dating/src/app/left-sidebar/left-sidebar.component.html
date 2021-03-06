@@ -76,7 +76,7 @@
     <!-- MENU ITEM -->
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'profile/'+ account.id +'/list-friend'" data-title="Bạn bè">
+      <a class="menu-item-link text-tooltip-tfr" [routerLink]="'profile/'+ account.id +'/friend-list'" data-title="Bạn bè">
         <!-- MENU ITEM LINK ICON -->
         <svg class="menu-item-link-icon icon-members">
           <use xlink:href="#svg-members"></use>
@@ -87,22 +87,18 @@
     </li>
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'suggestion-to-make-friends'" data-title="Bạn bè">
-        <!-- MENU ITEM LINK ICON -->
+      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'suggestion-to-make-friends'" data-title="Gợi ý kết bạn">
         <svg class="menu-item-link-icon icon-members">
-          <use xlink:href="#svg-members"></use>
+          <use xlink:href="#svg-friend"></use>
         </svg>
-        <!-- /MENU ITEM LINK ICON -->
       </a>
       <!-- /MENU ITEM LINK -->
     </li>
     <li class="menu-item">
       <!-- MENU ITEM LINK -->
-      <a class="menu-item-link text-tooltip-tfr" [routerLink]=" 'suggested-pairing'" data-title="Bạn bè">
+      <a class="menu-item-link text-tooltip-tfr" style="text-align: center; opacity: inherit;" [routerLink]=" 'suggested-pairing'" data-title="Ghép đôi">
         <!-- MENU ITEM LINK ICON -->
-        <svg class="menu-item-link-icon icon-members">
-          <use xlink:href="#svg-members"></use>
-        </svg>
+        <i class="far fa-heart" ></i>
         <!-- /MENU ITEM LINK ICON -->
       </a>
       <!-- /MENU ITEM LINK -->

@@ -95,4 +95,8 @@ export class ChangeAvatarComponent implements OnInit {
   exit() {
     this.router.navigateByUrl('');
   }
+
+  uploadAvatar() {
+    document.getElementById('chooseAvatar').click();
+  }
 }

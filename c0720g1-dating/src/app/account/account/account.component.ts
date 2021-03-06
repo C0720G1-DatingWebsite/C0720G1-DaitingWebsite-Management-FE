@@ -23,6 +23,7 @@ export class AccountComponent implements OnInit {
   isSubmited = false;
   formValid = false;
 
+
   constructor(private loadResourceService: LoadResourceService,
               private formBuild: FormBuilder,
               private router: Router,
@@ -79,7 +80,8 @@ export class AccountComponent implements OnInit {
       this.registerService.register(this.formGroup.value).subscribe(data => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        this.router.navigateByUrl("/information")
+        // this.router.navigate(['/information/',this.formGroup.value.userName])
+        this.router.navigateByUrl('/')
       });
 
 
