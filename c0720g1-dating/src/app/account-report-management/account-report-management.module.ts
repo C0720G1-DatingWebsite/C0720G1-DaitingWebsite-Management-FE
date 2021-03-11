@@ -7,16 +7,22 @@ import { SendReportComponent } from './send-report/send-report.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { GetFeedbackComponent } from './get-feedback/get-feedback.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
 @NgModule({
-  declarations: [ListMemberComponent, ReportMemberListComponent, SendReportComponent, GetFeedbackComponent],
+  declarations: [ListMemberComponent,
+    ReportMemberListComponent,
+    SendReportComponent,
+    GetFeedbackComponent,
+  ],
   imports: [
     CommonModule,
     AccountReportManagementRoutingModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgxPaginationModule
   ]
 })
 export class AccountReportManagementModule { }

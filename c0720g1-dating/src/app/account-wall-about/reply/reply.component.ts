@@ -83,8 +83,6 @@ export class ReplyComponent implements OnInit {
   getAllListReplySizeInComment() {
     this.commentService.getAllReplySize(this.idComment, this.page, this.size).subscribe(data => {
       this.iComment = data.content;
-      console.log('reply');
-      console.log(data.content);
     });
   }
 

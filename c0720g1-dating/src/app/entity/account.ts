@@ -28,6 +28,7 @@ export interface IAccount {
   avatar: string;
   backgroundImage: string;
   dateRegister: string;
+  email: string;
 
   maritalStatus: IMaritalStatus;
   status: IStatus;

@@ -1,13 +1,9 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="content-grid" style="transform: translate(167.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
-
   <!--  <div class="section-banner">-->
-
   <!--    <img class="section-banner-icon" src="img/banner/overview-icon.png" alt="overview-icon">-->
-
   <!--    <p class="section-banner-title">Overview</p>-->
-
   <!--    <p class="section-banner-text">Review your account, see stats and more!</p>-->
   <!--  </div>-->
   <div class="grid">
@@ -17,7 +13,7 @@
       <div class="grid-column">
         <div class="widget-box">
           <p class="widget-box-title" style="font-size: large">Cảnh báo thành viên</p>
-<!--          <p class="text-center text-danger" style="font-size: 30px" *ngIf="reportMemberList.length == 0">Không tìm thấy dữ liệu</p>-->
+          <!--          <p class="text-center text-danger" style="font-size: 30px" *ngIf="reportMemberList.length == 0">Không tìm thấy dữ liệu</p>-->
           <!--          <a href="warning-member.html" class="button secondary float-right" style="width: auto; padding: 0 15px; color: lightgoldenrodyellow">List of members warned</a>-->
           <div class="widget-box-content no-margin-top">
             <div class="table table-top-friends join-rows">
@@ -33,12 +29,10 @@
                 </div>
                 <div class="table-header-column centered padded" style="width: 25%">
                   <p class="table-header-title">Người tố cáo</p>
-
                 </div>
               </div>
-
               <div class="table-body">
-                <div class="table-row tiny" *ngFor="let report of reportMemberList, index as i">
+                <div class="table-row tiny" *ngFor="let report of reportMemberList| paginate: { itemsPerPage: 5, currentPage: p }, index as i">
                   <div class="table-column centered padded">
                     <p class="table-title">{{i+1}}</p>
                   </div>
@@ -57,242 +51,151 @@
               <!-- /TABLE BODY -->
             </div>
             <!-- /TABLE -->
-
             <!-- /SECTION PAGER BAR -->
           </div>
-          <div class="section-pager-bar">
-            <!-- SECTION PAGER -->
-            <div class="section-pager">
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item active">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">01</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">02</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">03</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">04</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">05</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-
-              <!-- SECTION PAGER ITEM -->
-              <div class="section-pager-item">
-                <!-- SECTION PAGER ITEM TEXT -->
-                <p class="section-pager-item-text">06</p>
-                <!-- /SECTION PAGER ITEM TEXT -->
-              </div>
-              <!-- /SECTION PAGER ITEM -->
-            </div>
-            <!-- /SECTION PAGER -->
-
-            <!-- SECTION PAGER CONTROLS -->
-            <div class="section-pager-controls">
-              <!-- SLIDER CONTROL -->
-              <div class="slider-control left disabled">
-                <!-- SLIDER CONTROL ICON -->
-                <svg class="slider-control-icon icon-small-arrow">
-                  <use xlink:href="#svg-small-arrow"></use>
-                </svg>
-                <!-- /SLIDER CONTROL ICON -->
-              </div>
-              <!-- /SLIDER CONTROL -->
-
-              <!-- SLIDER CONTROL -->
-              <div class="slider-control right">
-                <!-- SLIDER CONTROL ICON -->
-                <svg class="slider-control-icon icon-small-arrow">
-                  <use xlink:href="#svg-small-arrow"></use>
-                </svg>
-                <!-- /SLIDER CONTROL ICON -->
-              </div>
-              <!-- /SLIDER CONTROL -->
-            </div>
-            <!-- /SECTION PAGER CONTROLS -->
-          </div>
+          <pagination-controls
+            previousLabel="Trước"
+            nextLabel="Sau"
+            class="float-right" (pageChange)="p = $event">
+          </pagination-controls>
           <!-- WIDGET BOX CONTENT -->
           <div class="d-flex col-12 mt-3">
             <div class="col-3">
-              <p class="button secondary full popup-manage-group-trigger">Cảnh báo nhắc nhở</p>
+              <p class="button secondary full popup-manage-group-trigger">
+                Cảnh báo nhắc nhở
+              </p>
             </div>
-<!--            <div class="col-3">-->
-<!--              <p class="button small secondary" style="width: 150px">Kháo 1 tuần</p>-->
-<!--            </div>-->
-<!--            <div class="col-3">-->
-<!--              <p class="button small secondary" style="width: 150px">Khóa 1 tháng</p>-->
-<!--            </div>-->
-<!--            <div class="col-3">-->
-<!--              <p class="button small secondary" style="width: 150px">Khóa vĩnh viễn</p>-->
-<!--            </div>-->
+            <!--            <div class="col-3">-->
+            <!--              <p class="button small secondary" style="width: 150px">Kháo 1 tuần</p>-->
+            <!--            </div>-->
+            <!--            <div class="col-3">-->
+            <!--              <p class="button small secondary" style="width: 150px">Khóa 1 tháng</p>-->
+            <!--            </div>-->
+            <!--            <div class="col-3">-->
+            <!--              <p class="button small secondary" style="width: 150px">Khóa vĩnh viễn</p>-->
+            <!--            </div>-->
           </div>
           <a class="tag-item float-left mt-5 centered padded float-lg-right" href="/member"
              style="margin-right: 50px">Quay lại</a>
         </div>
-
         <!-- /WIDGET BOX -->
       </div>
-        <!-- /WIDGET BOX -->
-      </div>
-      <!-- /GRID COLUMN -->
-
-      <!-- GRID COLUMN -->
-      <div class="grid-column">
-        <!-- WIDGET BOX -->
-        <div class="widget-box">
-          <!-- WIDGET BOX ACTIONS -->
-          <div class="widget-box-actions">
-            <!-- WIDGET BOX ACTION -->
-            <div class="widget-box-action">
-              <!-- WIDGET BOX TITLE -->
-              <p class="widget-box-title">Thông báo</p>
-              <!-- /WIDGET BOX TITLE -->
-            </div>
-            <!-- /WIDGET BOX ACTION -->
-          </div>
-          <!-- /WIDGET BOX ACTIONS -->
-
-          <!-- WIDGET BOX CONTENT -->
-          <div class="widget-box-content">
-            <!-- PROGRESS ARC WRAP -->
-            <div class="progress-arc-wrap">
-              <!-- PROGRESS ARC -->
-              <div class="progress-arc"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="engagements-chart" style="display: block; height: 140px; width: 140px;" width="175" height="175" class="chartjs-render-monitor"></canvas>
-              </div>
-              <!-- PROGRESS ARC -->
-
-              <!-- PROGRESS ARC INFO -->
-              <div class="progress-arc-info">
-                <!-- PROGRESS ARC TITLE -->
-                <p class="progress-arc-title">28.8K</p>
-                <!-- /PROGRESS ARC TITLE -->
-
-                <!-- PROGRESS ARC TEXT -->
-                <p class="progress-arc-text">Tổng thành viên</p>
-                <!-- /PROGRESS ARC TEXT -->
-              </div>
-              <!-- /PROGRESS ARC INFO -->
-            </div>
-            <!-- /PROGRESS ARC WRAP -->
-
-            <!-- USER STATS -->
-            <div class="user-stats reference">
-              <!-- USER STAT -->
-              <div class="user-stat big">
-                <!-- REFERENCE BULLET -->
-                <div class="reference-bullet secondary"></div>
-                <!-- /REFERENCE BULLET -->
-
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">18.3K</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Lượt tương tác</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat big">
-                <!-- REFERENCE BULLET -->
-                <div class="reference-bullet primary"></div>
-                <!-- /REFERENCE BULLET -->
-
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">33.2K</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Bình luận</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-
-            <!-- USER STATS -->
-            <div class="user-stats reference">
-              <!-- USER STAT -->
-              <div class="user-stat big">
-                <!-- REFERENCE BULLET -->
-                <div class="reference-bullet blue"></div>
-                <!-- /REFERENCE BULLET -->
-
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">18.1K</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Chia sẽ</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-
-              <!-- USER STAT -->
-              <div class="user-stat big">
-                <!-- REFERENCE BULLET -->
-                <div class="reference-bullet light-blue"></div>
-                <!-- /REFERENCE BULLET -->
-
-                <!-- USER STAT TITLE -->
-                <p class="user-stat-title">4.3k</p>
-                <!-- /USER STAT TITLE -->
-
-                <!-- USER STAT TEXT -->
-                <p class="user-stat-text">Trả lời</p>
-                <!-- /USER STAT TEXT -->
-              </div>
-              <!-- /USER STAT -->
-            </div>
-            <!-- /USER STATS -->
-          </div>
-          <!-- WIDGET BOX CONTENT -->
-        </div>
-        <!-- /WIDGET BOX -->
-      </div>
-      <!-- /GRID COLUMN -->
-    </div>
-    <!-- /GRID -->
-
-    <!-- GRID -->
-    <div class="grid grid-3-9 stretched">
-      <!-- /GRID -->
-
-      <!-- WIDGET BOX -->
       <!-- /WIDGET BOX -->
     </div>
-    <!-- /GRID -->
+    <!-- /GRID COLUMN -->
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+      <!-- WIDGET BOX -->
+      <div class="widget-box">
+        <!-- WIDGET BOX ACTIONS -->
+        <div class="widget-box-actions">
+          <!-- WIDGET BOX ACTION -->
+          <div class="widget-box-action">
+            <!-- WIDGET BOX TITLE -->
+            <p class="widget-box-title">Thông báo</p>
+            <!-- /WIDGET BOX TITLE -->
+          </div>
+          <!-- /WIDGET BOX ACTION -->
+        </div>
+        <!-- /WIDGET BOX ACTIONS -->
+        <!-- WIDGET BOX CONTENT -->
+        <div class="widget-box-content">
+          <!-- PROGRESS ARC WRAP -->
+          <div class="progress-arc-wrap">
+            <!-- PROGRESS ARC -->
+            <div class="progress-arc"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+              <canvas id="engagements-chart" style="display: block; height: 140px; width: 140px;" width="175" height="175" class="chartjs-render-monitor"></canvas>
+            </div>
+            <!-- PROGRESS ARC -->
+            <!-- PROGRESS ARC INFO -->
+            <div class="progress-arc-info">
+              <!-- PROGRESS ARC TITLE -->
+              <p class="progress-arc-title">28.8K</p>
+              <!-- /PROGRESS ARC TITLE -->
+              <!-- PROGRESS ARC TEXT -->
+              <p class="progress-arc-text">Tổng thành viên</p>
+              <!-- /PROGRESS ARC TEXT -->
+            </div>
+            <!-- /PROGRESS ARC INFO -->
+          </div>
+          <!-- /PROGRESS ARC WRAP -->
+          <!-- USER STATS -->
+          <div class="user-stats reference">
+            <!-- USER STAT -->
+            <div class="user-stat big">
+              <!-- REFERENCE BULLET -->
+              <div class="reference-bullet secondary"></div>
+              <!-- /REFERENCE BULLET -->
+              <!-- USER STAT TITLE -->
+              <p class="user-stat-title">18.3K</p>
+              <!-- /USER STAT TITLE -->
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Lượt tương tác</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
+            <!-- USER STAT -->
+            <div class="user-stat big">
+              <!-- REFERENCE BULLET -->
+              <div class="reference-bullet primary"></div>
+              <!-- /REFERENCE BULLET -->
+              <!-- USER STAT TITLE -->
+              <p class="user-stat-title">33.2K</p>
+              <!-- /USER STAT TITLE -->
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Bình luận</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
+          </div>
+          <!-- /USER STATS -->
+          <!-- USER STATS -->
+          <div class="user-stats reference">
+            <!-- USER STAT -->
+            <div class="user-stat big">
+              <!-- REFERENCE BULLET -->
+              <div class="reference-bullet blue"></div>
+              <!-- /REFERENCE BULLET -->
+              <!-- USER STAT TITLE -->
+              <p class="user-stat-title">18.1K</p>
+              <!-- /USER STAT TITLE -->
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Chia sẽ</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
+            <!-- USER STAT -->
+            <div class="user-stat big">
+              <!-- REFERENCE BULLET -->
+              <div class="reference-bullet light-blue"></div>
+              <!-- /REFERENCE BULLET -->
+              <!-- USER STAT TITLE -->
+              <p class="user-stat-title">4.3k</p>
+              <!-- /USER STAT TITLE -->
+              <!-- USER STAT TEXT -->
+              <p class="user-stat-text">Trả lời</p>
+              <!-- /USER STAT TEXT -->
+            </div>
+            <!-- /USER STAT -->
+          </div>
+          <!-- /USER STATS -->
+        </div>
+        <!-- WIDGET BOX CONTENT -->
+      </div>
+      <!-- /WIDGET BOX -->
+    </div>
+    <!-- /GRID COLUMN -->
   </div>
-
-  <!-- /CONTENT GRID -->
+  <!-- /GRID -->
+  <!-- GRID -->
+  <div class="grid grid-3-9 stretched">
+    <!-- /GRID -->
+    <!-- WIDGET BOX -->
+    <!-- /WIDGET BOX -->
+  </div>
+  <!-- /GRID -->
+</div>
+<!-- /CONTENT GRID -->
 <div class="popup-box mid popup-manage-group">
   <!-- POPUP CLOSE BUTTON -->
   <div class="popup-close-button popup-manage-group-trigger">
@@ -302,11 +205,10 @@
     </svg>
     <!-- /POPUP CLOSE BUTTON ICON -->
   </div>
-
   <div class="poll-box">
     <h4>Xác nhận gửi cảnh cáo đến thành viên</h4>
     <!-- POLL TITLE -->
-<!--    <p class="poll-title">Xác nhận gửi cảnh cáo đến thành viên</p>-->
+    <!--    <p class="poll-title">Xác nhận gửi cảnh cáo đến thành viên</p>-->
     <!-- /POLL TITLE -->
     <!-- POLL TEXT -->
     <p class="poll-text">Gửi email đến thành viên.</p>
@@ -314,27 +216,16 @@
     <!-- FORM -->
     <div class="form">
       <div class="form-row">
-        <!-- FORM ITEM -->
-<!--        <div class="form-item">-->
-<!--          &lt;!&ndash; CHECKBOX WRAP &ndash;&gt;-->
-<!--          <div class="checkbox-wrap">-->
-<!--            <input type="checkbox" id="poll-option-8" name="poll_option" value="option-8">-->
-<!--            &lt;!&ndash; CHECKBOX BOX &ndash;&gt;-->
-<!--            <div class="checkbox-box round"></div>-->
-<!--            &lt;!&ndash; /CHECKBOX BOX &ndash;&gt;-->
-<!--            <label for="poll-option-8">Cảnh báo nhắc nhở</label>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; /CHECKBOX WRAP &ndash;&gt;-->
-<!--        </div>-->
-        <!-- /FORM ITEM -->
-        <select (change)="report($event.target.value)">
+        <label style="margin-bottom: 5px">Xử lý vi phạm:</label>
+        <select (change)="report($event.target.value)" style="margin-bottom: 5px">
           <option value="1">Cảnh cáo nhắc nhở</option>
           <option value="2">Khóa 1 tuần</option>
           <option value="3">Khóa 1 tháng</option>
           <option value="4">Khóa vĩnh viễn</option>
         </select>
-        <select name="" id="">
-          <option *ngFor="let rep of reportMemberList">{{rep.reportContent}}</option>
+        <label style="margin-bottom: 5px; margin-top: 10px">Nội dung vi phạm:</label>
+        <select #reportContent name="" id=""  style="margin-bottom: 5px">
+          <option [value]="reportContent.name"  *ngFor="let reportContent of reportContentList">{{reportContent.name}}</option>
         </select>
       </div>
       <!-- /FORM ROW -->
@@ -346,7 +237,7 @@
       <!-- POLL BOX ACTIONS -->
       <div class="poll-box-actions" style="margin-left: 58%;margin-top:10px">
         <!-- BUTTON -->
-        <p class="button secondary small popup-manage-group-trigger" (click)="getId()">Gửi</p>
+        <p class="button secondary small popup-manage-group-trigger" (click)="getId(reportContent.value)">Gửi</p>
         <!-- /BUTTON -->
         <!-- BUTTON -->
         <p class="button white small popup-manage-group-trigger">Đóng</p>
@@ -354,9 +245,7 @@
       </div>
       <!-- /POLL BOX ACTIONS -->
     </div>
-
   </div>
-
 </div>
   <!-- app -->
   <script src="src/assets/js/utils/app.js"></script>

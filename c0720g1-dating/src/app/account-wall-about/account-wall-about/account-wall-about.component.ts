@@ -6,10 +6,13 @@ import {AccountWallAboutService} from "../account-wall-about.service";
 import {IPost} from "../../entity/post";
 import {StorageService} from "../../security/storage.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {IAccountGroup} from "../../entity/account-group";
 import {IFriend} from "../../entity/friend";
 import {ToastrService} from "ngx-toastr";
 import {MessageManager} from "../message-manager";
+import {IReportContent} from "../../entity/report-content";
+import {MemberReportService} from "../../account-report-management/member-report.service";
+import {FriendListService} from "../../friends/friend-list.service";
+import {IFriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-account-wall-about',
@@ -22,24 +25,33 @@ export class AccountWallAboutComponent implements OnInit {
   idComment: number;
   iAccount: IAccount;
   page: number = 0;
-  pageable: any;
   size: number = 2;
   iPosts: IPost[];
-  iAccountGroups: IAccountGroup[] = [];
   iFriends: IFriend[] = [];
   formGroup: FormGroup;
   idPost: number;
   account;
   loadingData = false;
+  flagComment = false;
+
+  public iAccountDTO: IFriendDTO;
+  public friendList: IFriendDTO[];
+
+  reportForm: FormGroup;
+  reportContentList: IReportContent[];
+  dateReport = new Date();
+
 
   constructor(private route: ActivatedRoute,
               private accountWallAboutService: AccountWallAboutService,
               private storageService: StorageService,
               private loadResourceService: LoadResourceService,
               private formBuilder: FormBuilder,
-              private router: Router,
               public toastrService: ToastrService,
-              public messageManager: MessageManager) {
+              private router: Router,
+              public messageManager: MessageManager,
+              private friendService: FriendListService,
+              public memberReportService: MemberReportService) {
     this.loadScript();
   }
 
@@ -47,6 +59,9 @@ export class AccountWallAboutComponent implements OnInit {
     this.getFindById();
     this.account = this.storageService.getUser();
     this.createCommentForm();
+    this.getListReport();
+    this.formReport();
+    this.getAllFriend();
   }
 
   getFindById() {
@@ -54,46 +69,32 @@ export class AccountWallAboutComponent implements OnInit {
     this.accountWallAboutService.findById(this.id).subscribe((data: IAccount) => {
       this.iAccount = data;
       this.getAllPost();
-      this.getAllGroup();
-      this.getAllFriend();
     });
   }
 
   getAllPost() {
     this.accountWallAboutService.getAllPost(this.page, this.size, this.id).subscribe((data) => {
-      // if (this.iPosts.length == data.length){
-        this.iPosts = data.content;
-        this.pageable = data;
-      // }
-
-
+      this.iPosts = data.content;
     });
+  }
+
+  getAllFriend() {
+    this.accountWallAboutService.getAllFriend(this.account.id).subscribe((data: IFriend[]) => {
+      console.log('danh sách bạn của id hiẹn tại')
+      console.log(data)
+      this.iFriends = data;
+    })
   }
 
   onScroll() {
     this.size += 2;
     this.loadingData = true;
     this.getAllPost();
-    this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
-    this.loadResourceService.loadScript('assets/js/content/content.js');
-    // this.loadScript();
-  }
-
-  getAllGroup() {
-    this.accountWallAboutService.getAllGroup(this.id).subscribe((data: IAccountGroup[]) => {
-      this.iAccountGroups = data;
-    })
-  }
-
-  getAllFriend() {
-    this.accountWallAboutService.getAllFriend(this.id).subscribe((data: IFriend[]) => {
-      this.iFriends = data;
-    })
   }
 
   createCommentForm() {
     this.formGroup = this.formBuilder.group({
-      content: ['', [Validators.required ,Validators.maxLength(200)]],
+      content: ['', [Validators.required, Validators.maxLength(200)]],
       accountId: [this.account.id],
       postId: ['']
     });
@@ -102,10 +103,12 @@ export class AccountWallAboutComponent implements OnInit {
   submitFormCreate() {
     if (this.formGroup.invalid) {
       this.messageManager.showMessageCreateNotRole();
+      this.flagComment = false;
       return;
     } else {
       this.formGroup.value.postId = this.idPost;
       this.accountWallAboutService.saveComment(this.formGroup.value).subscribe(data => {
+        this.flagComment = false;
         this.ngOnInit();
         this.toastrService.success('Đăng bình luận thành công!', 'Thông báo')
       });
@@ -162,9 +165,75 @@ export class AccountWallAboutComponent implements OnInit {
     }
   }
 
-  getLinkAccount(id: number) {
-    this.router.navigate(['/account-wall', id, 'wall']);
+  flagCommentShow() {
+    this.flagComment = true;
     this.ngOnInit();
-    this.loadScript();
+  }
+
+  getListReport() {
+    this.memberReportService.getAllReportContent().subscribe(data => {
+      this.reportContentList = data;
+    });
+  }
+
+  formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+  }
+
+  report() {
+    this.memberReportService.sendReportAccount(this.reportForm.value).subscribe(() => {
+      this.ngOnInit();
+      this.toastrService.success('Tố cáo thành công!', 'Thông báo');
+    }, () => {
+      this.ngOnInit();
+      this.toastrService.error('Không thể tự tố cáo bản thân!', 'Thông báo');
+    });
+  }
+
+  patchValue(userName: string) {
+    this.reportForm = this.formBuilder.group({
+      dateReport: [''],
+      reportContent: [''],
+      accountVictim: [this.account.username],
+      accountTarget: [userName]
+    });
+    this.reportForm.get('dateReport').patchValue(this.formatDate(new Date()));
+  }
+
+  formReport() {
+    this.reportForm = this.formBuilder.group({
+      dateReport: [''],
+      reportContent: [''],
+      accountVictim: [''],
+      accountTarget: ['']
+    });
+  }
+
+  addFriend(idFri: number) {
+    this.friendService.addFriend(this.storageService.getUser().id, idFri).subscribe(data => {
+      this.iAccountDTO = data;
+      console.log(data);
+      this.ngOnInit();
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  delFriend(idFri: number) {
+    this.friendService.delFriend(this.storageService.getUser().id, idFri).subscribe(data => {
+      this.iAccountDTO = data;
+      console.log(data);
+      this.ngOnInit();
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+    }, error => {
+      console.log(error);
+    });
   }
 }

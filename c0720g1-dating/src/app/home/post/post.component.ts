@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {IPost} from "../../entity/post";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PostServiceService} from "../post-service.service";
 import {LoadResourceService} from "../../load-resource.service";
 import {StorageService} from "../../security/storage.service";
@@ -12,6 +12,9 @@ import {finalize} from "rxjs/operators";
 import {IPolicy} from "../../entity/policy";
 import {ToastrService} from "ngx-toastr";
 import {UploadFireService} from "../../../upload-fire-service/upload-fire.service";
+import {IAccount} from "../../entity/account";
+import {MessageManager} from "../../account-wall-about/message-manager";
+import {AccountWallAboutService} from "../../account-wall-about/account-wall-about.service";
 
 @Component({
   selector: 'app-post',
@@ -38,14 +41,23 @@ export class PostComponent implements OnInit {
   public image: string = '';
   checkEnd: boolean = false;
 
+  iAccount: IAccount;
+  account;
+  formGroup: FormGroup;
+  flagComment = false;
+  idPost: number;
+  idComment: number;
+
   constructor(private loadResourceService: LoadResourceService,
               private postServiceService: PostServiceService,
               private storageService: StorageService,
+              private accountWallAboutService: AccountWallAboutService,
               private formBuilder: FormBuilder,
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
               private router: Router,
               @Inject(UploadFireService) private uploadFileService: UploadFireService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              public messageManager: MessageManager,) {
     this.uploadFileService.getImageDetailList();
     this.loadScript();
   }
@@ -65,7 +77,8 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.getListPolicy();
     this.getListPost();
-
+    this.account = this.storageService.getUser();
+    this.createCommentForm();
 
   }
 
@@ -147,10 +160,6 @@ export class PostComponent implements OnInit {
     }, 200)
   }
 
-  editPost() {
-
-  }
-
   onScroll() {
     this.loadScript();
     this.checkLoading = true;
@@ -221,6 +230,53 @@ export class PostComponent implements OnInit {
 
   cancel() {
     this.booleanEdit = false;
+    this.ngOnInit();
+  }
+
+  createCommentForm() {
+    this.formGroup = this.formBuilder.group({
+      content: ['', [Validators.required, Validators.maxLength(200)]],
+      accountId: [this.account.id],
+      postId: ['']
+    });
+  }
+
+  submitFormCreate() {
+    if (this.formGroup.invalid) {
+      this.messageManager.showMessageCreateNotRole();
+      this.flagComment = false;
+      return;
+    } else {
+      this.formGroup.value.postId = this.idPost;
+      this.accountWallAboutService.saveComment(this.formGroup.value).subscribe(data => {
+        this.flagComment = false;
+        this.ngOnInit();
+        this.toastr.success('Đăng bình luận thành công!', 'Thông báo')
+      });
+    }
+  }
+
+  getDeleteCommentById(idComment: number) {
+    this.accountWallAboutService.deleteComment(idComment).subscribe(data => {
+      this.ngOnInit();
+      this.toastr.success('Xóa bình luận thành công!', 'Thông báo')
+    });
+  }
+
+  getIdCommentDelete(idComment: number) {
+    this.idComment = idComment;
+  }
+
+  getIdPost(id: any) {
+    for (let i = 0; i < this.iPosts.length; i++) {
+      if (this.iPosts[i].id == parseInt(id)) {
+        this.idPost = this.iPosts[i].id;
+      }
+    }
+  }
+
+  flagCommentShow() {
+    this.flagComment = true;
     this.ngOnInit();
   }
 }

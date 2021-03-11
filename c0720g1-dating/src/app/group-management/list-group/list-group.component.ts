@@ -58,7 +58,7 @@ export class ListGroupComponent implements OnInit, AfterViewChecked {
     this.groupService.getListMemberQuantity().subscribe(data => {
       this.listMemberQuantity = data;
     })
-
+    this.loadScript();
   }
 
 

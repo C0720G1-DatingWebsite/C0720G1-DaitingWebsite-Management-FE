@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from "../comment.service";
 import {StorageService} from "../../security/storage.service";
 import {LoadResourceService} from "../../load-resource.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IComment} from "../../entity/comment";
 
 @Component({
@@ -21,7 +21,7 @@ export class ReplyReplyComponent implements OnInit {
   @Input() idReplyMulti: number;
 
   formGroup: FormGroup;
-  flagReplyReply = false;
+  flagReplyMulti = false;
 
 
   constructor(private commentService: CommentService,
@@ -65,5 +65,27 @@ export class ReplyReplyComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
       this.loadResourceService.loadScript('assets/js/content/content.js');
     }, 200);
+  }
+
+  getIdReply(replyMulti: IComment) {
+    this.flagReplyMulti  = true;
+    this.idReplyReply = replyMulti.id;
+    this.formGroup = this.formBuilder.group({
+      content: ['', [Validators.required]],
+      accountId: [this.account.id],
+      commentId: [this.idReplyReply]
+    })
+  }
+
+  exitReply() {
+    this.flagReplyMulti = false;
+    this.ngOnInit();
+  }
+
+  submitForReply() {
+    this.commentService.saveReply(this.formGroup.value).subscribe(data=>{
+      this.flagReplyMulti = false;
+      this.ngOnInit();
+    })
   }
 }

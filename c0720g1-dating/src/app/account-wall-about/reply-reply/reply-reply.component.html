@@ -21,23 +21,23 @@
             <p class="meta-line-link light">Thích</p>
           </div>
           <div class="meta-line">
-            <p class="meta-line-link light">Trả lời</p>
-<!--            <p class="meta-line-link light" (click)="getIdReply(replyMulti)">Trả lời</p>-->
+<!--            <p class="meta-line-link light">Trả lời</p>-->
+            <p class="meta-line-link light" (click)="getIdReply(replyMulti)">Trả lời</p>
           </div>
           <div class="meta-line">
             <p class="meta-line-timestamp">{{replyMulti.dateComment|date:'dd/MM/yyyy - HH:mm:ss'}}</p>
           </div>
         </div>
       </div>
-<!--      <div *ngIf="flagReplyReply && idReply == reply.id">-->
-<!--        <form [formGroup]="formGroup">-->
-<!--          <div class="form-group">-->
-<!--            <textarea formControlName="content" required></textarea>-->
-<!--          </div>-->
-<!--          <button type="button" class="btn btn-secondary" (click)="exitReply()">Hủy</button>-->
-<!--          <button type="submit" class="btn btn-primary" (click)="submitForReply()">Lưu</button>-->
-<!--        </form>-->
-<!--      </div>-->
+      <div *ngIf="flagReplyMulti && idReplyReply == replyMulti.id">
+        <form [formGroup]="formGroup">
+          <div class="form-group">
+            <textarea formControlName="content" required></textarea>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="exitReply()">Hủy</button>
+          <button type="submit" class="btn btn-primary" (click)="submitForReply()">Lưu</button>
+        </form>
+      </div>
     </div>
   </div>
   <app-reply-reply [idReplyMulti]="replyMulti.id"></app-reply-reply>

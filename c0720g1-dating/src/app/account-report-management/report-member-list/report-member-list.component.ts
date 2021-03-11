@@ -6,7 +6,7 @@ import {StorageService} from "../../security/storage.service";
 import {LoadResourceService} from "../../load-resource.service";
 import {IAccount} from "../../entity/account";
 import {ToastrService} from "ngx-toastr";
-
+import {IReportContent} from "../../entity/report-content";
 @Component({
   selector: 'app-report-member-list',
   templateUrl: './report-member-list.component.html',
@@ -18,17 +18,18 @@ export class ReportMemberListComponent implements OnInit {
   account: Account;
   accountMember: IAccount;
   temp = 1;
+  p: any;
+  reportContentList: IReportContent[];
   constructor(private activatedRoute: ActivatedRoute,
               private memberReportService: MemberReportService,
               private loadResourceService:LoadResourceService,
               private toast: ToastrService,
               private storageService: StorageService) {
+    this.loadScript();
   }
-
   ngOnInit(): void {
     this.loadScript();
     this.activatedRoute.paramMap.subscribe((data: ParamMap) =>{
-
       this.accountId = data.get('id');
       this.memberReportService.reportMemberList(this.accountId).subscribe(data =>{
         this.reportMemberList = data;
@@ -36,6 +37,9 @@ export class ReportMemberListComponent implements OnInit {
     });
     this.memberReportService.findMemberById(this.accountId).subscribe((data)=>{
       this.accountMember = data;
+    });
+    this.memberReportService.getAllReportContent().subscribe(data =>{
+      this.reportContentList = data;
     });
     console.log(this.reportMemberList);
     console.log(this.accountMember.userName);
@@ -59,30 +63,34 @@ export class ReportMemberListComponent implements OnInit {
       this.loadResourceService.loadScript('assets/js/vendor/tiny-slider.min.js');
     },200)
   }
-  getId() {
-    if (this.temp == 1){
-      this.memberReportService.sendEmailReport(this.accountId).subscribe(() =>{
-        this.toast.success('Đã gửi email cảnh báo!', 'Thông báo');
-      },() =>{
-        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
+  getId(content: string) {
+    console.log(content);
+    this.memberReportService.getAllReportContent().subscribe(data => {
+      this.reportContentList = data;
+    });
+    if (this.temp == 1) {
+      this.memberReportService.sendEmailReport(this.accountId, content).subscribe(() => {
+        this.toast.success('Đã gửi email cảnh báo!', 'Thông báo:');
+      }, () => {
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo:');
       });
-    } else if (this.temp == 2){
-      this.memberReportService.lockAccountOneWeek(this.accountId).subscribe(() =>{
-        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
-      },() =>{
-        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
+    } else if (this.temp == 2) {
+      this.memberReportService.lockAccountOneWeek(this.accountId, content).subscribe(() => {
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo:');
+      }, () => {
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo:');
       });
-    } else if (this.temp == 3){
-      this.memberReportService.lockAccountOneMonth(this.accountId).subscribe(() =>{
-        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
-      },() =>{
-        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
+    } else if (this.temp == 3) {
+      this.memberReportService.lockAccountOneMonth(this.accountId).subscribe(() => {
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo:');
+      }, () => {
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo:');
       });
-    }else if (this.temp == 4){
-      this.memberReportService.lockAccountForever(this.accountId).subscribe(() =>{
-        this.toast.success('Khóa tài khoản thành công!', 'Thông báo');
-      },() =>{
-        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo');
+    } else if (this.temp == 4) {
+      this.memberReportService.lockAccountForever(this.accountId).subscribe(() => {
+        this.toast.success('Khóa tài khoản thành công!', 'Thông báo:');
+      }, () => {
+        this.toast.error('Tài khoản đang trong thời gian bị khóa, vui lòng thử lại sau!', 'Thông báo:');
       });
     }
   }

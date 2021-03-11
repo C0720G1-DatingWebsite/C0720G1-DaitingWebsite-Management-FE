@@ -1,0 +1,161 @@
+<div>
+  <div class="widget-box no-padding" *ngFor=" let posts of iPosts">
+    <div class="widget-box-status">
+      <div class="widget-box-status-content">
+        <div class="user-status">
+          <a class="user-status-avatar" [routerLink]="['/account-wall/', idAccountPost ,'wall']">
+            <div class="user-avatar small no-outline">
+              <div class="user-avatar-content">
+                <div class="hexagon-image-30-32" [attr.data-src]="idAccountPost.avatar"></div>
+              </div>
+              <div class="user-avatar-progress">
+                <div class="hexagon-progress-40-44"></div>
+              </div>
+              <div class="user-avatar-progress-border">
+                <div class="hexagon-border-40-44"></div>
+              </div>
+            </div>
+          </a>
+          <p class="user-status-title medium">
+            <a class="bold"
+               [routerLink]="['/account-wall/', idAccountPost.id ,'wall']">{{posts.account.fullName}}</a>
+          </p>
+          <p class="user-status-text small">{{posts.postTime |date:'dd/MM/yyyy - HH:mm:ss'}}</p>
+        </div>
+        <p class="widget-box-status-text">{{posts.content}}</p>
+        <div *ngIf="posts.image !== null">
+          <figure class="widget-box-picture popup-picture-trigger">
+            <img src="{{posts.image}}" alt="cover-04">
+          </figure>
+        </div>
+        <div class="content-actions">
+          <div class="content-action">
+            <div class="meta-line"></div>
+            <div class="meta-line">
+
+              <div class="meta-line-list reaction-item-list">
+
+                <div class="reaction-item">
+
+                  <img class="reaction-image reaction-item-dropdown-trigger"
+                       src="assets/img/reaction/like.png" alt="reaction-like">
+                </div>
+
+              </div>
+
+              <p class="meta-line-text">{{posts.likeCount}} like</p>
+
+            </div>
+          </div>
+          <div class="content-action">
+            <div class="meta-line">
+              <p class="meta-line-link">8 Bình luận</p>
+            </div>
+            <div class="meta-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-options">
+      <!-- POST OPTION WRAP -->
+      <div class="post-option-wrap">
+        <!-- POST OPTION -->
+        <div class="post-option reaction-options-dropdown-trigger">
+          <svg class="post-option-icon icon-thumbs-up">
+            <use xlink:href="#svg-thumbs-up"></use>
+          </svg>
+          <p class="post-option-text">Thích!</p>
+        </div>
+      </div>
+
+      <div class="post-option">
+        <svg class="post-option-icon icon-comment">
+          <use xlink:href="#svg-comment"></use>
+        </svg>
+        <p class="post-option-text">Bình luận</p>
+      </div>
+    </div>
+    <div>
+<!--      <div class="post-comment-list">-->
+<!--        <app-comment-list-->
+<!--          [idPost]="posts.id"-->
+<!--          (onDeleteComment)="getIdCommentDelete($event)">-->
+<!--        </app-comment-list>-->
+<!--        <div class="post-comment-form">-->
+<!--          <div class="user-avatar small no-outline">-->
+<!--            <div class="user-avatar-content">-->
+<!--              <div class="hexagon-image-30-32" [attr.data-src]="account.avatar"></div>-->
+<!--            </div>-->
+<!--            <div class="user-avatar-progress">-->
+<!--              <div class="hexagon-progress-40-44"></div>-->
+<!--            </div>-->
+<!--            <div class="user-avatar-progress-border">-->
+<!--              <div class="hexagon-border-40-44"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <form class="form" [formGroup]="formGroup" (ngSubmit)="submitFormCreate()">-->
+<!--            <div class="form-row split">-->
+<!--              <div class="form-item">-->
+<!--                <div class="form-input small">-->
+<!--                  <input type="hidden" formControlName="postId" class="form-control">-->
+<!--                  <input type="text" class="form-control" (click)="getIdPost(posts.id)" formControlName="content"-->
+<!--                         placeholder="Viết bình luận" required>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-item auto-width">-->
+<!--                <button type="submit" class="button primary padded" [disabled]="formGroup.invalid">-->
+<!--                  <svg class="button-icon no-space icon-send-message">-->
+<!--                    <use xlink:href="#svg-send-message"></use>-->
+<!--                  </svg>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="form-item auto-width">-->
+<!--                <button class="button info padded" type="reset">-->
+<!--                  <svg class="interactive-input-action-icon icon-cross-thin">-->
+<!--                    <use xlink:href="#svg-cross-thin"></use>-->
+<!--                  </svg>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+  <!--<div *ngIf="loadingData ; else checkPost">-->
+  <!--  <div class="page-loader-indicator loader-bars">-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--    <div class="loader-bar"></div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--<ng-template #checkPost>-->
+  <!--  <p class="post-comment-heading">Bạn đã đến cuối trang</p>-->
+  <!--</ng-template>-->
+</div>
+
+<!--<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"-->
+<!--     aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="deleteModalLongTitle">Xóa bình luận</h5>-->
+<!--      </div>-->
+<!--      <div class="modal-body" style="text-align: center">-->
+<!--        - Bạn có chắc chắn phải xóa bình luận này không.-->
+<!--        - Không thể hoàn tác công việc này-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>-->
+<!--        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="getDeleteCommentById(idComment)">Đồng-->
+<!--          ý-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

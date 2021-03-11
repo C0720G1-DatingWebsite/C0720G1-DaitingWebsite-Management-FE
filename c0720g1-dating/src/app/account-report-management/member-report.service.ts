@@ -7,6 +7,7 @@ import {IAccount} from "../entity/account";
 import {IReportMemberDTO} from "../entity/IReportMemberDTO";
 import {IReportContent} from "../entity/report-content";
 import {GetFeedbackDTO} from "../entity/GetFeedbackDTO";
+import {AccountTargetDTO} from "../../dto/AccountTargetDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class MemberReportService {
   ) {
   }
 
-  findAllMember(size: number): Observable<IMemberDTO[]> {
-    return this.http.get<IMemberDTO[]>(this.API + '/member?size=' + size );
+  findAllMember(): Observable<IMemberDTO[]> {
+    return this.http.get<IMemberDTO[]>(this.API + '/member');
   }
   /*
   tim kiem theo username, ngay sinh, ngay tham gia
@@ -54,8 +55,8 @@ export class MemberReportService {
   /*
   * khoa tai khoan 1 tuan
    */
-  lockAccountOneWeek(accountId): Observable<any> {
-    return this.http.get<any>(this.API + '/lock-account-one-week/' + accountId);
+  lockAccountOneWeek(accountId, content: string): Observable<any> {
+    return this.http.get<any>(this.API + '/lock-account-one-week/' + accountId + '?reportContentName=' + content);
   }
 
   /*
@@ -75,8 +76,8 @@ export class MemberReportService {
   /*
   send email report
    */
-  sendEmailReport(id: number): Observable<any> {
-    return this.http.get<any>(this.API + '/send-warning-message/' + id);
+  sendEmailReport(id: number, content: string): Observable<any> {
+    return this.http.get<any>(this.API + '/send-warning-message/' + id + '?reportContentName=' + content);
   }
 
   /*
@@ -97,5 +98,9 @@ export class MemberReportService {
    */
   findAllFeedback(): Observable<GetFeedbackDTO[]>{
     return this.http.get<GetFeedbackDTO[]>(this.API + '/get-feedback');
+  }
+
+  findAccountTarget(userName:string): Observable<AccountTargetDTO>{
+    return this.http.get<AccountTargetDTO>(this.API + '/getAccountTarget/'+userName);
   }
 }
