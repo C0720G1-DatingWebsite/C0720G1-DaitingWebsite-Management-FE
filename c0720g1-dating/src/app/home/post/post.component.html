@@ -18,7 +18,7 @@
     </div>
 
     <div class="grid-column">
-
+      <app-create-post></app-create-post>
       <div class="widget-box no-padding" *ngFor="let object of iPosts">
 
         <div class="widget-box-settings">
@@ -234,11 +234,6 @@
                   <!--                  <p class="meta-line-link">{{object.commentList}} Comments</p>-->
                   <!-- /META LINE LINK -->
                 </div>
-                <!-- /META LINE -->
-
-                <!-- META LINE -->
-
-                <!-- /META LINE -->
               </div>
               <!-- /CONTENT ACTION -->
             </div>
@@ -265,7 +260,7 @@
                 <svg class="post-option-icon icon-thumbs-up">
                   <use xlink:href="#svg-thumbs-up"></use>
                 </svg>
-                Like
+                Thích
               </button>
               <!-- /POST OPTION TEXT -->
             </div>
@@ -288,10 +283,59 @@
             <!-- /POST OPTION ICON -->
 
             <!-- POST OPTION TEXT -->
-            <p class="post-option-text">Comment</p>
+            <p class="post-option-text" (click)="flagCommentShow()">Bình luận</p>
             <!-- /POST OPTION TEXT -->
           </div>
           <!-- /POST OPTION -->
+        </div>
+        <div>
+          <div class="post-comment-list">
+            <app-comment-list
+              [idPost]="object.id"
+              (onDeleteComment)="getIdCommentDelete($event)">
+            </app-comment-list>
+            <div class="post-comment-form">
+              <div *ngIf="flagComment">
+                <div class="user-avatar small no-outline">
+                  <div class="user-avatar-content">
+                    <div class="hexagon-image-30-32" [attr.data-src]="account.avatar"></div>
+                  </div>
+                  <div class="user-avatar-progress">
+                    <div class="hexagon-progress-40-44"></div>
+                  </div>
+                  <div class="user-avatar-progress-border">
+                    <div class="hexagon-border-40-44"></div>
+                  </div>
+                </div>
+                <form class="form" [formGroup]="formGroup" (ngSubmit)="submitFormCreate()">
+                  <div class="form-row split">
+                    <div class="form-item">
+                      <div class="form-input small">
+                        <input type="hidden" formControlName="postId" class="form-control">
+                        <input type="text" class="form-control" (click)="getIdPost(object.id)"
+                               formControlName="content"
+                               placeholder="Viết bình luận" required>
+                      </div>
+                    </div>
+                    <div class="form-item auto-width">
+                      <button type="submit" class="button primary padded" [disabled]="formGroup.invalid">
+                        <svg class="button-icon no-space icon-send-message">
+                          <use xlink:href="#svg-send-message"></use>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-item auto-width">
+                      <button class="button info padded" type="reset">
+                        <svg class="interactive-input-action-icon icon-cross-thin">
+                          <use xlink:href="#svg-cross-thin"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /POST OPTIONS -->
       </div>
@@ -312,4 +356,25 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLongTitle">Xóa bình luận</h5>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        - Bạn có chắc chắn phải xóa bình luận này không.
+        - Không thể hoàn tác công việc này
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="getDeleteCommentById(idComment)">Đồng
+          ý
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 

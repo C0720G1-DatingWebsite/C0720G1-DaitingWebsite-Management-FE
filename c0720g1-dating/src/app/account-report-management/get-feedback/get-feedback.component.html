@@ -1,3 +1,57 @@
+<div class="popup-box mid popup-manage-group">
+  <!-- POPUP CLOSE BUTTON -->
+  <div class="popup-close-button popup-manage-group-trigger">
+    <!-- POPUP CLOSE BUTTON ICON -->
+    <svg class="popup-close-button-icon icon-cross">
+      <use xlink:href="#svg-cross"></use>
+    </svg>
+    <!-- /POPUP CLOSE BUTTON ICON -->
+  </div>
+
+  <div class="poll-box">
+    <h4>Xác nhận gửi cảnh cáo đến thành viên</h4>
+    <!-- POLL TITLE -->
+    <!--    <p class="poll-title">Xác nhận gửi cảnh cáo đến thành viên</p>-->
+    <!-- /POLL TITLE -->
+    <!-- POLL TEXT -->
+    <p class="poll-text">Gửi email đến thành viên.</p>
+    <!-- /POLL TEXT -->
+    <!-- FORM -->
+    <div class="form">
+      <div class="form-row">
+        <label style="margin-bottom: 5px">Xử lý vi phạm:</label>
+        <select (change)="report($event.target.value)" style="margin-bottom: 5px">
+          <option value="1">Cảnh cáo nhắc nhở</option>
+          <option value="2">Khóa 1 tuần</option>
+          <option value="3">Khóa 1 tháng</option>
+          <option value="4">Khóa vĩnh viễn</option>
+        </select>
+        <label style="margin-bottom: 5px; margin-top: 10px">Nội dung vi phạm:</label>
+        <select #reportContent name="" id=""  style="margin-bottom: 5px">
+          <option [value]="reportContent.name"  *ngFor="let reportContent of reportContentList">{{reportContent.name}}</option>
+        </select>
+      </div>
+      <!-- /FORM ROW -->
+      <div style="margin-top: 15px" class="alert alert-secondary" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> Hãy liên hệ với cơ quan hành pháp tại khu vực bạn nếu ai
+        đó đang gặp nguy hiểm.
+      </div>
+      <!-- /FORM -->
+      <!-- POLL BOX ACTIONS -->
+      <div class="poll-box-actions" style="margin-left: 58%;margin-top:10px">
+        <!-- BUTTON -->
+        <p class="button secondary small popup-manage-group-trigger" (click)="getId(reportContent.value)">Gửi</p>
+        <!-- /BUTTON -->
+        <!-- BUTTON -->
+        <p class="button white small popup-manage-group-trigger">Đóng</p>
+        <!-- /BUTTON -->
+      </div>
+      <!-- /POLL BOX ACTIONS -->
+    </div>
+
+  </div>
+
+</div>
 <div class="content-grid" style="transform: translate(167.5px, 0px); transition: transform 0.4s ease-in-out 0s;">
 
   <!--  <div class="section-banner">-->
@@ -28,6 +82,10 @@
                 <div class="table-header-column padded">
                   <p class="table-header-title">Nội dung</p>
                 </div>
+                <div class="table-header-column padded">
+                  <p class="table-header-title">Người bị tố cáo</p>
+                </div>
+
                 <div class="table-header-column centered padded">
                   <p class="table-header-title">Ngày gửi</p>
                 </div>
@@ -36,7 +94,7 @@
                 </div>
               </div>
               <div class="table-body">
-                <div class="table-row tiny" *ngFor="let feedback of getFeedbackList, index as i">
+                <div class="table-row tiny" *ngFor="let feedback of getFeedbackList| paginate: { itemsPerPage: 5, currentPage: p }, index as i">
                   <div class="table-column centered padded">
                     <p class="table-title">{{i+1}}</p>
                   </div>
@@ -46,15 +104,18 @@
                   <div class="table-column">
                     <p class="table-title">{{feedback.content}}</p>
                   </div>
+                  <div class="table-column">
+                    <p class="table-title">{{feedback.accountTarget}}</p>
+                  </div>
                   <div class="table-column centered padded">
                     <p class="table-title">{{feedback.sentDate | date: 'dd-MM-yyyy'}}</p>
                   </div>
                   <div class="table-column centered padded" style="width:16%">
-                    <div class="table-title" *ngIf="feedback.status == true; else elseBlock">
-                    <p class="tag-item bg-success float-left">Đã xử lý</p>
+                    <div class="table-title" *ngIf="feedback.status == false; else elseBlock" >
+                    <p class="button secondary full popup-manage-group-trigger" (click)="getIdAccountTarget(feedback.accountTarget)">Chưa xử lý</p>
                     </div>
                     <ng-template #elseBlock>
-                      <p class="tag-item float-left">Chưa xử lý</p>
+                      <p class="tag-item bg-success float-left">Đã xử lý</p>
                     </ng-template>
                   </div>
                 </div>
@@ -63,93 +124,19 @@
               <!-- /TABLE BODY -->
 
             </div>
+            <pagination-controls
+              previousLabel="Trước"
+              nextLabel="Sau"
+              class="float-right" (pageChange)="p = $event">
+            </pagination-controls>
             <!-- /TABLE -->
-            <div class="section-pager-bar">
-              <!-- SECTION PAGER -->
-              <div class="section-pager">
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item active">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">01</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">02</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">03</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">04</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">05</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-
-                <!-- SECTION PAGER ITEM -->
-                <div class="section-pager-item">
-                  <!-- SECTION PAGER ITEM TEXT -->
-                  <p class="section-pager-item-text">06</p>
-                  <!-- /SECTION PAGER ITEM TEXT -->
-                </div>
-                <!-- /SECTION PAGER ITEM -->
-              </div>
-              <!-- /SECTION PAGER -->
-
-              <!-- SECTION PAGER CONTROLS -->
-              <div class="section-pager-controls">
-                <!-- SLIDER CONTROL -->
-                <div class="slider-control left disabled">
-                  <!-- SLIDER CONTROL ICON -->
-                  <svg class="slider-control-icon icon-small-arrow">
-                    <use xlink:href="#svg-small-arrow"></use>
-                  </svg>
-                  <!-- /SLIDER CONTROL ICON -->
-                </div>
-                <!-- /SLIDER CONTROL -->
-
-                <!-- SLIDER CONTROL -->
-                <div class="slider-control right">
-                  <!-- SLIDER CONTROL ICON -->
-                  <svg class="slider-control-icon icon-small-arrow">
-                    <use xlink:href="#svg-small-arrow"></use>
-                  </svg>
-                  <!-- /SLIDER CONTROL ICON -->
-                </div>
-
-                <!-- /SLIDER CONTROL -->
-              </div>
-              <!-- /SECTION PAGER CONTROLS -->
-
-            </div>
 
             <!-- /SECTION PAGER BAR -->
 
           </div>
           <!-- WIDGET BOX CONTENT -->
-          <a class="tag-item float-left centered padded float-lg-right" href="manager-member.html"
-             style="margin-right: 50px">Quay lại</a>
+          <a class="tag-item float-left centered padded float-lg-right" href="/member"
+             style="margin-right: 50px; clear: both">Quay lại</a>
         </div>
         <!-- /WIDGET BOX -->
       </div>
@@ -285,3 +272,35 @@
     </div>
     <!-- /GRID -->
   </div>
+
+  <script src="src/assets/js/utils/app.js"></script>
+  <!-- page loader -->
+  <script src="src/assets/js/utils/page-loader.js"></script>
+  <!-- simplebar -->
+  <script src="src/assets/js/vendor/simplebar.min.js"></script>
+  <!-- liquidify -->
+  <script src="src/assets/js/utils/liquidify.js"></script>
+  <!-- XM_Plugins -->
+  <script src="src/assets/js/vendor/xm_plugins.min.js"></script>
+  <!-- global.hexagons -->
+  <script src="src/assets/js/global/global.hexagons.js"></script>
+  <!-- global.tooltips -->
+  <script src="src/assets/js/global/global.tooltips.js"></script>
+  <!-- global.accordions -->
+  <script src="src/assets/js/global/global.accordions.js"></script>
+  <!-- global.popups -->
+  <script src="src/assets/js/global/global.popups.js"></script>
+  <!-- header -->
+  <script src="src/assets/js/header/header.js"></script>
+  <!-- sidebar -->
+  <script src="src/assets/js/sidebar/sidebar.js"></script>
+  <!-- content -->
+  <script src="src/assets/js/content/content.js"></script>
+  <!-- form.utils -->
+  <script src="src/assets/js/form/form.utils.js"></script>
+  <!-- SVG icons -->
+  <script src="src/assets/js/utils/svg-loader.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+</div>

@@ -39,8 +39,8 @@ export class AccountWallAboutService {
       )
   }
 
-  getAllPostList(size: number, idAccount: number): Observable<any> {
-    return this.httpClient.get<any>(this.apiAccountAboutUrl + 'findById/' + idAccount + '/post/' + size)
+  getAllFriendList(): Observable<IFriend[]> {
+    return this.httpClient.get<IFriend[]>(this.apiAccountAboutUrl + '/list-friend/', this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )

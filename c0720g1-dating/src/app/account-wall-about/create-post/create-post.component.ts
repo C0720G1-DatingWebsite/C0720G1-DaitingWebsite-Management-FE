@@ -10,6 +10,7 @@ import {UploadFireService} from "../../../upload-fire-service/upload-fire.servic
 import {finalize} from "rxjs/operators";
 import {IPost} from "../../entity/post";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-post',
@@ -32,7 +33,8 @@ export class CreatePostComponent implements OnInit {
               @Inject(UploadFireService) private uploadFileService: UploadFireService,
               private loadResourceService: LoadResourceService,
               private createPostService: CreatePostService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              public toastrService: ToastrService) {
 
     this.createPostService.getAllPolicy().subscribe((data) => {
       this.listPolicy = data;
@@ -86,8 +88,9 @@ export class CreatePostComponent implements OnInit {
           this.createPostService.createPost(this.formCreatePost.value).subscribe(data=>{
             if (data){
               window.location.reload();
+              this.toastrService.success('Thêm mới bình luận thành công', 'Thành công')
             }else {
-              alert("Fail !");
+              this.toastrService.warning('Thêm mới không thành công!', 'Lỗi')
             }
           });
         });

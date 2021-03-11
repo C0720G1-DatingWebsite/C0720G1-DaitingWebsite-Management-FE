@@ -1,0 +1,31 @@
+<p class="widget-box-title">Friends <span class="highlighted">{{iFriends.length}}</span></p>
+
+<div class="widget-box-content">
+  <!-- USER STATUS LIST -->
+  <div class="user-status-list">
+    <div *ngIf="iFriends.length != 0; else checkFriend">
+      <div class="user-status request-small" *ngFor="let friends of iFriends">
+        <a class="user-status-avatar" (click)="getLinkAccount(friends.friend.id)"
+           [routerLink]="['/account-wall/', friends.friend.id ,'wall']">
+          <div class="user-avatar small no-outline">
+            <div class="user-avatar-content">
+              <div class="hexagon-image-30-32" [attr.data-src]="friends.friend.avatar"></div>
+            </div>
+            <div class="user-avatar-progress">
+              <div class="hexagon-progress-40-44"></div>
+            </div>
+            <div class="user-avatar-progress-border">
+              <div class="hexagon-border-40-44"></div>
+            </div>
+          </div>
+        </a>
+        <p class="user-status-title"><a class="bold">{{friends.friend.fullName}}</a></p>
+      </div>
+    </div>
+    <ng-template #checkFriend>
+      <p class="user-status-title">Không có bạn bè</p>
+    </ng-template>
+
+  </div>
+  <!-- /USER STATUS LIST -->
+</div>

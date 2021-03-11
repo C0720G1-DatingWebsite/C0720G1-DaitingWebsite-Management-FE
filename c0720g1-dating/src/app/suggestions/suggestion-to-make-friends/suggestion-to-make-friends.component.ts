@@ -4,6 +4,8 @@ import {InfoAccountDTO} from "../../entity/InfoAccountDTO";
 import {SuggestionsService} from "../suggestions.service";
 import {StorageService} from "../../security/storage.service";
 import {SuggestionToMakeFriendsDTO} from "../../entity/SuggestionToMakeFriendsDTO";
+import {FriendListService} from "../../friends/friend-list.service";
+import {IFriendDTO} from "../../entity/friendDTO";
 
 @Component({
   selector: 'app-suggestion-to-make-friends',
@@ -18,9 +20,11 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
   size = 10;
   loadingData: boolean = false;
   displayData: boolean = false;
+  public iAccount: IFriendDTO;
 
   constructor(private loadResourceService: LoadResourceService,
               public suggestionsService: SuggestionsService,
+              private friendService: FriendListService,
               public storageService: StorageService) {
     this.loadScript();
     this.getIdAccount();
@@ -64,7 +68,16 @@ export class SuggestionToMakeFriendsComponent implements OnInit {
     });
 
   }
-
+  addFriend(idFri: number) {
+    this.friendService.addFriend(this.storageService.getUser().id, idFri).subscribe(data => {
+      this.iAccount = data;
+      console.log(data);
+      this.ngOnInit();
+      this.loadResourceService.loadScript('assets/js/global/global.hexagons.js');
+    }, error => {
+      console.log(error);
+    });
+  }
 
   loadScript() {
     this.loadResourceService.loadScript('assets/js/utils/app.js');

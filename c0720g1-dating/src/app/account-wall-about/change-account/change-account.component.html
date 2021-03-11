@@ -1,0 +1,119 @@
+<div style="margin: 100px">
+  <div class="widget-box">
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <p class="widget-box-title">Hãy điền những thông tin bên dưới *</p>
+      <div class="widget-box-content">
+        <div class="form">
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-input small active">
+                <label for="fullName">Tên thường gọi *</label>
+                <input type="text" id="fullName" formControlName="fullName" placeholder="Tên thường gọi">
+              </div>
+            </div>
+            <div class="form-item">
+              <div class="form-input small active">
+                <label for="address">Địa chỉ *</label>
+                <input type="text" id="address" formControlName="address" placeholder="Địa chỉ">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-select">
+                <label for="maritalStatus">Tình trạng hôn nhân *</label>
+                <select id="maritalStatus" formControlName="countryId ">
+                  <option *ngFor="let maritalStatus of maritalStatusList" [value]="maritalStatus.id">
+                    {{maritalStatus.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label for="email">Địa chỉ email *</label>
+              <input type="text" id="email" formControlName="email" placeholder="Địa chỉ email">
+            </div>
+          </div>
+
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-select">
+                <label for="country">Quốc tịch *</label>
+                <select id="country" formControlName="countryId ">
+                  <option *ngFor="let country of countryList" [value]="country.id">
+                    {{country.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <div class="form-select">
+                <label for="city">Thành phố *</label>
+                <select id="city" formControlName="cityId">
+                  <option *ngFor="let city of cityList" [value]="city.id">
+                    {{city.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-select">
+                <label for="job">Nghề Nghiệp *</label>
+                <select id="job" formControlName="jobId">
+                  <option *ngFor=" let job of jobList" [value]="job.id">{{job.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <div class="form-item">
+                <div class="form-input small full">
+                  <label for="dateOfBirth">Ngày sinh *</label>
+                  <input type="date" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Ngày sinh">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-select">
+                <label for="audience">Đối tượng muốn kết bạn *</label>
+                <select id="audience" formControlName="audience">
+                  <option value="0">Nam</option>
+                  <option value="1" selected>Nữ</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label for="gender">Giới tính</label>
+              <select id="gender" formControlName="gender">
+                <option value="0">Nam</option>
+                <option value="1" selected>Nữ</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row split">
+            <div class="form-item">
+              <div class="form-input small full">
+                            <textarea id="profile-description" formControlName="accountDescribe"
+                                      placeholder="Hãy viết một vài thông tin mô tả về bạn"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="form-item">
+              <button class="button secondary full popup-manage-group-trigger" type="submit">Cập nhật thông tin</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

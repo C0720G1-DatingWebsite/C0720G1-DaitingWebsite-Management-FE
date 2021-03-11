@@ -1,0 +1,35 @@
+<div>
+  <p class="widget-box-title">Nhóm <span class="highlighted">{{iAccountGroups.length}}</span></p>
+  <div *ngIf="iAccountGroups.length == 0; else checkGroup">
+    <p>Không có nhóm nào</p>
+  </div>
+  <ng-template #checkGroup>
+    <div class="widget-box-content">
+      <div class="user-status-list" *ngFor="let groups of iAccountGroups">
+
+        <div class="user-status request-small">
+
+          <a class="user-status-avatar" href="group-timeline.html">
+
+            <div class="user-avatar small no-border">
+
+              <div class="user-avatar-content">
+
+                <div class="hexagon-image-40-44" [attr.data-src]="groups.userGroup.avatar"></div>
+
+              </div>
+
+            </div>
+
+          </a>
+
+          <p class="user-status-title"><a class="bold" href="group-timeline.html">{{groups.userGroup.name}}</a>
+          </p>
+        </div>
+
+      </div>
+      <!-- /USER STATUS LIST -->
+    </div>
+  </ng-template>
+</div>
+

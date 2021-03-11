@@ -52,8 +52,6 @@ export class CommentListComponent implements OnInit {
     this.commentService.getAllCommentSize(this.idPost, this.page, this.size).subscribe(data => {
       this.iComments = data.content;
     });
-    // this.loadResourceService.loadScript('assets/js/vendor/xm_plugins.min.js');
-    // this.loadResourceService.loadScript('assets/js/content/content.js');
   }
 
   onClickShowComment() {
